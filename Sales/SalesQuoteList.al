@@ -40,6 +40,7 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
             Caption = 'Valid Until';
         }
     }
+
     actions
     {
         addlast(Create)
