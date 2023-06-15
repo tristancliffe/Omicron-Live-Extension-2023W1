@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Omicron Custom Extension",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "Sandbox", //"OmicronsProductionTrial", //"Tristans_PlayArea",
+            //"startupObjectId": 973, //50102, //951, //27
+            "tenant": "16a9d72e-1c0f-4a1a-aa46-2014ebb88182",
+            "startupObjectType": "Page",
+            "breakOnError": "ExcludeTry",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true     
+        }
+    ]
+}
