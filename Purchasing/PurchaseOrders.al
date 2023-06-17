@@ -42,6 +42,11 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 MultiLine = true;
             }
         }
+        modify("Order Date")
+        {
+            Visible = true;
+            Importance = Standard;
+        }
         modify("Document Date")
         {
             Visible = true;
@@ -78,7 +83,10 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         { Importance = Standard; }
         modify(BuyFromContactEmail)
         { Importance = Standard; }
+        movebefore("Document Date"; "Order Date")
         movebefore(Control1904651607; Control3)
+        modify(Control1903326807)
+        { Visible = true; }
     }
     actions
     {
@@ -88,6 +96,22 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         { Visible = false; }
         modify("Send Intercompany Purchase Order_Promoted")
         { Visible = false; }
+        addlast("F&unctions")
+        {
+            action(ReqWorksheet)
+            {
+                ApplicationArea = All;
+                Image = MovementWorksheet;
+                Caption = 'Requisition Worksheet';
+                RunObject = page "Req. Worksheet";
+                //RunPageLink = "No." = field("No.");
+                Description = 'Go to the Requisition Worksheet to calculate orders';
+                ToolTip = 'Opens the requisition worksheet. From there, orders can be calculated based on reordering policies and quantities.';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
+        }
         addlast(Category_Process)
         {
             actionref(RecurringLines; GetRecurringPurchaseLines)
@@ -95,6 +119,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             actionref(VendorCard; Vendor)
             { }
             actionref(Statistics2; Statistics)
+            { }
+            actionref(RecWorksheet_Promoted; ReqWorksheet)
             { }
         }
     }

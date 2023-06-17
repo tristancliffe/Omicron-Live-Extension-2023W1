@@ -108,29 +108,31 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
 
     trigger OnAfterGetRecord()
     var
-        LineItem: Record Item;
+        Item: Record Item;
     begin
-        if LineItem.Get(Rec."Item No.") then begin
-            Rec.ItemDescription := LineItem.Description;
-            LineItem.CalcFields(Inventory);
-            QtyInStock := LineItem.Inventory;
-            LowStockThreshold := LineItem."Reorder Point";
-            if LineItem."Replenishment System" = LineItem."Replenishment System"::Purchase then begin
-                if LineItem."Reordering Policy" = LineItem."Reordering Policy"::"Fixed Reorder Qty." then
-                    OrderQty := LineItem."Reorder Quantity"
+        OrderQty := 0;
+        if Item.Get(Rec."Item No.") then begin
+            Rec.ItemDescription := Item.Description;
+            Item.CalcFields(Inventory);
+            QtyInStock := Item.Inventory;
+            LowStockThreshold := Item."Reorder Point";
+            if Item."Replenishment System" = Item."Replenishment System"::Purchase then begin
+                if Item."Reordering Policy" = Item."Reordering Policy"::"Fixed Reorder Qty." then
+                    OrderQty := Item."Reorder Quantity"
                 else
-                    if LineItem."Reordering Policy" = LineItem."Reordering Policy"::"Maximum Qty." then
-                        OrderQty := LineItem."Reorder Quantity"
+                    if Item."Reordering Policy" = Item."Reordering Policy"::"Maximum Qty." then
+                        OrderQty := Item."Reorder Quantity"
                     else
                         OrderQty := 0;
-                ReorderStatus := 'StandardAccent';
-                SetReorderStatus();
             end;
+            SetReorderStatus();
+
         end;
     end;
 
     procedure SetReorderStatus()
     begin
+        ReorderStatus := 'StandardAccent';
         if QtyInStock <= LowStockThreshold then
             ReorderStatus := 'Unfavorable'
         else

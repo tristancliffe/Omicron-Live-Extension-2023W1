@@ -46,19 +46,19 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 ApplicationArea = All;
                 style = AttentionAccent;
             }
-            field("Job No.1"; Rec."Job No.")
-            {
-                ApplicationArea = All;
-                Width = 8;
-                trigger OnValidate()
-                begin
-                    Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify();
-                    //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
-                end;
-            }
-            field("Job Task No.1"; Rec."Job Task No.")
-            { ApplicationArea = All; }
+            // field("Job No.1"; Rec."Job No.")
+            // {
+            //     ApplicationArea = All;
+            //     Width = 8;
+            //     trigger OnValidate()
+            //     begin
+            //         Rec.ValidateShortcutDimCode(3, Rec."Job No.");
+            //         Rec.Modify();
+            //         //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
+            //     end;
+            // }
+            // field("Job Task No.1"; Rec."Job Task No.")
+            // { ApplicationArea = All; }
         }
         modify("Unit Price")
         {

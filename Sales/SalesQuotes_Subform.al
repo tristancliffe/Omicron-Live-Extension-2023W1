@@ -7,10 +7,16 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
             trigger OnAfterValidate() // Triggered when a new line is entered
             begin
                 GetInventory();
+                if (rec."Unit Price" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
+                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
             end;
         }
+        modify(Description)
+        { QuickEntry = true; }
         modify(Quantity)
-        { Style = Strong; }
+        { style = Strong; }
+        Modify("Qty. to Assign")
+        { QuickEntry = true; }
         addafter("Unit of Measure Code")
         {
             field(ItemType; Rec.ItemType_SalesLine)
@@ -46,19 +52,28 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 ApplicationArea = All;
                 style = AttentionAccent;
             }
-            field("Job No.1"; Rec."Job No.")
+            // field("Job No.1"; Rec."Job No.")
+            // {
+            //     ApplicationArea = All;
+            //     Width = 8;
+            //     trigger OnValidate()
+            //     begin
+            //         Rec.ValidateShortcutDimCode(3, Rec."Job No.");
+            //         Rec.Modify();
+            //         //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
+            //     end;
+            // }
+            // field("Job Task No.1"; Rec."Job Task No.")
+            // { ApplicationArea = All; }
+        }
+        addafter("Line Amount")
+        {
+            field("Amount Including VAT"; Rec."Amount Including VAT")
             {
                 ApplicationArea = All;
-                Width = 8;
-                trigger OnValidate()
-                begin
-                    Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify();
-                    //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
-                end;
+                Visible = true;
+                Editable = false;
             }
-            field("Job Task No.1"; Rec."Job Task No.")
-            { ApplicationArea = All; }
         }
         modify("Unit Cost (LCY)")
         {

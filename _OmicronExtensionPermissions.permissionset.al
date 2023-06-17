@@ -9,5 +9,6 @@ permissionset 50100 OmicronPermissions
         page ShopifyAllVariants = X,
         page "Work Done Dialog" = X,
         report "Job Billing Excel" = X,
-        report "Timesheet Entries" = X;
+        report "Timesheet Entries" = X,
+        report ResourceEfficiency = X;
 }

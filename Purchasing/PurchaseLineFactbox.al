@@ -4,19 +4,26 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
     {
         addafter(Availability)
         {
-            group(Type)
-            {
-                ShowCaption = false;
-                Visible = TypeExists;
+            // group(Type)
+            // {
+            //     ShowCaption = false;
+            //     Visible = TypeExists;
 
-                field(ItemType; Rec.ItemType_PurchLine) //ShowType())
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Type';
-                    Visible = true;
-                    DrillDown = false;
-                }
-            }
+            //     field(ItemType; Rec.ItemType_PurchLine) //ShowType())
+            //     {
+            //         ApplicationArea = All;
+            //         Caption = 'Item Type';
+            //         Visible = true;
+            //         DrillDown = false;
+            //     }
+            //     field(QtyToOrder; QtyToOrder)
+            //     {
+            //         ApplicationArea = All;
+            //         Caption = 'Quantity to Order';
+            //         Visible = true;
+            //         DrillDown = false;
+            //     }
+            // }
             group(Notes)
             {
                 Caption = 'Item Notes';
@@ -48,29 +55,42 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
     var
         ImageExists: Boolean;
         NotesExist: Boolean;
-        TypeExists: Boolean;
+    // TypeExists: Boolean;
+    // QtyToOrder: Decimal;
+    // Item: Record Item;
 
     trigger OnAfterGetCurrRecord()
     begin
         ImageExists := true;
         NotesExist := true;
-        TypeExists := true;
-        //message('%1', strlen(Rec.ItemNotes_PurchLine));
+        // TypeExists := true;
+        // //message('%1', strlen(Rec.ItemNotes_PurchLine));
         if Rec.Image_PurchLine.Count = 0 then
             ImageExists := false;
-        if Rec.Type <> Rec.Type::Item then
-            TypeExists := false;
+        // if Rec.Type <> Rec.Type::Item then
+        //     TypeExists := false;
         If strlen(Rec.ItemNotes_PurchLine) = 0 then
             NotesExist := false;
+        // if Item.Get(Rec."No.") then begin
+        //     if item."Reordering Policy" = item."Reordering Policy"::"Fixed Reorder Qty." then
+        //         QtyToOrder := item."Reorder Quantity"
+        //     else
+        //         if item."Reordering Policy" = item."Reordering Policy"::"Maximum Qty." then begin
+        //             Item.CalcFields(Inventory);
+        //             QtyToOrder := item."Reorder Quantity" - item.Inventory
+        //         end
+        //         else
+        //             QtyToOrder := 0
+        // end;
     end;
 
 
-    local procedure ShowType(): Enum "Item Type"
-    begin
-        if Rec.Type <> Rec.Type::Item then
-            exit(Rec.ItemType_PurchLine::"Non-Inventory");
-        exit(Rec.ItemType_PurchLine);
-    end;
+    // local procedure ShowType(): Enum "Item Type"
+    // begin
+    //     if Rec.Type <> Rec.Type::Item then
+    //         exit(Rec.ItemType_PurchLine::"Non-Inventory");
+    //     exit(Rec.ItemType_PurchLine);
+    // end;
 
     local procedure ShowNotes(): text[1000]
     begin
