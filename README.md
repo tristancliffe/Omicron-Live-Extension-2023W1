@@ -9,3 +9,5 @@ I will add more to this eventually, but take a look around if you want to and se
 If anyone from Microsoft ever reads this (please let me know too) and takes ANY inspiration from this for future development then I'd be ever so pleased. Some small code tweaks can help usability dramatically, and I've done too many things to bother posting Ideas on your site!
 
 Thanks, Tristan
+
+P.S. I have no idea what I'm doing regarding VS Code, Github, Pulls, Pushes, Commits or anything like that. I am trying to learn, but currently 'n00b'.
