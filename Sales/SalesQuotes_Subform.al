@@ -15,6 +15,8 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
         { QuickEntry = true; }
         modify(Quantity)
         { style = Strong; }
+        Modify("Qty. to Assemble to Order")
+        { BlankZero = true; }
         Modify("Qty. to Assign")
         { QuickEntry = true; }
         addafter("Unit of Measure Code")
