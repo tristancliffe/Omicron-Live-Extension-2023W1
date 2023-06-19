@@ -1,0 +1,11 @@
+*.app
+.alpackages/
+.builds/
+.snapshots/
+.vscode/
+*.txt
+*.jpg
+*.rdlc
+*.xlsx
+*.docx
+*.zip
