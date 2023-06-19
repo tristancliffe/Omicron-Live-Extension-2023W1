@@ -48,17 +48,25 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             BlankZero = true;
         }
         modify("Qty. to Transfer to Invoice")
-        { BlankZero = true; }
+        {
+            BlankZero = true;
+            Style = Strong;
+            Visible = true;
+        }
         modify("Invoiced Amount (LCY)")
         { BlankZero = true; }
-        addbefore("Invoiced Amount (LCY)")
-        {
-            field("Qty. to Transfer to Invoice1"; Rec."Qty. to Transfer to Invoice")
-            { ApplicationArea = All; }
-        }
+        movebefore("Invoiced Amount (LCY)"; "Qty. to Transfer to Invoice")
+        // addbefore("Invoiced Amount (LCY)")
+        // {
+        //     field("Qty. to Transfer to Invoice1"; Rec."Qty. to Transfer to Invoice")
+        //     { ApplicationArea = All; }
+        // }
         movebefore("Invoiced Amount (LCY)"; "Qty. Invoiced")
         modify("Qty. Invoiced")
-        { Visible = true; }
+        {
+            Visible = true;
+            Style = Favorable;
+        }
         movelast(Control1; "User ID")
         modify("User ID")
         { Visible = true; }
