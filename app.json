@@ -2,7 +2,7 @@
   "id": "721fd7af-e3f1-4284-95ee-734c127773c1",
   "name": "Omicron Extension",
   "publisher": "Omicron Engineering Ltd",
-  "version": "1.7.230620.1",
+  "version": "1.7.230620.2",
   "brief": "Omicron's Custom Extension for 2023 Implementation",
   "description": "Adds custom table fields, changes to the layout via Designer, default view filters, role centre menus, and various other things to Business Central",
   "privacyStatement": "https://www.omicron.uk.com/",

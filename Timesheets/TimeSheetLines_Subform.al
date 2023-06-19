@@ -42,13 +42,9 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         modify(Description)
         { Visible = false; }
         modify("Job No.")
-        {
-            Visible = true;
-            ShowMandatory = true;
-        }
+        { Visible = true; }
         modify("Job Task No.")
         {
-            ShowMandatory = true;
             Caption = 'Job Task';
             Visible = true;
             trigger OnAfterValidate()

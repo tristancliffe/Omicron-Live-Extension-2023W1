@@ -57,6 +57,28 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                 PromotedOnly = true;
                 PromotedCategory = Process;
             }
+            action(MoveTimeSheetsToArchive)
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Move Time Sheets to Archive';
+                Image = Archive;
+                //RunObject = Report "Move Time Sheets to Archive";
+                ToolTip = 'Archive time sheets.';
+                Visible = Device;
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    Timesheet: Record "Time Sheet Header";
+                    ArchiveTimeSheet: Report "Move Time Sheets to Archive";
+                begin
+                    Timesheet.SetFilter("No.", Rec."No.");
+                    ArchiveTimeSheet.SetTableView(Timesheet);
+                    ArchiveTimeSheet.RunModal();
+                end;
+            }
         }
     }
     var
