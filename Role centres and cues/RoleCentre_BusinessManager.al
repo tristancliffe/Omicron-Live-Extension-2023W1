@@ -269,6 +269,14 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Posted Purchase Invoices";
                     ToolTip = 'Open the list of posted purchase invoices.';
                 }
+                action("PostedPurchaseReceipts")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Purchase Receipts';
+                    Image = Receipt;
+                    RunObject = Page "Posted Purchase Receipts";
+                    ToolTip = 'Open the list of posted purchase receipts.';
+                }
                 action("Posted Purchase Credit Memos")
                 {
                     ApplicationArea = Basic, Suite;

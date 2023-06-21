@@ -35,6 +35,26 @@ pageextension 50112 JobListExtension extends "Job List"
     {
         addafter("Create Job &Sales Invoice")
         {
+            action(CreateSalesInvoice)
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Create Job &Sales Invoice';
+                Image = JobSalesInvoice;
+                ToolTip = 'Use a batch job to help you create job sales invoices for the involved job planning lines.';
+                Visible = true;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    JobTask: Record "Job Task";
+                    JobInvoice: Report "Job Create Sales Invoice";
+                begin
+                    JobTask.SetFilter("Job No.", Rec."No.");
+                    JobInvoice.SetTableView(JobTask);
+                    JobInvoice.RunModal();
+                end;
+            }
             action(ManagerTimeSheet)
             {
                 Caption = 'Sales Invoices';
@@ -48,6 +68,8 @@ pageextension 50112 JobListExtension extends "Job List"
                 PromotedCategory = Process;
             }
         }
+        modify("Create Job &Sales Invoice")
+        { Visible = false; }
     }
     views
     {

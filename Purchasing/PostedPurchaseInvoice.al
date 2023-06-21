@@ -47,6 +47,11 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
         { Importance = Standard; }
         modify(BuyFromContactEmail)
         { Importance = Standard; }
+        addafter("Your Reference")
+        {
+            field("Order Notes"; Rec."Order Notes")
+            { ApplicationArea = All; }
+        }
     }
 }
 

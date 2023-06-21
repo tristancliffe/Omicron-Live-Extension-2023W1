@@ -29,7 +29,7 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
                 end;
             end;
         }
-        field(50101; "Order Notes"; text[50])
+        field(50101; "Order Notes"; text[250])
         {
             CaptionML = ENU = 'Order Notes';
             DataClassification = CustomerContent;

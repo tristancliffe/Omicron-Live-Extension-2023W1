@@ -31,7 +31,7 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
                 end;
             end;
         }
-        field(50101; "Order Notes"; text[50])
+        field(50101; "Order Notes"; text[250])
         {
             CaptionML = ENU = 'Order Notes';
             DataClassification = CustomerContent;

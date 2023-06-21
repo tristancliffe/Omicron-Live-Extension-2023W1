@@ -159,6 +159,8 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 Enabled = true;
             }
         }
+        modify("Create &Sales Invoice")
+        { Visible = false; }
     }
 
     var

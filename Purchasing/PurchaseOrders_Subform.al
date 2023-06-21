@@ -118,6 +118,8 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             BlankZero = true;
             Visible = true;
         }
+        modify("Qty. to Assign")
+        { QuickEntry = true; }
     }
     actions
     {

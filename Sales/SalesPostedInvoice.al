@@ -53,5 +53,10 @@ pageextension 50140 PostedSalesInvoiceExt extends "Posted Sales Invoice"
             field("Sell-to E-Mail"; Rec."Sell-to E-Mail")
             { ApplicationArea = All; }
         }
+        addafter("Your Reference")
+        {
+            field(OrderNotes; Rec."Order Notes")
+            { ApplicationArea = All; }
+        }
     }
 }

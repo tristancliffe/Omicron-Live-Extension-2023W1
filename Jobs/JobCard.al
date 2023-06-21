@@ -63,14 +63,24 @@ pageextension 50111 JobCardExt extends "Job Card"
     {
         addlast("&Job")
         {
-            action(CreateInvoice)
+            action(CreateSalesInvoice)
             {
                 Caption = 'Create Sales Invoice';
                 Image = SalesInvoice;
                 ApplicationArea = All;
-                RunObject = Report "Job Create Sales Invoice";
+                //RunObject = Report "Job Create Sales Invoice";
                 ToolTip = 'Create job sales invoices report';
                 Visible = true;
+
+                trigger OnAction()
+                var
+                    JobTask: Record "Job Task";
+                    JobInvoice: Report "Job Create Sales Invoice";
+                begin
+                    JobTask.SetFilter("Job No.", Rec."No.");
+                    JobInvoice.SetTableView(JobTask);
+                    JobInvoice.RunModal();
+                end;
 
                 // trigger OnAction()
                 // var
@@ -180,7 +190,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             group(Invoicing)
             {
                 ShowAs = SplitButton;
-                actionref(CreateInvoice_Promoted; CreateInvoice)
+                actionref(CreateSalesInvoice_Promoted; CreateSalesInvoice)
                 { }
                 actionref(SalesInvoiceList_Promoted; SalesInvoiceList)
                 { }
