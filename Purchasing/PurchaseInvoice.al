@@ -71,6 +71,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         { Importance = Standard; }
         modify(BuyFromContactEmail)
         { Importance = Standard; }
+        modify("Payment Reference")
+        { Importance = Standard; }
     }
     actions
     {
@@ -82,6 +84,36 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             { }
             actionref(Statistics2; Statistics)
             { }
+        }
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify(PostAndPrint)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify(PostAndNew)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
         }
     }
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

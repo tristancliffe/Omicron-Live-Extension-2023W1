@@ -10,5 +10,7 @@ permissionset 50100 OmicronPermissions
         page "Work Done Dialog" = X,
         report "Job Billing Excel" = X,
         report "Timesheet Entries" = X,
-        report ResourceEfficiency = X;
+        report ResourceEfficiency = X,
+        codeunit PostPurchInvoiceOrderNotes = X,
+        codeunit PostSalesInvoiceOrderNotes = X;
 }

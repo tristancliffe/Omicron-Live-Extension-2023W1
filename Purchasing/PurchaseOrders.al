@@ -83,6 +83,29 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         { Importance = Standard; }
         modify(BuyFromContactEmail)
         { Importance = Standard; }
+        modify("Payment Reference")
+        { Importance = Standard; }
+        addafter("Promised Receipt Date")
+        {
+            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Assign to a document type...';
+                Importance = Additional;
+            }
+            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Choose a document/payment to assign this record against.';
+                Importance = Additional;
+            }
+            field("Applies-to ID"; Rec."Applies-to ID")
+            {
+                ApplicationArea = All;
+                ToolTip = 'ID or Code for the applies to fields.';
+                Importance = Additional;
+            }
+        }
         movebefore("Document Date"; "Order Date")
         movebefore(Control1904651607; Control3)
         modify(Control1903326807)
@@ -116,12 +139,44 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         {
             actionref(RecurringLines; GetRecurringPurchaseLines)
             { }
+            actionref(PostedReceipts_Promoted; Receipts)
+            { }
             actionref(VendorCard; Vendor)
             { }
             actionref(Statistics2; Statistics)
             { }
             actionref(RecWorksheet_Promoted; ReqWorksheet)
             { }
+        }
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify("Post and &Print")
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify(PostAndNew)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
         }
     }
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

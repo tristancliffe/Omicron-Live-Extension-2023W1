@@ -177,6 +177,36 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             }
         }
         moveafter(Category_Category8; GetRecurringSalesLines_Promoted)
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify(PostAndSend)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify(PostAndNew)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
     }
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin

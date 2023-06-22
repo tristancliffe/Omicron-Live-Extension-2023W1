@@ -2,7 +2,13 @@ tableextension 50119 PostedSalesHeaderExt extends "Sales Invoice Header"
 {
     fields
     {
-        field(50100; "Order Notes"; Text[250])
+        field(50100; "Customer Notes"; Text[2000])
+        {
+            Caption = 'Customer Notes';
+            DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(50101; "Order Notes"; Text[250])
         {
             Caption = 'Order Notes';
             DataClassification = CustomerContent;

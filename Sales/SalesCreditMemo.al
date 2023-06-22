@@ -134,6 +134,26 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
                 Visible = true;
             }
         }
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
+        modify(PostAndSend)
+        {
+            trigger OnBeforeAction()
+            begin
+                if rec."Posting Date" = 0D then begin
+                    rec."Posting Date" := Today;
+                    Rec.Modify();
+                end;
+            end;
+        }
     }
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
