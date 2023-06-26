@@ -10,6 +10,8 @@ reportextension 50110 OmicronSalesShipment extends "Standard Sales - Shipment"
         {
             Type = Word;
             LayoutFile = './OmicronSalesShipment.docx';
+            Caption = 'Standard Sales Shipment';
+            Summary = 'Omicron Sales Shipment (Delivery Note)';
         }
     }
 }

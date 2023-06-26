@@ -2,8 +2,7 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
 {
     layout
     {
-        moveafter("Posting Date"; "Document Date")
-        moveafter("Document Date"; "VAT Reporting Date")
+        moveafter("Posting Date"; "Document Date", "VAT Reporting Date")
         modify("Document Date")
         {
             Visible = true;

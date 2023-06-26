@@ -2,8 +2,7 @@ report 50100 "Timesheet Entries"
 {
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = Word;
-    WordLayout = 'OmicronTimeSheetRecords.docx';
+    DefaultRenderingLayout = "OmicronTimeSheetRecords.docx";
     Caption = 'Timesheet Entries';
     PreviewMode = PrintLayout;
     dataset
@@ -72,6 +71,17 @@ report 50100 "Timesheet Entries"
 
         actions
         { }
+    }
+
+    rendering
+    {
+        layout("OmicronTimeSheetRecords.docx")
+        {
+            Type = Word;
+            LayoutFile = 'OmicronTimeSheetRecords.docx';
+            Caption = 'Timesheet Entries';
+            Summary = 'Timesheet and stock entries for a job for historical archiving';
+        }
     }
 
     labels

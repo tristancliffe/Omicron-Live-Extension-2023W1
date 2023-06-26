@@ -64,7 +64,6 @@ pageextension 50171 PostedPurchInvoiceSubExt extends "Posted Purch. Invoice Subf
             Editable = false;
             BlankZero = true;
         }
-        moveafter("Direct Unit Cost"; "Unit Cost (LCY)")
-        moveafter("Unit Cost (LCY)"; "Unit Price (LCY)")
+        moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)")
     }
 }

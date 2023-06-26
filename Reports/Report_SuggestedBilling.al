@@ -16,6 +16,7 @@ reportextension 50112 ActiveJobs extends "Job Suggested Billing"
             Type = RDLC;
             LayoutFile = './OmicronActiveJobs.rdlc';
             Caption = 'List of Current Jobs';
+            Summary = 'Prints a list of current (active) jobs for printing';
         }
     }
 

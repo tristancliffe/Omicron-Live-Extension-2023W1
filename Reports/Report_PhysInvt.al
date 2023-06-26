@@ -1,6 +1,5 @@
 reportextension 50101 PhysInvtReportExt extends "Phys. Inventory List"
 {
-    RDLCLayout = './OmicronPhysInvtList.rdlc';
     dataset
     {
 
@@ -9,6 +8,17 @@ reportextension 50101 PhysInvtReportExt extends "Phys. Inventory List"
             column(ShelfNo_ItemJournalLine; ShelfNo_ItemJournalLine)
             {
             }
+        }
+    }
+
+    rendering
+    {
+        layout("./OmicronPhysInvtList.rdlc")
+        {
+            Type = RDLC;
+            LayoutFile = './OmicronPhysInvtList.rdlc';
+            Caption = 'Physical Inventory List';
+            Summary = 'Omicron Physical Inventory List';
         }
     }
 

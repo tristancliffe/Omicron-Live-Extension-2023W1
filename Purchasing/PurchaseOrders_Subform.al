@@ -77,10 +77,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             { ApplicationArea = All; }
         }
         moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group")
-        moveafter("Direct Unit Cost"; "Unit Cost (LCY)")
-        moveafter("Unit Cost (LCY)"; "Unit Price (LCY)")
-        moveafter("Unit Price (LCY)"; "Line Discount Amount")
-        moveafter("Line Discount Amount"; "Line Discount %")
+        moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)", "Line Discount Amount", "Line Discount %")
         modify("Gen. Prod. Posting Group")
         {
             Style = Ambiguous;

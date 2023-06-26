@@ -81,16 +81,6 @@ pageextension 50111 JobCardExt extends "Job Card"
                     JobInvoice.SetTableView(JobTask);
                     JobInvoice.RunModal();
                 end;
-
-                // trigger OnAction()
-                // var
-                //     Job: Record Job;
-                // //ReportSelection: Report "Job Create Sales Invoice";
-                // begin
-                //     Job.SetCurrentKey("No.");
-                //     Job.SetFilter("No.", Rec."No.");
-                //     Report.RunModal(Report::"Job Create Sales Invoice", true, true, Job);
-                // end;
             }
             action(JobJournal)
             {

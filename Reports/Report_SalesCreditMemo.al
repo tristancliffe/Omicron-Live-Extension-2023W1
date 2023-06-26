@@ -10,6 +10,8 @@ reportextension 50107 OmicronSalesCreditMemo extends "Standard Sales - Credit Me
         {
             Type = Word;
             LayoutFile = './OmicronSalesCreditMemo.docx';
+            Caption = 'Standard Sales Credit Memo';
+            Summary = 'Omicron Sales Credit Memo';
         }
     }
 }

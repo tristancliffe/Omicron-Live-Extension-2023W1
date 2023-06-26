@@ -36,8 +36,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
             field("Order Notes1"; Rec."Order Notes")
             { ApplicationArea = All; }
         }
-        moveafter("Sell-to Customer Name"; Amount)
-        moveafter(Amount; "Amount Including VAT")
+        moveafter("Sell-to Customer Name"; Amount, "Amount Including VAT")
         modify("Completely Shipped")
         {
             Visible = true;

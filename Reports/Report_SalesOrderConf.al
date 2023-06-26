@@ -42,6 +42,8 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
         {
             Type = Word;
             LayoutFile = './OmicronSalesOrderConf.docx';
+            Caption = 'Standard Sales Order Confirmation';
+            Summary = 'Omicron Sales Order Confirmation';
         }
     }
     // var

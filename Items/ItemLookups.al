@@ -18,9 +18,7 @@ pageextension 50137 ItemLookupExt extends "Item Lookup"
             field("Shelf No.1"; Rec."Shelf No.")
             { ApplicationArea = All; }
         }
-        moveafter("Shelf No.1"; "Unit Price")
-        moveafter("Unit Price"; "Unit Cost")
-        moveafter("Unit Cost"; "Base Unit of Measure")
+        moveafter("Shelf No.1"; "Unit Price", "Unit Cost", "Base Unit of Measure")
         addafter("Base Unit of Measure")
         {
             field("Item Category Code1"; Rec."Item Category Code")

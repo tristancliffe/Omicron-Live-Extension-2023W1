@@ -14,6 +14,14 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         }
         addafter("Your Reference")
         {
+            field("Preferred Payment Method"; PaymentMethod)
+            {
+                ApplicationArea = All;
+                Caption = 'Preferred Payment Method';
+                ToolTip = 'Pulled from Vendor card';
+                Editable = false;
+                Style = Strong;
+            }
             field("Order Notes"; Rec."Order Notes")
             {
                 ApplicationArea = All;
@@ -24,14 +32,21 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         }
         addafter("Buy-from")
         {
-            field("Order Vendor Notes"; Rec."Order Vendor Notes")
+            field("Order Vendor Notes"; VendorNotes)
             {
+                Caption = 'Vendor Notes';
                 MultiLine = true;
                 ApplicationArea = All;
                 Importance = Standard;
                 ToolTip = 'This SHOULD be the vendor notes brought across to the orders';
                 QuickEntry = false;
                 Editable = true;
+
+                trigger OnValidate()
+                begin
+                    RecVendor."Vendor Notes" := VendorNotes;
+                    RecVendor.Modify()
+                end;
             }
         }
         modify("Document Date")
@@ -68,9 +83,21 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
             { }
         }
     }
+
+    var
+        RecVendor: Record Vendor;
+        PaymentMethod: Text[50];
+        VendorNotes: Text[1000];
+
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
         Rec."Assigned User ID" := USERID;
+        RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
+        if RecVendor.FindSet() then begin
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            //Rec.Modify()
+        end;
     end;
 
     trigger OnModifyRecord(): Boolean
@@ -79,13 +106,31 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
     end;
 
     trigger OnOpenPage()
-    var
-        RecVendor: Record Vendor;
-
     begin
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
-            Rec."Order Vendor Notes" := RecVendor."Vendor Notes";
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            //Rec.Modify()
+        end;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
+        if RecVendor.FindSet() then begin
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            //Rec.Modify()
+        end;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
+        if RecVendor.FindSet() then begin
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
             //Rec.Modify()
         end;
     end;

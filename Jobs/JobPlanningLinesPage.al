@@ -161,6 +161,51 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         }
         modify("Create &Sales Invoice")
         { Visible = false; }
+        addlast("F&unctions")
+        {
+            action(CreateSalesInvoice)
+            {
+                Caption = 'Create Sales Invoice';
+                Image = SalesInvoice;
+                ApplicationArea = All;
+                //RunObject = Report "Job Create Sales Invoice";
+                ToolTip = 'Create job sales invoices report';
+                Visible = true;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    JobTask: Record "Job Task";
+                    JobInvoice: Report "Job Create Sales Invoice";
+                begin
+                    JobTask.SetFilter("Job No.", Rec."No.");
+                    JobInvoice.SetTableView(JobTask);
+                    JobInvoice.RunModal();
+                end;
+            }
+            action("Report Job Invoicing Excel")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Excel Invoice Planner';
+                Image = "Report";
+                ToolTip = 'Open the Excel worksheet for invoicing';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    TimesheetReport: Report "Job Billing Excel";
+                begin
+                    Job.SetFilter("No.", Rec."Job No.");
+                    TimesheetReport.SetTableView(Job);
+                    TimesheetReport.RunModal();
+                end;
+            }
+        }
     }
 
     var

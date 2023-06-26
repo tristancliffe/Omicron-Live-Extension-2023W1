@@ -8,7 +8,9 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             begin
                 GetInventory;
                 if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
-                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.");
+                if (Rec.Type = Rec.Type::Item) and (Rec."Location Code" = '') then
+                    Rec.Validate("Location Code", 'STORES');
             end;
         }
         addafter(Description)

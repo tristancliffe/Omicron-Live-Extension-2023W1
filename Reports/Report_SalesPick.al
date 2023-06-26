@@ -58,6 +58,8 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
         {
             Type = RDLC;
             LayoutFile = './OmicronPickInstruction.rdlc';
+            Caption = 'Standard Pick Instruction';
+            Summary = 'Omicron Pick Instruction';
         }
     }
     // var

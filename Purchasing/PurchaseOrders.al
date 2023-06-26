@@ -2,34 +2,42 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
 {
     layout
     {
-        moveafter("Buy-from Vendor Name"; Status)
-        moveafter(Status; "Vendor Invoice No.")
+        moveafter("Buy-from Vendor Name"; "Your Reference", Status, "Vendor Invoice No.")
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
-        moveafter("Buy-from Vendor Name"; "Your Reference")
         modify("Your Reference")
         {
             ApplicationArea = All;
             QuickEntry = true;
 
         }
-        // addafter("Buy-from Vendor Name")
-        // {
-        //     field("Your Reference"; Rec."Your Reference")
-        //     {
-        //         ApplicationArea = All;
-        //         QuickEntry = true;
-        //     }
-        // }
+        addafter("Your Reference")
+        {
+            field("Preferred Payment Method"; PaymentMethod)
+            {
+                ApplicationArea = All;
+                Caption = 'Preferred Payment Method';
+                ToolTip = 'Pulled from Vendor card';
+                Editable = false;
+                Style = Strong;
+            }
+        }
         addafter("Buy-from")
         {
-            field("Order Vendor Notes"; Rec."Order Vendor Notes")
+            field("Order Vendor Notes"; VendorNotes)
             {
+                Caption = 'Vendor Notes';
                 MultiLine = true;
                 ApplicationArea = All;
                 Importance = Standard;
                 ToolTip = 'This SHOULD be the vendor notes brought across to the orders';
                 QuickEntry = false;
                 Editable = true;
+
+                trigger OnValidate()
+                begin
+                    RecVendor."Vendor Notes" := VendorNotes;
+                    RecVendor.Modify()
+                end;
             }
         }
         addafter("Your Reference")
@@ -178,10 +186,28 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 end;
             end;
         }
+        modify(Release)
+        { Enabled = ReleaseControllerStatus; }
+        modify(Reopen)
+        { Enabled = ReopenControllerStatus; }
     }
+
+    var
+        RecVendor: Record Vendor;
+        ReleaseControllerStatus: Boolean;
+        ReopenControllerStatus: Boolean;
+        PaymentMethod: Text[50];
+        VendorNotes: Text[1000];
+
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
         Rec."Assigned User ID" := USERID;
+        RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
+        if RecVendor.FindSet() then begin
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            // Rec.Modify()
+        end;
     end;
 
     trigger OnModifyRecord(): Boolean
@@ -190,14 +216,41 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
     end;
 
     trigger OnOpenPage()
-    var
-        RecVendor: Record Vendor;
-
     begin
+        InitPageControllers();
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
-            Rec."Order Vendor Notes" := RecVendor."Vendor Notes";
-            //Rec.Modify()
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            // Rec.Modify()
         end;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        InitPageControllers();
+        RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
+        if RecVendor.FindSet() then begin
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            // Rec.Modify()
+        end;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        InitPageControllers();
+        RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
+        if RecVendor.FindSet() then begin
+            VendorNotes := RecVendor."Vendor Notes";
+            PaymentMethod := RecVendor."Preferred Payment Method";
+            // Rec.Modify()
+        end;
+    end;
+
+    local procedure InitPageControllers()
+    begin
+        ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
+        ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 }

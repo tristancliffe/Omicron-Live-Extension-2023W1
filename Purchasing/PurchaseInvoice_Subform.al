@@ -61,8 +61,7 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
             Editable = false;
             BlankZero = true;
         }
-        moveafter("Direct Unit Cost"; "Unit Cost (LCY)")
-        moveafter("Unit Cost (LCY)"; "Unit Price (LCY)")
+        moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)")
     }
     actions
     {

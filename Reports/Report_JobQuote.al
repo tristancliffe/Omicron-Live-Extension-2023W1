@@ -49,6 +49,8 @@ reportextension 50100 ExcelQuoteExt extends "Job Quote"
         {
             Type = RDLC;
             LayoutFile = './OmicronJobQuote.rdlc';
+            Caption = 'Job Quote (printing)';
+            Summary = 'Omicron Job Quote';
         }
         // layout("Omicron Time Sheet Records")
         // {

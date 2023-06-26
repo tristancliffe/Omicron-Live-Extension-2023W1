@@ -66,8 +66,7 @@ pageextension 50100 ItemCardExt extends "Item Card"
             }
         }
         movelast(Item; "Tariff No.")
-        moveafter(Blocked; "Unit Price")
-        moveafter(Blocked; "Unit Cost")
+        moveafter(Blocked; "Unit Cost", "Unit Price")
         modify("Blocked")
         { Visible = true; }
         modify("Automatic Ext. Texts")

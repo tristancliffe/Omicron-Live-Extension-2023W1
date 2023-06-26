@@ -64,7 +64,6 @@ pageextension 50181 PurchOrderArchiveSubExt extends "Purchase Order Archive Subf
             Editable = false;
             BlankZero = true;
         }
-        moveafter("Direct Unit Cost"; "Unit Cost (LCY)")
-        moveafter("Unit Cost (LCY)"; "Unit Price (LCY)")
+        moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)")
     }
 }

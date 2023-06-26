@@ -6,7 +6,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
-            field("Order Customer Notes"; Rec."Order Customer Notes")
+            field("Order Customer Notes"; CustomerNotes)
             {
                 MultiLine = true;
                 ApplicationArea = All;
@@ -17,6 +17,12 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 trigger OnAssistEdit()
                 begin
                     message(Rec."Order Customer Notes");
+                end;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer Notes" := CustomerNotes;
+                    RecCustomer.Modify()
                 end;
             }
         }
@@ -133,10 +139,18 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 ApplicationArea = All;
                 CaptionML = ENU = 'E-Mail Address';
             }
-            field("Mobile No."; Rec."Mobile No.")
+            field("Mobile No."; MobileNo)
             {
                 ApplicationArea = All;
                 CaptionML = ENU = 'Mobile Phone No.';
+                ExtendedDatatype = PhoneNo;
+                Numeric = true;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Mobile Phone No." := MobileNo;
+                    RecCustomer.Modify()
+                end;
             }
         }
         modify(Control4)
@@ -262,14 +276,27 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 end;
             end;
         }
+        modify(Release)
+        { Enabled = ReleaseControllerStatus; }
+        modify(Reopen)
+        { Enabled = ReopenControllerStatus; }
     }
 
     var
         RecCustomer: Record Customer;
+        CustomerNotes: Text[2000];
+        MobileNo: Text[30];
+        ReleaseControllerStatus: Boolean;
+        ReopenControllerStatus: Boolean;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
         Rec."Assigned User ID" := USERID;
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
+        end;
     end;
 
     trigger OnModifyRecord(): Boolean
@@ -279,10 +306,37 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
 
     trigger OnOpenPage()
     begin
+        InitPageControllers();
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
-            Rec."Order Customer Notes" := RecCustomer."Customer Notes";
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
         end;
-        Rec."Mobile No." := RecCustomer."Mobile Phone No.";
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        InitPageControllers();
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        InitPageControllers();
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+    end;
+
+    local procedure InitPageControllers()
+    begin
+        ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
+        ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 }

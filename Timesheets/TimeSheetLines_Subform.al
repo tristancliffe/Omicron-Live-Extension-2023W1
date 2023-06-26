@@ -12,7 +12,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 Visible = true;
                 ApplicationArea = all;
                 ShowMandatory = true;
-                DrillDown = true;
+                //DrillDown = true;
 
                 Editable = CanEdit;
                 AssistEdit = true;
@@ -22,7 +22,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                     Dialog: Page "Work Done Dialog";
                 begin
                     if CanEdit = false then
-                        exit //message('%1', rec."Work Done")
+                        message('%1', rec."Work Done") //exit
                     else begin
                         Dialog.GetText(rec."Work Done");
                         if Dialog.RunModal() = Action::OK then
@@ -30,13 +30,13 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                     end;
                 end;
 
-                trigger OnDrillDown()
-                begin
-                    if CanEdit = false then
-                        message('%1', rec."Work Done")
-                    else
-                        exit;
-                end;
+                // trigger OnDrillDown()
+                // begin
+                //     if CanEdit = false then
+                //         message('%1', rec."Work Done")
+                //     else
+                //         exit;
+                // end;
             }
         }
         modify(Description)
@@ -54,10 +54,8 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 Rec.Modify();
             end;
         }
-        moveafter(Status; "Job No.")
-        moveafter("Job No."; "Job Task No.")
-        moveafter("Total Quantity"; Chargeable)
-        movebefore(Chargeable; "Cause of Absence Code")
+        moveafter(Status; "Job No.", "Job Task No.")
+        moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
         modify(Chargeable)
         { Visible = true; }
         modify("Cause of Absence Code")

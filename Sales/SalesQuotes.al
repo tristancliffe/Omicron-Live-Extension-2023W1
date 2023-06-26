@@ -6,7 +6,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
-            field("Order Customer Notes"; Rec."Order Customer Notes")
+            field("Order Customer Notes"; CustomerNotes)
             {
                 MultiLine = true;
                 ApplicationArea = All;
@@ -14,6 +14,12 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
                 ToolTip = 'This SHOULD be the customer notes brought across to the orders';
                 QuickEntry = false;
                 Editable = true;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer Notes" := CustomerNotes;
+                    RecCustomer.Modify()
+                end;
             }
         }
         modify("Sell-to Customer No.")
@@ -117,10 +123,18 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
                 ApplicationArea = All;
                 CaptionML = ENU = 'E-Mail Address';
             }
-            field("Mobile No."; Rec."Mobile No.")
+            field("Mobile No."; MobileNo)
             {
                 ApplicationArea = All;
                 CaptionML = ENU = 'Mobile Phone No.';
+                ExtendedDatatype = PhoneNo;
+                Numeric = true;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Mobile Phone No." := MobileNo;
+                    RecCustomer.Modify()
+                end;
             }
         }
         modify("Quote Valid Until Date")
@@ -168,9 +182,21 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             { }
         }
     }
+
+    var
+        RecCustomer: Record Customer;
+        CustomerNotes: Text[2000];
+        MobileNo: Text[30];
+
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
         Rec."Assigned User ID" := USERID;
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
+            //rec.modify()
+        end;
     end;
 
     trigger OnModifyRecord(): Boolean
@@ -179,15 +205,30 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
     end;
 
     trigger OnOpenPage()
-    var
-        RecCustomer: Record Customer;
-
     begin
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
-            Rec."Order Customer Notes" := RecCustomer."Customer Notes";
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
             //rec.modify()
         end;
-        Rec."Mobile No." := RecCustomer."Mobile Phone No.";
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            MobileNo := RecCustomer."Mobile Phone No.";
+        end;
     end;
 }

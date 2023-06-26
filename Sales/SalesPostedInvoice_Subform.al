@@ -15,9 +15,7 @@ pageextension 50139 "PostedSalesInvoiceSubform Ext" extends "Posted Sales Invoic
                 end;
             }
         }
-        moveafter("Deferral Code"; "VAT Bus. Posting Group")
-        moveafter("Deferral Code"; "Gen. Prod. Posting Group")
-        moveafter("Deferral Code"; "Gen. Bus. Posting Group")
+        moveafter("Deferral Code"; "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "VAT Bus. Posting Group")
         modify("Unit Cost (LCY)")
         {
             Visible = true;

@@ -12,6 +12,7 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
                 RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
                 if RecVendor.FindSet() then
                     Rec."Order Vendor Notes" := RecVendor."Vendor Notes";
+                Rec."Preferred Payment Method" := RecVendor."Preferred Payment Method";
             end;
         }
         field(50100; "Order Vendor Notes"; text[1000])
@@ -32,6 +33,11 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
         field(50101; "Order Notes"; text[250])
         {
             CaptionML = ENU = 'Order Notes';
+            DataClassification = CustomerContent;
+        }
+        field(50102; "Preferred Payment Method"; Text[50]) //! Remove this
+        {
+            CaptionML = ENG = 'Preferred Payment Method';
             DataClassification = CustomerContent;
         }
     }

@@ -19,6 +19,8 @@ reportextension 50113 PurchaseReceiptExt extends "Purchase - Receipt"
         {
             Type = RDLC;
             LayoutFile = './OmicronPurchaseReceipt.rdlc';
+            Caption = 'Standard Purchase Receipt';
+            Summary = 'Omicron Purchase Reciept';
         }
     }
 }

@@ -2,8 +2,7 @@ report 50101 "Job Billing Excel"
 {
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = Excel;
-    ExcelLayout = './OmicronJobBillingExcel.xlsx';
+    DefaultRenderingLayout = "./OmicronJobBillingExcel.xlsx";
     Caption = 'Excel Job Quote';
     Description = 'Used to calculate handwritten invoices for jobs';
     PreviewMode = PrintLayout;
@@ -107,6 +106,17 @@ report 50101 "Job Billing Excel"
 
         actions
         { }
+    }
+
+    rendering
+    {
+        layout("./OmicronJobBillingExcel.xlsx")
+        {
+            Type = Excel;
+            LayoutFile = './OmicronJobBillingExcel.xlsx';
+            Caption = 'Excel Job Invoice Calculator';
+            Summary = 'Used to calculate and write handwritten job invoices and/or prepare quotes';
+        }
     }
 
     labels
