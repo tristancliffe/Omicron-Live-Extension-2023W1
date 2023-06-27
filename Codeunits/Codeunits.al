@@ -23,21 +23,3 @@ codeunit 50101 ItemLedgerReasons
         ItemLedgerEntry.ReasonCode := ItemJournalLine."Reason Code";
     end;
 }
-
-codeunit 50102 PostSalesInvoiceOrderNotes
-{
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", OnInsertInvoiceHeaderOnAfterSalesInvHeaderTransferFields, '', true, true)]
-    local procedure TransferOrderNotes(var SalesInvoiceHeader: Record "Sales Invoice Header"; var SalesHeader: Record "Sales Header")
-    begin
-        SalesInvoiceHeader."Order Notes" := SalesHeader."Order Notes"
-    end;
-}
-
-codeunit 50103 PostPurchInvoiceOrderNotes
-{
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Purch.-Post", OnAfterInsertPostedHeaders, '', true, true)]
-    local procedure TransferOrderNotes(var PurchInvHeader: Record "Purch. Inv. Header"; var PurchaseHeader: Record "Purchase Header")
-    begin
-        PurchInvHeader."Order Notes" := PurchaseHeader."Order Notes"
-    end;
-}

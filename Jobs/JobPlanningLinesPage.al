@@ -160,7 +160,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             }
         }
         modify("Create &Sales Invoice")
-        { Visible = false; }
+        { Caption = 'Line to Sales Order'; }
         addlast("F&unctions")
         {
             action(CreateSalesInvoice)
@@ -180,7 +180,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                     JobTask: Record "Job Task";
                     JobInvoice: Report "Job Create Sales Invoice";
                 begin
-                    JobTask.SetFilter("Job No.", Rec."No.");
+                    JobTask.SetFilter("Job No.", Rec."Job No.");
                     JobInvoice.SetTableView(JobTask);
                     JobInvoice.RunModal();
                 end;

@@ -4,6 +4,8 @@ tableextension 50119 PostedSalesHeaderExt extends "Sales Invoice Header"
     {
         field(50100; "Customer Notes"; Text[2000])
         {
+            ObsoleteReason = 'Not needed anymore';
+            ObsoleteState = Removed;
             Caption = 'Customer Notes';
             DataClassification = CustomerContent;
             Editable = false;
