@@ -12,15 +12,6 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         { Visible = false; }
         modify("Sell-To Contact")
         { Visible = false; }
-        addafter("No.")
-        {
-            field("Document Type06148"; Rec."Document Type")
-            {
-                ApplicationArea = All;
-                Width = 16;
-                StyleExpr = ShippedStatus;
-            }
-        }
         addafter("Sell-to Customer Name")
         {
             field("Order Date98002"; Rec."Order Date")
@@ -41,12 +32,15 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         {
             Visible = true;
         }
-        moveafter(Status; "Completely Shipped")
+        moveafter(Amount; Status)
+        moveafter("Document Date"; "Completely Shipped")
         addafter("Completely Shipped")
         {
             field(InvoicedLineExists; Rec.InvoicedLineExists)
             { ApplicationArea = All; }
         }
+        modify("Document Date")
+        { Visible = false; }
     }
     actions
     {

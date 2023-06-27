@@ -181,10 +181,16 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             actionref(CustomerCard; Customer)
             { }
         }
+        modify(Release)
+        { Enabled = ReleaseControllerStatus; }
+        modify(Reopen)
+        { Enabled = ReopenControllerStatus; }
     }
 
     var
         RecCustomer: Record Customer;
+        ReleaseControllerStatus: Boolean;
+        ReopenControllerStatus: Boolean;
         CustomerNotes: Text[2000];
         MobileNo: Text[30];
 
@@ -206,6 +212,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
 
     trigger OnOpenPage()
     begin
+        InitPageControllers();
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
@@ -216,6 +223,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
 
     trigger OnAfterGetRecord()
     begin
+        InitPageControllers();
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
@@ -225,10 +233,17 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
 
     trigger OnAfterGetCurrRecord()
     begin
+        InitPageControllers();
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
+    end;
+
+    local procedure InitPageControllers()
+    begin
+        ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
+        ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 }

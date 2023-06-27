@@ -8,14 +8,6 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
         { Visible = false; }
         modify("Sell-To Contact")
         { Visible = false; }
-        addafter("No.")
-        {
-            field("Document Type06148"; Rec."Document Type")
-            {
-                ApplicationArea = All;
-                Width = 16;
-            }
-        }
         addafter("Sell-to Customer Name")
         {
             field("Order Date98002"; Rec."Order Date")
@@ -41,6 +33,13 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
                 Caption = 'Incl. VAT';
             }
         }
+        moveafter(Amount; Status)
+        modify(Status)
+        { Visible = true; }
+        modify("Posting Date")
+        { Visible = false; }
+        modify("Due Date")
+        { Visible = false; }
     }
 
     trigger OnOpenPage()

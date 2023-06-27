@@ -2,7 +2,15 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
 {
     layout
     {
-        moveafter("Buy-from Vendor Name"; "Your Reference")
+        moveafter("Buy-from Vendor Name"; "Your Reference", "Vendor Invoice No.", Amount, Status)
+        addafter(Status)
+        {
+            field("Order Date"; Rec."Order Date")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+        }
         modify("Your Reference")
         {
             ApplicationArea = All;
@@ -26,6 +34,13 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
         { Visible = false; }
         modify("Assigned User ID")
         { Visible = true; }
+        modify("Location Code")
+        { Visible = false; }
+        modify(Status)
+        {
+            ApplicationArea = All;
+            Visible = true;
+        }
     }
 
     trigger OnOpenPage()

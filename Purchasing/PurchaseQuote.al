@@ -82,10 +82,16 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
             actionref(VendorCard; Vendor)
             { }
         }
+        modify(Release)
+        { Enabled = ReleaseControllerStatus; }
+        modify(Reopen)
+        { Enabled = ReopenControllerStatus; }
     }
 
     var
         RecVendor: Record Vendor;
+        ReleaseControllerStatus: Boolean;
+        ReopenControllerStatus: Boolean;
         PaymentMethod: Text[50];
         VendorNotes: Text[1000];
 
@@ -107,6 +113,7 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
 
     trigger OnOpenPage()
     begin
+        InitPageControllers();
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
             VendorNotes := RecVendor."Vendor Notes";
@@ -117,6 +124,7 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
 
     trigger OnAfterGetRecord()
     begin
+        InitPageControllers();
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
             VendorNotes := RecVendor."Vendor Notes";
@@ -127,11 +135,18 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
 
     trigger OnAfterGetCurrRecord()
     begin
+        InitPageControllers();
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
             VendorNotes := RecVendor."Vendor Notes";
             PaymentMethod := RecVendor."Preferred Payment Method";
             //Rec.Modify()
         end;
+    end;
+
+    local procedure InitPageControllers()
+    begin
+        ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
+        ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 }

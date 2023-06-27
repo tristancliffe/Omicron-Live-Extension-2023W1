@@ -6,7 +6,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         { StyleExpr = StatusStyle; }
         modify("Buy-from Vendor Name")
         { StyleExpr = StatusStyle; }
-        moveafter("Buy-from Vendor Name"; "Your Reference")
+        moveafter("Buy-from Vendor Name"; "Your Reference", "Amount", Status, "Document Date", "Amount Received Not Invoiced (LCY)", "Amount Including VAT")
         modify("Your Reference")
         {
             ApplicationArea = All;
@@ -45,6 +45,8 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 Visible = true;
             }
         }
+        modify("Location Code")
+        { Visible = false; }
     }
     actions
     {

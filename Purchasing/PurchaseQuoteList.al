@@ -2,7 +2,7 @@ pageextension 50154 PurchaseQuoteListExt extends "Purchase Quotes"
 {
     layout
     {
-        moveafter("Buy-from Vendor Name"; "Your Reference")
+        moveafter("Buy-from Vendor Name"; "Your Reference", "Document Date")
         modify("Your Reference")
         {
             ApplicationArea = All;
@@ -11,6 +11,8 @@ pageextension 50154 PurchaseQuoteListExt extends "Purchase Quotes"
             Visible = true;
             Editable = true;
         }
+        modify("Document Date")
+        { Visible = true; }
         // addafter("Buy-from Vendor Name")
         // {
         //     field("Your Reference"; Rec."Your Reference")
@@ -26,6 +28,11 @@ pageextension 50154 PurchaseQuoteListExt extends "Purchase Quotes"
         { Visible = false; }
         modify("Assigned User ID")
         { Visible = true; }
+        movebefore("Document Date"; Status)
+        modify(Status)
+        { Visible = true; }
+        modify("Location Code")
+        { Visible = false; }
     }
 
     trigger OnOpenPage()

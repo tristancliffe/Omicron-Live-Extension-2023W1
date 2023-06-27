@@ -8,14 +8,6 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
         { Visible = false; }
         modify("Sell-To Contact")
         { Visible = false; }
-        addafter("No.")
-        {
-            field("Document Type06148"; Rec."Document Type")
-            {
-                ApplicationArea = All;
-                Width = 16;
-            }
-        }
         addafter("Sell-to Customer Name")
         {
             field("Order Date98002"; Rec."Order Date")
@@ -31,7 +23,7 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
             field("Order Notes1"; Rec."Order Notes")
             { ApplicationArea = All; }
         }
-        moveafter("Sell-to Customer Name"; Amount)
+        moveafter("Sell-to Customer Name"; Amount, Status)
         moveafter("Assigned User ID"; "Quote Valid Until Date")
         modify("Quote Valid Until Date")
         {
@@ -39,6 +31,12 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
             ApplicationArea = All;
             Caption = 'Valid Until';
         }
+        modify(Status)
+        { Visible = true; }
+        modify("Posting Date")
+        { Visible = false; }
+        modify("Requested Delivery Date")
+        { Visible = false; }
     }
 
     actions
