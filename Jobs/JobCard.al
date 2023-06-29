@@ -1,4 +1,3 @@
-#pragma implicitwith disable
 pageextension 50111 JobCardExt extends "Job Card"
 {
     layout

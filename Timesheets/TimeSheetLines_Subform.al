@@ -1,4 +1,3 @@
-#pragma implicitwith disable
 pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
 {
     layout
@@ -57,7 +56,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         moveafter(Status; "Job No.", "Job Task No.")
         moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
         modify(Chargeable)
-        { Visible = true; }
+        { Visible = Device; }
         modify("Cause of Absence Code")
         { Visible = true; }
         modify(UnitOfMeasureCode)
@@ -85,4 +84,13 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         CanEdit: Boolean;
         StatusStyle: Text[50];
         ChangeStatusColor: Codeunit ChangeStatusColour;
+        Device: Boolean;
+
+    trigger OnOpenPage()
+    begin
+        if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
+            Device := false
+        else
+            Device := true;
+    end;
 }

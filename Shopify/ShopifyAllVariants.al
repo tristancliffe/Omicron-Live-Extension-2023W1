@@ -1,4 +1,3 @@
-#pragma implicitwith disable
 page 50102 ShopifyAllVariants
 {
 
@@ -218,4 +217,3 @@ page 50102 ShopifyAllVariants
         }
     }
 }
-#pragma implicitwith restore

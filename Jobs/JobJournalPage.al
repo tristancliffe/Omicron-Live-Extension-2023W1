@@ -102,7 +102,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 Caption = 'Job Card';
                 Image = ViewJob;
                 ApplicationArea = All;
-                RunObject = Page "Job List";
+                RunObject = Page "Job Card";
                 RunPageLink = "No." = field("Job No.");
                 ShortcutKey = 'Shift+Ctrl+J';
                 ToolTip = 'Takes the user to the Job Card of the selected line';

@@ -1,4 +1,3 @@
-#pragma implicitwith disable
 pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
 {
     layout
@@ -224,4 +223,3 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         Rec.Ascending(true);
     end;
 }
-#pragma implicitwith restore

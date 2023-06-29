@@ -1,4 +1,3 @@
-#pragma implicitwith disable
 pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
 {
     layout

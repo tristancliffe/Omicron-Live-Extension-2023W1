@@ -1,4 +1,3 @@
-#pragma implicitwith disable
 pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
 {
     layout
@@ -144,4 +143,3 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 end;
     end;
 }
-#pragma implicitwith restore
