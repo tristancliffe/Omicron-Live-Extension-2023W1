@@ -13,6 +13,14 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                 ApplicationArea = All;
                 Importance = Promoted;
             }
+            field("Dropbox Link"; "Dropbox Link")
+            {
+                ApplicationArea = All;
+                Importance = Promoted;
+                Description = 'The link to the Dropbox image upload page';
+                ExtendedDatatype = URL;
+                Editable = false;
+            }
         }
     }
     actions
@@ -83,6 +91,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
     }
     var
         Device: Boolean;
+        "Dropbox Link": Text[50];
 
     trigger OnOpenPage()
     begin
@@ -90,5 +99,6 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             Device := false
         else
             Device := true;
+        "Dropbox Link" := 'https://bit.ly/omicronltd'
     end;
 }

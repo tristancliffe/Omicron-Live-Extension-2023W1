@@ -12,6 +12,16 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 Caption = 'Purchase Quotes';
             }
         }
+        addafter("Overdue Purch. Invoice Amount")
+        {
+            field("Pended Sales Invoice Amount"; Rec."Pending Sales Invoice Amount")
+            {
+                ApplicationArea = Basic, Suite;
+                ToolTip = 'Specifies the sum of sales invoices to be sent.';
+                DrillDownPageId = "Sales Invoice List";
+                Visible = true;
+            }
+        }
         addlast(Control54)
         {
             field(CustomersOpen; Rec.CustomersOpen)
@@ -34,4 +44,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         modify("Ongoing Purchase Invoices")
         { Caption = 'Purch. Invoices'; }
     }
+    var
+        ActivitiesManagement: Codeunit "Activities Mgt.";
 }
