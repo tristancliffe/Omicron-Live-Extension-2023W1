@@ -19,6 +19,15 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
             Visible = true;
             Editable = true;
         }
+        addafter(Amount)
+        {
+            field("Amount Including VAT"; Rec."Amount Including VAT")
+            {
+                ApplicationArea = All;
+                Caption = 'Amount incl. VAT';
+                Visible = true;
+            }
+        }
         // addafter("Buy-from Vendor Name")
         // {
         //     field("Your Reference"; Rec."Your Reference")

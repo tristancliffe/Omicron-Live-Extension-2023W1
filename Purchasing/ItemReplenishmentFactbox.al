@@ -17,6 +17,13 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                     Visible = true;
                     DrillDown = false;
                 }
+                field("Shelf No."; Rec."Shelf No.")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Shelf';
+                    Visible = true;
+                    DrillDown = false;
+                }
                 field(ItemCost; Rec."Unit Cost")
                 {
                     ApplicationArea = All;

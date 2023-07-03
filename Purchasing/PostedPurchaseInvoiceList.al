@@ -10,6 +10,12 @@ pageextension 50179 PostedPurchInvoiceListExt extends "Posted Purchase Invoices"
             Caption = 'Posted Date';
             ToolTip = 'The date that the invoice was posted.';
         }
+        moveafter(Amount; "Amount Including VAT")
+        modify("Amount Including VAT")
+        {
+            Caption = 'Amount incl. VAT';
+            Visible = true;
+        }
         modify("Document Date")
         { Visible = true; }
         modify(Cancelled)

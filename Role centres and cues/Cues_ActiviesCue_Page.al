@@ -43,6 +43,8 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         }
         modify("Ongoing Purchase Invoices")
         { Caption = 'Purch. Invoices'; }
+        modify("Sales Invoices Predicted Overdue")
+        { Visible = false; }
     }
     var
         ActivitiesManagement: Codeunit "Activities Mgt.";
