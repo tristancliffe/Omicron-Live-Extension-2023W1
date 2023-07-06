@@ -24,8 +24,10 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                         message('%1', rec."Work Done") //exit
                     else begin
                         Dialog.GetText(rec."Work Done");
-                        if Dialog.RunModal() = Action::OK then
-                            rec."Work Done" := Dialog.SaveText()
+                        if Dialog.RunModal() = Action::OK then begin
+                            rec."Work Done" := Dialog.SaveText();
+                            rec.Modify(); //saves the line to the table even if no other field is selected
+                        end;
                     end;
                 end;
 
@@ -46,12 +48,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         {
             Caption = 'Job Task';
             Visible = true;
-            trigger OnAfterValidate()
-            begin
-                if Rec."Work Done" = '' then
-                    Rec."Work Done" := Rec.Description;
-                Rec.Modify();
-            end;
+            // trigger OnAfterValidate()
+            // begin
+            //     if Rec."Work Done" = '' then
+            //         Rec."Work Done" := Rec.Description;
+            //     Rec.Modify();
+            // end;
         }
         moveafter(Status; "Job No.", "Job Task No.")
         moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)

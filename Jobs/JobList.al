@@ -70,6 +70,28 @@ pageextension 50112 JobListExtension extends "Job List"
         }
         modify("Create Job &Sales Invoice")
         { Visible = false; }
+        addlast(reporting)
+        {
+            action("Report Resource Efficiency")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Resource Efficiency';
+                Image = HumanResources;
+                ToolTip = 'Open the Excel worksheet for resource usage, profitability and efficiency';
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    Resource: Record Resource;
+                    TimesheetReport: Report ResourceEfficiency;
+                begin
+                    //Resource.SetFilter("No.", Rec."No.");
+                    TimesheetReport.SetTableView(Resource);
+                    TimesheetReport.RunModal();
+                end;
+            }
+        }
     }
     views
     {

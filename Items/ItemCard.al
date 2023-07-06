@@ -77,25 +77,25 @@ pageextension 50100 ItemCardExt extends "Item Card"
             ShowMandatory = true;
         }
         modify("Search Description")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Costing Method")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("VAT Prod. Posting Group")
         { Importance = Standard; }
         modify("Profit %")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Sales Unit of Measure")
         {
-            Importance = Promoted;
+            Importance = Standard;
             ShowMandatory = true;
         }
         modify("Vendor No.")
         { Importance = Promoted; }
         modify("Vendor Item No.")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Purch. Unit of Measure")
         {
-            Importance = Promoted;
+            Importance = Standard;
             ShowMandatory = true;
         }
         modify("Tariff No.")

@@ -408,16 +408,6 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Resource Ledger Entries";
                     ToolTip = 'Resource Ledger Entries list';
                 }
-                action("ActionNewJob")
-                {
-                    AccessByPermission = TableData "Job" = IMD;
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Create New Job';
-                    Image = ViewJob;
-                    RunObject = Page "Job Card";
-                    RunPageMode = Create;
-                    ToolTip = 'Create a new project (J-job or P-job)';
-                }
                 action("Absences")
                 {
                     AccessByPermission = TableData "Employee Absence" = IMD;

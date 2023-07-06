@@ -43,13 +43,13 @@ pageextension 50102 CustomerCardExt extends "Customer Card"
         modify(MobilePhoneNo)
         { Importance = Promoted; }
         modify("VAT Registration No.")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Ship-to Code")
         { Importance = Promoted; }
         modify("Shipping Advice")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Balance (LCY)2")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Primary Contact No.")
         { Importance = Standard; }
         modify(ContactName)

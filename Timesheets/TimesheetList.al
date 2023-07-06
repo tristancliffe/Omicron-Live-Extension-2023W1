@@ -36,12 +36,38 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
                 PromotedOnly = true;
                 PromotedCategory = Process;
             }
+            action(ArchiveTimeSheet)
+            {
+                Caption = 'Archive Timesheet';
+                Image = Archive;
+                ApplicationArea = All;
+                ToolTip = 'Send this sheet to the archive if fully posted';
+                Visible = Device;
+                Promoted = true;
+                PromotedOnly = true;
+                Ellipsis = true;
+                Scope = Repeater;
+
+                trigger OnAction()
+                var
+                    Timesheet: Record "Time Sheet Header";
+                    ArchiveReport: Report "Move Time Sheets to Archive";
+                begin
+                    Timesheet.SetFilter("No.", Rec."No.");
+                    ArchiveReport.SetTableView(Timesheet);
+                    ArchiveReport.RunModal();
+                end;
+            }
         }
     }
     trigger OnOpenPage()
     begin
         Rec.SetCurrentKey("Starting Date", "Resource No.");
         Rec.Ascending(true);
+        if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
+            Device := false
+        else
+            Device := true;
     end;
 
     trigger OnAfterGetRecord()
@@ -75,4 +101,5 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
 
     var
         PendingStyle: Text;
+        Device: Boolean;
 }

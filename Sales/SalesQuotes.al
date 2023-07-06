@@ -80,19 +80,19 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             Importance = Standard;
         }
         modify("Ship-to Name")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Ship-to Code")
-        { Importance = Additional; }
+        { Importance = Standard; }
         modify("Ship-to Address")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Ship-to Address 2")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Ship-to City")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Ship-to County")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Ship-to Post Code")
-        { Importance = Promoted; }
+        { Importance = Standard; }
         modify("Shipment Date")
         { Importance = Standard; }
         modify("Assigned User ID")

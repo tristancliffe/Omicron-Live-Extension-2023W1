@@ -8,7 +8,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         {
             ApplicationArea = All;
             QuickEntry = true;
-
+            Importance = Standard;
         }
         addafter("Your Reference")
         {
