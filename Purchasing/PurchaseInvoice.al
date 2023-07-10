@@ -87,6 +87,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         { Importance = Standard; }
         modify("Payment Reference")
         { Importance = Standard; }
+        modify("Currency Code")
+        { Importance = Standard; }
     }
     actions
     {
@@ -104,7 +106,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -114,7 +116,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -124,11 +126,21 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
         }
+        // modify(Preview)
+        // {
+        //     trigger OnBeforeAction()
+        //     begin
+        //         if rec."Posting Date" = 0D then begin
+        //             Rec.Validate("Posting Date", Today);
+        //             Rec.Modify();
+        //         end;
+        //     end;
+        // }
         modify("Re&lease")
         { Enabled = ReleaseControllerStatus; }
         modify(Reopen)

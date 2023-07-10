@@ -47,6 +47,8 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
         { Importance = Standard; }
         modify(BuyFromContactEmail)
         { Importance = Standard; }
+        modify("Currency Code")
+        { Importance = Standard; }
         addafter("Your Reference")
         {
             field("Order Notes"; Rec."Order Vendor Notes") //* changed to order vendor notes due to mistake in table field numbering

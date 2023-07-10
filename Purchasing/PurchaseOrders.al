@@ -93,6 +93,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         { Importance = Standard; }
         modify("Payment Reference")
         { Importance = Standard; }
+        modify("Currency Code")
+        { Importance = Standard; }
         addafter("Promised Receipt Date")
         {
             field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
@@ -161,7 +163,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -171,7 +173,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -181,11 +183,21 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
         }
+        // modify(Preview)
+        // {
+        //     trigger OnBeforeAction()
+        //     begin
+        //         if rec."Posting Date" = 0D then begin
+        //             Rec.Validate("Posting Date", Today);
+        //             Rec.Modify();
+        //         end;
+        //     end;
+        // }
         modify(Release)
         { Enabled = ReleaseControllerStatus; }
         modify(Reopen)

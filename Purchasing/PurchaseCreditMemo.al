@@ -16,6 +16,8 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
         { Importance = Standard; }
         modify("Payment Method Code")
         { Importance = Standard; }
+        modify("Currency Code")
+        { Importance = Standard; }
     }
     actions
     {
@@ -24,7 +26,7 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -34,7 +36,7 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -44,7 +46,7 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;

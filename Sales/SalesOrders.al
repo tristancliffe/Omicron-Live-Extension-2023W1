@@ -251,7 +251,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -261,7 +261,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
@@ -271,11 +271,21 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    rec."Posting Date" := Today;
+                    Rec.Validate("Posting Date", Today);
                     Rec.Modify();
                 end;
             end;
         }
+        // modify(PreviewPosting)
+        // {
+        //     trigger OnBeforeAction()
+        //     begin
+        //         if rec."Posting Date" = 0D then begin
+        //             Rec.Validate("Posting Date", Today);
+        //             Rec.Modify();
+        //         end;
+        //     end;
+        // }
         modify(Release)
         { Enabled = ReleaseControllerStatus; }
         modify(Reopen)

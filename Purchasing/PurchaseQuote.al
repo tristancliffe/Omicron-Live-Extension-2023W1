@@ -73,6 +73,8 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         { Importance = Standard; }
         modify(BuyFromContactEmail)
         { Importance = Standard; }
+        modify("Currency Code")
+        { Importance = Standard; }
         movebefore(Control1904651607; Control5)
     }
     actions

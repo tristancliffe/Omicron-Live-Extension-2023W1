@@ -47,7 +47,11 @@ pageextension 50111 JobCardExt extends "Job Card"
         modify("Search Description") { Importance = Standard; }
         modify("External Document No.") { Visible = true; Importance = Standard; }
         modify("Your Reference") { Visible = true; Importance = Standard; }
-
+        addafter(SellToPhoneNo)
+        {
+            field("Sell-to Mobile Number"; Rec."Sell-to Mobile Number")
+            { ApplicationArea = All; Importance = Standard; }
+        }
         addfirst(factboxes)
         {
             part(CustomerPicture; "Customer Picture")
@@ -147,6 +151,54 @@ pageextension 50111 JobCardExt extends "Job Card"
                     TimesheetReport.RunModal();
                 end;
             }
+            action("Job Card")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Job Card';
+                Image = "Report";
+                ToolTip = 'Produce a job card';
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    JobCard: Report "Job Card";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    JobCard.SetTableView(Job);
+                    JobCard.RunModal();
+                end;
+            }
+            action("Workshop Request")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Workshop Request Jobcard';
+                Image = "Report";
+                ToolTip = 'Produce the workshop request jobcard';
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    WorkshopRequest: Report "Workshop Request";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    WorkshopRequest.SetTableView(Job);
+                    WorkshopRequest.RunModal();
+                end;
+                //     ReportParameters: text;
+                //     TempBlob: Codeunit "Temp Blob";
+                //     FileManagement: Codeunit "File Management";
+                //     OStream: OutStream;
+                // begin
+                //     Clear(ReportParameters);
+                //     Clear(OStream);
+                //     Job.SetFilter("No.", Rec."No.");
+                //     WorkshopRequest.SetTableView(Job);
+                //     ReportParameters := Report.RunRequestPage(50103);
+                //     TempBlob.CreateOutStream(OStream);
+                //     Report.SaveAs(50103, ReportParameters, ReportFormat::Word, OStream);
+                //     FileManagement.BLOBExport(TempBlob, Format(Job."No.") + '_' + 'WorkshopRequest' + '_' + Format(CURRENTDATETIME, 0, '<Day,2><Month,2><Year4>') + '.docx', true);
+                // end;
+            }
         }
         // addafter("Report Job Quote")
         // {
@@ -201,6 +253,10 @@ pageextension 50111 JobCardExt extends "Job Card"
                 actionref(ExcelJobInvoicing; "Report Job Invoicing Excel")
                 { }
                 actionref(TimesheetEntries; "Report Timesheet Entries")
+                { }
+                actionref(JobCard; "Job Card")
+                { }
+                actionref(WorkshopRequest; "Workshop Request")
                 { }
             }
             // actionref(ExcelReport_Promoted; "Excel Report")

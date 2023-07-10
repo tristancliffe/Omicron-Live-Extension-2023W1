@@ -26,7 +26,9 @@ tableextension 50105 JobNotes extends Job
                 Workshop: Code[10];
                 PartsDept: Code[10];
                 JobPostingGroup: Code[3];
+                Customer: Record Customer;
             begin
+                "Sell-to Mobile Number" := Customer."Mobile Phone No.";
                 VarPurch := 'PURCHASES';
                 VarStock := 'STOCK';
                 VarSubContr := 'SUBCONTRACT';
@@ -206,7 +208,6 @@ tableextension 50105 JobNotes extends Job
         {
             CaptionML = ENU = 'Vehicle Reg';
             DataClassification = CustomerContent;
-
         }
         field(50102; "Date of Arrival"; Date)
         {
@@ -226,6 +227,12 @@ tableextension 50105 JobNotes extends Job
         field(50105; "Work Required"; Text[50])
         {
             CaptionML = ENU = 'Work Required';
+            DataClassification = CustomerContent;
+        }
+        field(50106; "Sell-to Mobile Number"; Text[30])
+        {
+            Caption = 'Mobile Phone No.';
+            ExtendedDatatype = PhoneNo;
             DataClassification = CustomerContent;
         }
     }
