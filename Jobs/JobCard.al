@@ -161,7 +161,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 trigger OnAction()
                 var
                     Job: Record Job;
-                    JobCard: Report "Job Card";
+                    JobCard: Report "Service Instruction";
                 begin
                     Job.SetFilter("No.", Rec."No.");
                     JobCard.SetTableView(Job);

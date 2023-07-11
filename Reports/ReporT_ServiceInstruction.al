@@ -1,10 +1,10 @@
-report 50104 "Job Card"
+report 50104 "Service Instruction"
 {
-    Caption = 'Job Card';
+    Caption = 'Service Instruction';
     UsageCategory = Documents;
     ApplicationArea = All;
-    DefaultRenderingLayout = JobCard;
-    Description = 'Produces a job card';
+    DefaultRenderingLayout = ServiceInstruction;
+    Description = 'Produces a job Service Instruction card';
     PreviewMode = PrintLayout;
 
     dataset
@@ -66,7 +66,7 @@ report 50104 "Job Card"
     // }
     rendering
     {
-        layout(Jobcard)
+        layout(ServiceInstruction)
         {
             Type = Word;
             LayoutFile = 'OmicronJobCard.docx';
