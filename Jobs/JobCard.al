@@ -250,13 +250,13 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Various Reports listed here.';
                 actionref(PreviewQuote_Promoted; "Report Job Quote")
                 { }
-                actionref(ExcelJobInvoicing; "Report Job Invoicing Excel")
-                { }
-                actionref(TimesheetEntries; "Report Timesheet Entries")
-                { }
                 actionref(JobCard; "Job Card")
                 { }
                 actionref(WorkshopRequest; "Workshop Request")
+                { }
+                actionref(ExcelJobInvoicing; "Report Job Invoicing Excel")
+                { }
+                actionref(TimesheetEntries; "Report Timesheet Entries")
                 { }
             }
             // actionref(ExcelReport_Promoted; "Excel Report")
