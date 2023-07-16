@@ -89,6 +89,27 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         { Importance = Standard; }
         modify("Currency Code")
         { Importance = Standard; }
+        addafter("On Hold")
+        {
+            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Assign to a document type...';
+                Importance = Additional;
+            }
+            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Choose a document/payment to assign this record against.';
+                Importance = Additional;
+            }
+            field("Applies-to ID"; Rec."Applies-to ID")
+            {
+                ApplicationArea = All;
+                ToolTip = 'ID or Code for the applies to fields.';
+                Importance = Additional;
+            }
+        }
     }
     actions
     {

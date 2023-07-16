@@ -2,6 +2,10 @@ pageextension 50114 JobJournalExt extends "Job Journal"
 {
     layout
     {
+        modify("Line Type")
+        { StyleExpr = BillableStyle; }
+        modify("Job No.")
+        { StyleExpr = BudgetStyle; }
         modify("No.")
         {
             trigger OnAfterValidate()
@@ -162,12 +166,32 @@ pageextension 50114 JobJournalExt extends "Job Journal"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
+        SetBillableStyle();
     end;
 
     trigger OnOpenPage()
     begin
         Rec.SetCurrentKey("Posting Date", "Job Planning Line No.");
         Rec.Ascending(true);
+        SetBillableStyle;
+    end;
+
+    var
+        BillableStyle: Text;
+        BudgetStyle: Text;
+
+    local procedure SetBillableStyle()
+    begin
+        BillableStyle := 'Standard';
+        BudgetStyle := 'Standard';
+        case Rec."Line Type" of
+            Rec."Line Type"::Budget:
+                BudgetStyle := 'Attention';
+            Rec."Line Type"::Billable:
+                BillableStyle := 'Favorable';
+            Rec."Line Type"::"Both Budget and Billable":
+                BillableStyle := 'Ambiguous';
+        end;
     end;
 
     local procedure GetInventory()
