@@ -31,6 +31,13 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                     Visible = true;
                     DrillDown = false;
                 }
+                field("Reordering Policy"; Rec."Reordering Policy")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Reorder Policy';
+                    Visible = true;
+                    DrillDown = false;
+                }
                 field(QtyToOrder; QtyToOrder)
                 {
                     ApplicationArea = All;

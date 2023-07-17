@@ -157,6 +157,32 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 Enabled = true;
             }
         }
+        addlast("F&unctions")
+        {
+            action(TimeSheetLink)
+            {
+                Caption = 'Time Sheets';
+                Image = Timesheet;
+                ApplicationArea = All;
+                RunObject = Page "Time Sheet List";
+                ToolTip = 'Takes the user to the Time Sheet page';
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+            }
+            action(ManagerTimeSheet)
+            {
+                Caption = 'Manager Time Sheets';
+                Image = Timesheet;
+                ApplicationArea = All;
+                RunObject = Page "Manager Time Sheet List";
+                ShortcutKey = 'Shift+Ctrl+J';
+                ToolTip = 'Takes the user to the Manager Time Sheet page';
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+            }
+        }
         modify(SuggestLinesFromTimeSheets)
         {
             Promoted = true;
