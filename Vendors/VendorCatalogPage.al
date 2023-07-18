@@ -68,6 +68,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
                     ToolTip = 'Opens the item card for this line';
                     Visible = true;
                     Enabled = true;
+                    Scope = Repeater;
                 }
             }
         }

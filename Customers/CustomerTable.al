@@ -28,6 +28,12 @@ tableextension 50101 CustomerTableExt extends Customer
             CalcFormula = count(Job where(Status = filter(Open), "Sell-to Customer No." = FIELD("No.")));
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; "Mobile Phone No.", "E-Mail", "Vehicle Model")
+        { }
+    }
+
     trigger OnAfterModify()
     begin
         "Vehicle Model" := UpperCase("Vehicle Model");

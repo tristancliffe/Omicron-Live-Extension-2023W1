@@ -8,6 +8,11 @@ tableextension 50104 EmployeeTableExt extends Employee
             DataClassification = CustomerContent;
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; "Mobile Phone No.", "E-Mail", "Company E-Mail", Status)
+        { }
+    }
 
     trigger OnBeforeDelete()
     var

@@ -236,6 +236,11 @@ tableextension 50105 JobNotes extends Job
             DataClassification = CustomerContent;
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; "Car Make/Model", "Vehicle Reg")
+        { }
+    }
     trigger OnAfterModify()
     begin
         "Parts Location" := UpperCase("Parts Location");

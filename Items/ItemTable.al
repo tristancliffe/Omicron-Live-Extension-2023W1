@@ -36,6 +36,11 @@ tableextension 50100 ItemTableExt extends Item
             DataClassification = CustomerContent;
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; Inventory, "Shelf No.", "Assembly BOM")
+        { }
+    }
     trigger OnAfterModify()
     begin
         Model := UpperCase(Model);

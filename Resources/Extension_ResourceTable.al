@@ -8,6 +8,11 @@ tableextension 50106 ResourceTable extends Resource
             DataClassification = CustomerContent;
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; Blocked)
+        { }
+    }
 
     trigger OnBeforeDelete()
     var

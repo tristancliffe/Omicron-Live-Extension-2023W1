@@ -18,6 +18,11 @@ tableextension 50103 VendorTableExt extends Vendor
             DataClassification = CustomerContent;
         }
     }
+    fieldgroups
+    {
+        addlast(DropDown; "Mobile Phone No.", "E-Mail", "Supply Type")
+        { }
+    }
     trigger OnAfterModify()
     begin
         "Supply Type" := UpperCase("Supply Type");
