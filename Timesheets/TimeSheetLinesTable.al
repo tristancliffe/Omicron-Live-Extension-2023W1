@@ -2,6 +2,16 @@ tableextension 50200 "Time Sheet Line Ext" extends "Time Sheet Line"
 {
     fields
     {
+        modify(Type)
+        {
+            trigger OnAfterValidate()
+            begin
+                Case Type of
+                    Type::Absence:
+                        Chargeable := false;
+                End;
+            end;
+        }
         modify("Job No.")
         {
             trigger OnBeforeValidate()
