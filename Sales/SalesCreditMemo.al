@@ -21,7 +21,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         modify("Your Reference")
         { Importance = Standard; QuickEntry = true; ShowMandatory = true; }
         modify(WorkDescription)
-        { Importance = Standard; Visible = false; }
+        { Importance = Additional; Visible = true; }
         modify("External Document No.")
         { Importance = Standard; Visible = true; }
         modify("Document Date")
