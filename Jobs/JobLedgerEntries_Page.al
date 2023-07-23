@@ -2,6 +2,11 @@ pageextension 50202 "Job Ledger Entries Ext" extends "Job Ledger Entries"
 {
     layout
     {
+        addafter("Entry Type")
+        {
+            field("Line Type"; Rec."Line Type")
+            { ApplicationArea = All; Visible = true; }
+        }
         movebefore(Description; "Job No.")
         movebefore(Description; "Job Task No.")
         modify("Job No.")

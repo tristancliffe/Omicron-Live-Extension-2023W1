@@ -215,6 +215,24 @@ tableextension 50105 JobNotes extends Job
         { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
         field(50106; "Sell-to Mobile Number"; Text[30])
         { Caption = 'Mobile Phone No.'; ExtendedDatatype = PhoneNo; DataClassification = CustomerContent; }
+        field(50107; TotalHours; Decimal)
+        {
+            Caption = 'Total Hours';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Ledger Entry".Quantity where("Job No." = field("No."),
+                                                                "Entry Type" = filter('Usage'),
+                                                                Type = filter('Resource'),
+                                                                "Unit of Measure Code" = filter('HOUR')));
+        }
+        field(50108; InvoicedHours; Decimal)
+        {
+            Caption = 'Invoiced Hours';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Ledger Entry".Quantity where("Job No." = field("No."),
+                                                                "Entry Type" = filter('Sale'),
+                                                                Type = filter('Resource'),
+                                                                "Unit of Measure Code" = filter('HOUR')));
+        }
     }
     fieldgroups
     {
