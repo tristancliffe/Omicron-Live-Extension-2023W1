@@ -29,71 +29,31 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Sell-to Customer No.")
         { Importance = Standard; }
         modify("Sell-to Address")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Address 2")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to City")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to County")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Post Code")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Your Reference")
-        {
-            Importance = Standard;
-            QuickEntry = true;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; QuickEntry = true; ShowMandatory = true; }
         modify(WorkDescription)
-        {
-            Importance = Standard;
-            Visible = false;
-        }
+        { Importance = Standard; Visible = false; }
         modify("External Document No.")
-        {
-            Importance = Standard;
-            Visible = true;
-        }
+        { Importance = Standard; Visible = true; }
         modify("Document Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Due Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Posting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("VAT Reporting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Ship-to Name")
         { Importance = Standard; }
         modify("Ship-to Code")
@@ -111,10 +71,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Shipment Date")
         { Importance = Standard; }
         modify("Assigned User ID")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         addafter("Your Reference")
         {
             field("Order Notes47091"; Rec."Order Notes")
@@ -130,15 +87,9 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         addafter("Sell-to Country/Region Code")
         {
             field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
-            {
-                ApplicationArea = All;
-                CaptionML = ENU = 'Phone No.';
-            }
+            { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
             field("Sell-to E-Mail2"; Rec."Sell-to E-Mail")
-            {
-                ApplicationArea = All;
-                CaptionML = ENU = 'E-Mail Address';
-            }
+            { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
             field("Mobile No."; MobileNo)
             {
                 ApplicationArea = All;
@@ -158,14 +109,9 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         moveafter(SalesDocCheckFactbox; Control1906127307)
         movelast(factboxes; Control1902018507)
         modify(Control1902018507)
-        {
-            Visible = true;
-        }
+        { Visible = true; }
         modify("Payment Method Code")
-        {
-            Importance = Standard;
-            QuickEntry = true;
-        }
+        { Importance = Standard; QuickEntry = true; }
         modify(SelectedPayments)
         { Visible = false; }
         modify("Direct Debit Mandate ID")

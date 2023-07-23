@@ -33,17 +33,9 @@ pageextension 50190 BankStatementListExt extends "Bank Account Statement List"
         addfirst
         {
             view(CurrentAccount)
-            {
-                Caption = 'Current Account';
-                Filters = where("Bank Account No." = filter('CURRENT_BANK'));
-                //OrderBy = descending("Statement Date");
-            }
+            { Caption = 'Current Account'; Filters = where("Bank Account No." = filter('CURRENT_BANK')); }
             view(CreditCard)
-            {
-                Caption = 'Credit Card';
-                Filters = where("Bank Account No." = filter('NATWEST_CREDIT'));
-                //OrderBy = descending("Statement Date");
-            }
+            { Caption = 'Credit Card'; Filters = where("Bank Account No." = filter('NATWEST_CREDIT')); }
         }
     }
     procedure GetFullName(userID: Guid): Text

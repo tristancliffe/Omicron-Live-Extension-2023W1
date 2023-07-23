@@ -23,15 +23,9 @@ pageextension 50105 VendorCardExt extends "Vendor Card"
         addlast(General) //! User Control for the large notes field...
         {
             field("Supply Type"; Rec."Supply Type")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Supply type shortname (Access Dimensions SortKey)';
-            }
+            { ApplicationArea = All; ToolTip = 'Supply type shortname (Access Dimensions SortKey)'; }
             field("Preferred Payment Method"; Rec."Preferred Payment Method")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Note about their preferred method of payment';
-            }
+            { ApplicationArea = All; ToolTip = 'Note about their preferred method of payment'; }
             // field("Vendor Notes"; Rec."Vendor Notes")
             // {
             //     MultiLine = true;
@@ -63,20 +57,11 @@ pageextension 50105 VendorCardExt extends "Vendor Card"
         modify("Location Code")
         { ShowMandatory = true; }
         modify("Gen. Bus. Posting Group")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("VAT Bus. Posting Group")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Vendor Posting Group")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Country/Region Code")
         {
             //ShowMandatory = true; //## This was used before I found out how to make County appear by default in General Ledger Setup

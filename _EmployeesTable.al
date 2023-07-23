@@ -3,10 +3,7 @@ tableextension 50104 EmployeeTableExt extends Employee
     fields
     {
         field(50100; "Employee Notes"; Text[1000])
-        {
-            CaptionML = ENU = 'Employee Notes';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Employee Notes'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {

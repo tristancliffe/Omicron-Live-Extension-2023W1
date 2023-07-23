@@ -4,9 +4,6 @@ pageextension 50195 VendorApplyEntries extends "Apply Vendor Entries"
     {
         movebefore("Remaining Amount"; Amount)
         modify(Amount)
-        {
-            Visible = true;
-            Caption = 'Orig. Amount';
-        }
+        { Visible = true; Caption = 'Orig. Amount'; }
     }
 }

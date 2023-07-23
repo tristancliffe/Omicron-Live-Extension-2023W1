@@ -37,16 +37,10 @@ pageextension 50121 TeamMemberRoleExt extends "Team Member Role Center"
             }
         }
         modify(Finance)
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify(Sales)
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify(Purchasing)
-        {
-            Visible = false;
-        }
+        { Visible = false; }
     }
 }

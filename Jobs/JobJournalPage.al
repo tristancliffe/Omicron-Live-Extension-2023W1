@@ -184,10 +184,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             }
         }
         modify(SuggestLinesFromTimeSheets)
-        {
-            Promoted = true;
-            PromotedCategory = Process;
-        }
+        { Promoted = true; PromotedCategory = Process; }
     }
     trigger OnAfterGetRecord()
     begin

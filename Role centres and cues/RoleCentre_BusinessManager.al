@@ -6,9 +6,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
         modify("Intercompany Activities")
         { Visible = false; }
         modify("My Job Queue")
-        {
-            Visible = true;
-        }
+        { Visible = true; }
         //moveafter(Control16; Control46)
         //moveafter(Control16; ShpfyActivities)
         // addafter("User Tasks Activities")
@@ -22,10 +20,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
         addafter(Control46)
         {
             part(ProjectCues; "Project Manager Activities")
-            {
-                ApplicationArea = All;
-                Visible = True;
-            }
+            { ApplicationArea = All; Visible = True; }
         }
     }
     actions

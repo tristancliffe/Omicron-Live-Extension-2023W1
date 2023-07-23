@@ -10,25 +10,13 @@ pageextension 50112 JobListExtension extends "Job List"
         addafter(Status)
         {
             field("Car Make/Model"; Rec."Car Make/Model")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Car make/model';
-            }
+            { ApplicationArea = All; ToolTip = 'Car make/model'; }
             field("Vehicle Reg"; Rec."Vehicle Reg")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Registration No.';
-            }
+            { ApplicationArea = All; ToolTip = 'Registration No.'; }
             field("Job Notes"; Rec."Job Notes")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Job notes';
-            }
+            { ApplicationArea = All; ToolTip = 'Job notes'; }
             field("Date of Arrival"; Rec."Date of Arrival")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Date of arrival at Omicron';
-            }
+            { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; }
         }
     }
     actions

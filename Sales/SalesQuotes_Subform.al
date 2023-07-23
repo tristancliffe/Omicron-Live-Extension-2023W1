@@ -45,15 +45,9 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
         addafter("Qty. Assigned")
         {
             field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = Ambiguous;
-            }
+            { ApplicationArea = All; style = Ambiguous; }
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = AttentionAccent;
-            }
+            { ApplicationArea = All; style = AttentionAccent; }
             // field("Job No.1"; Rec."Job No.")
             // {
             //     ApplicationArea = All;

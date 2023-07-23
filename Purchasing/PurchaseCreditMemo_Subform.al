@@ -24,10 +24,7 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
             field("Job Line Type2"; Rec."Job Line Type")
             { ApplicationArea = All; }
             field("Job Unit Price2"; Rec."Job Unit Price")
-            {
-                ApplicationArea = All;
-                Width = 8;
-            }
+            { ApplicationArea = All; Width = 8; }
             field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
             { ApplicationArea = All; }
         }

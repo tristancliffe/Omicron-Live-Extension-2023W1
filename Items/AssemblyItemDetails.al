@@ -15,7 +15,6 @@ pageextension 50168 AssemblyOrderItemDetailsExt extends "Component - Item FactBo
                 Caption = 'Item Info.';
                 Visible = TypeExists;
 
-                //field(ItemType; Rec.ItemType_ReqLine) //ShowType())
                 field(ItemType_AssemblyLine; Rec.ItemType_AssemblyLine)
                 {
                     ApplicationArea = All;

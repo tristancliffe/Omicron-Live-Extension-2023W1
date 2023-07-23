@@ -75,9 +75,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
         addlast(Promoted)
         {
             actionref(ItemCard_Promoted; ItemCardLink)
-            {
-                Visible = true;
-            }
+            { Visible = true; }
         }
     }
     views

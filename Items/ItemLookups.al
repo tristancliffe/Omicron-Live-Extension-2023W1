@@ -31,10 +31,7 @@ pageextension 50137 ItemLookupExt extends "Item Lookup"
             { ApplicationArea = All; }
         }
         modify("Routing No.")
-        {
-            QuickEntry = false;
-            Visible = false;
-        }
+        { QuickEntry = false; Visible = false; }
         modify("Vendor Item No.")
         { Visible = false; }
     }

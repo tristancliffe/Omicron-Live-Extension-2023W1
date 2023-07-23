@@ -3,20 +3,11 @@ tableextension 50103 VendorTableExt extends Vendor
     fields
     {
         field(50100; "Vendor Notes"; Text[1000])
-        {
-            CaptionML = ENU = 'Seller Notes';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Seller Notes'; DataClassification = CustomerContent; }
         field(50101; "Supply Type"; Text[50])
-        {
-            CaptionML = ENU = 'Supply Type';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Supply Type'; DataClassification = CustomerContent; }
         field(50102; "Preferred Payment Method"; Text[50])
-        {
-            CaptionML = ENU = 'Preferred Payment Method';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Preferred Payment Method'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {

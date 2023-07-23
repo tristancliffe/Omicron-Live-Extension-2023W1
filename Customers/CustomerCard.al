@@ -23,18 +23,16 @@ pageextension 50102 CustomerCardExt extends "Customer Card"
                 if Rec.Name = '' then begin
                     rec.Validate("Payment Terms Code", '0 DAYS');
                     Rec.Validate("Location Code", 'STORES');
-                    //Rec.Validate("Country/Region Code", 'GB');
                 end;
             end;
         }
         addafter(Name)
         {
             field("Vehicle Model"; Rec."Vehicle Model")
-            {
-                MultiLine = false;
-                ApplicationArea = All;
-            }
+            { MultiLine = false; ApplicationArea = All; }
         }
+        modify("Search Name")
+        { Visible = true; Importance = Standard; }
         moveafter("Post Code"; "Country/Region Code")
         modify("Fax No.")
         { Importance = Standard; }
@@ -87,20 +85,11 @@ pageextension 50102 CustomerCardExt extends "Customer Card"
         modify("Location Code")
         { ShowMandatory = true; }
         modify("Gen. Bus. Posting Group")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("VAT Bus. Posting Group")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Customer Posting Group")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Country/Region Code")
         {
             trigger OnAfterValidate()

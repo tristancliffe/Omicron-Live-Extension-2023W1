@@ -18,10 +18,7 @@ pageextension 50101 ItemListExtension extends "Item List"
         modify(Description)
         { StyleExpr = BlockedStyle; }
         modify(Control1)
-        {
-            Editable = false;
-            FreezeColumn = Description;
-        }
+        { Editable = false; FreezeColumn = Description; }
         modify("Unit Cost")
         { Visible = false; }
         modify("Unit Price")
@@ -78,10 +75,7 @@ pageextension 50101 ItemListExtension extends "Item List"
                 Style = Strong;
             }
             field("Stockout Warning"; Rec."Stockout Warning")
-            {
-                ApplicationArea = All;
-                Visible = false;
-            }
+            { ApplicationArea = All; Visible = false; }
         }
         addafter(Description)
         {
@@ -93,26 +87,15 @@ pageextension 50101 ItemListExtension extends "Item List"
             }
         }
         modify(Type)
-        {
-            StyleExpr = BlockedStyle;
-        }
+        { StyleExpr = BlockedStyle; }
         addafter("Vendor No.")
         {
             field(Model; Rec.Model)
-            {
-                ApplicationArea = All;
-                ToolTip = 'Vehicle model and detaisl. Use the Notes field for more information like chassis numbers et cetera.';
-            }
+            { ApplicationArea = All; ToolTip = 'Vehicle model and detaisl. Use the Notes field for more information like chassis numbers et cetera.'; }
             field(Supplier; Rec.Supplier)
-            {
-                ApplicationArea = All;
-                ToolTip = 'Short supplier notes. Ideally use the vendors functionality to record suppiers, prices and leadtimes.';
-            }
+            { ApplicationArea = All; ToolTip = 'Short supplier notes. Ideally use the vendors functionality to record suppiers, prices and leadtimes.'; }
             field("Item Notes"; Rec."Item Notes")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Item notes.';
-            }
+            { ApplicationArea = All; ToolTip = 'Item notes.'; }
         }
     }
     actions

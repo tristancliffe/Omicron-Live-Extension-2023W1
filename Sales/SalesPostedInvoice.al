@@ -3,25 +3,13 @@ pageextension 50140 PostedSalesInvoiceExt extends "Posted Sales Invoice"
     layout
     {
         modify("External Document No.")
-        {
-            Importance = Standard;
-            Visible = true;
-        }
+        { Importance = Standard; Visible = true; }
         modify("Document Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("VAT Reporting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Posting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         // modify(SellToPhoneNo)
         // {
         //     Importance = Standard;

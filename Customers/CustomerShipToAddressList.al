@@ -9,13 +9,5 @@ pageextension 50192 ShipToListExt extends "Ship-to Address List"
         modify("Phone No.")
         { Visible = true; }
         moveafter(County; "Post Code")
-
-        // addbefore(City)
-        // {
-        //     field(Address;Address)
-        //     {
-        //         ApplicationArea = All;
-        //     }
-        // }
     }
 }

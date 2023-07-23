@@ -13,28 +13,16 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
             }
         }
         modify("Salespers./Purch. Code")
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify(ShortcutDimCode4)
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify(ShortcutDimCode5)
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify(ShortcutDimCode3)
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify("Shortcut Dimension 2 Code")
-        {
-            Visible = false;
-        }
+        { Visible = false; }
         modify("Shortcut Dimension 1 Code")
-        {
-            Visible = false;
-        }
+        { Visible = false; }
     }
 }

@@ -22,10 +22,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         addafter(Quantity)
         {
             field("Location Code1"; Rec."Location Code")
-            {
-                ShowMandatory = true;
-                ApplicationArea = All;
-            }
+            { ShowMandatory = true; ApplicationArea = All; }
         }
         moveafter(Quantity; "Unit of Measure Code")
         modify("Unit of Measure Code")
@@ -62,10 +59,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         // }
         movebefore("Invoiced Amount (LCY)"; "Qty. Invoiced")
         modify("Qty. Invoiced")
-        {
-            Visible = true;
-            Style = Favorable;
-        }
+        { Visible = true; Style = Favorable; }
         movelast(Control1; "User ID")
         modify("User ID")
         { Visible = true; }

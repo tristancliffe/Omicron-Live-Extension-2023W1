@@ -31,40 +31,19 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             QuickEntry = true;
         }
         modify("Sell-to Address")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Address 2")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to City")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to County")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Post Code")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         modify(WorkDescription)
-        {
-            Importance = Standard;
-            Visible = false;
-        }
+        { Importance = Standard; Visible = false; }
         modify("Document Date")
         {
             Visible = true;
@@ -75,10 +54,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             end;
         }
         modify("Due Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Ship-to Name")
         { Importance = Standard; }
         modify("Ship-to Code")
@@ -96,10 +72,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         modify("Shipment Date")
         { Importance = Standard; }
         modify("Assigned User ID")
-        {
-            Importance = Standard;
-            QuickEntry = false;
-        }
+        { Importance = Standard; QuickEntry = false; }
         addafter("Your Reference")
         {
             field("Order Notes47091"; Rec."Order Notes")
@@ -114,15 +87,9 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         addafter("Sell-to Country/Region Code")
         {
             field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
-            {
-                ApplicationArea = All;
-                CaptionML = ENU = 'Phone No.';
-            }
+            { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
             field("Sell-to E-Mail2"; Rec."Sell-to E-Mail")
-            {
-                ApplicationArea = All;
-                CaptionML = ENU = 'E-Mail Address';
-            }
+            { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
             field("Mobile No."; MobileNo)
             {
                 ApplicationArea = All;
@@ -138,10 +105,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             }
         }
         modify("Quote Valid Until Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify(Control72)
         { Visible = true; }
         movebefore("Attached Documents"; Control1906127307)

@@ -72,10 +72,7 @@ pageextension 50100 ItemCardExt extends "Item Card"
         modify("Automatic Ext. Texts")
         { Importance = Standard; }
         modify("Shelf No.")
-        {
-            Importance = Promoted;
-            ShowMandatory = true;
-        }
+        { Importance = Promoted; ShowMandatory = true; }
         modify("Search Description")
         { Importance = Standard; }
         modify("Costing Method")
@@ -85,19 +82,13 @@ pageextension 50100 ItemCardExt extends "Item Card"
         modify("Profit %")
         { Importance = Standard; }
         modify("Sales Unit of Measure")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Vendor No.")
         { Importance = Promoted; }
         modify("Vendor Item No.")
         { Importance = Standard; }
         modify("Purch. Unit of Measure")
-        {
-            Importance = Standard;
-            ShowMandatory = true;
-        }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Tariff No.")
         { ShowMandatory = true; }
         modify("Reordering Policy")

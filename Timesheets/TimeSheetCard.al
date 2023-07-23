@@ -9,10 +9,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         addafter("Resource No.")
         {
             field("Resource Name1"; Rec."Resource Name")
-            {
-                ApplicationArea = All;
-                Importance = Promoted;
-            }
+            { ApplicationArea = All; Importance = Promoted; }
             field("Dropbox Link"; "Dropbox Link")
             {
                 ApplicationArea = All;

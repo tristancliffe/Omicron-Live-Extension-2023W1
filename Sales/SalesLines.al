@@ -17,9 +17,7 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             CalcFormula = lookup(Item."Tariff No." where("No." = field("No.")));
         }
         field(50102; "Work Done"; Text[700])
-        {
-            CaptionML = ENG = 'Work Done', ENU = 'Work Done';
-        }
+        { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; }
         field(50103; Instock_SalesLine; Decimal)
         {
             Caption = 'Stock level';
@@ -49,7 +47,6 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             CalcFormula = lookup(Item.Picture where("No." = field("No.")));
         }
     }
-
 }
 tableextension 50141 AssemblyLineExt extends "Assembly Line"
 {

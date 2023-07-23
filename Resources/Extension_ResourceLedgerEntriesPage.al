@@ -4,10 +4,7 @@ pageextension 50203 "Resource Ledger Entries Ext" extends "Resource Ledger Entri
     {
         movebefore(Description; "Job No.")
         modify("Job No.")
-        {
-            Visible = true;
-            ApplicationArea = All;
-        }
+        { Visible = true; ApplicationArea = All; }
         addafter(Description)
         {
             field("Work Done"; Rec."Work Done")

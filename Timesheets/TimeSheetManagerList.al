@@ -3,9 +3,7 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
     layout
     {
         modify("Resource No.")
-        {
-            StyleExpr = PendingStyle;
-        }
+        { StyleExpr = PendingStyle; }
     }
     actions
     {

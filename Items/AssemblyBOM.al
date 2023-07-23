@@ -24,14 +24,26 @@ pageextension 50164 AssemblyBOMExt extends "Assembly BOM"
                     Item: Record Item;
                     Resource: Record Resource;
                 begin
-                    if rec.Type = rec.Type::Item then begin
-                        Item.Get(Rec."No.");
-                        PAGE.Run(PAGE::"Item Card", Item)
-                    end else
-                        if Rec.Type = Rec.Type::Resource then begin
-                            Resource.Get(rec."No.");
-                            PAGE.Run(PAGE::"Resource Card", Resource);
-                        end
+                    case Rec.Type of
+                        Rec.type::Item:
+                            begin
+                                Item.Get(Rec."No.");
+                                PAGE.Run(PAGE::"Item Card", Item)
+                            end;
+                        Rec.Type::Resource:
+                            begin
+                                Resource.Get(rec."No.");
+                                PAGE.Run(PAGE::"Resource Card", Resource);
+                            end;
+                    end;
+                    // if rec.Type = rec.Type::Item then begin
+                    //     Item.Get(Rec."No.");
+                    //     PAGE.Run(PAGE::"Item Card", Item)
+                    // end else
+                    //     if Rec.Type = Rec.Type::Resource then begin
+                    //         Resource.Get(rec."No.");
+                    //         PAGE.Run(PAGE::"Resource Card", Resource);
+                    //     end
                 end;
             }
         }

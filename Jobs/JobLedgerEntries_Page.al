@@ -5,15 +5,9 @@ pageextension 50202 "Job Ledger Entries Ext" extends "Job Ledger Entries"
         movebefore(Description; "Job No.")
         movebefore(Description; "Job Task No.")
         modify("Job No.")
-        {
-            Visible = true;
-            ApplicationArea = All;
-        }
+        { Visible = true; ApplicationArea = All; }
         modify("Job Task No.")
-        {
-            Visible = true;
-            ApplicationArea = All;
-        }
+        { Visible = true; ApplicationArea = All; }
         addafter(Description)
         {
             field("Work Done"; Rec."Work Done")

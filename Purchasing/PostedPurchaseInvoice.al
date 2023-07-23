@@ -6,37 +6,19 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
         addafter("Buy-from Vendor Name")
         {
             field("Your Reference"; Rec."Your Reference")
-            {
-                ApplicationArea = All;
-                QuickEntry = true;
-            }
+            { ApplicationArea = All; QuickEntry = true; }
         }
         moveafter("Your Reference"; "Vendor Invoice No.")
         modify("Vendor Invoice No.")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Document Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Due Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Posting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("VAT Reporting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Purchaser Code")
         { Visible = false; }
         modify("Payment Method Code")

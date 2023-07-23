@@ -14,7 +14,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         }
         addafter("Overdue Purch. Invoice Amount")
         {
-            field("Pended Sales Invoice Amount"; Rec."Pending Sales Invoice Amount")
+            field("Pending Sales Invoice Amount"; Rec."Pending Sales Invoice Amount")
             {
                 ApplicationArea = Basic, Suite;
                 ToolTip = 'Specifies the sum of sales invoices to be sent.';

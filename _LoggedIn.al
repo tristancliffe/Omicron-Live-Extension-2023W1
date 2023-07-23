@@ -18,17 +18,11 @@ page 50100 "Logged-In Users"
             repeater(General)
             {
                 field("User ID"; Rec."User ID")
-                {
-                    ToolTip = 'Specifies the value of the User ID field';
-                }
+                { ToolTip = 'Specifies the value of the User ID field'; }
                 field("Login Datetime"; Rec."Login Datetime")
-                {
-                    ToolTip = 'Specifies the value of the Login Datetime field';
-                }
+                { ToolTip = 'Specifies the value of the Login Datetime field'; }
                 field("Client Type"; Rec."Client Type")
-                {
-                    ToolTip = 'Specifies the value of the Client Type field';
-                }
+                { ToolTip = 'Specifies the value of the Client Type field'; }
             }
         }
     }

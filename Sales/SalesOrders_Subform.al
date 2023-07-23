@@ -37,15 +37,9 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         addafter("Qty. Assigned")
         {
             field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = Ambiguous;
-            }
+            { ApplicationArea = All; style = Ambiguous; }
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = AttentionAccent;
-            }
+            { ApplicationArea = All; style = AttentionAccent; }
             // field("Job No.1"; Rec."Job No.")
             // {
             //     ApplicationArea = All;
@@ -80,11 +74,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         addafter("Line Amount")
         {
             field("Amount Including VAT"; Rec."Amount Including VAT")
-            {
-                ApplicationArea = All;
-                Visible = true;
-                Editable = false;
-            }
+            { ApplicationArea = All; Visible = true; Editable = false; }
         }
     }
     actions

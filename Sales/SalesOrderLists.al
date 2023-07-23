@@ -17,10 +17,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
             field("Order Date98002"; Rec."Order Date")
             { ApplicationArea = All; }
             field("Your Reference50380"; Rec."Your Reference")
-            {
-                ApplicationArea = All;
-                Width = 14;
-            }
+            { ApplicationArea = All; Width = 14; }
         }
         addafter("Your Reference50380")
         {
@@ -29,9 +26,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         }
         moveafter("Sell-to Customer Name"; Amount, "Amount Including VAT")
         modify("Completely Shipped")
-        {
-            Visible = true;
-        }
+        { Visible = true; }
         moveafter(Amount; Status)
         moveafter("Document Date"; "Completely Shipped")
         addafter("Completely Shipped")

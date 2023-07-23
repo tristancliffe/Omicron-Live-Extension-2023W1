@@ -14,10 +14,7 @@ pageextension 50104 ShipToCardExt extends "Ship-to Address"
         addafter(Name)
         {
             field("Address Notes"; Rec."Address Notes")
-            {
-                MultiLine = true;
-                ApplicationArea = All;
-            }
+            { MultiLine = true; ApplicationArea = All; }
         }
         modify(GLN)
         { Visible = false; }

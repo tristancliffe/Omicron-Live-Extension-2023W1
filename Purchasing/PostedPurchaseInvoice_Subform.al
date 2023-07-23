@@ -9,28 +9,16 @@ pageextension 50171 PostedPurchInvoiceSubExt extends "Posted Purch. Invoice Subf
         addafter(Description)
         {
             field("Vendor Item No."; Rec."Vendor Item No.")
-            {
-                ApplicationArea = all;
-                Caption = 'Vendor Item No.';
-            }
+            { ApplicationArea = all; Caption = 'Vendor Item No.'; }
         }
         addafter("VAT %")
         {
             field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = Ambiguous;
-            }
+            { ApplicationArea = All; style = Ambiguous; }
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = AttentionAccent;
-            }
+            { ApplicationArea = All; style = AttentionAccent; }
             field("Job No.1"; Rec."Job No.")
-            {
-                ApplicationArea = All;
-                Width = 8;
-            }
+            { ApplicationArea = All; Width = 8; }
             field("Job Task No.1"; Rec."Job Task No.")
             {
                 ApplicationArea = All;
@@ -43,10 +31,7 @@ pageextension 50171 PostedPurchInvoiceSubExt extends "Posted Purch. Invoice Subf
             field("Job Line Type2"; Rec."Job Line Type")
             { ApplicationArea = All; }
             field("Job Unit Price2"; Rec."Job Unit Price")
-            {
-                ApplicationArea = All;
-                Width = 8;
-            }
+            { ApplicationArea = All; Width = 8; }
             field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
             { ApplicationArea = All; }
         }

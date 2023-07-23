@@ -116,22 +116,45 @@ pageextension 50103 CustomerListExt extends "Customer List"
 
     procedure SetBlockedStyle()
     begin
-        if Rec.Blocked = Rec.Blocked::" " then begin
-            BlockedStyle := 'Standard';
-            BlockedStyleNo := 'StandardAccent';
-        end else
-            if Rec.Blocked = Rec.Blocked::All then begin
-                BlockedStyle := 'Subordinate';
-                BlockedStyleNo := 'Subordinate';
-            end else
-                if Rec.Blocked = Rec.Blocked::Invoice then begin
+        case Rec.Blocked of
+            Rec.Blocked::" ":
+                begin
+                    BlockedStyle := 'Standard';
+                    BlockedStyleNo := 'StandardAccent';
+                end;
+            Rec.Blocked::All:
+                begin
+                    BlockedStyle := 'Subordinate';
+                    BlockedStyleNo := 'Subordinate';
+                end;
+            Rec.Blocked::Invoice:
+                begin
                     BlockedStyle := 'Ambiguous';
                     BlockedStyleNo := 'Ambiguous';
-                end else
-                    if Rec.Blocked = Rec.Blocked::Ship then begin
-                        BlockedStyle := 'Ambiguous';
-                        BlockedStyleNo := 'Ambiguous';
-                    end;
+                end;
+            rec.Blocked::Ship:
+                begin
+                    BlockedStyle := 'Ambiguous';
+                    BlockedStyleNo := 'Ambiguous';
+                end;
+        end;
+
+        // if Rec.Blocked = Rec.Blocked::" " then begin
+        //     BlockedStyle := 'Standard';
+        //     BlockedStyleNo := 'StandardAccent';
+        // end else
+        //     if Rec.Blocked = Rec.Blocked::All then begin
+        //         BlockedStyle := 'Subordinate';
+        //         BlockedStyleNo := 'Subordinate';
+        //     end else
+        //         if Rec.Blocked = Rec.Blocked::Invoice then begin
+        //             BlockedStyle := 'Ambiguous';
+        //             BlockedStyleNo := 'Ambiguous';
+        //         end else
+        //             if Rec.Blocked = Rec.Blocked::Ship then begin
+        //                 BlockedStyle := 'Ambiguous';
+        //                 BlockedStyleNo := 'Ambiguous';
+        //             end;
     end;
 
     var

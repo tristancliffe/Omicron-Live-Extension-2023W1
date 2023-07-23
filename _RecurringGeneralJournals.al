@@ -8,15 +8,9 @@ pageextension 50187 RecurringGenJournalExt extends "Recurring General Journal"
         addafter("VAT Amount")
         {
             field("Bal. Account Type"; Rec."Bal. Account Type")
-            {
-                ApplicationArea = All;
-                Visible = true;
-            }
+            { ApplicationArea = All; Visible = true; }
             field("Bal. Account No."; Rec."Bal. Account No.")
-            {
-                ApplicationArea = All;
-                Visible = true;
-            }
+            { ApplicationArea = All; Visible = true; }
         }
     }
 }

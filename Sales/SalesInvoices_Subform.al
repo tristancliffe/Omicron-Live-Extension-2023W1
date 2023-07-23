@@ -43,13 +43,9 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
             }
         }
         modify("Gen. Prod. Posting Group")
-        {
-            style = Ambiguous;
-        }
+        { style = Ambiguous; }
         modify("VAT Prod. Posting Group")
-        {
-            style = AttentionAccent;
-        }
+        { style = AttentionAccent; }
         addafter(FilteredTypeField)
         {
             field("Job Task No.1"; Rec."Job Task No.")

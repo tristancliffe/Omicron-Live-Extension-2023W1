@@ -11,19 +11,13 @@ tableextension 50101 CustomerTableExt extends Customer
     fields
     {
         field(50100; "Customer Notes"; text[2000])
-        {
-            CaptionML = ENU = 'Customer Notes';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Customer Notes'; DataClassification = CustomerContent; }
         field(50101; "Vehicle Model"; text[100])
-        {
-            CaptionML = ENU = 'Customer Vehicle Model';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Customer Vehicle Model'; DataClassification = CustomerContent; }
         field(50200; "No. of Jobs"; Integer)
         {
             FieldClass = FlowField;
-            Caption = 'Number of ongoing jobs with a customer';
+            Caption = 'Number of jobs with the customer';
             Editable = false;
             CalcFormula = count(Job where(Status = filter(Open), "Sell-to Customer No." = FIELD("No.")));
         }

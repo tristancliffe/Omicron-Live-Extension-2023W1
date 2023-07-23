@@ -4,15 +4,9 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
     {
         moveafter("Posting Date"; "Document Date", "VAT Reporting Date")
         modify("Document Date")
-        {
-            Visible = true;
-            width = 10;
-        }
+        { Visible = true; width = 10; }
         modify("VAT Reporting Date")
-        {
-            Visible = true;
-            Width = 10;
-        }
+        { Visible = true; Width = 10; }
     }
     actions
     {

@@ -197,44 +197,24 @@ tableextension 50105 JobNotes extends Job
                 else
                     DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
                 DefaultTaskDimension.Insert();
+                Rec.Validate("Starting Date", Today);
+                Rec.Validate("Date of Arrival", Today);
             end;
         }
         field(50100; "Parts Location"; Text[100])
-        {
-            CaptionML = ENU = 'Parts Location';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Parts Location'; DataClassification = CustomerContent; }
         field(50101; "Vehicle Reg"; Text[20])
-        {
-            CaptionML = ENU = 'Vehicle Reg';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Vehicle Reg'; DataClassification = CustomerContent; }
         field(50102; "Date of Arrival"; Date)
-        {
-            CaptionML = ENU = 'Date of Arrival';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Date of Arrival'; DataClassification = CustomerContent; }
         field(50103; "Job Notes"; Text[1000])
-        {
-            CaptionML = ENU = 'Job Notes';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Job Notes'; DataClassification = CustomerContent; }
         field(50104; "Car Make/Model"; Text[100])
-        {
-            CaptionML = ENU = 'Car Make/Model/Series';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Car Make/Model/Series'; DataClassification = CustomerContent; }
         field(50105; "Work Required"; Text[50])
-        {
-            CaptionML = ENU = 'Work Required';
-            DataClassification = CustomerContent;
-        }
+        { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
         field(50106; "Sell-to Mobile Number"; Text[30])
-        {
-            Caption = 'Mobile Phone No.';
-            ExtendedDatatype = PhoneNo;
-            DataClassification = CustomerContent;
-        }
+        { Caption = 'Mobile Phone No.'; ExtendedDatatype = PhoneNo; DataClassification = CustomerContent; }
     }
     fieldgroups
     {

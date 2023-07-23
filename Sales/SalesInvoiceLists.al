@@ -13,10 +13,7 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
             field("Order Date98002"; Rec."Order Date")
             { ApplicationArea = All; }
             field("Your Reference50380"; Rec."Your Reference")
-            {
-                ApplicationArea = All;
-                Width = 14;
-            }
+            { ApplicationArea = All; Width = 14; }
         }
         addafter("Your Reference50380")
         {
