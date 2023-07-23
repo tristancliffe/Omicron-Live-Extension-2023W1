@@ -211,7 +211,7 @@ tableextension 50105 JobNotes extends Job
         { CaptionML = ENU = 'Job Notes'; DataClassification = CustomerContent; }
         field(50104; "Car Make/Model"; Text[100])
         { CaptionML = ENU = 'Car Make/Model/Series'; DataClassification = CustomerContent; }
-        field(50105; "Work Required"; Text[50])
+        field(50105; "Work Required"; Text[500])
         { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
         field(50106; "Sell-to Mobile Number"; Text[30])
         { Caption = 'Mobile Phone No.'; ExtendedDatatype = PhoneNo; DataClassification = CustomerContent; }
