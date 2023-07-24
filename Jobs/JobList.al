@@ -22,6 +22,11 @@ pageextension 50112 JobListExtension extends "Job List"
             field(InvoicedHours; Rec.InvoicedHours)
             { ApplicationArea = All; ToolTip = 'The total number of INVOICED HOURS entered against the job'; Width = 8; }
         }
+        moveafter(Control1905650007; Control1907234507, Control1902018507)
+        modify(Control1907234507)
+        { Visible = true; }
+        modify(Control1902018507)
+        { Visible = true; }
     }
     actions
     {

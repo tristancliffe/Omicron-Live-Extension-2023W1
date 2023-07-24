@@ -92,6 +92,8 @@ pageextension 50105 VendorCardExt extends "Vendor Card"
         }
         addlast(Category_Process)
         {
+            actionref(Dimensions_Promoted2; Dimensions)
+            { }
             actionref(LedgerEntries_Promoted; "Ledger E&ntries")
             { }
             actionref(OrderAddress_Promoted; OrderAddresses)
