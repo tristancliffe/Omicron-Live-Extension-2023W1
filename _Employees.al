@@ -38,9 +38,18 @@ pageextension 50107 EmployeeCardExt extends "Employee Card"
                 ToolTip = 'Opens the resource card for this employee';
                 Visible = true;
                 Enabled = true;
-                Promoted = true;
-                PromotedCategory = Process;
+                // Promoted = true;
+                // PromotedCategory = Process;
             }
+        }
+        addlast(Category_Process)
+        {
+            actionref(Dimensions_Promoted2; Dimensions)
+            { }
+            actionref(ResourceLink_Promoted; ResourceLink)
+            { }
+            actionref(Absenses_Promoted; "A&bsences")
+            { }
         }
     }
 }
