@@ -30,5 +30,8 @@ pageextension 50202 "Job Ledger Entries Ext" extends "Job Ledger Entries"
                 end;
             }
         }
+        movelast(Control1; "User ID")
+        modify("User ID")
+        { Visible = true; }
     }
 }
