@@ -39,10 +39,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         addafter("Expected Receipt Date")
         {
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = AttentionAccent;
-            }
+            { ApplicationArea = All; style = AttentionAccent; }
             field("Job No.1"; Rec."Job No.")
             {
                 ApplicationArea = All;
@@ -63,25 +60,16 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 end;
             }
             field("Job Line Type2"; Rec."Job Line Type")
-            {
-                ApplicationArea = All;
-                ShowMandatory = true;
-            }
+            { ApplicationArea = All; ShowMandatory = true; }
             field("Job Unit Price2"; Rec."Job Unit Price")
-            {
-                ApplicationArea = All;
-                Width = 8;
-            }
+            { ApplicationArea = All; Width = 8; }
             field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
             { ApplicationArea = All; }
         }
         moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group")
         moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)", "Line Discount Amount", "Line Discount %")
         modify("Gen. Prod. Posting Group")
-        {
-            Style = Ambiguous;
-            Visible = true;
-        }
+        { Style = Ambiguous; Visible = true; }
         modify("Direct Unit Cost")
         {
             trigger OnAfterValidate()
@@ -105,15 +93,9 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             BlankZero = true;
         }
         modify("Line Discount Amount")
-        {
-            BlankZero = true;
-            Visible = true;
-        }
+        { BlankZero = true; Visible = true; }
         modify("Line Discount %")
-        {
-            BlankZero = true;
-            Visible = true;
-        }
+        { BlankZero = true; Visible = true; }
         modify("Qty. to Assign")
         { QuickEntry = true; }
     }
@@ -136,6 +118,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             }
         }
     }
+
     trigger OnAfterGetRecord()
     begin
         GetInventory;

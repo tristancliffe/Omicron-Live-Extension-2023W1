@@ -10,6 +10,14 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         {
             field("Resource Name1"; Rec."Resource Name")
             { ApplicationArea = All; Importance = Promoted; }
+            field(Reminder; Reminder)
+            {
+                ApplicationArea = All;
+                Importance = Promoted;
+                Editable = false;
+                MultiLine = true;
+                Style = Strong;
+            }
             field("Dropbox Link"; "Dropbox Link")
             {
                 ApplicationArea = All;
@@ -89,6 +97,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
     var
         Device: Boolean;
         "Dropbox Link": Text[50];
+        Reminder: Text[150];
 
     trigger OnOpenPage()
     begin
@@ -96,6 +105,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             Device := false
         else
             Device := true;
-        "Dropbox Link" := 'https://bit.ly/omicronltd'
+        "Dropbox Link" := 'https://bit.ly/omicronltd';
+        Reminder := 'DO NOT FORGET TO SUBMIT YOUR TIMESHEETS REGULARLY. \KEEP STOCK CARDS UP TO DATE. TAKE & UPLOAD PICTURES.';
     end;
 }

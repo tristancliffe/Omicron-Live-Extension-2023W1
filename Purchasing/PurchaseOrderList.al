@@ -14,6 +14,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             ToolTip = 'Add our reference here so we know something about the order';
             Visible = true;
             Editable = true;
+            Width = 35;
         }
         // addafter("Buy-from Vendor Name")
         // {
@@ -32,6 +33,15 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         }
         addafter("Amount Including VAT")
         {
+            field(TotalAmountLCY; TotalAmountLCY)
+            {
+                ApplicationArea = Suite;
+                Caption = 'Total LCY';
+                Editable = false;
+                AutoFormatExpression = Currency.Code;
+                AutoFormatType = 1;
+                Width = 8;
+            }
             field("Completely Received"; Rec."Completely Received")
             {
                 ApplicationArea = All;
@@ -47,6 +57,9 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         }
         modify("Location Code")
         { Visible = false; }
+        modify("Currency Code")
+        { Visible = true; Width = 7; }
+        moveafter("Amount Including VAT"; "Currency Code")
     }
     actions
     {
@@ -65,6 +78,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
     trigger OnAfterGetRecord()
     begin
         SetStatusStyle();
+        UpdateTotalLCY()
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -89,4 +103,14 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
 
     var
         StatusStyle: Text;
+        TotalAmountLCY: Decimal;
+        Currency: Record Currency;
+
+    local procedure UpdateTotalLCY()
+    begin
+        if Rec."Currency Factor" <> 0 then
+            TotalAmountLCY := Rec."Amount Including VAT" / Rec."Currency Factor"
+        else
+            TotalAmountLCY := Rec."Amount Including VAT";
+    end;
 }

@@ -78,6 +78,8 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         }
         modify("Unit Price")
         {
+            StyleExpr = SellingPriceStyle;
+
             trigger OnAfterValidate()
             begin
                 if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
@@ -189,24 +191,26 @@ pageextension 50114 JobJournalExt extends "Job Journal"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
-        SetBillableStyle();
+        SetStyles();
     end;
 
     trigger OnOpenPage()
     begin
         Rec.SetCurrentKey("Posting Date", "Job Planning Line No.");
         Rec.Ascending(true);
-        SetBillableStyle;
+        SetStyles;
     end;
 
     var
         BillableStyle: Text;
         BudgetStyle: Text;
+        SellingPriceStyle: Text;
 
-    local procedure SetBillableStyle()
+    local procedure SetStyles()
     begin
         BillableStyle := 'Standard';
         BudgetStyle := 'Standard';
+        SellingPriceStyle := 'Standard';
         case Rec."Line Type" of
             Rec."Line Type"::Budget:
                 BudgetStyle := 'Attention';
@@ -215,6 +219,8 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             Rec."Line Type"::"Both Budget and Billable":
                 BillableStyle := 'Ambiguous';
         end;
+        if Rec."Unit Price" < Rec."Unit Cost" then
+            SellingPriceStyle := 'Unfavorable';
     end;
 
     local procedure GetInventory()
