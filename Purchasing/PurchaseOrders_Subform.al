@@ -98,6 +98,11 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         { BlankZero = true; Visible = true; }
         modify("Qty. to Assign")
         { QuickEntry = true; }
+        addafter("Line Amount")
+        {
+            field(LineAmountInclVAT; Rec."Amount Including VAT")
+            { ApplicationArea = All; Visible = true; Caption = 'Line Amount incl. VAT'; }
+        }
     }
     actions
     {

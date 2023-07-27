@@ -50,25 +50,13 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             }
         }
         modify("Document Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Due Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Posting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("VAT Reporting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Purchaser Code")
         { Visible = false; }
         modify("Campaign No.")
@@ -78,7 +66,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         modify("Assigned User ID")
         { Importance = Standard; }
         modify("Payment Method Code")
-        { Importance = Standard; }
+        { Importance = Standard; ShowMandatory = true; }
         modify(BuyFromContactMobilePhoneNo)
         { Importance = Standard; }
         modify(BuyFromContactPhoneNo)

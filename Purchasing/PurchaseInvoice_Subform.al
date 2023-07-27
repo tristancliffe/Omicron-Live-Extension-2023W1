@@ -62,6 +62,11 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
             BlankZero = true;
         }
         moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)")
+        addafter("Line Amount")
+        {
+            field(LineAmountInclVAT; Rec."Amount Including VAT")
+            { ApplicationArea = All; Visible = true; Caption = 'Line Amount incl. VAT'; }
+        }
     }
     actions
     {

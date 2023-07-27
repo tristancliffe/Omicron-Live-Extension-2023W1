@@ -10,7 +10,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             {
                 Visible = true;
                 ApplicationArea = all;
-                ShowMandatory = true;
+                ShowMandatory = WorkDoneStyle;
                 //DrillDown = true;
 
                 Editable = CanEdit;
@@ -60,7 +60,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         modify(Chargeable)
         { Visible = Device; }
         modify("Cause of Absence Code")
-        { Visible = true; }
+        { Visible = true; ShowMandatory = AbsenceStyle; }
         modify(UnitOfMeasureCode)
         { QuickEntry = false; }
         modify(TimeSheetTotalQuantity)
@@ -70,16 +70,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
     var
         Job: Record Job;
     Begin
-        IF rec.Status = rec.Status::Open THEN
-            CanEdit := TRUE
-        ELSE
-            CanEdit := FALSE;
-        ;
+        SetStyles();
     End;
 
     trigger OnAfterGetRecord()
     begin
-        StatusStyle := ChangeStatusColor.ChangeLineStatusColour(Rec);
+        SetStyles();
     end;
 
     var
@@ -87,6 +83,8 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         StatusStyle: Text[50];
         ChangeStatusColor: Codeunit ChangeStatusColour;
         Device: Boolean;
+        WorkDoneStyle: Boolean;
+        AbsenceStyle: Boolean;
 
     trigger OnOpenPage()
     begin
@@ -94,5 +92,20 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             Device := false
         else
             Device := true;
+    end;
+
+    local procedure SetStyles();
+    begin
+        WorkDoneStyle := true;
+        AbsenceStyle := false;
+        StatusStyle := ChangeStatusColor.ChangeLineStatusColour(Rec);
+        if Rec.Type = Rec.Type::Absence then begin
+            WorkDoneStyle := false;
+            AbsenceStyle := true;
+        end;
+        IF rec.Status = rec.Status::Open THEN
+            CanEdit := TRUE
+        ELSE
+            CanEdit := FALSE;
     end;
 }

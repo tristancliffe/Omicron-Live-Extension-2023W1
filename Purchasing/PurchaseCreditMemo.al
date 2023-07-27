@@ -15,7 +15,7 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
         modify("Buy-from Vendor No.")
         { Importance = Standard; }
         modify("Payment Method Code")
-        { Importance = Standard; }
+        { Importance = Standard; ShowMandatory = true; }
         modify("Currency Code")
         { Importance = Standard; }
     }

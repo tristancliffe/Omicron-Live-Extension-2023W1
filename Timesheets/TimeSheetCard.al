@@ -106,6 +106,6 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         else
             Device := true;
         "Dropbox Link" := 'https://bit.ly/omicronltd';
-        Reminder := 'DO NOT FORGET TO SUBMIT YOUR TIMESHEETS REGULARLY. \KEEP STOCK CARDS UP TO DATE. TAKE & UPLOAD PICTURES.';
+        Reminder := 'Do not forget to SUBMIT your timesheets regularly. \Keep STOCK CARDS up to date. Take & UPLOAD pictures.';
     end;
 }

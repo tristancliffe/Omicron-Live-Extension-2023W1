@@ -19,10 +19,14 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 end;
             }
         }
+        modify(Type)
+        { StyleExpr = TypeStyle; }
+        modify("No.")
+        { StyleExpr = TypeStyle; }
         addafter(Quantity)
         {
             field("Location Code1"; Rec."Location Code")
-            { ShowMandatory = true; ApplicationArea = All; }
+            { ShowMandatory = MandatoryLocation; ApplicationArea = All; }
         }
         moveafter(Quantity; "Unit of Measure Code")
         modify("Unit of Measure Code")
@@ -39,18 +43,13 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         modify("Cost Calculation Method")
         { visible = false; }
         modify("Qty. to Transfer to Journal")
-        {
-            Visible = true;
-            BlankZero = true;
-        }
+        { Visible = true; BlankZero = true; }
         modify("Qty. to Transfer to Invoice")
-        {
-            BlankZero = true;
-            Style = Strong;
-            Visible = true;
-        }
+        { BlankZero = true; Style = Strong; Visible = true; }
         modify("Invoiced Amount (LCY)")
         { BlankZero = true; }
+        modify("Unit Price")
+        { StyleExpr = SellingPriceStyle; }
         movebefore("Invoiced Amount (LCY)"; "Qty. to Transfer to Invoice")
         // addbefore("Invoiced Amount (LCY)")
         // {
@@ -203,9 +202,21 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
 
     var
         CurrentJob: Code[20];
+        SellingPriceStyle: Text;
+        TypeStyle: Text;
+        MandatoryLocation: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetStyles();
+        if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
+            rec."Work Done" := rec.Description;
+        rec.Modify()
+    end;
 
     trigger OnAfterGetCurrRecord()
     begin
+        SetStyles();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
             rec."Work Done" := rec.Description;
         rec.Modify()
@@ -213,7 +224,21 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
 
     trigger OnOpenPage()
     begin
+        SetStyles();
         Rec.SetCurrentKey("Planning Date", "Line No.");
         Rec.Ascending(true);
+    end;
+
+    local procedure SetStyles()
+    begin
+        SellingPriceStyle := 'Standard';
+        TypeStyle := 'Standard';
+        MandatoryLocation := false;
+        if (Rec."Unit Price" < Rec."Unit Cost") then // or (Rec."Unit Price" = 0) then
+            SellingPriceStyle := 'Unfavorable';
+        if Rec."Unit of Measure Code" <> 'HOUR' then
+            TypeStyle := 'Ambiguous';
+        if Rec.Type = Rec.Type::Item then
+            MandatoryLocation := true;
     end;
 }

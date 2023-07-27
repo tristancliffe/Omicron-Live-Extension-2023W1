@@ -84,7 +84,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         modify("Buy-from Vendor No.")
         { Importance = Standard; }
         modify("Payment Method Code")
-        { Importance = Standard; }
+        { Importance = Standard; ShowMandatory = true; }
         modify(BuyFromContactPhoneNo)
         { Importance = Standard; }
         modify(BuyFromContactMobilePhoneNo)

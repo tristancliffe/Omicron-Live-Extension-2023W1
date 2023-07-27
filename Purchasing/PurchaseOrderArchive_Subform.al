@@ -9,28 +9,16 @@ pageextension 50181 PurchOrderArchiveSubExt extends "Purchase Order Archive Subf
         addafter(Description)
         {
             field("Vendor Item No."; Rec."Vendor Item No.")
-            {
-                ApplicationArea = all;
-                Caption = 'Vendor Item No.';
-            }
+            { ApplicationArea = all; Caption = 'Vendor Item No.'; }
         }
         addafter("Deferral Code")
         {
             field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = Ambiguous;
-            }
+            { ApplicationArea = All; style = Ambiguous; }
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                style = AttentionAccent;
-            }
+            { ApplicationArea = All; style = AttentionAccent; }
             field("Job No.1"; Rec."Job No.")
-            {
-                ApplicationArea = All;
-                Width = 8;
-            }
+            { ApplicationArea = All; Width = 8; }
             field("Job Task No.1"; Rec."Job Task No.")
             {
                 ApplicationArea = All;
