@@ -39,6 +39,7 @@ pageextension 50188 BankStatementExt extends "Bank Account Statement"
             }
         }
     }
+
     var
         Difference: Decimal;
         UserName: Record User;

@@ -1,7 +1,16 @@
 pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
 {
     layout
-    { }
+    {
+        modify(StatementEndingBalance)
+        {
+            trigger OnAfterValidate()
+            begin
+                if Rec."Statement Ending Balance" > 0 then
+                    message('This is a positive amount. Are you sure?')
+            end;
+        }
+    }
     actions
     {
         addlast("F&unctions")
@@ -12,6 +21,8 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
                 Caption = 'Bank Acc. Statements';
                 Image = BankAccountStatement;
                 RunObject = Page "Bank Account Statement List";
+                RunPageLink = "Bank Account No." = field("Bank Account No.");
+                RunPageView = sorting("Statement Date") order(descending);
                 ToolTip = 'View statements for selected bank accounts. For each bank transaction, the report shows a description, an applied amount, a statement amount, and other information.';
             }
         }
@@ -19,9 +30,6 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
         {
             actionref(ImportStatement_Promoted; ImportBankStatement)
             { }
-        }
-        addlast(Category_Process)
-        {
             actionref(AutoMatch_Promoted; MatchAutomatically)
             { }
             actionref(ManualMatch_Promoted; MatchManually)
@@ -47,6 +55,10 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
         { ShortcutKey = 'Alt+S'; }
         modify(All)
         { ShortcutKey = 'Alt+A'; }
+        modify("Transfer to General Journal_Promoted")
+        { Visible = false; }
+        modify(SuggestLines_Promoted)
+        { Visible = false; }
     }
 }
 

@@ -28,6 +28,7 @@ pageextension 50190 BankStatementListExt extends "Bank Account Statement List"
             }
         }
     }
+
     views
     {
         addfirst
@@ -38,6 +39,7 @@ pageextension 50190 BankStatementListExt extends "Bank Account Statement List"
             { Caption = 'Credit Card'; Filters = where("Bank Account No." = filter('NATWEST_CREDIT')); }
         }
     }
+
     procedure GetFullName(userID: Guid): Text
     var
         UserInfo: Record User;
