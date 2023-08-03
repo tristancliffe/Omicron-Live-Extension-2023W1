@@ -22,6 +22,14 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
         }
         addlast(Category_Process)
         {
+            actionref(AutoMatch_Promoted; MatchAutomatically)
+            { }
+            actionref(ManualMatch_Promoted; MatchManually)
+            { }
+            actionref(HideMatched_Promoted; NotMatched)
+            { }
+            actionref(ShowMatched_Promoted; All)
+            { }
             actionref(BankStatements; "Bank Acc. Statements")
             { }
         }
@@ -35,6 +43,10 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
         { ShortcutKey = 'Alt+D'; }
         modify("&Test Report")
         { ShortcutKey = 'Ctrl+Alt+T'; }
+        modify(NotMatched)
+        { ShortcutKey = 'Alt+S'; }
+        modify(All)
+        { ShortcutKey = 'Alt+A'; }
     }
 }
 

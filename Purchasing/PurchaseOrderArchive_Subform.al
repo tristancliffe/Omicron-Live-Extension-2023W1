@@ -25,7 +25,6 @@ pageextension 50181 PurchOrderArchiveSubExt extends "Purchase Order Archive Subf
                 trigger OnValidate()
                 begin
                     Rec."Job Line Type" := Rec."Job Line Type"::Billable;
-
                 end;
             }
             field("Job Line Type2"; Rec."Job Line Type")

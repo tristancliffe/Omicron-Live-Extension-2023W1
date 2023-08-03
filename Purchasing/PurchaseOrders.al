@@ -144,6 +144,30 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 Visible = true;
                 Enabled = true;
             }
+            action(PostedInvoices)
+            {
+                ApplicationArea = All;
+                Image = PurchaseInvoice;
+                Caption = 'Posted Invoices';
+                RunObject = page "Posted Purchase Invoices";
+                RunPageLink = "Buy-from Vendor No." = field("Buy-from Vendor No.");
+                Description = 'Open list of posted purchase invoices.';
+                ToolTip = 'Opens the list of posted purchase invoices.';
+                Visible = true;
+                Enabled = true;
+            }
+            action(VendorLedgerEntries)
+            {
+                ApplicationArea = All;
+                Image = LedgerEntries;
+                Caption = 'Vendor Ledger';
+                RunObject = page "Vendor Ledger Entries";
+                RunPageLink = "Vendor No." = field("Buy-from Vendor No.");
+                Description = 'Open vendor ledger entries list for this vendor.';
+                ToolTip = 'Opens the list of vendor ledger entries for this vendor.';
+                Visible = true;
+                Enabled = true;
+            }
         }
         addlast(Category_Process)
         {
@@ -152,6 +176,10 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             actionref(PostedReceipts_Promoted; Receipts)
             { }
             actionref(VendorCard; Vendor)
+            { }
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+            actionref(VendorLedger_Promoted; VendorLedgerEntries)
             { }
             actionref(Statistics2; Statistics)
             { }

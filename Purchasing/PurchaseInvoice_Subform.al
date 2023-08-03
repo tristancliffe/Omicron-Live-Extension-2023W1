@@ -26,12 +26,14 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
                     Rec.Modify();
+                    JobPriceMandatory := true;
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }
             field("Job Task No.1"; Rec."Job Task No.")
             {
                 ApplicationArea = All;
+                ShowMandatory = JobPriceMandatory;
                 trigger OnValidate()
                 begin
                     Rec.Validate("Job Line Type", Rec."Job Line Type"::Billable)
@@ -40,10 +42,7 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
             field("Job Line Type2"; Rec."Job Line Type")
             { ApplicationArea = All; }
             field("Job Unit Price2"; Rec."Job Unit Price")
-            {
-                ApplicationArea = All;
-                Width = 8;
-            }
+            { ApplicationArea = All; Width = 8; ShowMandatory = JobPriceMandatory; }
             field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
             { ApplicationArea = All; }
         }
@@ -87,4 +86,9 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
             }
         }
     }
+
+    var
+        JobPriceMandatory: Boolean;
+
+
 }
