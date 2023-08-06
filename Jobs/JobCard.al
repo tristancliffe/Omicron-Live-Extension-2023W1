@@ -21,22 +21,15 @@ pageextension 50111 JobCardExt extends "Job Card"
         addlast(General)
         {
             field("Parts Location"; Rec."Parts Location")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc';
-            }
+            { ApplicationArea = All; ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc'; }
             field("Vehicle Reg"; Rec."Vehicle Reg")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Vehicle registration number, where known';
-                ShowMandatory = true;
-            }
+            { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; }
+            field("Engine No."; Rec.EngineNo)
+            { ApplicationArea = All; ToolTip = 'Engine number, if known'; }
+            field("Chassis No."; Rec.ChassisNo)
+            { ApplicationArea = All; ToolTip = 'Chassis number, if known'; }
             field("Date of Arrival"; Rec."Date of Arrival")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Date of arrival at Omicron';
-                ShowMandatory = true;
-            }
+            { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
         }
         moveafter("No."; Status)
         modify("Bill-to County") { Importance = Additional; }

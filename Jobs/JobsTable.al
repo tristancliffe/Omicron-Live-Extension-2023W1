@@ -233,6 +233,10 @@ tableextension 50105 JobNotes extends Job
                                                                 Type = filter('Resource'),
                                                                 "Unit of Measure Code" = filter('HOUR')));
         }
+        field(50109; ChassisNo; Code[30])
+        { CaptionML = ENU = 'Chassis No.'; DataClassification = CustomerContent; }
+        field(50110; EngineNo; Code[30])
+        { CaptionML = ENU = 'Engine No.'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {

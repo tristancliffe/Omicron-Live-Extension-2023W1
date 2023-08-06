@@ -6,8 +6,9 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
         {
             trigger OnAfterValidate()
             begin
-                if Rec."Statement Ending Balance" > 0 then
-                    message('This is a positive amount. Are you sure?')
+                if Rec."Statement Ending Balance" <> 0 then
+                    if Rec."Balance Last Statement" / Rec."Statement Ending Balance" < 0 then
+                        message('Double-check the sign (positive/negative) of the Statement Ending Balance.');
             end;
         }
     }
@@ -34,11 +35,15 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
             { }
             actionref(ManualMatch_Promoted; MatchManually)
             { }
+            actionref(UnMatch_Promoted; RemoveMatch)
+            { }
             actionref(HideMatched_Promoted; NotMatched)
             { }
             actionref(ShowMatched_Promoted; All)
             { }
             actionref(BankStatements; "Bank Acc. Statements")
+            { }
+            actionref(TestReport; "&Test Report")
             { }
         }
         modify(MatchManually)
