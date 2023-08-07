@@ -39,12 +39,17 @@ tableextension 50105 JobNotes extends Job
 
                 "Your Reference" := "No.";
 
-                DimensionValue.Init();
-                DimensionValue.Validate("Dimension Code", 'JOB NO');
-                DimensionValue.Validate(Code, Rec."No.");
-                DimensionValue.Validate(Name, Rec.Description);
-                DimensionValue.Validate("Dimension Value Type", DimensionValue."Dimension Value Type"::Standard);
-                DimensionValue.Insert();
+                DimensionValue.Reset();
+                DimensionValue.SetRange("Dimension Code", 'JOB NO');
+                DimensionValue.SetRange("Code", "No.");
+                if not DimensionValue.FindSet() then begin
+                    DimensionValue.Init();
+                    DimensionValue.Validate("Dimension Code", 'JOB NO');
+                    DimensionValue.Validate(Code, Rec."No.");
+                    DimensionValue.Validate(Name, Rec.Description);
+                    DimensionValue.Validate("Dimension Value Type", DimensionValue."Dimension Value Type"::Standard);
+                    DimensionValue.Insert();
+                end;
                 DimensionDefault.Init();
                 DimensionDefault.Validate("Table ID", 167);
                 DimensionDefault.Validate("No.", Rec."No.");

@@ -2,9 +2,21 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
 {
     layout
     {
-        moveafter(Description; "Due Date", "Original Amount", Amount, "Amount (LCY)", "User ID", "Remaining Amount", "Remaining Amt. (LCY)")
+        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Original Amount", "Amount (LCY)", "User ID")
         modify("User ID")
         { Visible = true; ApplicationArea = All; }
+        modify("Pmt. Discount Date")
+        { Visible = false; }
+        modify("Pmt. Disc. Tolerance Date")
+        { Visible = false; }
+        modify("Original Pmt. Disc. Possible")
+        { Visible = false; }
+        modify("Remaining Pmt. Disc. Possible")
+        { Visible = false; }
+        modify("Max. Payment Tolerance")
+        { Visible = false; }
+        modify("Exported to Payment File")
+        { Visible = false; }
     }
     actions
     {
