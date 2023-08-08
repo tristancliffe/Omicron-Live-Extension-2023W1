@@ -27,9 +27,9 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         modify("Exported to Payment File")
         { Visible = false; }
     }
-    trigger OnOpenPage()
-    begin
-        Rec.SetCurrentKey("Posting Date", "Customer No.");
-        Rec.Ascending(false);
-    end;
+    // trigger OnOpenPage()
+    // begin
+    //     Rec.SetCurrentKey("Posting Date", "Customer No.");
+    //     Rec.Ascending(false);
+    // end;
 }

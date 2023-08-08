@@ -132,6 +132,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
+        JobPriceMandatory := false;
     end;
 
     local procedure GetInventory()

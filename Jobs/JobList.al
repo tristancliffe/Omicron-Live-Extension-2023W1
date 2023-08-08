@@ -5,6 +5,8 @@ pageextension 50112 JobListExtension extends "Job List"
         modify(Control1)
         { FreezeColumn = Description; }
         moveafter("Search Description"; "Status")
+        modify("Search Description")
+        { Visible = false; }
         modify("Status")
         { Visible = true; }
         addafter(Status)
@@ -17,6 +19,8 @@ pageextension 50112 JobListExtension extends "Job List"
             { ApplicationArea = All; ToolTip = 'Job notes'; }
             field("Date of Arrival"; Rec."Date of Arrival")
             { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; }
+            field("Ending Date"; Rec."Ending Date")
+            { ApplicationArea = All; ToolTip = 'Date job was considered "completed"'; }
             field(TotalHours; Rec.TotalHours)
             { ApplicationArea = All; ToolTip = 'The total number of HOURS entered against the job, regardless of adjustments and invoicing'; Width = 8; }
             field(InvoicedHours; Rec.InvoicedHours)

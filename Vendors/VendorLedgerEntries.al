@@ -17,6 +17,11 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
         { Visible = false; }
         modify("Exported to Payment File")
         { Visible = false; }
+        addafter("Due Date")
+        {
+            field(VendorPriority; Priority)
+            { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = false; }
+        }
     }
     actions
     {
@@ -54,4 +59,13 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
             // }
         }
     }
+    var
+        Priority: Integer;
+
+    trigger OnAfterGetRecord()
+    var
+        Vendor: Record Vendor;
+    begin
+        Priority := Vendor.Priority;
+    end;
 }

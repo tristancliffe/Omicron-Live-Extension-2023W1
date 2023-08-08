@@ -55,7 +55,7 @@ tableextension 50105 JobNotes extends Job
                 DimensionDefault.Validate("No.", Rec."No.");
                 DimensionDefault.Validate("Dimension Code", 'JOB NO');
                 DimensionDefault.Validate("Dimension Value Code", Rec."No.");
-                DimensionDefault.Validate("Value Posting", DimensionDefault."Value Posting"::"Same Code");
+                DimensionDefault.Validate("Value Posting", DimensionDefault."Value Posting"::"Code Mandatory");
                 DimensionDefault.Insert();
                 DimensionDefault.Init();
                 DimensionDefault.Validate("Table ID", 167);
