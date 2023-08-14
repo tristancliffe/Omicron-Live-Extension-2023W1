@@ -27,6 +27,8 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
                     Rec.Modify();
                     JobPriceMandatory := true;
+                    if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
+                        message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }

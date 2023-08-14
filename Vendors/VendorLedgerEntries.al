@@ -20,7 +20,7 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
         addafter("Due Date")
         {
             field(VendorPriority; Priority)
-            { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = false; }
+            { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = true; }
         }
     }
     actions
@@ -63,9 +63,21 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
         Priority: Integer;
 
     trigger OnAfterGetRecord()
-    var
-        Vendor: Record Vendor;
     begin
-        Priority := Vendor.Priority;
+        GetPriority();
+    end;
+
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     GetPriority();
+    // end;
+
+    local procedure GetPriority()
+    var
+        VendorRec: Record Vendor;
+    begin
+        if VendorRec.Get(rec."Vendor No.") then begin
+            Priority := VendorRec.Priority;
+        end;
     end;
 }

@@ -56,6 +56,11 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
                 QuickEntry = false;
             }
         }
+        modify("Price Calculation Method")
+        { Visible = false; }
+        modify("Bin Code")
+        { Visible = false; }
+
     }
     actions
     {

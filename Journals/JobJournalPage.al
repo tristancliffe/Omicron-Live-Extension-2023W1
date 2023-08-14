@@ -15,6 +15,8 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                     message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.");
                 if (Rec.Type = Rec.Type::Item) and (Rec."Location Code" = '') then
                     Rec.Validate("Location Code", 'STORES');
+                if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
+                    message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
             end;
         }
         addafter(Description)

@@ -9,6 +9,8 @@ tableextension 50200 "Time Sheet Line Ext" extends "Time Sheet Line"
                 Case Type of
                     Type::Absence:
                         Chargeable := false;
+                    Type::Job:
+                        Chargeable := true;
                 End;
             end;
         }
@@ -34,7 +36,9 @@ tableextension 50200 "Time Sheet Line Ext" extends "Time Sheet Line"
                     i := i + 1;
                 end;
                 if match then
-                    Chargeable := false;
+                    Chargeable := false
+                else
+                    Chargeable := true;
             end;
 
         }

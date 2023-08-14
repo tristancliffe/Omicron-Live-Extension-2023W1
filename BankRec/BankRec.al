@@ -27,6 +27,24 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
                 ToolTip = 'View statements for selected bank accounts. For each bank transaction, the report shows a description, an applied amount, a statement amount, and other information.';
             }
         }
+        modify(MatchManually)
+        { ShortcutKey = 'Alt+M'; }
+        modify(RemoveMatch)
+        { ShortcutKey = 'Alt+R'; }
+        modify(MatchAutomatically)
+        { ShortcutKey = 'Alt+X'; }
+        modify(MatchDetails)
+        { ShortcutKey = 'Alt+D'; }
+        modify("&Test Report")
+        { ShortcutKey = 'Ctrl+Alt+T'; }
+        modify(NotMatched)
+        { ShortcutKey = 'Alt+S'; CaptionML = ENG = 'Hide Matched'; }
+        modify(All)
+        { ShortcutKey = 'Alt+A'; }
+        modify("Transfer to General Journal_Promoted")
+        { Visible = false; }
+        modify(SuggestLines_Promoted)
+        { Visible = false; }
         addfirst(Category_Process)
         {
             actionref(ImportStatement_Promoted; ImportBankStatement)
@@ -46,24 +64,6 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
             actionref(TestReport; "&Test Report")
             { }
         }
-        modify(MatchManually)
-        { ShortcutKey = 'Alt+M'; }
-        modify(RemoveMatch)
-        { ShortcutKey = 'Alt+R'; }
-        modify(MatchAutomatically)
-        { ShortcutKey = 'Alt+X'; }
-        modify(MatchDetails)
-        { ShortcutKey = 'Alt+D'; }
-        modify("&Test Report")
-        { ShortcutKey = 'Ctrl+Alt+T'; }
-        modify(NotMatched)
-        { ShortcutKey = 'Alt+S'; }
-        modify(All)
-        { ShortcutKey = 'Alt+A'; }
-        modify("Transfer to General Journal_Promoted")
-        { Visible = false; }
-        modify(SuggestLines_Promoted)
-        { Visible = false; }
     }
 }
 

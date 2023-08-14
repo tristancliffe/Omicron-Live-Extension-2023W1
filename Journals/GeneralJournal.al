@@ -7,6 +7,15 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
         { Visible = true; width = 10; }
         modify("VAT Reporting Date")
         { Visible = true; Width = 10; }
+        modify("EU 3-Party Trade")
+        { Visible = false; }
+        modify("Deferral Code")
+        { Visible = false; }
+        modify("Applies-to Doc. Type")
+        { Visible = true; }
+        modify("Applies-to Doc. No.")
+        { Visible = true; }
+        //moveafter("Bal. Gen. Prod. Posting Group"; "Applies-to Doc. Type", "Applies-to Doc. No.")
     }
     actions
     {

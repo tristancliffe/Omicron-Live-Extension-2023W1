@@ -8,7 +8,10 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             begin
                 GetInventory();
                 if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) and ((Rec."No." <> 'JOB-PURCHASES') or (Rec."No." <> 'TEXT')) then
-                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+                    if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT')) then
+                        exit
+                    else
+                        message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
             end;
         }
         modify(Quantity)
@@ -49,6 +52,8 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
                     Rec.Modify();
                     JobPriceMandatory := true;
+                    if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
+                        message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }
@@ -77,7 +82,10 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             trigger OnAfterValidate()
             begin
                 if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
-                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+                    if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT')) then
+                        exit
+                    else
+                        message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
             end;
         }
         modify("Unit Price (LCY)")
