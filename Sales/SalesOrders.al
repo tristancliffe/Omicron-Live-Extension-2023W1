@@ -116,6 +116,13 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         { Visible = false; }
         modify("Direct Debit Mandate ID")
         { Visible = false; }
+        addafter("Pmt. Discount Date")
+        {
+            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
+            { ApplicationArea = All; Visible = true; }
+            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
+            { ApplicationArea = All; Visible = true; }
+        }
     }
     actions
     {
@@ -257,7 +264,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
 
     trigger OnModifyRecord(): Boolean
     begin
-        Rec."Your Reference" := UpperCase(Rec."Your Reference");
+        Rec.Validate(Rec."Your Reference", UpperCase(Rec."Your Reference"));
     end;
 
     trigger OnOpenPage()

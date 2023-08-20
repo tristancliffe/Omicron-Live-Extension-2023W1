@@ -171,7 +171,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
 
     trigger OnModifyRecord(): Boolean
     begin
-        Rec."Your Reference" := UpperCase(Rec."Your Reference");
+        Rec.Validate(Rec."Your Reference", UpperCase(Rec."Your Reference"));
     end;
 
     trigger OnOpenPage()

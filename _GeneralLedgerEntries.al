@@ -15,5 +15,21 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
         { Visible = true; }
         modify("VAT Amount")
         { Visible = true; }
+        modify(Amount)
+        { StyleExpr = BalanceColour; }
     }
+
+    var
+        BalanceColour: Text;
+
+    local procedure SetBalanceColours()
+    begin
+        BalanceColour := 'Standard';
+        if Rec.Amount < 0 then BalanceColour := 'Ambiguous'
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetBalanceColours();
+    end;
 }

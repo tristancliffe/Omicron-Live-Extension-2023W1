@@ -110,6 +110,6 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
 
     trigger OnModifyRecord(): Boolean
     begin
-        Rec."Your Reference" := UpperCase(Rec."Your Reference");
+        Rec.Validate(Rec."Your Reference", UpperCase(Rec."Your Reference"));
     end;
 }

@@ -29,8 +29,8 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
                 Caption = 'Time Sheet Archive';
                 Image = PostedTimeSheet;
                 ApplicationArea = All;
-                RunObject = Page "Time Sheet Archive";
-                ToolTip = 'Takes the user to the Time Sheet Archive page';
+                RunObject = Page "Time Sheet Archive List";
+                ToolTip = 'Takes the user to the Time Sheet Archive list';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;

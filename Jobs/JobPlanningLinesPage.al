@@ -151,13 +151,13 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 Enabled = true;
             }
         }
-        modify("Create &Sales Invoice")
-        { Caption = 'Line to Sales Order'; }
+        // modify("Create &Sales Invoice")
+        // { Caption = 'Line to Sales Order'; }
         addlast("F&unctions")
         {
             action(CreateSalesInvoice)
             {
-                Caption = 'Create Sales Invoice';
+                Caption = 'Create Job Sales Invoice';
                 Image = SalesInvoice;
                 ApplicationArea = All;
                 //RunObject = Report "Job Create Sales Invoice";
@@ -210,16 +210,16 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
     begin
         SetStyles();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
-            rec."Work Done" := rec.Description;
-        rec.Modify()
+            Rec.Validate("Work Done", Rec.Description);
+        //rec.Modify() - THIS BREAKS STUFF
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
         SetStyles();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
-            rec."Work Done" := rec.Description;
-        rec.Modify()
+            Rec.Validate("Work Done", Rec.Description);
+        //rec.Modify() - THIS BREAKS STUFF
     end;
 
     trigger OnOpenPage()

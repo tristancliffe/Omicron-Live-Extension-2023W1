@@ -30,7 +30,7 @@ tableextension 50101 CustomerTableExt extends Customer
 
     trigger OnAfterModify()
     begin
-        "Vehicle Model" := UpperCase("Vehicle Model");
+        Validate("Vehicle Model", UpperCase("Vehicle Model"));
     end;
 
     // trigger OnDelete()

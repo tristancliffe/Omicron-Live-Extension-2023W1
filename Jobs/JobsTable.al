@@ -250,9 +250,9 @@ tableextension 50105 JobNotes extends Job
     }
     trigger OnAfterModify()
     begin
-        "Parts Location" := UpperCase("Parts Location");
-        "Vehicle Reg" := UpperCase("Vehicle Reg");
-        "Car Make/Model" := UpperCase("Car Make/Model");
-        "Work Required" := UpperCase("Work Required");
+        Validate("Parts Location", UpperCase("Parts Location"));
+        Validate("Vehicle Reg", UpperCase("Vehicle Reg"));
+        Validate("Car Make/Model", UpperCase("Car Make/Model"));
+        Validate("Work Required", UpperCase("Work Required"));
     end;
 }

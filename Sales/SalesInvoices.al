@@ -207,7 +207,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
 
     trigger OnModifyRecord(): Boolean
     begin
-        Rec."Your Reference" := UpperCase(Rec."Your Reference");
+        Rec.Validate(Rec."Your Reference", UpperCase(Rec."Your Reference"));
     end;
 
     trigger OnOpenPage()

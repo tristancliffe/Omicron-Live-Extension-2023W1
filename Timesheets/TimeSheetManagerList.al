@@ -56,6 +56,18 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
                     ArchiveReport.RunModal();
                 end;
             }
+            action(TimeSheetArchive)
+            {
+                Caption = 'Time Sheet Archive';
+                Image = PostedTimeSheet;
+                ApplicationArea = All;
+                RunObject = Page "Time Sheet Archive List";
+                ToolTip = 'Takes the user to the Time Sheet Archive list';
+                Visible = true;
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+            }
         }
     }
     trigger OnOpenPage()

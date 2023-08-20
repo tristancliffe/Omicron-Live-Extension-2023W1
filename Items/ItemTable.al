@@ -43,9 +43,9 @@ tableextension 50100 ItemTableExt extends Item
     }
     trigger OnAfterModify()
     begin
-        Model := UpperCase(Model);
-        Supplier := UpperCase(Supplier);
-        NonStockShelf := UpperCase(NonStockShelf);
+        Validate(Model, UpperCase(Model));
+        Validate(Supplier, UpperCase(Supplier));
+        Validate(NonStockShelf, UpperCase(NonStockShelf));
     end;
 
     trigger OnModify()

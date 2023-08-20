@@ -16,8 +16,8 @@ tableextension 50103 VendorTableExt extends Vendor
     }
     trigger OnAfterModify()
     begin
-        "Supply Type" := UpperCase("Supply Type");
-        "Preferred Payment Method" := UpperCase("Preferred Payment Method");
+        Validate("Supply Type", UpperCase("Supply Type"));
+        Validate("Preferred Payment Method", UpperCase("Preferred Payment Method"));
     end;
 
     trigger OnBeforeDelete()

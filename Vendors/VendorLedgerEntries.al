@@ -2,7 +2,7 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
 {
     layout
     {
-        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Original Amount", "Amount (LCY)", "User ID")
+        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Payment Method Code", "Original Amount", "Amount (LCY)", "User ID")
         modify("User ID")
         { Visible = true; ApplicationArea = All; }
         modify("Pmt. Discount Date")
@@ -17,10 +17,12 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
         { Visible = false; }
         modify("Exported to Payment File")
         { Visible = false; }
+        modify("Payment Method Code")
+        { Visible = true; }
         addafter("Due Date")
         {
             field(VendorPriority; Priority)
-            { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = true; }
+            { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = true; Editable = false; }
         }
     }
     actions
@@ -59,6 +61,7 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
             // }
         }
     }
+
     var
         Priority: Integer;
 
