@@ -8,27 +8,37 @@ Page 50101 "Work Done Dialog"
     {
         area(Content)
         {
+            // group(Text)
+            // {
+            //     Caption = 'Text Entry';
             field(WorkDoneText; WorkDoneText)
             {
                 Caption = 'Work done';
                 ShowCaption = false;
                 Multiline = true;
+                Importance = Standard;
 
-                // trigger OnValidate()
-                // begin
-                //     CharacterCount := StrLen(WorkDoneText);
-                // end;
+                trigger OnValidate()
+                begin
+                    CharacterCount := StrLen(WorkDoneText);
+                end;
             }
-            // field(CharacterCount; CharacterCount)
+            // }
+            // group("Character Count")
             // {
-            //     Caption = 'No. of characters';
-            //     Editable = false;
+            //     Caption = 'Character Counter';
+            field(CharacterCount; CharacterCount)
+            {
+                Caption = 'No. of characters (max 700):';
+                Editable = false;
+                Importance = Promoted;
+            }
             // }
         }
     }
     var
         WorkDoneText: text[700];
-    // CharacterCount: Integer;
+        CharacterCount: Integer;
 
     procedure GetText(_text: text[700])
     begin
@@ -40,8 +50,8 @@ Page 50101 "Work Done Dialog"
         exit(WorkDoneText);
     end;
 
-    // trigger OnOpenPage()
-    // begin
-    //     CharacterCount := StrLen(WorkDoneText);
-    // end;
+    trigger OnOpenPage()
+    begin
+        CharacterCount := StrLen(WorkDoneText);
+    end;
 }

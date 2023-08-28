@@ -92,6 +92,92 @@ pageextension 50112 JobListExtension extends "Job List"
                     TimesheetReport.RunModal();
                 end;
             }
+            action("Report Timesheet Entries")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Time Sheet Report';
+                Image = "Report";
+                ToolTip = 'Open the Time Sheet report.';
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    TimesheetReport: Report "Timesheet Entries";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    TimesheetReport.SetTableView(Job);
+                    TimesheetReport.RunModal();
+                end;
+            }
+            action("Report Job Invoicing Excel")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Excel Invoice Planner';
+                Image = "Report";
+                ToolTip = 'Open the Excel worksheet for invoicing';
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    TimesheetReport: Report "Job Billing Excel";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    TimesheetReport.SetTableView(Job);
+                    TimesheetReport.RunModal();
+                end;
+            }
+            action("Active Jobs")
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Active Job List';
+                Image = "Report";
+                RunObject = Report "Active Jobs";
+                ToolTip = 'View a list of all active J-jobs (use the filter ''J*|P*'')';
+                Promoted = true;
+                PromotedCategory = Report;
+            }
+            action("Job Card")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Job Card';
+                Image = "Report";
+                ToolTip = 'Produce a job card';
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    JobCard: Report "Service Instruction";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    JobCard.SetTableView(Job);
+                    JobCard.RunModal();
+                end;
+            }
+            action("Workshop Request")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Workshop Request Jobcard';
+                Image = "Report";
+                ToolTip = 'Produce the workshop request jobcard';
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    WorkshopRequest: Report "Workshop Request";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    WorkshopRequest.SetTableView(Job);
+                    WorkshopRequest.RunModal();
+                end;
+            }
         }
     }
     views

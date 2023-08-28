@@ -21,6 +21,11 @@ pageextension 50101 ItemListExtension extends "Item List"
         { Editable = false; FreezeColumn = Description; }
         modify("Unit Cost")
         { Visible = false; }
+        modify("Sales Unit of Measure")
+        { Visible = true; }
+        modify("Base Unit of Measure")
+        { Visible = false; }
+        moveafter("Base Unit of Measure"; "Sales Unit of Measure")
         modify("Unit Price")
         { Style = Strong; }
         addbefore(Control1)

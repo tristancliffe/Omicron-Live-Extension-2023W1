@@ -110,11 +110,13 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         else
             if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
                 Items.CalcFields(Inventory);
+                //Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
                 Rec.Instock_SalesLine := Items.Inventory;
                 Rec.Modify();
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
+                    // Rec.Validate(Rec.Instock_SalesLine, 999);
                     Rec.Instock_SalesLine := 999;
                     Rec.Modify()
                 end;

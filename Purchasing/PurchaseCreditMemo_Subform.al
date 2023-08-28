@@ -28,5 +28,12 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
             field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
             { ApplicationArea = All; }
         }
+        modify("Item Reference No.")
+        { Visible = false; }
+        addafter(Description)
+        {
+            field("Vendor Item No."; Rec."Vendor Item No.")
+            { ApplicationArea = All; Visible = true;}
+        }
     }
 }

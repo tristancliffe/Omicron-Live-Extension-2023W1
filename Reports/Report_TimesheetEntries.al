@@ -17,6 +17,12 @@ report 50100 "Timesheet Entries"
             { }
             column(Job_Description; Description)
             { }
+            column(RegNo; "Vehicle Reg")
+            { }
+            column(ChassisNo; ChassisNo)
+            { }
+            column(EngineNo; EngineNo)
+            { }
             dataitem("Job Planning Line"; "Job Planning Line")
             {
                 DataItemLink = "Job No." = FIELD("No.");

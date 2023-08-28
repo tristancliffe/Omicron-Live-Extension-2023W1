@@ -2,6 +2,16 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
 {
     layout
     {
+        addafter("Ongoing Sales Invoices")
+        {
+            field("Ongoing Sales Credit Memos"; Rec."Ongoing Sales Credit Memos")
+            {
+                ApplicationArea = Suite;
+                DrillDownPageID = "Sales Credit Memos";
+                ToolTip = 'Specifies sales credit memos that are active';
+                Caption = 'Sales Credit Memos';
+            }
+        }
         addbefore("Purchase Orders")
         {
             field(OngoingPurchQuote; Rec.OngoingPurchQuote)
@@ -10,6 +20,16 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 DrillDownPageID = "Purchase Quotes";
                 ToolTip = 'Specifies purchases quotes that are active';
                 Caption = 'Purchase Quotes';
+            }
+        }
+        addafter("Ongoing Purchase Invoices")
+        {
+            field("Ongoing Purchase Credit Memos"; Rec."Ongoing Purchase Credit Memos")
+            {
+                ApplicationArea = Suite;
+                DrillDownPageID = "Purchase Credit Memos";
+                ToolTip = 'Specifies purchases credit memos that are active';
+                Caption = 'Purchase Credit Memos';
             }
         }
         addafter("Overdue Purch. Invoice Amount")
@@ -44,6 +64,10 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         modify("Ongoing Purchase Invoices")
         { Caption = 'Purch. Invoices'; }
         modify("Sales Invoices Predicted Overdue")
+        { Visible = false; }
+        modify("Non-Applied Payments")
+        { Visible = false; }
+        modify("Average Collection Days")
         { Visible = false; }
     }
     var

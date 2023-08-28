@@ -91,6 +91,4 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
 
     var
         JobPriceMandatory: Boolean;
-
-
 }

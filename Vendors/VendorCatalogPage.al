@@ -120,7 +120,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
                     OrderQty := Item."Reorder Quantity"
                 else
                     if Item."Reordering Policy" = Item."Reordering Policy"::"Maximum Qty." then
-                        OrderQty := Item."Reorder Quantity"
+                        OrderQty := Item."Maximum Inventory"
                     else
                         OrderQty := 0;
             end;

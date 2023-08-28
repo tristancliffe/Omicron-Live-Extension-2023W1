@@ -35,6 +35,18 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             Caption = 'Pending Sales Invoice Amount';
             //DecimalPlaces = 0 : 0;
         }
+        field(50104; "Ongoing Purchase Credit Memos"; Integer)
+        {
+            CalcFormula = count("Purchase Header" where("Document Type" = filter("Credit Memo")));
+            Caption = 'Ongoing Purch. Credit Memo';
+            FieldClass = FlowField;
+        }
+        field(50105; "Ongoing Sales Credit Memos"; Integer)
+        {
+            CalcFormula = count("Sales Header" where("Document Type" = filter("Credit Memo")));
+            Caption = 'Ongoing Sales Credit Memo';
+            FieldClass = FlowField;
+        }
         // field(50104; OpenTimeSheetsCue; Integer)
         // {
         //     CalcFormula = count("Time Sheet Header");

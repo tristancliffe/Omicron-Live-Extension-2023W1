@@ -23,6 +23,7 @@ tableextension 50105 JobNotes extends Job
                 VarStock: Code[10];
                 VarSubContr: Code[11];
                 VarTransp: Code[10];
+                VarAdmin: Code[5];
                 Workshop: Code[10];
                 PartsDept: Code[10];
                 JobPostingGroup: Code[3];
@@ -33,6 +34,7 @@ tableextension 50105 JobNotes extends Job
                 VarStock := 'STOCK';
                 VarSubContr := 'SUBCONTRACT';
                 VarTransp := 'TRANSPORT';
+                VarAdmin := 'ADMIN';
                 Workshop := 'WORKSHOP';
                 PartsDept := 'PARTSDEPT';
                 JobPostingGroup := 'JOB';
@@ -78,6 +80,7 @@ tableextension 50105 JobNotes extends Job
                 DimensionDefault.Validate("Value Posting", DimensionDefault."Value Posting"::"Code Mandatory");
                 DimensionDefault.Insert();
                 Message('Please check Dimension values for Department and Job Type, if not WORKSHOP.\ \Workshop J-Jobs should be Department = WORKSHOP and Project Type = WORKSHOP. \Bodyshop J-Jobs should be Department = BODYSHOP and Project Type = BODYSHOP. \Parts Department P-Jobs should be Department = WORKSHOP/BODYSHOP and Project Type = PARTSDEPT.');
+
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarStock;
@@ -109,6 +112,7 @@ tableextension 50105 JobNotes extends Job
                 else
                     DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
                 DefaultTaskDimension.Insert();
+
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarPurch;
@@ -140,6 +144,7 @@ tableextension 50105 JobNotes extends Job
                 else
                     DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
                 DefaultTaskDimension.Insert();
+
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarSubContr;
@@ -171,6 +176,7 @@ tableextension 50105 JobNotes extends Job
                 else
                     DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
                 DefaultTaskDimension.Insert();
+
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarTransp;
@@ -202,6 +208,39 @@ tableextension 50105 JobNotes extends Job
                 else
                     DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
                 DefaultTaskDimension.Insert();
+
+                DefaultTask.Init();
+                DefaultTask."Job No." := Rec."No.";
+                DefaultTask."Job Task No." := VarAdmin;
+                DefaultTask.Description := 'Admin and clerical time';
+                DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
+                DefaultTask."Job Posting Group" := JobPostingGroup;
+                DefaultTask.Insert();
+                DefaultTaskDimension.Init();
+                DefaultTaskDimension."Job No." := Rec."No.";
+                DefaultTaskDimension."Job Task No." := VarAdmin;
+                DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
+                if StrPos(rec."No.", 'P') = 1 then
+                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                else
+                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                DefaultTaskDimension.Insert();
+                DefaultTaskDimension.Init();
+                DefaultTaskDimension."Job No." := Rec."No.";
+                DefaultTaskDimension."Job Task No." := VarAdmin;
+                DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
+                DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
+                DefaultTaskDimension.Insert();
+                DefaultTaskDimension.Init();
+                DefaultTaskDimension."Job No." := Rec."No.";
+                DefaultTaskDimension."Job Task No." := VarAdmin;
+                DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
+                if StrPos(rec."No.", 'P') = 1 then
+                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                else
+                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                DefaultTaskDimension.Insert();
+
                 Rec.Validate("Starting Date", Today);
                 Rec.Validate("Date of Arrival", Today);
             end;
@@ -242,6 +281,26 @@ tableextension 50105 JobNotes extends Job
         { CaptionML = ENU = 'Chassis No.'; DataClassification = CustomerContent; }
         field(50110; EngineNo; Code[30])
         { CaptionML = ENU = 'Engine No.'; DataClassification = CustomerContent; }
+        field(50111; Mileage; Code[30])
+        { CaptionML = ENU = 'Recorded mileage'; DataClassification = CustomerContent; }
+        field(50112; TotalValue; Decimal)
+        {
+            Caption = 'Committed Value';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Ledger Entry"."Total Price" where("Job No." = field("No."),
+                                                                "Entry Type" = filter('Usage')));
+            AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
+            AutoFormatType = 1;
+        }
+        field(50113; InvoicedValue; Decimal)
+        {
+            Caption = 'Invoiced Value';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Ledger Entry"."Total Price" where("Job No." = field("No."),
+                                                                "Entry Type" = filter('Sale')));
+            AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
+            AutoFormatType = 1;
+        }
     }
     fieldgroups
     {

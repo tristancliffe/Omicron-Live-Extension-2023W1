@@ -19,5 +19,4 @@ reportextension 50112 ActiveJobs extends "Job Suggested Billing"
             Summary = 'Prints a list of current (active) jobs for printing';
         }
     }
-
 }

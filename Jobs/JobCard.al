@@ -18,6 +18,14 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Notes about the job';
             }
         }
+        modify(Status)
+        {
+            trigger OnBeforeValidate()
+            begin
+                if rec.Status = rec.status::Completed then
+                    message('Don''t forget to print the timesheet report for filing.')
+            end;
+        }
         addlast(General)
         {
             field("Parts Location"; Rec."Parts Location")
@@ -25,9 +33,11 @@ pageextension 50111 JobCardExt extends "Job Card"
             field("Vehicle Reg"; Rec."Vehicle Reg")
             { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; }
             field("Chassis No."; Rec.ChassisNo)
-            { ApplicationArea = All; ToolTip = 'Chassis number, if known'; }
+            { ApplicationArea = All; ToolTip = 'Chassis number, if known'; ShowMandatory = true; }
             field("Engine No."; Rec.EngineNo)
-            { ApplicationArea = All; ToolTip = 'Engine number, if known'; }
+            { ApplicationArea = All; ToolTip = 'Engine number, if known'; ShowMandatory = true; }
+            field(Mileage; Rec.Mileage)
+            { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; }
             field("Date of Arrival"; Rec."Date of Arrival")
             { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
         }
@@ -44,6 +54,11 @@ pageextension 50111 JobCardExt extends "Job Card"
         {
             field("Sell-to Mobile Number"; Rec."Sell-to Mobile Number")
             { ApplicationArea = All; Importance = Standard; }
+        }
+        addafter("Payment Method Code")
+        {
+            field("Next Invoice Date"; Rec."Next Invoice Date")
+            { ApplicationArea = All; Importance = Promoted; }
         }
         addfirst(factboxes)
         {
