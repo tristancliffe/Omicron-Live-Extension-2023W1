@@ -41,6 +41,32 @@ pageextension 50199 PaymentJournalExt extends "Payment Journal"
                 Visible = true;
                 Enabled = true;
             }
+            action(VendorLink)
+            {
+                ApplicationArea = All;
+                Image = Vendor;
+                Caption = 'Vendor Card';
+                RunObject = page "Vendor Card";
+                RunPageLink = "No." = field("Account No.");
+                Description = 'Go to the Vendor card';
+                ToolTip = 'Opens the Vendor account card for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
+            action(CustomerLink)
+            {
+                ApplicationArea = All;
+                Image = Customer;
+                Caption = 'Customer Card';
+                RunObject = page "Customer Card";
+                RunPageLink = "No." = field("Account No.");
+                Description = 'Go to the Customer card';
+                ToolTip = 'Opens the Customer account card for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
         }
         addlast(Category_Process)
         {

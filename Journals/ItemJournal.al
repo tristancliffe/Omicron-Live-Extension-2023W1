@@ -81,6 +81,19 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
                 Visible = true;
                 Enabled = true;
             }
+            action(JobLink)
+            {
+                ApplicationArea = All;
+                Image = Job;
+                Caption = 'Job Card';
+                RunObject = page "Job Card";
+                RunPageLink = "No." = field("Job No.");
+                Description = 'Go to the Job card';
+                ToolTip = 'Opens the Job Card for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
         }
     }
 

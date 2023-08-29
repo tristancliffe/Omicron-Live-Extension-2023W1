@@ -81,6 +81,21 @@ pageextension 50103 CustomerListExt extends "Customer List"
             actionref(ShipToAddresses_Promoted1; ShipToAddresses)
             { }
         }
+        addlast("&Customer")
+        {
+            action("Ledger Entries")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Ledger Entries';
+                Image = CustomerLedger;
+                RunObject = Page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = FIELD("No.");
+                RunPageView = SORTING("Customer No.")
+                                  ORDER(Descending);
+                ToolTip = 'View the history of transactions that have been posted for the selected record.';
+                Scope = Repeater;
+            }
+        }
     }
     views
     {

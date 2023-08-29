@@ -15,6 +15,8 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
         { Visible = true; }
         modify("Applies-to Doc. No.")
         { Visible = true; }
+        modify("External Document No.")
+        { Visible = true; }
         //moveafter("Bal. Gen. Prod. Posting Group"; "Applies-to Doc. Type", "Applies-to Doc. No.")
     }
     actions
@@ -30,6 +32,32 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
                 RunPageLink = "No." = field("Account No.");
                 Description = 'Go to the General Ledger account card';
                 ToolTip = 'Opens the general ledger account card for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
+            action(VendorLink)
+            {
+                ApplicationArea = All;
+                Image = Vendor;
+                Caption = 'Vendor Card';
+                RunObject = page "Vendor Card";
+                RunPageLink = "No." = field("Account No.");
+                Description = 'Go to the Vendor card';
+                ToolTip = 'Opens the Vendor account card for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
+            action(CustomerLink)
+            {
+                ApplicationArea = All;
+                Image = Customer;
+                Caption = 'Customer Card';
+                RunObject = page "Customer Card";
+                RunPageLink = "No." = field("Account No.");
+                Description = 'Go to the Customer card';
+                ToolTip = 'Opens the Customer account card for this line';
                 Scope = Repeater;
                 Visible = true;
                 Enabled = true;

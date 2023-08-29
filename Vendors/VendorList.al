@@ -63,6 +63,21 @@ pageextension 50106 VendorListExtension extends "Vendor List"
             actionref(OrderAddresses_Promoted1; OrderAddresses)
             { }
         }
+        addlast("Ven&dor")
+        {
+            action("Ledger Entries")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Ledger Entries';
+                Image = VendorLedger;
+                RunObject = Page "Vendor Ledger Entries";
+                RunPageLink = "Vendor No." = FIELD("No.");
+                RunPageView = SORTING("Vendor No.")
+                                  ORDER(Descending);
+                ToolTip = 'View the history of transactions that have been posted for the selected record.';
+                Scope = Repeater;
+            }
+        }
     }
     views
     {
