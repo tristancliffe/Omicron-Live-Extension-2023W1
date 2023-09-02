@@ -92,25 +92,25 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 RunObject = Page "Job Card";
                 RunPageLink = "No." = field("Job No.");
             }
-            action("Report Timesheet Entries")
-            {
-                ApplicationArea = All;
-                Caption = 'Job History PDF';
-                Image = History;
-                ToolTip = 'Open the approved and posted job history in a PDF format. You''ll need to print it or use a PDF app.';
-                Scope = Repeater;
+            // action("Report Timesheet Entries")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Job History PDF';
+            //     Image = History;
+            //     ToolTip = 'Open the approved and posted job history in a PDF format. You''ll need to print it or use a PDF app.';
+            //     Scope = Repeater;
 
-                trigger OnAction()
-                var
-                    Job: Record Job;
-                    TimesheetReport: Report "Timesheet Entries";
-                begin
-                    Job.SetFilter("No.", Rec."Job No.");
-                    TimesheetReport.SetTableView(Job);
-                    TimesheetReport.UseRequestPage(false);
-                    TimesheetReport.RunModal();
-                end;
-            }
+            //     trigger OnAction()
+            //     var
+            //         Job: Record Job;
+            //         TimesheetReport: Report "Timesheet Entries";
+            //     begin
+            //         Job.SetFilter("No.", Rec."Job No.");
+            //         TimesheetReport.SetTableView(Job);
+            //         TimesheetReport.UseRequestPage(false);
+            //         TimesheetReport.RunModal();
+            //     end;
+            // }
         }
     }
     trigger OnAfterGetCurrRecord()
