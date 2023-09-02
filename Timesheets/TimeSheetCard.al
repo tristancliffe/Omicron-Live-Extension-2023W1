@@ -16,7 +16,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                 Importance = Promoted;
                 ShowCaption = false;
                 Editable = false;
-                //MultiLine = true;
+                MultiLine = true;
                 Style = Attention;
             }
             // field("Dropbox Link"; "Dropbox Link")
@@ -27,15 +27,15 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             //     ExtendedDatatype = URL;
             //     Editable = false;
             // }
-            field(Reminder2; Reminder2)
-            {
-                ApplicationArea = All;
-                Importance = Promoted;
-                ShowCaption = false;
-                Editable = false;
-                //MultiLine = true;
-                Style = Attention;
-            }
+            // field(Reminder2; Reminder2)
+            // {
+            //     ApplicationArea = All;
+            //     Importance = Promoted;
+            //     ShowCaption = false;
+            //     Editable = false;
+            //     //MultiLine = true;
+            //     Style = Attention;
+            // }
         }
     }
     actions
@@ -129,8 +129,8 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         else
             Device := true;
         "Dropbox Link" := 'https://bit.ly/omicronltd';
-        //Reminder := 'Don''t forget to SUBMIT timesheets regularly. \Keep STOCK CARDS up to date. Upload PICTURES.';
-        Reminder := 'Don''t forget to SUBMIT timesheets regularly.';
-        Reminder2 := 'Keep STOCK CARDS updated. Upload PICTURES.';
+        Reminder := 'Don''t forget to SUBMIT timesheets regularly. \Keep STOCK CARDS up to date. Upload PICTURES.';
+        //Reminder := 'Don''t forget to SUBMIT timesheets regularly.';
+        //Reminder2 := 'Keep STOCK CARDS updated. Upload PICTURES.';
     end;
 }
