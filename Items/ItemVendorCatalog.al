@@ -18,6 +18,26 @@ pageextension 50172 "ItemVendorCatalogExt" extends "Item Vendor Catalog"
             }
         }
     }
+    actions
+    {
+        addlast("&Item Vendor")
+        {
+            action(VendorLink)
+            {
+                ApplicationArea = All;
+                Image = Vendor;
+                Caption = 'Vendor Card';
+                RunObject = page "Vendor Card";
+                RunPageLink = "No." = field("Vendor No.");
+                Description = 'Go to the Vendor card';
+                ToolTip = 'Opens the Vendor account card for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = true;
+            }
+
+        }
+    }
     views
     {
         // addfirst

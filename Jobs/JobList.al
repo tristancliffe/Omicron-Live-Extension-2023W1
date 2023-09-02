@@ -19,13 +19,14 @@ pageextension 50112 JobListExtension extends "Job List"
             { ApplicationArea = All; ToolTip = 'Job notes'; }
             field("Date of Arrival"; Rec."Date of Arrival")
             { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; }
-            field("Ending Date"; Rec."Ending Date")
-            { ApplicationArea = All; ToolTip = 'Date job was considered "completed"'; }
             field(TotalHours; Rec.TotalHours)
             { ApplicationArea = All; ToolTip = 'The total number of HOURS entered against the job, regardless of adjustments and invoicing'; Width = 8; }
             field(InvoicedHours; Rec.InvoicedHours)
             { ApplicationArea = All; ToolTip = 'The total number of INVOICED HOURS entered against the job'; Width = 8; }
         }
+        moveafter("Date of Arrival"; "Person Responsible")
+        modify("Person Responsible")
+        { Visible = true; ToolTip = 'Whom is ''doing'' the job, or whom is responsible for it.'; }
         moveafter(Control1905650007; Control1907234507, Control1902018507)
         modify(Control1907234507)
         { Visible = true; }

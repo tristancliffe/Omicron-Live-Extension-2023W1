@@ -50,11 +50,11 @@ pageextension 50111 JobCardExt extends "Job Card"
         modify("Search Description") { Importance = Standard; }
         modify("External Document No.") { Visible = true; Importance = Standard; }
         modify("Your Reference") { Visible = true; Importance = Standard; }
-        addafter(SellToPhoneNo)
-        {
-            field("Sell-to Mobile Number"; Rec."Sell-to Mobile Number")
-            { ApplicationArea = All; Importance = Standard; }
-        }
+        // addafter(SellToPhoneNo)
+        // {
+        //     field("Sell-to Mobile Number"; Rec."Sell-to Mobile Number")
+        //     { ApplicationArea = All; Importance = Standard; }
+        // }
         addafter("Payment Method Code")
         {
             field("Next Invoice Date"; Rec."Next Invoice Date")

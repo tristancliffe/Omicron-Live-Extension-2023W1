@@ -95,6 +95,18 @@ pageextension 50103 CustomerListExt extends "Customer List"
                 ToolTip = 'View the history of transactions that have been posted for the selected record.';
                 Scope = Repeater;
             }
+            action("Open Ledger Entries")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Open Entries';
+                Image = CustomerLedger;
+                RunObject = Page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = FIELD("No.");
+                RunPageView = SORTING("Customer No.")
+                                  ORDER(Descending) where(Open = filter(true));
+                ToolTip = 'View the open transactions that have been posted for the selected record.';
+                Scope = Repeater;
+            }
         }
     }
     views

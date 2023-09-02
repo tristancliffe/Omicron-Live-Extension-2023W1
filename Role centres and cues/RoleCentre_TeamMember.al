@@ -34,6 +34,7 @@ pageextension 50121 TeamMemberRoleExt extends "Team Member Role Center"
                 ApplicationArea = All;
                 CaptionML = ENG = 'Job Journals', ENU = 'Job Journals';
                 RunObject = page "Job Journal";
+                Visible = false;
             }
         }
         modify(Finance)

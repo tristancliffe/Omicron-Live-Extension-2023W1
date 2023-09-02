@@ -44,6 +44,12 @@ report 50103 "Workshop Request"
             { }
             column(Job_Notes; "Job Notes")
             { }
+            column(ChassisNo; ChassisNo)
+            { }
+            column(EngineNo; EngineNo)
+            { }
+            column(Mileage; Mileage)
+            { }
         }
     }
 
@@ -70,15 +76,15 @@ report 50103 "Workshop Request"
         {
             Type = Word;
             LayoutFile = 'OmicronWorkshopRequest.docx';
-            Caption = 'Workshop Request';
-            Summary = 'Workshop Request Job Card';
+            Caption = 'Workshop P-Job Request';
+            Summary = 'Workshop P-Job Job Card';
         }
-        layout(Jobcard)
-        {
-            Type = Word;
-            LayoutFile = 'OmicronJobCard.docx';
-            Caption = 'Job Card';
-            Summary = 'Job Card';
-        }
+        // layout(Jobcard)
+        // {
+        //     Type = Word;
+        //     LayoutFile = 'OmicronJobCard.docx';
+        //     Caption = 'Job Card';
+        //     Summary = 'Job Card';
+        // }
     }
 }

@@ -77,6 +77,18 @@ pageextension 50106 VendorListExtension extends "Vendor List"
                 ToolTip = 'View the history of transactions that have been posted for the selected record.';
                 Scope = Repeater;
             }
+            action("Open Ledger Entries")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Open Entries';
+                Image = VendorLedger;
+                RunObject = Page "Vendor Ledger Entries";
+                RunPageLink = "Vendor No." = FIELD("No.");
+                RunPageView = SORTING("Vendor No.")
+                                  ORDER(Descending) where(Open = filter(true));
+                ToolTip = 'View the open transactions that have been posted for the selected record.';
+                Scope = Repeater;
+            }
         }
     }
     views

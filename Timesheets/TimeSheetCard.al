@@ -14,17 +14,27 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             {
                 ApplicationArea = All;
                 Importance = Promoted;
+                ShowCaption = false;
                 Editable = false;
-                MultiLine = true;
-                Style = Strong;
+                //MultiLine = true;
+                Style = Attention;
             }
-            field("Dropbox Link"; "Dropbox Link")
+            // field("Dropbox Link"; "Dropbox Link")
+            // {
+            //     ApplicationArea = All;
+            //     Importance = Promoted;
+            //     Description = 'The link to the Dropbox image upload page';
+            //     ExtendedDatatype = URL;
+            //     Editable = false;
+            // }
+            field(Reminder2; Reminder2)
             {
                 ApplicationArea = All;
                 Importance = Promoted;
-                Description = 'The link to the Dropbox image upload page';
-                ExtendedDatatype = URL;
+                ShowCaption = false;
                 Editable = false;
+                //MultiLine = true;
+                Style = Attention;
             }
         }
     }
@@ -92,12 +102,25 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                     ArchiveTimeSheet.RunModal();
                 end;
             }
+            action(Absences)
+            {
+                ApplicationArea = All;
+                Caption = 'Absences';
+                Image = Absence;
+                Tooltip = 'Show a list of staff absenses.';
+                RunObject = Page "Employee Absences";
+                RunPageLink = "Employee No." = field("Resource No.");
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+            }
         }
     }
     var
         Device: Boolean;
         "Dropbox Link": Text[50];
         Reminder: Text[150];
+        Reminder2: Text[150];
 
     trigger OnOpenPage()
     begin
@@ -106,6 +129,8 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         else
             Device := true;
         "Dropbox Link" := 'https://bit.ly/omicronltd';
-        Reminder := 'Do not forget to SUBMIT your timesheets regularly. \Keep STOCK CARDS up to date. Take & UPLOAD pictures.';
+        //Reminder := 'Don''t forget to SUBMIT timesheets regularly. \Keep STOCK CARDS up to date. Upload PICTURES.';
+        Reminder := 'Don''t forget to SUBMIT timesheets regularly.';
+        Reminder2 := 'Keep STOCK CARDS updated. Upload PICTURES.';
     end;
 }

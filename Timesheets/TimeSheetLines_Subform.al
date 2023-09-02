@@ -66,6 +66,53 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         modify(TimeSheetTotalQuantity)
         { QuickEntry = false; }
     }
+    actions
+    {
+        addlast(Processing)
+        {
+            // action("Report Timesheet Entries")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Job History';
+            //     Image = History;
+            //     ToolTip = 'Open the approved and posted job history.';
+            //     Scope = Repeater;
+
+            //     trigger OnAction()
+            //     var
+            //         Job: Record Job;
+            //         TimesheetReport: Report "Timesheet Entries";
+            //     begin
+            //         Job.SetFilter("No.", Rec."Job No.");
+            //         TimesheetReport.SetTableView(Job);
+            //         TimesheetReport.UseRequestPage(false);
+            //         TimesheetReport.RunModal();
+            //     end;
+            // }
+            action(JobPlanningLines)
+            {
+                ApplicationArea = All;
+                Caption = 'Timesheet History';
+                Image = History;
+                ToolTip = 'Shows the entries made for the job so far that have been approved and posted';
+                Scope = Repeater;
+                RunObject = Page "Job Planning Lines";
+                RunPageLink = "Job No." = FIELD("Job No.");
+                RunPageView = SORTING("Job No.", "Planning Date", "Document No.")
+                                  ORDER(Descending);
+            }
+            action(JobCard)
+            {
+                ApplicationArea = All;
+                Caption = 'Job Card';
+                Image = Job;
+                ToolTip = 'Go to the main job card for the job.';
+                Scope = Repeater;
+                RunObject = Page "Job Card";
+                RunPageLink = "No." = field("Job No.");
+            }
+        }
+    }
     trigger OnAfterGetCurrRecord()
     var
         Job: Record Job;

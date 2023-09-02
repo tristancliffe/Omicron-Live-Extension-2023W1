@@ -12,5 +12,6 @@ permissionset 50100 OmicronPermissions
         report "Timesheet Entries" = X,
         report ResourceEfficiency = X,
         report "Service Instruction" = X,
-        report "Workshop Request" = X;
+        report "Workshop Request" = X,
+        report "Active Jobs" = X;
 }

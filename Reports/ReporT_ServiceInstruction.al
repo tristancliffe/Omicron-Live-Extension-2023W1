@@ -12,6 +12,8 @@ report 50104 "Service Instruction"
         dataitem(Job; Job)
         {
             RequestFilterFields = "No.";
+            column(TodayFormatted; Format(Today, 0, 4))
+            { }
             column(No_; "No.")
             { }
             column(Date_of_Arrival; Format("Date of Arrival", 0, 4))
@@ -44,6 +46,12 @@ report 50104 "Service Instruction"
             { }
             column(Job_Notes; "Job Notes")
             { }
+            column(ChassisNo; ChassisNo)
+            { }
+            column(EngineNo; EngineNo)
+            { }
+            column(Mileage; Mileage)
+            { }
         }
     }
 
@@ -72,6 +80,13 @@ report 50104 "Service Instruction"
             LayoutFile = 'OmicronJobCard.docx';
             Caption = 'Job Card';
             Summary = 'Job Card';
+        }
+        layout(JobInvoice)
+        {
+            Type = Word;
+            LayoutFile = 'OmicronJobInvoice.docx';
+            Caption = 'Job Invoice';
+            Summary = 'Template for Job Invoice';
         }
     }
 }
