@@ -113,6 +113,41 @@ pageextension 50106 VendorListExtension extends "Vendor List"
                 Filters = where("Balance" = filter('<>0'));
 
             }
+            view(PhoneNumbers)
+            {
+                Caption = 'Phone Numbers';
+                SharedLayout = false;
+                Filters = where("Blocked" = const(" "));
+                layout
+                {
+                    modify("E-Mail")
+                    { Visible = false; }
+                    modify(Contact)
+                    { Visible = false; }
+                    modify(City)
+                    { Visible = false; }
+                    modify("Post Code")
+                    { Visible = false; }
+                    modify("Post Code1")
+                    { Visible = false; }
+                    modify("Country/Region Code")
+                    { Visible = false; }
+                    modify("Country/Region Code1")
+                    { Visible = false; }
+                    modify("Search Name")
+                    { Visible = false; }
+                    modify("Balance (LCY)")
+                    { Visible = false; }
+                    modify("Balance Due (LCY)")
+                    { Visible = false; }
+                    modify("Payments (LCY)")
+                    { Visible = false; }
+                    modify("Supply Type")
+                    { Visible = false; }
+                    modify("Vendor Notes")
+                    { Visible = false; }
+                }
+            }
         }
     }
 

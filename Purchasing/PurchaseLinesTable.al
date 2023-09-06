@@ -30,6 +30,13 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
             Editable = false;
             DataClassification = CustomerContent;
         }
+        field(50104; QtyOnSalesOrder_PurchLine; Decimal)
+        {
+            Caption = 'Qty. on Sales Orders';
+            DecimalPlaces = 1 : 2;
+            Editable = false;
+            DataClassification = CustomerContent;
+        }
     }
 }
 

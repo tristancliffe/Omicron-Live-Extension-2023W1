@@ -2,6 +2,8 @@ pageextension 50111 JobCardExt extends "Job Card"
 {
     layout
     {
+        modify(Description)
+        { ShowMandatory = true; }
         addafter(Description)
         {
             field("Car Make/Model"; Rec."Car Make/Model")
@@ -43,7 +45,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         }
         moveafter("No."; Status)
         modify("Bill-to County") { Importance = Additional; }
-        modify("Sell-to Customer No.") { Importance = Standard; }
+        modify("Sell-to Customer No.") { Importance = Standard; ShowMandatory = true; }
         modify(SellToPhoneNo) { Importance = Standard; }
         modify(SellToMobilePhoneNo) { Importance = Standard; }
         modify(SellToEmail) { Importance = Standard; }

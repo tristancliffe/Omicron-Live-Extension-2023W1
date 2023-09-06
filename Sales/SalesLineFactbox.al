@@ -10,19 +10,15 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
                 Visible = TypeExists;
 
                 field(ShelfNo_SalesLine; Rec.ShelfNo_SalesLine)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shelf';
-                    Visible = true;
-                    DrillDown = false;
-                }
+                { ApplicationArea = All; Caption = 'Shelf'; Visible = true; DrillDown = false; }
                 field(ItemType; Rec.ItemType_SalesLine) //ShowType())
-                {
-                    ApplicationArea = All;
-                    Caption = 'Item Type';
-                    Visible = true;
-                    DrillDown = false;
-                }
+                { ApplicationArea = All; Caption = 'Item Type'; Visible = true; DrillDown = false; }
+                field(ItemVendor; Rec.Itemvendor_SalesLine)
+                { ApplicationArea = All; Visible = true; Drilldown = true; }
+                field(ItemVendorNo; Rec.ItemVendorNo_SalesLine)
+                { ApplicationArea = All; Visible = true; DrillDown = false; }
+                field(ItemQtyOnOrder_SalesLine; Rec.ItemQtyOnOrder_SalesLine)
+                { ApplicationArea = All; Visible = true; DrillDown = false; }
             }
             group(Notes)
             {
@@ -56,6 +52,9 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
         ImageExists: Boolean;
         NotesExist: Boolean;
         TypeExists: Boolean;
+        Vendor: Code[20];
+        VendorNo: Text[50];
+        Item: Record Item;
 
     trigger OnAfterGetCurrRecord()
     begin
@@ -68,6 +67,13 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
             TypeExists := false;
         If strlen(Rec.ItemNotes_SalesLine) = 0 then
             NotesExist := false;
+        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields("Qty. on Purch. Order");
+            Rec.Validate(Rec.ItemQtyOnOrder_SalesLine, Item."Qty. on Purch. Order")
+        end
+        else
+            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then
+                Rec.Validate(ItemQtyOnOrder_SalesLine, 0)
     end;
 
 

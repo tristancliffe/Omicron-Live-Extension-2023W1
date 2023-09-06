@@ -43,6 +43,22 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         { Visible = false; }
         modify("Create &Warehouse Shipment_Promoted")
         { Visible = false; }
+        addlast("O&rder")
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = all;
+                Caption = 'Posted Invoices';
+                ToolTip = 'Opens the list of posted sales invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Sales Invoices";
+            }
+        }
+        addlast(Promoted)
+        {
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+        }
     }
     trigger OnOpenPage()
     begin

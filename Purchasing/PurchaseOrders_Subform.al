@@ -50,7 +50,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 trigger OnValidate()
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify();
+                    // Rec.Modify();
                     JobPriceMandatory := true;
                     if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
                         message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
@@ -152,13 +152,15 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         else
             if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
                 Items.CalcFields(Inventory);
-                Rec.Instock_PurchLine := Items.Inventory;
-                Rec.Modify();
+                // Rec.Instock_PurchLine := Items.Inventory;
+                // Rec.Modify();
+                Rec.Validate(Instock_PurchLine, Items.Inventory)
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                    Rec.Instock_PurchLine := 999;
-                    Rec.Modify()
+                    // Rec.Instock_PurchLine := 999;
+                    // Rec.Modify()
+                    Rec.Validate(Rec.Instock_PurchLine, 999)
                 end;
     end;
 }

@@ -61,6 +61,22 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
             actionref(ArchiveQuote_Promoted; ArchiveQuote)
             { }
         }
+        addlast("&Quote")
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = all;
+                Caption = 'Posted Invoices';
+                ToolTip = 'Opens the list of posted sales invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Sales Invoices";
+            }
+        }
+        addlast(Promoted)
+        {
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+        }
     }
 
     var

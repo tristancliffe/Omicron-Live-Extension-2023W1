@@ -40,6 +40,24 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
                 Caption = 'Inactive';
                 Filters = where("Status" = filter('Inactive|Terminated'));
             }
+            view(PhoneNumbers)
+            {
+                Caption = 'Phone Numbers';
+                SharedLayout = false;
+                layout
+                {
+                    modify("Job Title")
+                    { Visible = false; }
+                    modify("E-Mail")
+                    { Visible = false; }
+                    modify("Search Name")
+                    { Visible = false; }
+                    modify(Comment)
+                    { Visible = false; }
+                    modify("Employee Notes")
+                    { Visible = false; }
+                }
+            }
         }
     }
 

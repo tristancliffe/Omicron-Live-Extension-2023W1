@@ -72,13 +72,15 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
     begin
         if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
             Items.CalcFields(Inventory);
-            Rec.Instock_AssemblyLine := Items.Inventory;
-            Rec.Modify();
+            // Rec.Instock_AssemblyLine := Items.Inventory;
+            // Rec.Modify();
+            Rec.Validate(Rec.Instock_AssemblyLine, Items.Inventory)
         end
         else
             if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                Rec.Instock_AssemblyLine := 999;
-                Rec.Modify()
+                // Rec.Instock_AssemblyLine := 999;
+                // Rec.Modify()
+                Rec.Validate(Instock_AssemblyLine, 999)
             end;
     end;
 }

@@ -15,7 +15,7 @@ pageextension 50148 PurchaseReturnOrderSubformExt extends "Purchase Return Order
                 trigger OnValidate()
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify()
+                    // Rec.Modify()
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }

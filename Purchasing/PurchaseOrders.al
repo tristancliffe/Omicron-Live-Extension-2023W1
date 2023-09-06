@@ -10,7 +10,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             QuickEntry = true;
             Importance = Standard;
         }
-        addafter("Your Reference")
+        addafter("Vendor Invoice No.")
         {
             field("Preferred Payment Method"; PaymentMethod)
             {
@@ -40,7 +40,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 end;
             }
         }
-        addafter("Your Reference")
+        addafter("Preferred Payment Method")
         {
             field("Order Notes"; Rec."Order Notes")
             {
@@ -51,30 +51,16 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             }
         }
         modify("Order Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Document Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Due Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("Posting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
         modify("VAT Reporting Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
+        { Visible = true; Importance = Standard; }
+        moveafter("VAT Reporting Date"; "Document Date")
         modify("Purchaser Code")
         { Visible = false; }
         modify("Assigned User ID")
@@ -191,8 +177,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }
@@ -201,8 +187,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }
@@ -211,8 +197,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }

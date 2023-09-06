@@ -51,6 +51,25 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
             Visible = true;
         }
     }
+    actions
+    {
+        addlast("&Invoice")
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = all;
+                Caption = 'Posted Invoices';
+                ToolTip = 'Opens the list of posted purchase invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Purchase Invoices";
+            }
+        }
+        addlast(Promoted)
+        {
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+        }
+    }
 
     trigger OnOpenPage()
     begin

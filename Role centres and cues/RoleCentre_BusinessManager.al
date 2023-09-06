@@ -606,13 +606,13 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Change Log Entries";
                     ToolTip = 'See the change log for recorded fields';
                 }
-                action(FeatureManagement)
+                action(PhoneNumbers)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Feature Management';
-                    Image = User;
-                    RunObject = Page "Feature Management";
-                    ToolTip = 'Manage current and future features of Business Central';
+                    Caption = 'Phone Numbers';
+                    Image = ElectronicNumber;
+                    RunObject = Page "Phone Number Lists";
+                    ToolTip = 'Lists of phone numbers';
                 }
                 action(VATSetup)
                 {

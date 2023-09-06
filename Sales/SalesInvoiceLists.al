@@ -38,6 +38,25 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
         modify("Due Date")
         { Visible = false; }
     }
+    actions
+    {
+        addlast("&Invoice")
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = all;
+                Caption = 'Posted Invoices';
+                ToolTip = 'Opens the list of posted sales invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Sales Invoices";
+            }
+        }
+        addlast(Promoted)
+        {
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+        }
+    }
 
     trigger OnOpenPage()
     begin

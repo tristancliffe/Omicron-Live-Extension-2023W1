@@ -4,6 +4,8 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
     {
         addafter(Availability)
         {
+            field(QtyOnSalesOrder_PurchLine; Rec.QtyOnSalesOrder_PurchLine)
+            { ApplicationArea = All; Visible = true; DrillDown = false; }
             // group(Type)
             // {
             //     ShowCaption = false;
@@ -55,6 +57,7 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
     var
         ImageExists: Boolean;
         NotesExist: Boolean;
+        Item: Record Item;
     // TypeExists: Boolean;
     // QtyToOrder: Decimal;
     // Item: Record Item;
@@ -82,6 +85,13 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
         //         else
         //             QtyToOrder := 0
         // end;
+        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields("Qty. on Sales Order");
+            Rec.Validate(Rec.QtyOnSalesOrder_PurchLine, Item."Qty. on Sales Order")
+        end
+        else
+            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then
+                Rec.Validate(QtyOnSalesOrder_PurchLine, 0)
     end;
 
 

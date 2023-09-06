@@ -114,15 +114,15 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
         else
             if (Items.Get(Rec."No.")) and (Items.Type = Items.Type::Inventory) then begin
                 Items.CalcFields(Inventory);
-                //Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
-                Rec.Instock_SalesLine := Items.Inventory;
-                Rec.Modify();
+                // Rec.Instock_SalesLine := Items.Inventory;
+                // Rec.Modify();
+                Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                    // Rec.Validate(Rec.Instock_SalesLine, 999);
-                    Rec.Instock_SalesLine := 999;
-                    Rec.Modify()
+                    // Rec.Instock_SalesLine := 999;
+                    // Rec.Modify()
+                    Rec.Validate(Rec.Instock_SalesLine, 999);
                 end
     end;
 }

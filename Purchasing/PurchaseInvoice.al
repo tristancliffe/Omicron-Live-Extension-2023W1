@@ -2,7 +2,6 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
 {
     layout
     {
-        moveafter("Buy-from Vendor Name"; Status, "Vendor Invoice No.")
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
         addafter("Buy-from Vendor Name")
         {
@@ -49,8 +48,10 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 MultiLine = true;
             }
         }
+        moveafter("Your Reference"; Status, "Vendor Invoice No.")
         modify("Document Date")
         { Visible = true; Importance = Standard; }
+        moveafter("VAT Reporting Date"; "Document Date")
         modify("Due Date")
         { Visible = true; Importance = Standard; }
         modify("Posting Date")
@@ -146,8 +147,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }
@@ -156,8 +157,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }
@@ -166,8 +167,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }

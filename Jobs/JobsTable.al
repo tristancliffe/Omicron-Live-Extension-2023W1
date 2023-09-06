@@ -38,8 +38,7 @@ tableextension 50105 JobNotes extends Job
                 Workshop := 'WORKSHOP';
                 PartsDept := 'PARTSDEPT';
                 JobPostingGroup := 'JOB';
-
-                "Your Reference" := "No.";
+                "Your Reference" := CopyStr("No." + ' ' + "Sell-to Customer No." + ' ' + "Car Make/Model", 1, MaxStrLen("Your Reference"));
 
                 DimensionValue.Reset();
                 DimensionValue.SetRange("Dimension Code", 'JOB NO');
@@ -48,7 +47,7 @@ tableextension 50105 JobNotes extends Job
                     DimensionValue.Init();
                     DimensionValue.Validate("Dimension Code", 'JOB NO');
                     DimensionValue.Validate(Code, Rec."No.");
-                    DimensionValue.Validate(Name, Rec.Description);
+                    DimensionValue.Validate(Name, CopyStr(Rec.Description, 1, MaxStrLen(DimensionValue.Name)));
                     DimensionValue.Validate("Dimension Value Type", DimensionValue."Dimension Value Type"::Standard);
                     DimensionValue.Insert();
                 end;
@@ -188,10 +187,7 @@ tableextension 50105 JobNotes extends Job
                 DefaultTaskDimension."Job No." := Rec."No.";
                 DefaultTaskDimension."Job Task No." := VarTransp;
                 DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                DefaultTaskDimension.Validate("Dimension Value Code", 'TRANSPORT');
                 DefaultTaskDimension.Insert();
                 DefaultTaskDimension.Init();
                 DefaultTaskDimension."Job No." := Rec."No.";

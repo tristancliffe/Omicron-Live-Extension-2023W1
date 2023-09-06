@@ -15,7 +15,7 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
                 trigger OnValidate()
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify()
+                    // Rec.Modify()
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }
@@ -33,7 +33,7 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
         addafter(Description)
         {
             field("Vendor Item No."; Rec."Vendor Item No.")
-            { ApplicationArea = All; Visible = true;}
+            { ApplicationArea = All; Visible = true; }
         }
     }
 }

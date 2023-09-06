@@ -87,8 +87,8 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }
@@ -97,8 +97,8 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    // Rec.Modify();
                 end;
             end;
         }

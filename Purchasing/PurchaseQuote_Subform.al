@@ -44,7 +44,7 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 trigger OnValidate()
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify()
+                    // Rec.Modify()
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }
@@ -133,13 +133,15 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
         else
             if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
                 Items.CalcFields(Inventory);
-                Rec.Instock_PurchLine := Items.Inventory;
-                Rec.Modify();
+                // Rec.Instock_PurchLine := Items.Inventory;
+                // Rec.Modify();
+                Rec.Validate(Instock_PurchLine, Items.Inventory)
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                    Rec.Instock_PurchLine := 999;
-                    Rec.Modify()
+                    // Rec.Instock_PurchLine := 999;
+                    // Rec.Modify()
+                    Rec.Validate(Instock_PurchLine, 999)
                 end;
     end;
 }

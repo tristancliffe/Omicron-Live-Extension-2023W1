@@ -34,6 +34,25 @@ pageextension 50154 PurchaseQuoteListExt extends "Purchase Quotes"
         modify("Location Code")
         { Visible = false; }
     }
+    actions
+    {
+        addlast("&Quote")
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = all;
+                Caption = 'Posted Invoices';
+                ToolTip = 'Opens the list of posted purchase invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Purchase Invoices";
+            }
+        }
+        addlast(Promoted)
+        {
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+        }
+    }
 
     trigger OnOpenPage()
     begin

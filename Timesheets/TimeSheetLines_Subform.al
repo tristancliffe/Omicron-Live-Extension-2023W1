@@ -25,8 +25,9 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                     else begin
                         Dialog.GetText(rec."Work Done");
                         if Dialog.RunModal() = Action::OK then begin
-                            rec."Work Done" := Dialog.SaveText();
-                            rec.Modify(); //saves the line to the table even if no other field is selected
+                            // rec."Work Done" := Dialog.SaveText();
+                            // rec.Modify(); //saves the line to the table even if no other field is selected
+                            rec.Validate(Rec."Work Done", Dialog.SaveText());
                         end;
                     end;
                 end;

@@ -6,6 +6,13 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
+            field(CustomerCar; RecCustomer."Vehicle Model")
+            {
+                Caption = 'Customer Car';
+                ApplicationArea = All;
+                Editable = false;
+                Importance = Standard;
+            }
             field("Order Customer Notes"; CustomerNotes)
             {
                 MultiLine = true;
@@ -204,8 +211,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    //Rec.Modify();
                 end;
             end;
         }
@@ -214,8 +221,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    //Rec.Modify();
                 end;
             end;
         }
@@ -224,8 +231,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             trigger OnBeforeAction()
             begin
                 if rec."Posting Date" = 0D then begin
-                    Rec.Validate("Posting Date", Today);
-                    Rec.Modify();
+                    Rec.Validate(Rec."Posting Date", Today);
+                    //Rec.Modify();
                 end;
             end;
         }

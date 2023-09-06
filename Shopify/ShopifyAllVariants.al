@@ -117,10 +117,12 @@ page 50102 ShopifyAllVariants
                     ItemList.LookupMode := true;
                     if ItemList.RunModal() = Action::LookupOK then begin
                         ItemList.GetRecord(Item);
-                        Rec."Item SystemId" := Item.SystemId;
+                        // Rec."Item SystemId" := Item.SystemId;
+                        Rec.Validate("Item SystemId", Item.SystemId);
                         Clear(Rec."Item Variant SystemId");
                         Rec."Mapped By Item" := true;
-                        Rec.Modify();
+                        Rec.Validate(Rec."Mapped By Item", true);
+                        // Rec.Modify();
                     end;
                 end;
             }
@@ -145,9 +147,11 @@ page 50102 ShopifyAllVariants
                         ItemVariantList.SetTableView(ItemVariant);
                         if ItemVariantList.RunModal() = Action::LookupOK then begin
                             ItemVariantList.GetRecord(ItemVariant);
-                            Rec."Item Variant SystemId" := ItemVariant.SystemId;
-                            Rec."Mapped By Item" := false;
-                            Rec.Modify();
+                            // Rec."Item Variant SystemId" := ItemVariant.SystemId;
+                            // Rec."Mapped By Item" := false;
+                            // Rec.Modify();
+                            Rec.Validate(Rec."Item Variant SystemId", ItemVariant.SystemId);
+                            Rec.Validate(Rec."Mapped By Item", false);
                         end;
                     end;
                 end;

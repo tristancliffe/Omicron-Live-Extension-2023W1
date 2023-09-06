@@ -57,7 +57,7 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                 trigger OnValidate()
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    Rec.Modify();
+                    // Rec.Modify();
                     //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }
@@ -115,13 +115,15 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
         else
             if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
                 Items.CalcFields(Inventory);
-                Rec.Instock_SalesLine := Items.Inventory;
-                Rec.Modify();
+                // Rec.Instock_SalesLine := Items.Inventory;
+                // Rec.Modify();
+                Rec.Validate(Instock_SalesLine, Items.Inventory)
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                    Rec.Instock_SalesLine := 999;
-                    Rec.Modify();
+                    // Rec.Instock_SalesLine := 999;
+                    // Rec.Modify();
+                    Rec.Validate(Instock_SalesLine, 999)
                 end
     end;
 }

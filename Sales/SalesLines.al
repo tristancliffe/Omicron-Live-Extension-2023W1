@@ -46,6 +46,27 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             Editable = False;
             CalcFormula = lookup(Item.Picture where("No." = field("No.")));
         }
+        field(50107; ItemVendor_SalesLine; Code[20])
+        {
+            Caption = 'Supplier';
+            FieldClass = FlowField;
+            Editable = False;
+            CalcFormula = lookup(Item."Vendor No." where("No." = field("No.")));
+        }
+        field(50108; ItemVendorNo_SalesLine; Text[50])
+        {
+            Caption = 'Supplier No.';
+            FieldClass = FlowField;
+            Editable = False;
+            CalcFormula = lookup(Item."Vendor Item No." where("No." = field("No.")));
+        }
+        field(50109; ItemQtyOnOrder_SalesLine; Decimal)
+        {
+            Caption = 'Qty on order';
+            DecimalPlaces = 1 : 2;
+            Editable = false;
+            DataClassification = CustomerContent;
+        }
     }
 }
 tableextension 50141 AssemblyLineExt extends "Assembly Line"

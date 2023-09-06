@@ -67,6 +67,22 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         { Visible = false; }
         modify("Send IC Purchase Order_Promoted")
         { Visible = false; }
+        addlast("O&rder")
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = all;
+                Caption = 'Posted Invoices';
+                ToolTip = 'Opens the list of posted purchase invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Purchase Invoices";
+            }
+        }
+        addlast(Promoted)
+        {
+            actionref(PostedInvoices_Promoted; PostedInvoices)
+            { }
+        }
     }
 
     trigger OnOpenPage()

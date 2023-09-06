@@ -6,6 +6,13 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
+            field(CustomerCar; RecCustomer."Vehicle Model")
+            {
+                Caption = 'Customer Car';
+                ApplicationArea = All;
+                Editable = false;
+                Importance = Standard;
+            }
             field("Order Customer Notes"; CustomerNotes)
             {
                 MultiLine = true;

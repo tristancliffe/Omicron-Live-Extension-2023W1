@@ -94,8 +94,25 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 Visible = true;
                 Enabled = true;
             }
+            action("BOM Level_Promoted")
+            {
+                AccessByPermission = TableData "BOM Buffer" = R;
+                ApplicationArea = Assembly;
+                Caption = 'BOM Level';
+                Image = BOMLevel;
+                ToolTip = 'View availability figures for items on bills of materials that show how many units of a parent item you can make based on the availability of child items.';
+
+                trigger OnAction()
+                begin
+                    ItemAvailFormsMgt.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt.ByBOM())
+                end;
+            }
         }
     }
+
+    var
+        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+
     trigger OnAfterGetRecord()
     begin
         GetInventory;
@@ -110,15 +127,15 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         else
             if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
                 Items.CalcFields(Inventory);
-                //Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
-                Rec.Instock_SalesLine := Items.Inventory;
-                Rec.Modify();
+                // Rec.Instock_SalesLine := Items.Inventory;
+                // Rec.Modify();
+                Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                    // Rec.Validate(Rec.Instock_SalesLine, 999);
-                    Rec.Instock_SalesLine := 999;
-                    Rec.Modify()
+                    // Rec.Instock_SalesLine := 999;
+                    // Rec.Modify()
+                    Rec.Validate(Rec.Instock_SalesLine, 999);
                 end;
     end;
 
