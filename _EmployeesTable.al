@@ -4,6 +4,8 @@ tableextension 50104 EmployeeTableExt extends Employee
     {
         field(50100; "Employee Notes"; Text[1000])
         { CaptionML = ENU = 'Employee Notes'; DataClassification = CustomerContent; }
+        modify("Phone No.")
+        { Caption = 'Home Phone No.'; }
     }
     fieldgroups
     {

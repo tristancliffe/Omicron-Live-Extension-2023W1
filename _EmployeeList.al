@@ -11,14 +11,11 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
         modify("Job Title")
         { StyleExpr = BlockedStyle; }
         modify("Phone No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyleNo; CaptionML = ENG = 'Home Phone No.'; }
         addafter("Phone No.")
         {
             field("Mobile Phone No.1"; Rec."Mobile Phone No.")
-            {
-                ApplicationArea = All;
-                StyleExpr = BlockedStyleNo;
-            }
+            { ApplicationArea = All; StyleExpr = BlockedStyleNo; }
         }
         addafter("Search Name")
         {

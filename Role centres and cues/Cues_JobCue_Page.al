@@ -13,6 +13,14 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 Caption = 'Active Jobs';
                 Visible = true;
             }
+            field(ActiveTimeSheetsCue; Rec.ActiveTimeSheetsCue)
+            {
+                ApplicationArea = Basic, Suite;
+                DrillDownPageId = "Time Sheet List";
+                Tooltip = 'Number of timesheets not submitted';
+                Caption = 'Open Time Sheets';
+                Visible = true;
+            }
             field(OpenTimeSheetsCue; Rec.OpenTimeSheetsCue)
             {
                 ApplicationArea = Basic, Suite;
@@ -25,6 +33,8 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
         modify("Completed - WIP Not Calculated")
         { Visible = false; }
         modify(Invoicing)
+        { Visible = false; }
+        modify("Jobs Over Budget")
         { Visible = false; }
     }
 }

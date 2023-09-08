@@ -113,7 +113,7 @@ page 50106 "Employee Phone Number List"
     ApplicationArea = All;
     PageType = ListPart;
     SourceTable = Employee;
-    SourceTableView = where(Status = filter(Active));
+    //SourceTableView = where(Status = filter(Active));
     ShowFilter = true;
 
     layout

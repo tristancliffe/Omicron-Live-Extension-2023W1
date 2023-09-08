@@ -22,6 +22,10 @@ pageextension 50107 EmployeeCardExt extends "Employee Card"
                 ToolTip = 'Notes about this employee.';
             }
         }
+        modify("Phone No.")
+        { CaptionML = ENG = 'Home Phone No.'; }
+        modify("Phone No.2")
+        { Visible = false; CaptionML = ENG = 'Home Phone No.'; }
     }
     actions
     {

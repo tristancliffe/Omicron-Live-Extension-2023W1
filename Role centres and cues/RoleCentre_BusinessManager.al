@@ -54,6 +54,15 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Tooltip = 'Go to the Vendor List';
                 Ellipsis = true;
             }
+            action(JobList_Omicron)
+            {
+                ApplicationArea = All;
+                RunObject = page "Job List";
+                Caption = 'Jobs';
+                Image = ViewJob;
+                Tooltip = 'Show the list of current jobs';
+                Ellipsis = true;
+            }
         }
         addfirst(embedding)
         {
