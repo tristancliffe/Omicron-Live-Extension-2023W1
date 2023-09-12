@@ -58,6 +58,8 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             {
                 ApplicationArea = All;
                 RunObject = page "Job List";
+                //RunPageLink = Status = filter(Open | Quote | Planning);
+                RunPageView = where(Status = filter(Open | Quote | Planning));
                 Caption = 'Jobs';
                 Image = ViewJob;
                 Tooltip = 'Show the list of current jobs';
@@ -362,6 +364,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     Caption = 'Jobs and Projects';
                     Image = Job;
                     RunObject = Page "Job List";
+                    RunPageView = where(Status = filter(Open | Quote | Planning));
                     ToolTip = 'See and edit the list of jobs, and then go to card list';
                 }
                 action("ActionTimeSheets")

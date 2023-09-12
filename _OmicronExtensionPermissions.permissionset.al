@@ -13,5 +13,10 @@ permissionset 50100 OmicronPermissions
         report ResourceEfficiency = X,
         report "Service Instruction" = X,
         report "Workshop Request" = X,
-        report "Active Jobs" = X;
+        report "Active Jobs" = X,
+        page "Completed Job List" = X,
+        page "Customer Phone Number List" = X,
+        page "Employee Phone Number List" = X,
+        page "Phone Number Lists" = X,
+        page "Vendor Phone Number List" = X;
 }

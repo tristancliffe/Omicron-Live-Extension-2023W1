@@ -16,7 +16,7 @@ tableextension 50112 ProjectManagerExt extends "Job Cue"
         }
         field(50102; ActiveTimeSheetsCue; Integer)
         {
-            CalcFormula = count("Time Sheet Header" where("Quantity Open" = filter('>1')));
+            CalcFormula = count("Time Sheet Header" where("Quantity Approved" = filter('<38')));
             Caption = 'Active Time Sheets';
             FieldClass = FlowField;
         }

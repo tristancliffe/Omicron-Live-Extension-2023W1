@@ -16,6 +16,7 @@ tableextension 50200 "Time Sheet Line Ext" extends "Time Sheet Line"
         }
         modify("Job No.")
         {
+            //TableRelation = if (Status = const(Open)) Job where(Status = filter('Open|Quote|Planning'));
             trigger OnBeforeValidate()
             begin
                 Rec.Type := Rec.Type::Job;

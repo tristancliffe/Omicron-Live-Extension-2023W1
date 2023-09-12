@@ -298,11 +298,13 @@ tableextension 50105 JobNotes extends Job
             AutoFormatType = 1;
         }
     }
+
     fieldgroups
     {
         addlast(DropDown; "Car Make/Model", "Vehicle Reg")
         { }
     }
+
     trigger OnAfterModify()
     begin
         Validate("Parts Location", UpperCase("Parts Location"));

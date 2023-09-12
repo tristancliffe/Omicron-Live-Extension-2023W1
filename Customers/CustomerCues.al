@@ -17,6 +17,13 @@ pageextension 50158 CustomerCueExt extends "Sales Hist. Sell-to FactBox"
                 DrillDownPageID = "Job List";
                 ToolTip = 'Specifies the number of jobs ongoing for the customer.';
             }
+            field("No. of Completed Jobs"; Rec."No. of Completed Jobs")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Completed Jobs';
+                DrillDownPageID = "Completed Job List";
+                ToolTip = 'Specifies the number of jobs completed for the customer.';
+            }
         }
     }
 }

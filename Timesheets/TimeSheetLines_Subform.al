@@ -1,13 +1,19 @@
 pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
 {
+    AboutTitle = 'Timesheet Lines';
+    AboutText = 'Use this section to enter the times for each day...';
     layout
     {
+        modify(Type)
+        { AboutTitle = 'Type'; AboutText = 'Use **Job** or **Absence**. Don''t worry about Resource, Service or Assembly Order.'; }
         modify(Status)
-        { StyleExpr = StatusStyle; }
+        { StyleExpr = StatusStyle; AboutTitle = 'Status'; AboutText = 'Open lines can be edited, but MUST be submitted when you''re finished. Submitted lines can be reopened until they are approved. Approved lines can be unapproved for editing unless they have been posted.'; }
         addafter(Description)
         {
             field("Work Done"; Rec."Work Done")
             {
+                AboutTitle = 'Work Done';
+                AboutText = 'This field can accept up to 700 characters of text, describing what work was carried out, measurements taken, tests performed etc. Try to write in a scientific manner, e.g. "a leak down test was carried out" rather than "I did a leak down test".';
                 Visible = true;
                 ApplicationArea = all;
                 ShowMandatory = WorkDoneStyle;
@@ -44,9 +50,11 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         modify(Description)
         { Visible = false; }
         modify("Job No.")
-        { Visible = true; }
+        { Visible = true; AboutTitle = 'Job Number'; AboutText = 'Choose the job (or admin) that the work was done on from the drop-down list.'; }
         modify("Job Task No.")
         {
+            AboutTitle = 'Job Task';
+            AboutText = 'Please use **appropriate* tasks. If work is carried out on two unrelated aspects then they should be recorded on separate lines. Removing a gearbox to get to a clutch can still be recorded under **Clutch** for example, but sorted the brake lights out at the same time needs a new line.';
             Caption = 'Job Task';
             Visible = true;
             // trigger OnAfterValidate()
@@ -61,7 +69,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         modify(Chargeable)
         { Visible = Device; }
         modify("Cause of Absence Code")
-        { Visible = true; ShowMandatory = AbsenceStyle; }
+        { Visible = true; ShowMandatory = AbsenceStyle; AboutTitle = 'Absences'; AboutText = 'Use this, and NOT Admin to record time off work, including bank holidays, sickness, approved holiday etc.'; }
         modify(UnitOfMeasureCode)
         { QuickEntry = false; }
         modify(TimeSheetTotalQuantity)

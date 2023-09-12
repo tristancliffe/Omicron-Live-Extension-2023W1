@@ -99,6 +99,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 Image = Job;
                 ApplicationArea = All;
                 RunObject = Page "Job List";
+                RunPageView = where(Status = filter(Open | Quote | Planning));
                 ToolTip = 'Takes the user to the Job List';
                 Visible = true;
                 Promoted = true;

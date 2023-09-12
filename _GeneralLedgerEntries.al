@@ -1,5 +1,7 @@
 pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
 {
+    AboutTitle = 'General Ledger Colours';
+    AboutText = 'The colours on the list show if an amount is negative (**red**) or positive (**black**).';
     layout
     {
         moveafter("Posting Date"; Reversed)
@@ -25,7 +27,7 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
     local procedure SetBalanceColours()
     begin
         BalanceColour := 'Standard';
-        if Rec.Amount < 0 then BalanceColour := 'Ambiguous'
+        if Rec.Amount < 0 then BalanceColour := 'Attention'
     end;
 
     trigger OnAfterGetRecord()

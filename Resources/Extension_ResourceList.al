@@ -1,5 +1,7 @@
 pageextension 50119 ResourceListExtension extends "Resource List"
 {
+    AboutTitle = 'Resource Colours';
+    AboutText = 'Current, active resources are shown in **black**. Inactive resources are shown in **grey**.';
     layout
     {
         modify("No.")

@@ -10,13 +10,16 @@
 pageextension 50101 ItemListExtension extends "Item List"
 {
     editable = true;
-
     layout
     {
         modify("No.")
         { StyleExpr = BlockedStyleNo; }
         modify(Description)
-        { StyleExpr = BlockedStyle; }
+        {
+            StyleExpr = BlockedStyle;
+            AboutTitle = 'Item List Colours';
+            AboutText = 'Normal items are shown in **black**. Items that are blocked for sales or purchasing are shown in **yellow**. Items that are blocked for both sales AND purchasing are shown in **grey**.';
+        }
         modify(Control1)
         { Editable = false; FreezeColumn = Description; }
         modify("Unit Cost")

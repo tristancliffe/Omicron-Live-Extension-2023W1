@@ -17,6 +17,8 @@
 // Defines variables to hold blocked styles for use in the triggers.
 pageextension 50103 CustomerListExt extends "Customer List"
 {
+    AboutTitle = 'General Ledger Colours';
+    AboutText = 'The colours on the list show if an account is active (**black**) or blocked (**grey**) or partially blocked (**yellow**).';
     layout
     {
         modify("No.")

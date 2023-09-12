@@ -1,5 +1,7 @@
 pageextension 50191 RegisterCustomerPaymentsExt extends "Payment Registration"
 {
+    AboutTitle = 'Customer Payment Colours';
+    AboutText = 'The colours on the list show if an amount is negative [we owe them] (**red**) or positive [they owe us] (**black**).';
     layout
     {
         modify("Source No.")
@@ -34,6 +36,6 @@ pageextension 50191 RegisterCustomerPaymentsExt extends "Payment Registration"
     local procedure SetBalanceColours()
     begin
         BalanceColours := 'Standard';
-        if Rec."Remaining Amount" < 1 then BalanceColours := 'Ambiguous';
+        if Rec."Remaining Amount" < 1 then BalanceColours := 'Attention';
     end;
 }

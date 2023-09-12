@@ -3,7 +3,11 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
     layout
     {
         modify("Sell-to Customer No.")
-        { StyleExpr = ShippedStatus; }
+        {
+            StyleExpr = ShippedStatus;
+            AboutTitle = 'Sales Order Colours';
+            AboutText = 'Orders that have *completely shipped* are shown in **bold RED**. If *partially invoiced* they are shown in **bold GREEN**. If some other condition exists they are shown in **BLUE**. *Released* orders are shown as **RED**. Other orders are shown as **BLACK**.';
+        }
         modify("Sell-to Customer Name")
         { StyleExpr = ShippedStatus; }
         modify("External Document No.")

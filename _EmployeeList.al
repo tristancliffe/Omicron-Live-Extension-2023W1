@@ -1,5 +1,7 @@
 pageextension 50108 EmployeeListExtension extends "Employee List"
 {
+    AboutTitle = 'Employee List Colours';
+    AboutText = 'The colours on the list show if an employee is active (**standard**), inactive (**grey**) or terminated (**dark yellow**).';
     layout
     {
         modify("No.")

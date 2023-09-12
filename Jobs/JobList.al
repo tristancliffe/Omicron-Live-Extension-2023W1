@@ -185,6 +185,11 @@ pageextension 50112 JobListExtension extends "Job List"
     {
         addfirst
         {
+            view(CurrentJobs)
+            {
+                Caption = 'Current Jobs';
+                Filters = where("Status" = filter('Planning|Quote|Open'));
+            }
             view(AllJobs)
             {
                 Caption = 'All Jobs';
@@ -203,7 +208,7 @@ pageextension 50112 JobListExtension extends "Job List"
             view(CompletedJobs)
             {
                 Caption = 'Completed Jobs';
-                Filters = where("Status" = const(Completed));
+                Filters = where("Status" = filter('Completed'));
             }
             view("WIP to Post")
             {
@@ -218,6 +223,5 @@ pageextension 50112 JobListExtension extends "Job List"
         Rec.SetCurrentKey("No.");
         Rec.Ascending(true);
         Rec.SetFilter("Status", 'Planning|Quote|Open');
-        // Rec.SetView(StrSubstNo('sorting ("No.") order(ascending) where ("Status" = filter (Planning|Open|Quote))'));
     end;
 }

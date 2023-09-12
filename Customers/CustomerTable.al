@@ -21,6 +21,13 @@ tableextension 50101 CustomerTableExt extends Customer
             Editable = false;
             CalcFormula = count(Job where(Status = filter(Open), "Sell-to Customer No." = FIELD("No.")));
         }
+        field(50201; "No. of Completed Jobs"; Integer)
+        {
+            FieldClass = FlowField;
+            Caption = 'Number of completed jobs with the customer';
+            Editable = false;
+            CalcFormula = count(Job where(Status = filter(Completed), "Sell-to Customer No." = FIELD("No.")));
+        }
     }
     fieldgroups
     {

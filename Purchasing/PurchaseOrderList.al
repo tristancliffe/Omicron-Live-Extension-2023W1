@@ -1,11 +1,21 @@
 pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
 {
+    AboutTitle = 'Purchase Orders';
+    AboutText = 'This page shows the current orders. There is a basic colour code system, and an "Order Status" of ''Open'' or ''Released''. Click next to see more info on OPEN AND RELEASED...';
     layout
     {
         modify("Buy-from Vendor No.")
-        { StyleExpr = StatusStyle; }
+        {
+            StyleExpr = StatusStyle;
+            AboutTitle = 'Order Statuses';
+            AboutText = '**Open** means that the order is *NOT YET FINALISED*. This should mean the order hasn'' been placed, and can be modified. **Released** means that the order has been sent to the supplier, and whilst prices might change, the order is *essentially fixed*.';
+        }
         modify("Buy-from Vendor Name")
-        { StyleExpr = StatusStyle; }
+        {
+            StyleExpr = StatusStyle;
+            AboutTitle = 'Colour Codes';
+            AboutText = 'When an order is *Released* it will become **BLUE**. When an order is *partially invoiced* it will become **RED**. When an order is *completely received* it will become **GREEN**. When an order is *partially invoiced and completely received* it will be **BLACK**.';
+        }
         moveafter("Buy-from Vendor Name"; "Your Reference", "Amount", Status, "Document Date", "Amount Received Not Invoiced (LCY)", "Amount Including VAT")
         modify("Your Reference")
         {
@@ -114,7 +124,10 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 if Rec."Partially Invoiced" = true then
                     StatusStyle := 'Unfavorable'
                 else
-                    StatusStyle := 'Standard';
+                    if Rec.Status = Rec.Status::Released then
+                        StatusStyle := 'StrongAccent'
+                    else
+                        StatusStyle := 'Standard';
     end;
 
     var
