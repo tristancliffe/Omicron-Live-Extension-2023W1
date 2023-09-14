@@ -5,18 +5,12 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
     layout
     {
         modify("Buy-from Vendor No.")
-        {
-            StyleExpr = StatusStyle;
-            AboutTitle = 'Order Statuses';
-            AboutText = '**Open** means that the order is *NOT YET FINALISED*. This should mean the order hasn'' been placed, and can be modified. **Released** means that the order has been sent to the supplier, and whilst prices might change, the order is *essentially fixed*.';
-        }
+        { StyleExpr = StatusStyle; }
         modify("Buy-from Vendor Name")
-        {
-            StyleExpr = StatusStyle;
-            AboutTitle = 'Colour Codes';
-            AboutText = 'When an order is *Released* it will become **BLUE**. When an order is *partially invoiced* it will become **RED**. When an order is *completely received* it will become **GREEN**. When an order is *partially invoiced and completely received* it will be **BLACK**.';
-        }
-        moveafter("Buy-from Vendor Name"; "Your Reference", "Amount", Status, "Document Date", "Amount Received Not Invoiced (LCY)", "Amount Including VAT")
+        { StyleExpr = StatusStyle; AboutTitle = 'Colour Codes'; AboutText = 'When an order is *Released* it will become **BLUE**. When an order is *partially invoiced* it will become **RED**. When an order is *completely received* it will become **GREEN**. When an order is *partially invoiced and completely received* it will be **BLACK**. If the order has been pre-paid it will be shown in **RED**.'; }
+        moveafter("Buy-from Vendor Name"; "Your Reference", "Amount", Status, "Document Date", "Amount Received Not Invoiced (LCY)", "Amount Including VAT", "Currency Code", "Assigned User ID")
+        modify(Status)
+        { AboutTitle = 'Order Statuses'; AboutText = '**Open** means that the order is *NOT YET FINALISED*. This should mean the order hasn'' been placed, and can be modified. **Released** means that the order has been sent to the supplier, and whilst prices might change, the order is *essentially fixed*. **Pending Prepayment** means a prepayment invoice has been posted.'; }
         modify("Your Reference")
         {
             ApplicationArea = All;
@@ -38,10 +32,8 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         //     }
         // }
         modify("Vendor Authorization No.")
-        {
-            Visible = false;
-        }
-        addafter("Amount Including VAT")
+        { Visible = false; }
+        addafter("Currency Code")
         {
             field(TotalAmountLCY; TotalAmountLCY)
             {
@@ -64,12 +56,13 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 Caption = 'Partially Invoiced';
                 Visible = true;
             }
+            field("Expected Receipt Date"; Rec."Expected Receipt Date")
+            { ApplicationArea = All; Visible = true; }
         }
         modify("Location Code")
         { Visible = false; }
         modify("Currency Code")
         { Visible = true; Width = 7; }
-        moveafter("Amount Including VAT"; "Currency Code")
     }
     actions
     {
@@ -127,7 +120,10 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                     if Rec.Status = Rec.Status::Released then
                         StatusStyle := 'StrongAccent'
                     else
-                        StatusStyle := 'Standard';
+                        if Rec.Status = Rec.Status::"Pending Prepayment" then
+                            StatusStyle := 'Unfavorable'
+                        else
+                            StatusStyle := 'Standard';
     end;
 
     var

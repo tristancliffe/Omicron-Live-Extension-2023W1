@@ -6,8 +6,10 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         {
             StyleExpr = ShippedStatus;
             AboutTitle = 'Sales Order Colours';
-            AboutText = 'Orders that have *completely shipped* are shown in **bold RED**. If *partially invoiced* they are shown in **bold GREEN**. If some other condition exists they are shown in **BLUE**. *Released* orders are shown as **RED**. Other orders are shown as **BLACK**.';
+            AboutText = 'Orders that have *completely shipped* are shown in **bold RED**. If *partially invoiced* they are shown in **bold GREEN**. If some other condition exists they are shown in **BLUE**. *Released* orders are shown as **RED**. Pre-paid invoices are shown in **YELLOW**. Other orders are shown as **BLACK**.';
         }
+        modify(Status)
+        { AboutTitle = 'Order Status'; AboutText = '**Open** means that the order is *NOT YET FINALISED*. This should mean the order hasn'' been placed, and can be modified. **Released** means that the order has been sent to the supplier, and whilst prices might change, the order is *essentially fixed*. **Pending Prepayment** means a prepayment invoice has been posted.'; }
         modify("Sell-to Customer Name")
         { StyleExpr = ShippedStatus; }
         modify("External Document No.")
@@ -98,7 +100,10 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
                         if Rec.Status = Rec.Status::Released then
                             ShippedStatus := 'Attention'
                         else
-                            ShippedStatus := 'Standard';
+                            if Rec.Status = Rec.Status::"Pending Prepayment" then
+                                ShippedStatus := 'Ambiguous'
+                            else
+                                ShippedStatus := 'Standard';
     end;
 
     var

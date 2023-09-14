@@ -122,6 +122,7 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
+
     end;
 
     local procedure GetInventory()

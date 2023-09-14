@@ -81,6 +81,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         { Importance = Standard; }
         modify("Currency Code")
         { Importance = Standard; }
+        modify("Expected Receipt Date")
+        { ShowMandatory = true; }
         addafter("Promised Receipt Date")
         {
             field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
@@ -170,6 +172,15 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             actionref(Statistics2; Statistics)
             { }
             actionref(RecWorksheet_Promoted; ReqWorksheet)
+            { }
+        }
+        addlast(Category_Category8)
+        {
+            actionref(TestPrepayment; "Prepayment Test &Report")
+            { }
+            actionref(PostPrepayment; PostPrepaymentInvoice)
+            { }
+            actionref(PostAndPrintPrepayment; "Post and Print Prepmt. Invoic&e")
             { }
         }
         modify(Post)

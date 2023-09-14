@@ -1,11 +1,14 @@
 page 50103 "Phone Number Lists"
 {
     ApplicationArea = All;
-    Caption = 'Phone Number Lists';
+    Caption = 'Phone Numbers';
     Description = 'Lists of phone numbers';
     PageType = Card;
     ShowFilter = true;
     Editable = false;
+    AboutTitle = 'Company Phone Numbers';
+    AboutText = 'This page shows a list of customer, supplier and employee phone numbers for exporting to the phone system for caller ID.';
+    UsageCategory = Lists;
 
     layout
     {
@@ -14,7 +17,7 @@ page 50103 "Phone Number Lists"
             group(Customers)
             {
                 part("Customer Phone Number List"; "Customer Phone Number List")
-                { }
+                { }//SubPageView = where("Phone No." = const('<>'''''), "Mobile Phone No." = const('<>''''')); }
             }
             group(Vendors)
             {
@@ -64,8 +67,16 @@ page 50104 "Customer Phone Number List"
     trigger OnAfterGetRecord()
     begin
         NoNumber := false;
-        if ((Rec."Phone No." = '') and (Rec."Mobile Phone No." = '')) then
+        if ((Rec."Phone No." = '') and (Rec."Mobile Phone No." = '')) then begin
             NoNumber := true;
+        end;
+    end;
+
+    trigger OnOpenPage()
+    begin
+        Rec.FilterGroup(-1);
+        Rec.SetFilter("Phone No.", '<>''''');
+        Rec.SetFilter("Mobile Phone No.", '<>''''');
     end;
 }
 
@@ -106,6 +117,13 @@ page 50105 "Vendor Phone Number List"
         if ((Rec."Phone No." = '') and (Rec."Mobile Phone No." = '')) then
             NoNumber := true;
     end;
+
+    trigger OnOpenPage()
+    begin
+        Rec.FilterGroup(-1);
+        Rec.SetFilter("Phone No.", '<>''''');
+        Rec.SetFilter("Mobile Phone No.", '<>''''');
+    end;
 }
 
 page 50106 "Employee Phone Number List"
@@ -133,4 +151,11 @@ page 50106 "Employee Phone Number List"
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        Rec.FilterGroup(-1);
+        Rec.SetFilter("Phone No.", '<>''''');
+        Rec.SetFilter("Mobile Phone No.", '<>''''');
+    end;
 }
