@@ -27,6 +27,25 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         modify("Exported to Payment File")
         { Visible = false; }
     }
+    actions
+    {
+        addafter(Customer)
+        {
+            action(PostedInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Posted Invoices';
+                Image = SalesInvoice;
+                RunObject = Page "Posted Sales Invoices";
+                RunPageLink = "Sell-to Customer No." = field("Customer No.");
+                RunPageView = sorting("Sell-to Customer No.", "Order Date");
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+                ToolTip = 'View all posted invoices for this customer.';
+            }
+        }
+    }
     // trigger OnOpenPage()
     // begin
     //     Rec.SetCurrentKey("Posting Date", "Customer No.");

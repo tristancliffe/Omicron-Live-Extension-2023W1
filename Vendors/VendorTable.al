@@ -8,6 +8,8 @@ tableextension 50103 VendorTableExt extends Vendor
         { CaptionML = ENU = 'Supply Type'; DataClassification = CustomerContent; }
         field(50102; "Preferred Payment Method"; Text[50])
         { CaptionML = ENU = 'Preferred Payment Method'; DataClassification = CustomerContent; }
+        field(50103; "Phone Numbers Exist"; Boolean)
+        { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {
@@ -18,6 +20,11 @@ tableextension 50103 VendorTableExt extends Vendor
     begin
         Validate("Supply Type", UpperCase("Supply Type"));
         Validate("Preferred Payment Method", UpperCase("Preferred Payment Method"));
+        if ((Rec."Phone No." <> '') or (Rec."Mobile Phone No." <> '')) then
+            Rec."Phone Numbers Exist" := true
+        else
+            Rec."Phone Numbers Exist" := false;
+        Rec.Modify()
     end;
 
     trigger OnBeforeDelete()

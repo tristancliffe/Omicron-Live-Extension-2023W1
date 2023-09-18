@@ -22,6 +22,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         }
         modify(Status)
         {
+            Style = Strong;
             trigger OnBeforeValidate()
             begin
                 if rec.Status = rec.status::Completed then

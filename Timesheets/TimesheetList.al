@@ -6,6 +6,17 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
         { StyleExpr = PendingStyle; }
         modify("Resource No.")
         { StyleExpr = PendingStyle; }
+        modify(Quantity)
+        { BlankZero = true; }
+        modify("Quantity Open")
+        { BlankZero = true; }
+        modify("Quantity Submitted")
+        { BlankZero = true; Style = Strong; }
+        modify("Quantity Approved")
+        { BlankZero = true; Style = Favorable; }
+        modify("Quantity Rejected")
+        { BlankZero = true; Style = Unfavorable; }
+
     }
     actions
     {

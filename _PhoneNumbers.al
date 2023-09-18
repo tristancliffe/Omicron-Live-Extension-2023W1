@@ -9,7 +9,6 @@ page 50103 "Phone Number Lists"
     AboutTitle = 'Company Phone Numbers';
     AboutText = 'This page shows a list of customer, supplier and employee phone numbers for exporting to the phone system for caller ID.';
     UsageCategory = Lists;
-
     layout
     {
         area(Content)
@@ -17,7 +16,7 @@ page 50103 "Phone Number Lists"
             group(Customers)
             {
                 part("Customer Phone Number List"; "Customer Phone Number List")
-                { }//SubPageView = where("Phone No." = const('<>'''''), "Mobile Phone No." = const('<>''''')); }
+                { }
             }
             group(Vendors)
             {
@@ -39,8 +38,6 @@ page 50104 "Customer Phone Number List"
     PageType = ListPart;
     SourceTable = Customer;
     SourceTableView = where(Blocked = filter(" " | Invoice | Ship));
-    ShowFilter = true;
-
     layout
     {
         area(Content)
@@ -55,28 +52,12 @@ page 50104 "Customer Phone Number List"
                 { ExtendedDatatype = None; }
                 field("Mobile Phone No."; Rec."Mobile Phone No.")
                 { }
-                field(NoNumber; NoNumber)
-                { Caption = 'Blank'; }
             }
         }
     }
-
-    var
-        NoNumber: Boolean;
-
-    trigger OnAfterGetRecord()
-    begin
-        NoNumber := false;
-        if ((Rec."Phone No." = '') and (Rec."Mobile Phone No." = '')) then begin
-            NoNumber := true;
-        end;
-    end;
-
     trigger OnOpenPage()
     begin
-        Rec.FilterGroup(-1);
-        Rec.SetFilter("Phone No.", '<>''''');
-        Rec.SetFilter("Mobile Phone No.", '<>''''');
+        Rec.SetRange("Phone Numbers Exist", true);
     end;
 }
 
@@ -87,7 +68,6 @@ page 50105 "Vendor Phone Number List"
     SourceTable = Vendor;
     SourceTableView = where(Blocked = filter(" " | Payment));
     ShowFilter = true;
-
     layout
     {
         area(Content)
@@ -102,27 +82,13 @@ page 50105 "Vendor Phone Number List"
                 { }
                 field("Mobile Phone No."; Rec."Mobile Phone No.")
                 { }
-                field(NoNumber; NoNumber)
-                { Caption = 'Blank'; }
             }
         }
     }
 
-    var
-        NoNumber: Boolean;
-
-    trigger OnAfterGetRecord()
-    begin
-        NoNumber := false;
-        if ((Rec."Phone No." = '') and (Rec."Mobile Phone No." = '')) then
-            NoNumber := true;
-    end;
-
     trigger OnOpenPage()
     begin
-        Rec.FilterGroup(-1);
-        Rec.SetFilter("Phone No.", '<>''''');
-        Rec.SetFilter("Mobile Phone No.", '<>''''');
+        Rec.SetRange("Phone Numbers Exist", true);
     end;
 }
 
@@ -133,7 +99,6 @@ page 50106 "Employee Phone Number List"
     SourceTable = Employee;
     //SourceTableView = where(Status = filter(Active));
     ShowFilter = true;
-
     layout
     {
         area(Content)
@@ -154,8 +119,6 @@ page 50106 "Employee Phone Number List"
 
     trigger OnOpenPage()
     begin
-        Rec.FilterGroup(-1);
-        Rec.SetFilter("Phone No.", '<>''''');
-        Rec.SetFilter("Mobile Phone No.", '<>''''');
+        Rec.SetRange("Phone Numbers Exist", true);
     end;
 }

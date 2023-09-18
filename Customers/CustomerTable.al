@@ -28,6 +28,8 @@ tableextension 50101 CustomerTableExt extends Customer
             Editable = false;
             CalcFormula = count(Job where(Status = filter(Completed), "Sell-to Customer No." = FIELD("No.")));
         }
+        field(50102; "Phone Numbers Exist"; Boolean)
+        { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {
@@ -38,6 +40,11 @@ tableextension 50101 CustomerTableExt extends Customer
     trigger OnAfterModify()
     begin
         Validate("Vehicle Model", UpperCase("Vehicle Model"));
+        if ((Rec."Phone No." <> '') or (Rec."Mobile Phone No." <> '')) then
+            Rec."Phone Numbers Exist" := true
+        else
+            Rec."Phone Numbers Exist" := false;
+        Rec.Modify()
     end;
 
     // trigger OnDelete()

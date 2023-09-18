@@ -4,6 +4,8 @@ tableextension 50104 EmployeeTableExt extends Employee
     {
         field(50100; "Employee Notes"; Text[1000])
         { CaptionML = ENU = 'Employee Notes'; DataClassification = CustomerContent; }
+        field(50101; "Phone Numbers Exist"; Boolean)
+        { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
         modify("Phone No.")
         { Caption = 'Home Phone No.'; }
     }
@@ -12,6 +14,15 @@ tableextension 50104 EmployeeTableExt extends Employee
         addlast(DropDown; "Mobile Phone No.", "E-Mail", "Company E-Mail", Status)
         { }
     }
+
+    trigger OnAfterModify()
+    begin
+        if ((Rec."Phone No." <> '') or (Rec."Mobile Phone No." <> '')) then
+            Rec."Phone Numbers Exist" := true
+        else
+            Rec."Phone Numbers Exist" := false;
+        Rec.Modify()
+    end;
 
     trigger OnBeforeDelete()
     var

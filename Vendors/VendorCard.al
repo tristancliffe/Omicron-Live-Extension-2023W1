@@ -12,6 +12,8 @@ pageextension 50105 VendorCardExt extends "Vendor Card"
                 end;
             end;
         }
+        modify("Search Name")
+        { Importance = Standard; }
         modify("Fax No.")
         { Importance = Standard; }
         moveafter(AddressDetails; "Home Page")
