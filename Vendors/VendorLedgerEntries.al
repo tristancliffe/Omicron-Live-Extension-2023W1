@@ -24,6 +24,10 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
             field(VendorPriority; Priority)
             { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = true; Editable = false; }
         }
+        modify("Vendor Name")
+        { StyleExpr = TypeStyle; }
+        modify(Description)
+        { StyleExpr = TypeStyle; }
     }
     actions
     {
@@ -64,10 +68,12 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
 
     var
         Priority: Integer;
+        TypeStyle: Text;
 
     trigger OnAfterGetRecord()
     begin
         GetPriority();
+        SetTypeStyle();
     end;
 
     // trigger OnAfterGetCurrRecord()
@@ -81,6 +87,14 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
     begin
         if VendorRec.Get(rec."Vendor No.") then begin
             Priority := VendorRec.Priority;
+        end;
+    end;
+
+    local procedure SetTypeStyle()
+    begin
+        TypeStyle := 'Standard';
+        if Rec."Document Type" <> Rec."Document Type"::Invoice then begin
+            TypeStyle := 'Ambiguous';
         end;
     end;
 }

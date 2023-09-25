@@ -26,7 +26,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 trigger OnValidate()
                 begin
                     RecVendor."Vendor Notes" := VendorNotes;
-                    RecVendor.Modify()
+                    RecVendor.Modify();
+                    Commit();
                 end;
             }
         }

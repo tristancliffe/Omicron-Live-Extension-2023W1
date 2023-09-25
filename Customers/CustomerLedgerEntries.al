@@ -26,6 +26,10 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         { Visible = false; }
         modify("Exported to Payment File")
         { Visible = false; }
+        modify("Customer Name")
+        { StyleExpr = TypeStyle; }
+        modify(Description)
+        { StyleExpr = TypeStyle; }
     }
     actions
     {
@@ -46,6 +50,23 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
             }
         }
     }
+
+    var
+        TypeStyle: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetTypeStyle();
+    end;
+
+    local procedure SetTypeStyle()
+    begin
+        TypeStyle := 'Standard';
+        if Rec."Document Type" <> Rec."Document Type"::Invoice then begin
+            TypeStyle := 'Ambiguous';
+        end;
+    end;
+
     // trigger OnOpenPage()
     // begin
     //     Rec.SetCurrentKey("Posting Date", "Customer No.");

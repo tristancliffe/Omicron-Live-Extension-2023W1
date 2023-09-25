@@ -42,7 +42,7 @@ reportextension 50100 ExcelQuoteExt extends "Job Quote"
         {
             Type = Excel;
             LayoutFile = './OmicronJobQuoteExcel.xlsx';
-            Caption = 'Excel Job Quote';
+            Caption = 'Job Calculator';
             Summary = 'Used to calculate handwritten invoices for jobs';
         }
         layout("Omicron Job Quote")

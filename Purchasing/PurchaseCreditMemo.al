@@ -2,6 +2,7 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
 {
     layout
     {
+        moveafter("Buy-from Vendor Name"; "Vendor Cr. Memo No.")
         modify("Posting Date")
         { Visible = true; Importance = Standard; }
         modify("Document Date")
@@ -86,4 +87,12 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
             end;
         }
     }
+
+    var
+        RecVendor: Record Vendor;
+
+    trigger OnInsertRecord(BelowXRec: Boolean): Boolean
+    begin
+        Rec."Assigned User ID" := USERID;
+    end;
 }

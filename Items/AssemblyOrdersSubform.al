@@ -76,6 +76,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
             // Rec.Modify();
             Rec.Validate(Rec.Instock_AssemblyLine, Items.Inventory);
             Rec.Modify();
+            Commit();
         end
         else
             if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
@@ -83,6 +84,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 // Rec.Modify()
                 Rec.Validate(Instock_AssemblyLine, 999);
                 Rec.Modify();
+                Commit();
             end;
     end;
 }

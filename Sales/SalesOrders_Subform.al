@@ -18,6 +18,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         { style = Strong; }
         Modify("Qty. to Assign")
         { QuickEntry = true; }
+        Modify("Item Charge Qty. to Handle")
+        { QuickEntry = true; }
         addafter("Unit of Measure Code")
         {
             field(Instock_SalesLine; rec.Instock_SalesLine)
@@ -130,14 +132,16 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 // Rec.Instock_SalesLine := Items.Inventory;
                 // Rec.Modify();
                 Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
-                Rec.Modify()
+                Rec.Modify();
+                Commit();
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
                     // Rec.Instock_SalesLine := 999;
                     // Rec.Modify()
                     Rec.Validate(Rec.Instock_SalesLine, 999);
-                    Rec.Modify()
+                    Rec.Modify();
+                    Commit();
                 end;
     end;
 

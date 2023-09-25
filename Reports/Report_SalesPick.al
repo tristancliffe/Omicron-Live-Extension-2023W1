@@ -73,11 +73,13 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
             Items.CalcFields(Inventory);
             "Assembly Line".Instock_AssemblyLine := Items.Inventory;
             "Assembly Line".Modify();
+            Commit();
         end
         else
             if Items.Get("Assembly Line"."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
                 "Assembly Line".Instock_AssemblyLine := 999;
-                "Assembly Line".Modify()
+                "Assembly Line".Modify();
+                Commit();
             end;
     end;
 }

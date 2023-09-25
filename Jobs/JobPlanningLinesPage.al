@@ -8,6 +8,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             {
                 ApplicationArea = All;
                 AssistEdit = true;
+                StyleExpr = InvoicedStyle;
 
                 trigger OnAssistEdit()
                 var
@@ -19,18 +20,24 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 end;
             }
         }
+        modify("Job Task No.")
+        { StyleExpr = InvoicedStyle; }
+        modify(Description)
+        { StyleExpr = InvoicedStyle; }
         modify(Type)
         { StyleExpr = TypeStyle; }
         modify("No.")
         { StyleExpr = TypeStyle; }
-        addafter(Quantity)
-        {
-            field("Location Code1"; Rec."Location Code")
-            { ShowMandatory = MandatoryLocation; ApplicationArea = All; }
-        }
-        moveafter(Quantity; "Unit of Measure Code")
+        moveafter(Quantity; "Unit of Measure Code", "Location Code", "Qty. to Transfer to Journal", "Qty. to Transfer to Invoice")
+        // addafter("Unit of Measure Code")
+        // {
+        //     field("Location Code1"; Rec."Location Code")
+        //     { ShowMandatory = MandatoryLocation; ApplicationArea = All; Caption = 'blah'; }
+        // }
         modify("Unit of Measure Code")
         { Visible = true; }
+        modify("Location Code")
+        { Visible = true; ShowMandatory = MandatoryLocation; }
         moveafter("Line Amount"; "Line Discount %")
         modify("Line Amount")
         { BlankZero = true; }
@@ -50,25 +57,14 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         { BlankZero = true; }
         modify("Unit Price")
         { StyleExpr = SellingPriceStyle; }
-        movebefore("Invoiced Amount (LCY)"; "Qty. to Transfer to Invoice")
-        // addbefore("Invoiced Amount (LCY)")
-        // {
-        //     field("Qty. to Transfer to Invoice1"; Rec."Qty. to Transfer to Invoice")
-        //     { ApplicationArea = All; }
-        // }
         movebefore("Invoiced Amount (LCY)"; "Qty. Invoiced")
         modify("Qty. Invoiced")
         { Visible = true; Style = Favorable; }
         movelast(Control1; "User ID")
         modify("User ID")
         { Visible = true; }
-        movebefore("Qty. Invoiced"; "Qty. Transferred to Invoice")
         modify("Qty. Transferred to Invoice")
-        {
-            Visible = true;
-            Editable = false;
-            ApplicationArea = All;
-        }
+        { Visible = true; Editable = false; ApplicationArea = All; }
     }
     actions
     {
@@ -205,6 +201,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         SellingPriceStyle: Text;
         TypeStyle: Text;
         MandatoryLocation: Boolean;
+        InvoicedStyle: Text;
 
     trigger OnAfterGetRecord()
     begin
@@ -233,6 +230,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
     begin
         SellingPriceStyle := 'Standard';
         TypeStyle := 'Standard';
+        InvoicedStyle := 'Standard';
         MandatoryLocation := false;
         if (Rec."Unit Price" < Rec."Unit Cost") then // or (Rec."Unit Price" = 0) then
             SellingPriceStyle := 'Unfavorable';
@@ -240,5 +238,9 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             TypeStyle := 'Ambiguous';
         if Rec.Type = Rec.Type::Item then
             MandatoryLocation := true;
+        if (Rec."Qty. Invoiced" > 0) or (Rec."Qty. to Transfer to Invoice" = 0) then begin
+            InvoicedStyle := 'Subordinate';
+            TypeStyle := 'Subordinate';
+        end;
     end;
 }

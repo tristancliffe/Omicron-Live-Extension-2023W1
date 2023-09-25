@@ -3,7 +3,7 @@ report 50101 "Job Billing Excel"
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
     DefaultRenderingLayout = "./OmicronJobBillingExcel.xlsx";
-    Caption = 'Excel Job Quote';
+    Caption = 'Job Calculator';
     Description = 'Used to calculate handwritten invoices for jobs';
     PreviewMode = PrintLayout;
 

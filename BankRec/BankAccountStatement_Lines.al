@@ -8,6 +8,7 @@ pageextension 50189 BankStatementLinesExt extends "Bank Account Statement Lines"
             {
                 ApplicationArea = All;
                 Caption = 'Sum of Applied';
+                Visible = true;
                 ToolTip = 'This is the sum of the ''Amount Applied'' column. Added on 6th June 2023';
                 Editable = false;
                 Style = Ambiguous;

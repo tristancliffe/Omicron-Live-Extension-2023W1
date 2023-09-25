@@ -117,13 +117,17 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                 Items.CalcFields(Inventory);
                 // Rec.Instock_SalesLine := Items.Inventory;
                 // Rec.Modify();
-                Rec.Validate(Instock_SalesLine, Items.Inventory)
+                Rec.Validate(Instock_SalesLine, Items.Inventory);
+                Rec.Modify();
+                Commit();
             end
             else
                 if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
                     // Rec.Instock_SalesLine := 999;
                     // Rec.Modify();
-                    Rec.Validate(Instock_SalesLine, 999)
+                    Rec.Validate(Instock_SalesLine, 999);
+                    Rec.Modify();
+                    Commit();
                 end
     end;
 }

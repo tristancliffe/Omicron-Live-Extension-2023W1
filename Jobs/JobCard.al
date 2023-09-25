@@ -237,8 +237,6 @@ pageextension 50111 JobCardExt extends "Job Card"
             { }
             actionref(JobPlanningLinesLink; JobPlanningLines)
             { }
-            actionref(SuggestedBilling_Promoted; "Job - Suggested Billing")
-            { }
             group(Invoicing)
             {
                 ShowAs = SplitButton;
@@ -259,13 +257,15 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ShowAs = SplitButton;
                 Caption = 'Reports';
                 ToolTip = 'Various Reports listed here.';
+                actionref(ExcelJobInvoicing; "Report Job Invoicing Excel")
+                { }
                 actionref(PreviewQuote_Promoted; "Report Job Quote")
+                { }
+                actionref(SuggestedBilling_Promoted; "Job - Suggested Billing")
                 { }
                 actionref(JobCard; "Job Card")
                 { }
                 actionref(WorkshopRequest; "Workshop Request")
-                { }
-                actionref(ExcelJobInvoicing; "Report Job Invoicing Excel")
                 { }
                 actionref(TimesheetEntries; "Report Timesheet Entries")
                 { }

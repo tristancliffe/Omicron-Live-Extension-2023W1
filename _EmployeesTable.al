@@ -21,7 +21,8 @@ tableextension 50104 EmployeeTableExt extends Employee
             Rec."Phone Numbers Exist" := true
         else
             Rec."Phone Numbers Exist" := false;
-        Rec.Modify()
+        Rec.Modify();
+        Commit();
     end;
 
     trigger OnBeforeDelete()

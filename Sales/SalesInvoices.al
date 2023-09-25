@@ -16,6 +16,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             field("Order Customer Notes"; CustomerNotes)
             {
                 MultiLine = true;
+                Caption = 'Customer Notes';
                 ApplicationArea = All;
                 Importance = Standard;
                 ToolTip = 'This SHOULD be the customer notes brought across to the orders';
