@@ -37,6 +37,13 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
             Editable = false;
             DataClassification = CustomerContent;
         }
+        field(50105; ShelfNo_PurchLine; Code[10])
+        {
+            Caption = 'Shelf No.';
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = lookup(Item."Shelf No." where("No." = field("No.")));
+        }
     }
 }
 

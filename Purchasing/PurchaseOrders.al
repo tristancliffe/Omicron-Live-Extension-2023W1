@@ -227,6 +227,32 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         { Enabled = ReleaseControllerStatus; }
         modify(Reopen)
         { Enabled = ReopenControllerStatus; }
+        addlast(Print)
+        {
+            action("Purchase Checklist")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Order Checklist';
+                Image = "Report";
+                ToolTip = 'Produce the purchase order checklist to check arrivals before ''recieving''';
+                Ellipsis = true;
+
+                trigger OnAction()
+                var
+                    Order: Record "Purchase Header";
+                    Report: Report "Purchase Order Checklist";
+                begin
+                    Order.SetFilter("No.", Rec."No.");
+                    Report.SetTableView(Order);
+                    Report.RunModal();
+                end;
+            }
+        }
+        addlast(Category_Category10)
+        {
+            actionref(PrintCheckList; "Purchase Checklist")
+            { }
+        }
     }
 
     var

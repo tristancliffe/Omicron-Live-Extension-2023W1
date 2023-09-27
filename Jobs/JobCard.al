@@ -165,7 +165,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             action("Job Card")
             {
                 ApplicationArea = Suite;
-                Caption = 'Job Card';
+                Caption = 'Job Card/Invoice';
                 Image = "Report";
                 ToolTip = 'Produce a job card';
 
