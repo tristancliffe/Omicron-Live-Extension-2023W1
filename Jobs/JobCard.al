@@ -26,7 +26,9 @@ pageextension 50111 JobCardExt extends "Job Card"
             trigger OnBeforeValidate()
             begin
                 if rec.Status = rec.status::Completed then
-                    message('Don''t forget to print the timesheet report for filing.')
+                    //message('Don''t forget to print the timesheet report for filing.')
+                    if not confirm('Have you printed the Time Sheet Report for %1?', false, Job."No.") then
+                        ERROR('Print the Time Sheet Report first');
             end;
         }
         addlast(General)
@@ -87,9 +89,6 @@ pageextension 50111 JobCardExt extends "Job Card"
                 Visible = true;
 
                 trigger OnAction()
-                var
-                    JobTask: Record "Job Task";
-                    JobInvoice: Report "Job Create Sales Invoice";
                 begin
                     JobTask.SetFilter("Job No.", Rec."No.");
                     JobInvoice.SetTableView(JobTask);
@@ -136,9 +135,6 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Open the Time Sheet report.';
 
                 trigger OnAction()
-                var
-                    Job: Record Job;
-                    TimesheetReport: Report "Timesheet Entries";
                 begin
                     Job.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Job);
@@ -153,13 +149,10 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Open the Excel worksheet for invoicing';
 
                 trigger OnAction()
-                var
-                    Job: Record Job;
-                    TimesheetReport: Report "Job Billing Excel";
                 begin
                     Job.SetFilter("No.", Rec."No.");
-                    TimesheetReport.SetTableView(Job);
-                    TimesheetReport.RunModal();
+                    ExcelReport.SetTableView(Job);
+                    ExcelReport.RunModal();
                 end;
             }
             action("Job Card")
@@ -170,9 +163,6 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Produce a job card';
 
                 trigger OnAction()
-                var
-                    Job: Record Job;
-                    JobCard: Report "Service Instruction";
                 begin
                     Job.SetFilter("No.", Rec."No.");
                     JobCard.SetTableView(Job);
@@ -187,9 +177,6 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Produce the workshop request jobcard';
 
                 trigger OnAction()
-                var
-                    Job: Record Job;
-                    WorkshopRequest: Report "Workshop Request";
                 begin
                     Job.SetFilter("No.", Rec."No.");
                     WorkshopRequest.SetTableView(Job);
@@ -276,4 +263,20 @@ pageextension 50111 JobCardExt extends "Job Card"
         modify("Create Warehouse Pick_Promoted")
         { Visible = false; }
     }
+
+    var
+        Job: Record Job;
+        JobTask: Record "Job Task";
+        JobCard: Report "Service Instruction";
+        WorkshopRequest: Report "Workshop Request";
+        ExcelReport: Report "Job Billing Excel";
+        TimesheetReport: Report "Timesheet Entries";
+        JobInvoice: Report "Job Create Sales Invoice";
+
+    procedure RunTimesheetReport()
+    begin
+        Job.SetFilter("No.", Rec."No.");
+        TimesheetReport.SetTableView(Job);
+        //TimesheetReport.RunModal();
+    end;
 }

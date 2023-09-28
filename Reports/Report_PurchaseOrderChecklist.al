@@ -25,6 +25,12 @@ report 50105 "Purchase Order Checklist"
 
             dataitem("Purchase Line"; "Purchase Line")
             {
+                DataItemLink = "Document No." = FIELD("No.");
+                DataItemTableView = SORTING("Document Type", "Document No.", "Line No.");
+                column(Document_No_; "Document No.")
+                { }
+                column(Line_No_; "Line No.")
+                { }
                 column(No_; "No.")
                 { }
                 column(Vendor_Item_No_; "Vendor Item No.")
