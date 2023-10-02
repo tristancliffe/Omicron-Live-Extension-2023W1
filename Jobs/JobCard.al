@@ -27,7 +27,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             begin
                 if rec.Status = rec.status::Completed then
                     //message('Don''t forget to print the timesheet report for filing.')
-                    if not confirm('Have you printed the Time Sheet Report for %1?', false, Job."No.") then
+                    if not confirm('Have you printed the Time Sheet Report for this job?', false) then
                         ERROR('Print the Time Sheet Report first');
             end;
         }
