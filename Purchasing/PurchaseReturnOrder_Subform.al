@@ -47,7 +47,7 @@ pageextension 50148 PurchaseReturnOrderSubformExt extends "Purchase Return Order
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
             }
         }
     }

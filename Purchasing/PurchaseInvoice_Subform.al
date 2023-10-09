@@ -84,7 +84,7 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
             }
         }
     }

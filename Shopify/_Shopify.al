@@ -24,10 +24,11 @@ codeunit 50102 "Shpfy Order External Doc. No"
 enumextension 50101 "Extended Stock Calculations" extends "Shpfy Stock Calculation"
 {
     // Adds the option "Inventory on hand" to the Shopify stock calulation system rather than future availability
-    value(50101; "Inventory on hand")
+    value(50101; "Non-reserved Inventory")
     {
-        Caption = 'Inventory on hand';
-        Implementation = "Shpfy Stock Calculation" = "Shpfy Stock Calc. Inventory";
+        Caption = 'Free Inventory (not reserved)';
+        Implementation = "Shpfy Stock Calculation" = "Shpfy Stock Calc. Inventory",
+                         "Shpfy IStock Available" = "Shpfy Can Have Stock";
     }
 }
 codeunit 50103 "Shpfy Stock Calc. Inventory" implements "Shpfy Stock Calculation"
@@ -35,7 +36,7 @@ codeunit 50103 "Shpfy Stock Calc. Inventory" implements "Shpfy Stock Calculation
     // Calulates the current 'on-hand' stock level of items in conjunction with the enumextension 50101 above
     procedure GetStock(var Item: Record Item): decimal;
     begin
-        Item.Calcfields(Inventory);
-        exit(Item.Inventory);
+        Item.Calcfields(Inventory, "Reserved Qty. on Inventory");
+        exit(Item.Inventory - Item."Reserved Qty. on Inventory");
     end;
 }

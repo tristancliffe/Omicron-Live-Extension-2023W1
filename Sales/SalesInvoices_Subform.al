@@ -97,7 +97,7 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
             }
         }
     }

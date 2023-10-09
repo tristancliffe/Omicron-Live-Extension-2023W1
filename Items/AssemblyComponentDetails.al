@@ -1,21 +1,15 @@
-// This is a page extension for the "Component - Item FactBox"
-// Adds a new group called "ItemType" to show the item type of the component
-// Adds a new group called "Notes" to show the item notes of the component
-// Adds a new group called "Image" to show the item image of the component
-// The visibility of the ItemType, Notes, and Image groups depend on the existence of data in the corresponding fields
-// The OnAfterGetCurrRecord trigger is used to check if the data exists in each field and sets the visibility flags accordingly
-pageextension 50168 AssemblyItemDetailsExt extends "Assembly Item - Details"
+pageextension 50213 AssemblyComponentDetailsExt extends "Component - Item FactBox"
 {
     layout
     {
-        addafter("Unit Price")
+        addafter("Required Quantity")
         {
             group(ItemType)
             {
                 Caption = 'Item Info.';
-                Visible = true;
+                Visible = TypeExists;
 
-                field(Type; Rec.Type)
+                field(ItemType_AssemblyLine; Rec.ItemType_AssemblyLine)
                 {
                     ApplicationArea = All;
                     Caption = 'Item Type';
@@ -28,7 +22,7 @@ pageextension 50168 AssemblyItemDetailsExt extends "Assembly Item - Details"
                 Caption = 'Item Notes';
                 Visible = NotesExist;
 
-                field("Item Notes"; Rec."Item Notes") //ShowNotes())
+                field(ItemNotes_AssemblyLine; Rec.ItemNotes_AssemblyLine) //ShowNotes())
                 {
                     ApplicationArea = All;
                     Caption = '';
@@ -42,7 +36,7 @@ pageextension 50168 AssemblyItemDetailsExt extends "Assembly Item - Details"
                 Visible = ImageExists;
                 Caption = 'Item Image';
 
-                field(Picture; Rec.Picture)
+                field(Image_AssemblyLine; Rec.Image_AssemblyLine)
                 {
                     ApplicationArea = All;
                     Caption = '';
@@ -53,15 +47,19 @@ pageextension 50168 AssemblyItemDetailsExt extends "Assembly Item - Details"
     var
         ImageExists: Boolean;
         NotesExist: Boolean;
+        TypeExists: Boolean;
 
     trigger OnAfterGetCurrRecord()
     begin
         ImageExists := true;
         NotesExist := true;
+        TypeExists := true;
         //message('%1', strlen(Rec.ItemNotes_PurchLine));
-        if Rec.Picture.Count = 0 then
+        if Rec.Image_AssemblyLine.Count = 0 then
             ImageExists := false;
-        If strlen(Rec."Item Notes") = 0 then
+        if Rec.Type <> Rec.Type::Item then
+            TypeExists := false;
+        If strlen(Rec.ItemNotes_AssemblyLine) = 0 then
             NotesExist := false;
     end;
 }

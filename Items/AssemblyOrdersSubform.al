@@ -57,7 +57,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
             }
         }
     }

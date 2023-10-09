@@ -5,7 +5,7 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
         modify("Resource No.")
         { StyleExpr = PendingStyle; }
         modify(Quantity)
-        { BlankZero = true; }
+        { BlankZero = true; StyleExpr = OvertimeStyle; }
         modify("Quantity Open")
         { BlankZero = true; }
         modify("Quantity Submitted")
@@ -89,32 +89,46 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
     trigger OnAfterGetRecord()
     begin
         SetPendingStyle();
+        SetOvertimeStyle();
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
         SetPendingStyle();
+        SetOvertimeStyle();
     end;
 
     procedure SetPendingStyle()
     begin
         PendingStyle := 'Standard';
         if Rec."Quantity Open" >= 0.25 then begin
-            PendingStyle := 'AttentionAccent';
+            PendingStyle := 'Attention';
         end else
-            if Rec."Quantity Submitted" >= 0.25 then begin
-                PendingStyle := 'StrongAccent';
+            if ((Rec.Quantity < 40) and (Rec."Quantity Open" = 0) and (Rec."Quantity Submitted" = 0)) then begin
+                PendingStyle := 'Unfavorable'
             end else
-                if Rec."Quantity Approved" >= 0.25 then begin
-                    PendingStyle := 'Favorable';
+                if Rec."Quantity Submitted" >= 0.25 then begin
+                    PendingStyle := 'AttentionAccent';//'StrongAccent';
                 end else
-                    if Rec."Quantity Rejected" >= 0.25 then begin
-                        PendingStyle := 'Unfavorable';
-                    end
-                    else
-                        PendingStyle := 'Standard';
+                    if Rec."Quantity Approved" = Rec.Quantity then begin
+                        PendingStyle := 'Favorable';
+                    end else
+                        if Rec."Quantity Rejected" >= 0.25 then begin
+                            PendingStyle := 'Unfavorable';
+                        end else
+                            PendingStyle := 'Standard';
+    end;
+
+    procedure SetOvertimeStyle()
+    begin
+        OvertimeStyle := 'Standard';
+        if rec.Quantity > 40 then begin
+            OvertimeStyle := 'Favorable';
+        end else
+            OvertimeStyle := 'Standard';
     end;
 
     var
         PendingStyle: Text;
+        OvertimeStyle: Text;
 }

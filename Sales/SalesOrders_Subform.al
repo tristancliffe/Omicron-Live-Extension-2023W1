@@ -94,7 +94,23 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
+            }
+            action(Reserve2)
+            {
+                ApplicationArea = Reservation;
+                Caption = '&Reserve';
+                Ellipsis = true;
+                Image = Reserve;
+                Enabled = Rec.Type = Rec.Type::Item;
+                ToolTip = 'Reserve the quantity of the selected item that is required on the document line from which you opened this page. This action is available only for lines that contain an item.';
+                Scope = Repeater;
+                Visible = true;
+                trigger OnAction()
+                begin
+                    Rec.Find();
+                    Rec.ShowReservation();
+                end;
             }
             action("BOM Level_Promoted")
             {
@@ -128,10 +144,10 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             Rec.Instock_SalesLine := 0
         else
             if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
-                Items.CalcFields(Inventory);
+                Items.CalcFields(Inventory); //, "Reserved Qty. on Inventory");
                 // Rec.Instock_SalesLine := Items.Inventory;
                 // Rec.Modify();
-                Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);
+                Rec.Validate(Rec.Instock_SalesLine, Items.Inventory);  // - Items."Reserved Qty. on Inventory");
                 Rec.Modify();
                 Commit();
             end

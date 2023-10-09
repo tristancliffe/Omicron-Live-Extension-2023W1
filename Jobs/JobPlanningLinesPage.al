@@ -144,7 +144,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 PromotedCategory = Process;
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
             }
         }
         // modify("Create &Sales Invoice")

@@ -39,7 +39,7 @@ pageextension 50199 PaymentJournalExt extends "Payment Journal"
                 ToolTip = 'Opens the general ledger account card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = rec."Account Type" = Rec."Account Type"::"G/L Account";
             }
             action(VendorLink)
             {
@@ -52,7 +52,8 @@ pageextension 50199 PaymentJournalExt extends "Payment Journal"
                 ToolTip = 'Opens the Vendor account card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = rec."Account Type" = Rec."Account Type"::Vendor;
+                ;
             }
             action(CustomerLink)
             {
@@ -65,7 +66,7 @@ pageextension 50199 PaymentJournalExt extends "Payment Journal"
                 ToolTip = 'Opens the Customer account card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = rec."Account Type" = Rec."Account Type"::Customer;
             }
         }
         addlast(Category_Process)

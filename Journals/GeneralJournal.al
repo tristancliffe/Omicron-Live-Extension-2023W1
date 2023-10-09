@@ -34,7 +34,8 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
                 ToolTip = 'Opens the general ledger account card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec."Account Type" = Rec."Account Type"::"G/L Account";
+                ;
             }
             action(VendorLink)
             {
@@ -47,7 +48,7 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
                 ToolTip = 'Opens the Vendor account card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec."Account Type" = Rec."Account Type"::Vendor;
             }
             action(CustomerLink)
             {
@@ -60,7 +61,8 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
                 ToolTip = 'Opens the Customer account card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec."Account Type" = Rec."Account Type"::Customer;
+                ;
             }
         }
         addafter(Category_Category9)

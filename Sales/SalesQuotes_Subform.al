@@ -95,7 +95,7 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
                 Visible = true;
-                Enabled = true;
+                Enabled = Rec.Type = Rec.Type::Item;
             }
         }
     }
