@@ -16,14 +16,26 @@ pageextension 50196 JobCostFactboxExt extends "Job Cost Factbox"
             }
             group(JobCosts)
             {
-                Caption = 'Job Values';
+                Caption = 'Job Profitability';
                 field(TotalValue; Rec.TotalValue)
-                { ApplicationArea = All; Visible = true; Caption = 'Total Spent, £'; ToolTip = 'The value committed to the job so far.'; }
+                { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the job so far.'; }
                 field(InvoicedValue; Rec.InvoicedValue)
-                { ApplicationArea = All; Visible = true; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
-                field(ValueToInvoice; Rec.TotalValue + Rec.InvoicedValue)
-                { ApplicationArea = All; Visible = true; Caption = 'To be invoiced, £'; ToolTip = 'The value left to invoice'; }
+                { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
+                field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue))
+                { ApplicationArea = All; Visible = true; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; StyleExpr = ProfitStyle; }
             }
         }
     }
+    var
+        ProfitStyle: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        ProfitStyle := 'Standard';
+        if (Rec.TotalValue + Rec.InvoicedValue) < -100 then
+            ProfitStyle := 'Favorable'
+        else
+            if (Rec.TotalValue + Rec.InvoicedValue) > 100 then
+                ProfitStyle := 'Unfavorable';
+    end;
 }

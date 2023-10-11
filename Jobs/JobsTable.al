@@ -283,7 +283,7 @@ tableextension 50105 JobNotes extends Job
         {
             Caption = 'Committed Value';
             FieldClass = FlowField;
-            CalcFormula = sum("Job Ledger Entry"."Total Price" where("Job No." = field("No."),
+            CalcFormula = sum("Job Ledger Entry"."Total Cost" where("Job No." = field("No."),
                                                                 "Entry Type" = filter('Usage')));
             AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
             AutoFormatType = 1;

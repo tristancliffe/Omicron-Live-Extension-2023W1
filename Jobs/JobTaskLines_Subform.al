@@ -16,6 +16,10 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
             field(TaskDimensionValue; TaskDimensionValue)
             { ApplicationArea = All; Caption = 'Dept.'; Editable = false; Style = Ambiguous; }
         }
+        modify("Contract (Total Price)")
+        { StyleExpr = InvoiceWarning; }
+        modify("Usage (Total Cost)")
+        { StyleExpr = LossWarning; }
     }
     // var
     //     TaskDimension: Record "Job Task Dimension";
@@ -30,11 +34,14 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
 
     var
         TaskDimensionValue: Code[20];
+        InvoiceWarning: Text;
+        LossWarning: Text;
 
     trigger OnAfterGetRecord()
     var
         TaskDimensionRec: Record "Job Task Dimension";
     begin
+        SetInvoiceWarning();
         // Filter the "Job Task Dimension" record based on "Job Task No."
         TaskDimensionRec.SetRange("Job No.", rec."Job No.");
         TaskDimensionRec.SETRANGE("Job Task No.", rec."Job Task No.");
@@ -45,4 +52,18 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
         end;
     end;
 
+    trigger OnAfterGetCurrRecord()
+    begin
+        SetInvoiceWarning();
+    end;
+
+    procedure SetInvoiceWarning();
+    begin
+        InvoiceWarning := 'AttentionAccent';
+        LossWarning := 'AttentionAccent';
+        if Rec."Contract (Total Price)" > Rec."Contract (Invoiced Price)" then
+            InvoiceWarning := 'Attention';
+        if Rec."Usage (Total Cost)" > Rec."Contract (Invoiced Price)" then
+            LossWarning := 'Attention';
+    end;
 }

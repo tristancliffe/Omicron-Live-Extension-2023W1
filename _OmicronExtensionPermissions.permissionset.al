@@ -15,11 +15,12 @@ permissionset 50100 OmicronPermissions
         report "Workshop Request" = X,
         report "Active Jobs" = X,
         page "Completed Job List" = X,
-        // page "Customer Phone Number List" = X,
-        // page "Employee Phone Number List" = X,
-        // page "Phone Number Lists" = X,
-        // page "Vendor Phone Number List" = X,
+    // page "Customer Phone Number List" = X,
+    // page "Employee Phone Number List" = X,
+    // page "Phone Number Lists" = X,
+    // page "Vendor Phone Number List" = X,
         report "Purchase Order Checklist" = X,
         codeunit "Shpfy Order External Doc. No" = X,
-        codeunit "Shpfy Stock Calc. Inventory" = X;
+        codeunit "Shpfy Stock Calc. Inventory" = X,
+        report "Phone Numbers" = X;
 }
