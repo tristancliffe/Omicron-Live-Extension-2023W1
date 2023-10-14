@@ -68,7 +68,7 @@ report 50102 ResourceEfficiency
         {
             Type = Excel;
             LayoutFile = 'OmicronResourceEfficiency.xlsx';
-            Caption = 'Resource Efficiency';
+            Caption = 'Omicron Resource Efficiency';
             Summary = 'Report of resource usage and efficiency';
         }
     }

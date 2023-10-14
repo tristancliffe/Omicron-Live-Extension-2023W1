@@ -79,6 +79,8 @@ report 50105 "Purchase Order Checklist"
         {
             Type = Word;
             LayoutFile = 'OmicronPurchOrderChecklist.docx';
+            Caption = 'Omicron Purchase Order Checklist';
+            Summary = 'Omicron Purchase Order Checklist (for checking parcels before receiving the invoice)';
         }
     }
 }

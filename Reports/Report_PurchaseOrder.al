@@ -16,15 +16,15 @@ reportextension 50104 OmicronPurchaseOrder extends "Order"
         {
             Type = RDLC;
             LayoutFile = './OmicronPurchOrder.rdlc';
-            Caption = 'Standard RDLC Purchase Order';
-            Summary = 'Omicron Standard Purchase Order';
+            Caption = 'Omicron RDLC Purchase Order';
+            Summary = 'Omicron RDLC Purchase Order';
         }
         layout("./OmicronPurchOrder.docx")
         {
             Type = Word;
             LayoutFile = './OmicronPurchOrder.docx';
-            Caption = 'Standard Word Purchase Order';
-            Summary = 'Omicron Standard Purchase Order';
+            Caption = 'Omicron Word Purchase Order';
+            Summary = 'Omicron Word Purchase Order';
         }
     }
 }

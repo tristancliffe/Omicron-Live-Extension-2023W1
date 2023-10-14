@@ -76,15 +76,15 @@ report 50103 "Workshop Request"
         {
             Type = Word;
             LayoutFile = 'OmicronWorkshopRequest.docx';
-            Caption = 'Workshop P-Job Request';
-            Summary = 'Workshop P-Job Job Card';
+            Caption = 'Omicron Workshop P-Job Request';
+            Summary = 'Omicron Workshop P-Job Job Card';
         }
         // layout(Jobcard)
         // {
         //     Type = Word;
         //     LayoutFile = 'OmicronJobCard.docx';
-        //     Caption = 'Job Card';
-        //     Summary = 'Job Card';
+        //     Caption = 'Omicron Job Card';
+        //     Summary = 'Omicron Job Card';
         // }
     }
 }

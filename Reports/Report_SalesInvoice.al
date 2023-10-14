@@ -15,14 +15,14 @@ reportextension 50103 OmicronSalesInvoiceExt extends "Standard Sales - Invoice"
         {
             Type = Word;
             LayoutFile = './OmicronSalesInvoice.docx';
-            Caption = 'Standard Sales Invoice';
+            Caption = 'Omicron Sales Invoice';
             Summary = 'Omicron Standard Sales Invoice';
         }
         layout("./OmicronJobSalesInvoice.docx")
         {
             Type = Word;
             LayoutFile = './OmicronJobSalesInvoice.docx';
-            Caption = 'Job Sales Invoice';
+            Caption = 'Omicron Job Sales Invoice';
             Summary = 'Omicron Job Sales Invoice';
         }
     }

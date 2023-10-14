@@ -17,7 +17,7 @@ reportextension 50106 JobPlanningLinesRepExt extends "Job - Planning Lines"
         {
             Type = RDLC;
             LayoutFile = './OmicronJobPlanningLines.rdlc';
-            Caption = 'Job Planning Lines';
+            Caption = 'Omicron Job Planning Lines';
             Summary = 'Omicron Job Planning Lines Report';
         }
     }

@@ -17,7 +17,7 @@ reportextension 50109 OmicronSalesQuoteExt extends "Standard Sales - Quote"
         {
             Type = Word;
             LayoutFile = './OmicronSalesQuote.docx';
-            Caption = 'Standard Sales Estimate';
+            Caption = 'Omicron Sales Estimate';
             Summary = 'Omicron Sales Estimate';
         }
     }

@@ -10,3 +10,7 @@
 *.docx
 *.zip
 app.json
+*.md
+results.csv
+results.json
+diff.csv

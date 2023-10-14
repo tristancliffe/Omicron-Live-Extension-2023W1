@@ -114,7 +114,7 @@ report 50101 "Job Billing Excel"
         {
             Type = Excel;
             LayoutFile = './OmicronJobBillingExcel.xlsx';
-            Caption = 'Excel Job Invoice Calculator';
+            Caption = 'Omicron Excel Job Invoice Calculator';
             Summary = 'Used to calculate and write handwritten job invoices and/or prepare quotes';
         }
     }

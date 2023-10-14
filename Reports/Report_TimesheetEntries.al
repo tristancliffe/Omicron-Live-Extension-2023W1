@@ -85,8 +85,8 @@ report 50100 "Timesheet Entries"
         {
             Type = Word;
             LayoutFile = 'OmicronTimeSheetRecords.docx';
-            Caption = 'Timesheet Entries';
-            Summary = 'Timesheet and stock entries for a job for historical archiving';
+            Caption = 'Omicron Timesheet Entries';
+            Summary = 'Omicron Timesheet and stock entries for a job for historical archiving';
         }
     }
 

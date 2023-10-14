@@ -78,15 +78,15 @@ report 50104 "Service Instruction"
         {
             Type = Word;
             LayoutFile = 'OmicronJobCard.docx';
-            Caption = 'Job Card';
-            Summary = 'Job Card';
+            Caption = 'Omicron Job Card';
+            Summary = 'Omicron Job Card';
         }
         layout(JobInvoice)
         {
             Type = Word;
             LayoutFile = 'OmicronJobInvoice.docx';
-            Caption = 'Job Invoice';
-            Summary = 'Template for Job Invoice';
+            Caption = 'Omicron Job Invoice';
+            Summary = 'Omicron Template for Job Invoice';
         }
     }
 }

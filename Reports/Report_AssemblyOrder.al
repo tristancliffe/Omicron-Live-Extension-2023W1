@@ -16,7 +16,7 @@ reportextension 50111 AssemblyOrderReportExt extends "Assembly Order"
         {
             Type = RDLC;
             LayoutFile = './OmicronAssemblyOrder.rdlc';
-            Caption = 'Assembly Order';
+            Caption = 'Omicron Assembly Order';
             Summary = 'Omicron Assembly Order';
         }
     }

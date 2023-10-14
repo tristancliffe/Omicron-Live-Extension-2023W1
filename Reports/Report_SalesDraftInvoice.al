@@ -16,7 +16,7 @@ reportextension 50105 OmicronDraftSalesInvoice extends "Standard Sales - Draft I
         {
             Type = Word;
             LayoutFile = './OmicronSalesDraftInvoice.docx';
-            Caption = 'Standard Draft Sales Invoice';
+            Caption = 'Omicron Draft Sales Invoice';
             Summary = 'Omicron Draft Sales Invoice';
         }
     }

@@ -10,7 +10,7 @@ reportextension 50108 OmicronPurchaseQuote extends "Purchase - Quote"
         {
             Type = RDLC;
             LayoutFile = './OmicronPurchaseQuote.rdlc';
-            Caption = 'Standard Purchase Quote';
+            Caption = 'Omicron Purchase Quote';
             Summary = 'Omicron Standard Purchase Quote';
         }
     }

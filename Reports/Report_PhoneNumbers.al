@@ -68,7 +68,7 @@ report 50107 "Phone Numbers"
         {
             Type = Excel;
             LayoutFile = 'Omicron_Phone_Numbers.xlsx';
-            Caption = 'Phone Number Export';
+            Caption = 'Omicron Phone Number Export';
             Summary = 'Excel Export of Customer, Vendor and Employee phone numbers for VOIP systems';
         }
     }
