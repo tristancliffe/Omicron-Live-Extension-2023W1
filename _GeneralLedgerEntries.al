@@ -19,6 +19,11 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
         { Visible = true; }
         modify(Amount)
         { StyleExpr = BalanceColour; }
+        addafter("VAT Reporting Date")
+        {
+            field(Comment; Rec.Comment)
+            { ApplicationArea = All; }
+        }
     }
 
     var

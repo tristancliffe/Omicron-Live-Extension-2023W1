@@ -17,6 +17,12 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
         { Visible = true; }
         modify("External Document No.")
         { Visible = true; }
+        modify("VAT Bus. Posting Group")
+        { Visible = true; }
+        modify("VAT Prod. Posting Group")
+        { Visible = true; }
+        modify("VAT Amount")
+        { Visible = true; }
         //moveafter("Bal. Gen. Prod. Posting Group"; "Applies-to Doc. Type", "Applies-to Doc. No.")
     }
     actions
