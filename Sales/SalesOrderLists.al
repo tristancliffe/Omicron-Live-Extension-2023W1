@@ -94,7 +94,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
                 if rec.Ship = true then
                     ShippedStatus := 'StrongAccent'
                 else
-                    if Rec."Shpfy Order No." <> '' then
+                    if Rec."Shpfy Order Id" > 0 then
                         ShippedStatus := 'Strong'
                     else
                         if Rec.Status = Rec.Status::Released then
