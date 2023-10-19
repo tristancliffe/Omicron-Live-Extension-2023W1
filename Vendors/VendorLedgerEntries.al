@@ -28,6 +28,9 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
         { StyleExpr = TypeStyle; }
         modify(Description)
         { StyleExpr = TypeStyle; }
+        moveafter("Document Type"; Reversed)
+        modify(Reversed)
+        { Visible = true; }
     }
     actions
     {

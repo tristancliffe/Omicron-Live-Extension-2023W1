@@ -20,5 +20,19 @@ tableextension 50112 ProjectManagerExt extends "Job Cue"
             Caption = 'Active Time Sheets';
             FieldClass = FlowField;
         }
+        field(50103; HoursThisMonth; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'), "Planning Date" = filter('-1M..Today')));
+            Caption = 'Hours Last Month';
+        }
+        field(50104; ChargeableThisMonth; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'),
+                                                                    "Planning Date" = filter('-1M..Today'),
+                                                                    "Line Type" = filter(Billable)));
+            Caption = 'Chargeable Hours Last Month';
+        }
     }
 }

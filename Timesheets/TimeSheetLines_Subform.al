@@ -82,12 +82,24 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             action(JobPlanningLines)
             {
                 ApplicationArea = All;
-                Caption = 'Timesheet History';
+                Caption = 'Job History';
                 Image = History;
                 ToolTip = 'Shows the entries made for the job so far that have been approved and posted';
                 Scope = Repeater;
-                RunObject = Page "Job Planning Lines";
+                RunObject = Page "Job Planning History";
                 RunPageLink = "Job No." = FIELD("Job No.");
+                RunPageView = SORTING("Job No.", "Planning Date", "Document No.")
+                                  ORDER(Descending);
+            }
+            action(JobTaskLines)
+            {
+                ApplicationArea = All;
+                Caption = 'Task History';
+                Image = History;
+                ToolTip = 'Shows the entries made for the selected task so far that have been approved and posted';
+                Scope = Repeater;
+                RunObject = Page "Job Planning History";
+                RunPageLink = "Job No." = FIELD("Job No."), "Job Task No." = field("Job Task No.");
                 RunPageView = SORTING("Job No.", "Planning Date", "Document No.")
                                   ORDER(Descending);
             }

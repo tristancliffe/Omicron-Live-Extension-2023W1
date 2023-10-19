@@ -29,6 +29,20 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 Caption = 'Time Sheets';
                 Visible = true;
             }
+            field(HoursThisMonth; Rec.HoursThisMonth)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Hours This Month';
+                AutoFormatExpression = '<precision, 0:0><standard format, 0>';
+                AutoFormatType = 11;
+            }
+            field(ChargeableThisMonth; Rec.ChargeableThisMonth)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Chargeable This Month';
+                AutoFormatExpression = '<precision, 0:0><standard format, 0>';
+                AutoFormatType = 11;
+            }
         }
         modify("Completed - WIP Not Calculated")
         { Visible = false; }

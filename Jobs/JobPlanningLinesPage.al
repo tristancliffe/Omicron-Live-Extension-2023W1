@@ -20,6 +20,8 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 end;
             }
         }
+        modify("Document No.")
+        { Visible = Device; }
         modify("Job Task No.")
         { StyleExpr = InvoicedStyle; }
         modify(Description)
@@ -202,6 +204,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         TypeStyle: Text;
         MandatoryLocation: Boolean;
         InvoicedStyle: Text;
+        Device: Boolean;
 
     trigger OnAfterGetRecord()
     begin
@@ -222,6 +225,10 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
     trigger OnOpenPage()
     begin
         SetStyles();
+        if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
+            Device := false
+        else
+            Device := true;
         Rec.SetCurrentKey("Planning Date", "Line No.");
         Rec.Ascending(true);
     end;

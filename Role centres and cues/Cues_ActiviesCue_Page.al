@@ -71,5 +71,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         { Visible = false; }
     }
     var
-        ActivitiesManagement: Codeunit "Activities Mgt.";
+    // ActivitiesManagement: Codeunit "Activities Mgt.";
+    // ActivitiesMgt: Codeunit "Activities Mgt.";
 }

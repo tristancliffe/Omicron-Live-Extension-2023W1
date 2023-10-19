@@ -22,5 +22,7 @@ permissionset 50100 OmicronPermissions
         report "Purchase Order Checklist" = X,
         codeunit "Shpfy Order External Doc. No" = X,
         codeunit "Shpfy Stock Calc. Inventory" = X,
-        report "Phone Numbers" = X;
+        report "Phone Numbers" = X,
+        codeunit MessageHandlePurch = X,
+        page "Job Planning History" = X;
 }

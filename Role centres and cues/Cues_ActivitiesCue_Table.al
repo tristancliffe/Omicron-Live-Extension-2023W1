@@ -47,12 +47,6 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             Caption = 'Ongoing Sales Credit Memo';
             FieldClass = FlowField;
         }
-        // field(50104; OpenTimeSheetsCue; Integer)
-        // {
-        //     CalcFormula = count("Time Sheet Header");
-        //     Caption = 'Active Time Sheets';
-        //     FieldClass = FlowField;
-        // }
     }
 }
 
