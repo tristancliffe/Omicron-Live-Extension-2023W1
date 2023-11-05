@@ -7,6 +7,7 @@ page 50103 "Job Planning History"
     PageType = List;
     SourceTable = "Job Planning Line";
     Editable = False;
+    //AnalysisModeEnabled = true;
 
     layout
     {

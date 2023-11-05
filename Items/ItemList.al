@@ -105,6 +105,16 @@ pageextension 50101 ItemListExtension extends "Item List"
             field("Item Notes"; Rec."Item Notes")
             { ApplicationArea = All; ToolTip = 'Item notes.'; }
         }
+        addfirst(factboxes)
+        {
+            part(ItemPicture; "Item Picture")
+            {
+                ApplicationArea = All;
+                Caption = 'Picture';
+                SubPageLink = "No." = field("No.");
+                Visible = true;
+            }
+        }
     }
     actions
     {

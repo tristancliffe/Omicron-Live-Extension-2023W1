@@ -59,6 +59,9 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             field("Expected Receipt Date"; Rec."Expected Receipt Date")
             { ApplicationArea = All; Visible = true; }
         }
+        moveafter("Expected Receipt Date"; "Payment Method Code")
+        modify("Payment Method Code")
+        { Visible = true; }
         modify("Location Code")
         { Visible = false; }
         modify("Currency Code")

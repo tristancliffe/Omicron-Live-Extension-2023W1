@@ -9,6 +9,7 @@ page 50100 "Logged-In Users"
     Editable = false;
     DeleteAllowed = false;
     ApplicationArea = All;
+    //AnalysisModeEnabled = true;
 
 
     layout

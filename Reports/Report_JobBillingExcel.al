@@ -80,7 +80,7 @@ report 50101 "Job Billing Excel"
                         CurrReport.Skip();
                     if Quantity <> 0 then
                         InvoicePrice := round(("Line Amount" / Quantity) * "Qty. to Transfer to Invoice", 0.01);
-                    InvoiceCost := round("Unit Cost" * "Qty. to Transfer to Invoice", 0.01);
+                    InvoiceCost := round("Total Cost", 0.01);
                     VAT := round(InvoicePrice * 0.2, 0.01);
                     InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                 end;

@@ -6,6 +6,7 @@ report 50102 ResourceEfficiency
     Caption = 'Resource Efficiency';
     Description = 'Used to show resource efficiency';
     PreviewMode = PrintLayout;
+    //ExcelLayoutMultipleDataSheets = true;
 
     dataset
     {
@@ -39,6 +40,24 @@ report 50102 ResourceEfficiency
                     end;
                 end;
             }
+            // dataitem("Employee Absence"; "Employee Absence")
+            // {
+            //     DataItemTableView = sorting("Employee No.", "From Date");
+            //     column(DATE_TODAY; Format(Today, 0, 4))
+            //     { }
+            //     column(Employee_Absence__Employee_No__; "Employee No.")
+            //     { }
+            //     column(Employee_Absence__From_Date_; Format("From Date"))
+            //     { }
+            //     column(Employee_Absence__Cause_of_Absence_Code_; "Cause of Absence Code")
+            //     { }
+            //     column(Employee_Absence_Description; Description)
+            //     { }
+            //     column(Employee_Absence_Quantity; Quantity)
+            //     { }
+            //     column(Employee_Absence__Unit_of_Measure_Code_; "Unit of Measure Code")
+            //     { }
+            // }
             trigger OnAfterGetRecord()
             begin
                 if (Blocked = true) or (Type = Type::Machine) then begin

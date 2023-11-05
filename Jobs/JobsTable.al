@@ -29,7 +29,6 @@ tableextension 50105 JobNotes extends Job
                 JobPostingGroup: Code[3];
                 Customer: Record Customer;
             begin
-                "Sell-to Mobile Number" := Customer."Mobile Phone No.";
                 VarPurch := 'PURCHASES';
                 VarStock := 'STOCK';
                 VarSubContr := 'SUBCONTRACT';
@@ -239,6 +238,10 @@ tableextension 50105 JobNotes extends Job
 
                 Rec.Validate("Starting Date", Today);
                 Rec.Validate("Date of Arrival", Today);
+                Customer.SetRange("No.", Rec."Sell-to Customer No.");
+                if Customer.FindSet() then begin
+                    Rec.Validate("Sell-to Mobile Number", Customer."Mobile Phone No.");
+                end;
             end;
         }
         field(50100; "Parts Location"; Text[100])
@@ -254,7 +257,7 @@ tableextension 50105 JobNotes extends Job
         field(50105; "Work Required"; Text[500])
         { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
         field(50106; "Sell-to Mobile Number"; Text[30])
-        { Caption = 'Mobile Phone No.'; ExtendedDatatype = PhoneNo; DataClassification = CustomerContent; }
+        { Caption = 'Mobile No.'; DataClassification = CustomerContent; ExtendedDatatype = PhoneNo; }
         field(50107; TotalHours; Decimal)
         {
             Caption = 'Total Hours';

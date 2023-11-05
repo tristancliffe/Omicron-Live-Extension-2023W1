@@ -21,7 +21,7 @@ pageextension 50102 CustomerCardExt extends "Customer Card"
             trigger OnAfterValidate()
             begin
                 if Rec.Name = '' then begin
-                    rec.Validate("Payment Terms Code", '0 DAYS');
+                    rec.Validate("Payment Terms Code", '1 DAY');
                     Rec.Validate("Location Code", 'STORES');
                 end;
             end;
