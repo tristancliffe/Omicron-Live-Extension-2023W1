@@ -28,8 +28,8 @@ reportextension 50100 ExcelQuoteExt extends "Job Quote"
             trigger OnAfterAfterGetRecord()
             begin
                 if Quantity <> 0 then
-                    InvoicePrice := round(("Line Amount" / Quantity) * "Qty. to Transfer to Invoice", 0.01);
-                InvoiceCost := round("Unit Cost" * "Qty. to Transfer to Invoice", 0.01);
+                    InvoicePrice := round("Unit Price (LCY)" * "Qty. to Transfer to Invoice", 0.01);
+                InvoiceCost := round("Total Cost", 0.01);
                 VAT := round(InvoicePrice * 0.2, 0.01);
                 InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                 // "Planning Date" := format("Planning Date", 0, '<Day,2>/<Month,2>/<Year,2>');

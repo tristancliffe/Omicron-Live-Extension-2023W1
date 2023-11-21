@@ -77,11 +77,6 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         SetShippedStatus();
     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetShippedStatus();
-    end;
-
     procedure SetShippedStatus()
     begin
         ShippedStatus := 'Standard';

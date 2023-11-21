@@ -76,6 +76,16 @@ pageextension 50105 VendorCardExt extends "Vendor Card"
                 end;
             end;
         }
+        addbefore("Balance (LCY)")
+        {
+            field(Balance; Rec.Balance)
+            { ApplicationArea = All; }
+        }
+        addbefore("Balance Due (LCY)")
+        {
+            field("Balance Due"; Rec."Balance Due")
+            { ApplicationArea = All; }
+        }
     }
     actions
     {

@@ -46,6 +46,7 @@ pageextension 50118 ResourceCardExt extends "Resource Card"
                     Resource.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Resource);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
         }

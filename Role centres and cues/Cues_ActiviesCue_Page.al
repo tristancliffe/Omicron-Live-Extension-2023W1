@@ -69,6 +69,8 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         { Visible = false; }
         modify("Average Collection Days")
         { Visible = false; }
+        modify("S. Ord. - Reserved From Stock")
+        { Visible = false; }
     }
     var
     // ActivitiesManagement: Codeunit "Activities Mgt.";

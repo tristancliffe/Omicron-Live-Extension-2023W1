@@ -67,6 +67,11 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         { Visible = true; }
         modify("Qty. Transferred to Invoice")
         { Visible = true; Editable = false; ApplicationArea = All; }
+        addafter("User ID")
+        {
+            field(InvoicePrice; Rec.InvoicePrice)
+            { ApplicationArea = All; BlankZero = true; }
+        }
     }
     actions
     {
@@ -173,6 +178,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                     JobTask.SetFilter("Job No.", Rec."Job No.");
                     JobInvoice.SetTableView(JobTask);
                     JobInvoice.RunModal();
+                    Clear(JobInvoice);
                 end;
             }
             action("Report Job Invoicing Excel")
@@ -193,6 +199,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                     Job.SetFilter("No.", Rec."Job No.");
                     TimesheetReport.SetTableView(Job);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
         }
@@ -205,13 +212,26 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         MandatoryLocation: Boolean;
         InvoicedStyle: Text;
         Device: Boolean;
+    //UpdateJobPlanningLines: Codeunit UpdateJobPlanningLines;
 
     trigger OnAfterGetRecord()
     begin
         SetStyles();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
             Rec.Validate("Work Done", Rec.Description);
+
         //rec.Modify() - THIS BREAKS STUFF
+        // Rec.InvoicePrice := round((Rec."Unit Price (LCY)") * Rec."Qty. to Transfer to Invoice", 0.01);
+        // Rec.InvoiceCost := round(Rec."Total Cost (LCY)", 0.01);
+        // Rec.VAT := round(Rec.InvoicePrice * 0.2, 0.01);
+        // Rec.InvoicePriceInclVAT := round(Rec.InvoicePrice + Rec.VAT, 0.01);
+
+        // Rec.Validate(InvoicePrice, round(Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice", 0.01));
+        // Rec.Validate(InvoiceCost, round(Rec."Total Cost", 0.01));
+        // Rec.Validate(VAT, round(Rec.InvoicePrice * 0.2, 0.01));
+        // Rec.Validate(InvoicePriceInclVAT, round(Rec.InvoicePrice + Rec.VAT, 0.01));
+        // Rec.Modify();
+        // UpdateJobPlanningLines.UpdateLines(Rec);
     end;
 
     trigger OnAfterGetCurrRecord()

@@ -4,7 +4,7 @@ report 50107 "Phone Numbers"
     ApplicationArea = All;
     DefaultRenderingLayout = PhoneNumbers;
     Caption = 'Phone Numbers List';
-    //ExcelLayoutMultipleDataSheets = true;
+    ExcelLayoutMultipleDataSheets = true;
 
 
     dataset

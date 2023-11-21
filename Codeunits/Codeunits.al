@@ -23,3 +23,21 @@ codeunit 50101 ItemLedgerReasons
         ItemLedgerEntry.ReasonCode := ItemJournalLine."Reason Code";
     end;
 }
+
+// codeunit 50105 UpdateJobPlanningLines
+// {
+//     procedure UpdateLines(Rec: Record "Job Planning Line")
+//     var
+//     // Rec: Record "Job Planning Line";
+//     begin
+//         begin
+//             if ((rec."Line Type" = Rec."Line Type"::Billable) or (rec."Line Type" = Rec."Line Type"::Billable)) then begin
+//                 Rec.Validate(InvoicePrice, round(Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice", 0.01));
+//                 Rec.Validate(InvoiceCost, round(Rec."Total Cost", 0.01));
+//                 Rec.Validate(VAT, round(Rec.InvoicePrice * 0.2, 0.01));
+//                 Rec.Validate(InvoicePriceInclVAT, round(Rec.InvoicePrice + Rec.VAT, 0.01));
+//                 Rec.Modify();
+//             end;
+//         end;
+//     end;
+// }

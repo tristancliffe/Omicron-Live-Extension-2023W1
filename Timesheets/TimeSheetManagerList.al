@@ -64,6 +64,7 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
                     Timesheet.SetFilter("No.", Rec."No.");
                     ArchiveReport.SetTableView(Timesheet);
                     ArchiveReport.RunModal();
+                    Clear(ArchiveReport);
                 end;
             }
             action(TimeSheetArchive)

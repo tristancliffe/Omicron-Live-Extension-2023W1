@@ -23,6 +23,8 @@ pageextension 50112 JobListExtension extends "Job List"
             { ApplicationArea = All; ToolTip = 'The total number of HOURS entered against the job, regardless of adjustments and invoicing'; Width = 8; }
             field(InvoicedHours; Rec.InvoicedHours)
             { ApplicationArea = All; ToolTip = 'The total number of INVOICED HOURS entered against the job'; Width = 8; }
+            field(ToInvoice; Rec.ToInvoice)
+            { ApplicationArea = All; StyleExpr = InvoiceStyle; }
         }
         moveafter("Date of Arrival"; "Person Responsible")
         modify("Person Responsible")
@@ -55,6 +57,7 @@ pageextension 50112 JobListExtension extends "Job List"
                     JobTask.SetFilter("Job No.", Rec."No.");
                     JobInvoice.SetTableView(JobTask);
                     JobInvoice.RunModal();
+                    Clear(JobInvoice);
                 end;
             }
             action(ManagerTimeSheet)
@@ -91,6 +94,7 @@ pageextension 50112 JobListExtension extends "Job List"
                     //Resource.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Resource);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
             action("Report Timesheet Entries")
@@ -110,6 +114,7 @@ pageextension 50112 JobListExtension extends "Job List"
                     Job.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Job);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
             action("Report Job Invoicing Excel")
@@ -129,6 +134,7 @@ pageextension 50112 JobListExtension extends "Job List"
                     Job.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Job);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
             action("Active Jobs")
@@ -158,6 +164,7 @@ pageextension 50112 JobListExtension extends "Job List"
                     Job.SetFilter("No.", Rec."No.");
                     JobCard.SetTableView(Job);
                     JobCard.RunModal();
+                    Clear(JobCard);
                 end;
             }
             action("Workshop Request")
@@ -177,6 +184,42 @@ pageextension 50112 JobListExtension extends "Job List"
                     Job.SetFilter("No.", Rec."No.");
                     WorkshopRequest.SetTableView(Job);
                     WorkshopRequest.RunModal();
+                    Clear(WorkshopRequest);
+                end;
+            }
+        }
+        addafter(CopyJob)
+        {
+            action(JobPlanningLines)
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Job &Planning Lines';
+                Image = JobLines;
+                ToolTip = 'View all planning lines for the job. You use this window to plan what items, resources, and general ledger expenses that you expect to use on a job (Budget) or you can specify what you actually agreed with your customer that he should pay for the job (Billable).';
+                PromotedCategory = Process;
+                Promoted = true;
+                PromotedOnly = true;
+                Scope = Repeater;
+
+                trigger OnAction()
+                var
+                    JobPlanningLine: Record "Job Planning Line";
+                    JobPlanningLines: Page "Job Planning Lines";
+                    IsHandled: Boolean;
+                begin
+                    IsHandled := false;
+                    OnBeforeJobPlanningLinesAction(Rec, IsHandled);
+                    if IsHandled then
+                        exit;
+
+                    Rec.TestField("No.");
+                    JobPlanningLine.FilterGroup(2);
+                    JobPlanningLine.SetRange("Job No.", Rec."No.");
+                    JobPlanningLine.FilterGroup(0);
+                    JobPlanningLines.SetJobTaskNoVisible(true);
+                    JobPlanningLines.SetTableView(JobPlanningLine);
+                    JobPlanningLines.Editable := true;
+                    JobPlanningLines.Run();
                 end;
             }
         }
@@ -218,10 +261,33 @@ pageextension 50112 JobListExtension extends "Job List"
         }
     }
 
+    var
+        InvoiceStyle: Text;
+
     trigger OnOpenPage()
     begin
         Rec.SetCurrentKey("No.");
         Rec.Ascending(true);
         Rec.SetFilter("Status", 'Planning|Quote|Open');
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        InvoiceStyle := 'StandardAccent';
+        If Rec.ToInvoice > 3000 then
+            InvoiceStyle := 'Attention';
+    end;
+
+    // trigger OnAfterGetRecord()
+    // var
+    //     UpdateJobPlanningLines: Codeunit UpdateJobPlanningLines;
+    //     PlanningLine: Record "Job Planning Line";
+    // begin
+    //     UpdateJobPlanningLines.UpdateLines(PlanningLine);
+    // end;
+
+    [IntegrationEvent(true, false)]
+    local procedure OnBeforeJobPlanningLinesAction(var Job: Record Job; var IsHandled: Boolean)
+    begin
     end;
 }

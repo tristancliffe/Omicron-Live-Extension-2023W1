@@ -67,6 +67,7 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
                     Timesheet.SetFilter("No.", Rec."No.");
                     ArchiveReport.SetTableView(Timesheet);
                     ArchiveReport.RunModal();
+                    Clear(ArchiveReport);
                 end;
             }
         }

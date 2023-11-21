@@ -300,6 +300,16 @@ tableextension 50105 JobNotes extends Job
             AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
             AutoFormatType = 1;
         }
+        field(50114; ToInvoice; Decimal)
+        {
+            Caption = 'To Invoice';
+            AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
+            AutoFormatType = 1;
+            DecimalPlaces = 2 : 2;
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".InvoicePrice where("Job No." = field("No."),
+                                                                    "Qty. Transferred to Invoice" = filter('0')));
+        }
     }
 
     fieldgroups

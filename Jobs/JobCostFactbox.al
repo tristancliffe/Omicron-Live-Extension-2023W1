@@ -13,6 +13,8 @@ pageextension 50196 JobCostFactboxExt extends "Job Cost Factbox"
                 { ApplicationArea = All; Visible = true; ToolTip = 'The total number of INVOICED HOURS entered against the job'; }
                 field(ToInvoice; Rec.TotalHours + Rec.InvoicedHours)
                 { ApplicationArea = All; Visible = true; Caption = 'To be invoiced'; ToolTip = 'The number of hours left to invoice'; }
+                field(ToInvoicePrice; Rec.ToInvoice)
+                { ApplicationArea = All; Caption = 'Value to invoice'; Tooltip = 'This is the value due to be invoiced, calculated from Job Planning Lines.'; }
             }
             group(JobCosts)
             {

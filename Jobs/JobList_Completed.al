@@ -130,6 +130,7 @@ page 50107 "Completed Job List"
                             CurrPage.SetSelectionFilter(Job);
                             DefaultDimensionsMultiple.SetMultiRecord(Job, Rec.FieldNo("No."));
                             DefaultDimensionsMultiple.RunModal();
+                            Clear(DefaultDimensionsMultiple);
                         end;
                     }
                 }
@@ -156,6 +157,7 @@ page 50107 "Completed Job List"
                     begin
                         JobInvoices.SetPrJob(Rec);
                         JobInvoices.RunModal();
+                        Clear(JobInvoices);
                     end;
                 }
                 action("Co&mments")
@@ -461,6 +463,7 @@ page 50107 "Completed Job List"
                     begin
                         CopyJob.SetFromJob(Rec);
                         CopyJob.RunModal();
+                        Clear(CopyJob);
                     end;
                 }
                 action("Create Job &Sales Invoice")

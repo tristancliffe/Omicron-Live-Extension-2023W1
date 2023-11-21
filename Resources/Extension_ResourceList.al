@@ -40,6 +40,7 @@ pageextension 50119 ResourceListExtension extends "Resource List"
                     //Resource.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Resource);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
         }

@@ -71,18 +71,26 @@ report 50101 "Job Billing Excel"
                         WorkDoneDescription := "Job Planning Line".Description
                     else
                         WorkDoneDescription := "Work Done";
-                    if (InvoicedSelector = true) and ("Qty. to Transfer to Invoice" = 0) then begin
+                    if (InvoicedSelector = true) then begin
+                        if "Qty. to Transfer to Invoice" > 0 then
+                            CurrReport.Skip();
                         "Qty. to Transfer to Invoice" := "Qty. Invoiced";
-                        // if "Qty. to Transfer to Invoice" = 0 then
-                        //     CurrReport.Skip();
+                        InvoicePrice := round("Unit Price (LCY)" * "Qty. Invoiced", 0.01);
+                        InvoiceCost := round("Total Cost", 0.01);
+                        VAT := round(InvoicePrice * 0.2, 0.01);
+                        InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                     end;
-                    if (InvoicedSelector = false) and ("Qty. Invoiced" <> 0) then
-                        CurrReport.Skip();
-                    if Quantity <> 0 then
-                        InvoicePrice := round(("Line Amount" / Quantity) * "Qty. to Transfer to Invoice", 0.01);
-                    InvoiceCost := round("Total Cost", 0.01);
-                    VAT := round(InvoicePrice * 0.2, 0.01);
-                    InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
+                    if (InvoicedSelector = false) then begin
+                        if ("Qty. Invoiced" <> 0) then
+                            CurrReport.Skip();
+                        if "Qty. to Transfer to Invoice" = 0 then
+                            CurrReport.Skip();
+                    end;
+                    // if Quantity <> 0 then
+                    //     InvoicePrice := round(("Line Amount" / Quantity) * "Qty. to Transfer to Invoice", 0.01);
+                    // InvoiceCost := round("Total Cost", 0.01);
+                    // VAT := round(InvoicePrice * 0.2, 0.01);
+                    // InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                 end;
             }
         }
@@ -98,7 +106,7 @@ report 50101 "Job Billing Excel"
                 field(InvoiceOption; InvoicedSelector)
                 {
                     ApplicationArea = All;
-                    Caption = 'Include Invoiced Lines';
+                    Caption = 'Only include invoiced lines?';
                     ToolTip = 'If this is selected, then the Quantity field will show the quantity invoiced if it has been invoiced. Otherwise it will only include the amount left to invoice.';
                 }
             }

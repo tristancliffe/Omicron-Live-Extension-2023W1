@@ -102,6 +102,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                     Timesheet.SetFilter("No.", Rec."No.");
                     ArchiveTimeSheet.SetTableView(Timesheet);
                     ArchiveTimeSheet.RunModal();
+                    Clear(ArchiveTimeSheet);
                 end;
             }
             action(Absences)

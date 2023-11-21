@@ -11,6 +11,7 @@ codeunit 50102 "Shpfy Order External Doc. No"
         Status: Text;
     begin
         SalesHeader."Your Reference" := 'Shopify ' + OrderHeader."Shopify Order No." + ' £' + format(OrderHeader."Total Amount");
+        // SalesHeader."Shopify Order Value" := OrderHeader."Total Amount";
         OrderHeader.CalcFields("Work Description");
         If OrderHeader."Work Description".HasValue() then begin
             OrderHeader."Work Description".CreateInStream(MyInStream);

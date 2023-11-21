@@ -36,6 +36,8 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
         { CaptionML = ENU = 'Order Notes'; DataClassification = CustomerContent; }
         field(50102; "Mobile No."; text[30])
         { CaptionML = ENU = 'Mobile Phone No.'; DataClassification = CustomerContent; }
+        // field(50103; "Shopify Order Value"; Decimal)
+        // { Caption = 'Shopify Order Value'; DataClassification = CustomerContent; DecimalPlaces = 2 : 2; }
     }
 
 }

@@ -23,6 +23,7 @@ permissionset 50100 OmicronPermissions
         codeunit "Shpfy Order External Doc. No" = X,
         codeunit "Shpfy Stock Calc. Inventory" = X,
         report "Phone Numbers" = X,
-        codeunit MessageHandlePurch = X,
-        page "Job Planning History" = X;
+        // codeunit MessageHandlePurch = X,
+        page "Job Planning History" = X,
+        page "Job Planning Lines All" = X;
 }

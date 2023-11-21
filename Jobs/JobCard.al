@@ -55,16 +55,12 @@ pageextension 50111 JobCardExt extends "Job Card"
         modify("Search Description") { Importance = Standard; }
         modify("External Document No.") { Visible = true; Importance = Standard; }
         modify("Your Reference") { Visible = true; Importance = Standard; }
-        // addafter(SellToPhoneNo)
+
+        // addafter("Payment Method Code")
         // {
-        //     field("Sell-to Mobile Number"; Rec."Sell-to Mobile Number")
-        //     { ApplicationArea = All; Importance = Standard; }
+        //     field("Next Invoice Date"; Rec."Next Invoice Date")
+        //     { ApplicationArea = All; Importance = Promoted; }
         // }
-        addafter("Payment Method Code")
-        {
-            field("Next Invoice Date"; Rec."Next Invoice Date")
-            { ApplicationArea = All; Importance = Promoted; }
-        }
         addfirst(factboxes)
         {
             part(CustomerPicture; "Customer Picture")
@@ -93,6 +89,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                     JobTask.SetFilter("Job No.", Rec."No.");
                     JobInvoice.SetTableView(JobTask);
                     JobInvoice.RunModal();
+                    Clear(JobInvoice);
                 end;
             }
             action(JobJournal)
@@ -139,6 +136,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                     Job.SetFilter("No.", Rec."No.");
                     TimesheetReport.SetTableView(Job);
                     TimesheetReport.RunModal();
+                    Clear(TimesheetReport);
                 end;
             }
             action("Report Job Invoicing Excel")
@@ -153,6 +151,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                     Job.SetFilter("No.", Rec."No.");
                     ExcelReport.SetTableView(Job);
                     ExcelReport.RunModal();
+                    Clear(ExcelReport);
                 end;
             }
             action("Job Card")
@@ -167,6 +166,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                     Job.SetFilter("No.", Rec."No.");
                     JobCard.SetTableView(Job);
                     JobCard.RunModal();
+                    Clear(JobCard);
                 end;
             }
             action("Workshop Request")
@@ -181,6 +181,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                     Job.SetFilter("No.", Rec."No.");
                     WorkshopRequest.SetTableView(Job);
                     WorkshopRequest.RunModal();
+                    Clear(WorkshopRequest);
                 end;
                 //     ReportParameters: text;
                 //     TempBlob: Codeunit "Temp Blob";

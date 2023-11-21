@@ -107,6 +107,19 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 end;
             }
         }
+        modify("EU 3-Party Trade")
+        { Visible = false; }
+        modify(SelectedPayments)
+        { Visible = false; }
+        modify("Direct Debit Mandate ID")
+        { Visible = false; }
+        addafter("Pmt. Discount Date")
+        {
+            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
+            { ApplicationArea = All; Visible = true; }
+            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
+            { ApplicationArea = All; Visible = true; }
+        }
         modify(Control202)
         { Visible = true; }
         moveafter(SalesDocCheckFactbox; Control1906127307)
