@@ -26,6 +26,13 @@ pageextension 50190 BankStatementListExt extends "Bank Account Statement List"
                 Tooltip = 'The user name of the account that posted the bank reconciliation.';
                 Editable = false;
             }
+            field(SystemCreatedAt; Rec.SystemCreatedAt)
+            {
+                ApplicationArea = All;
+                Caption = 'Posted Date';
+                ToolTip = 'When the user posted the statement';
+                Editable = false;
+            }
         }
     }
 

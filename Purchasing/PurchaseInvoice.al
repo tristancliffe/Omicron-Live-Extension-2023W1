@@ -226,6 +226,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
     trigger OnAfterGetRecord()
     begin
         InitPageControllers();
+        Rec.CalcFields("Amount Including VAT");
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
             VendorNotes := RecVendor."Vendor Notes";

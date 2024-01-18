@@ -1,6 +1,7 @@
-tableextension 50120 PostedPurchInvHeader extends "Purch. Inv. Header"
+tableextension 50215 PostedPurchCreditMemoHeaderExt extends "Purch. Cr. Memo Hdr."
 {
     DataCaptionFields = "No.", "Buy-from Vendor Name", "Amount Including VAT";
+
     fields
     {
         field(50100; "Order Notes"; Text[1000]) //* Changed from order notes [250] to Vendor notes [1000] to enable invoice posting.

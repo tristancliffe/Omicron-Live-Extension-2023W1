@@ -117,6 +117,25 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                 PromotedCategory = Process;
                 PromotedOnly = true;
             }
+            // action(Instructions)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Timesheet Instructions';
+            //     Image = Help;
+            //     ToolTip = 'Open the timesheet instructions';
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedOnly = true;
+            //     // RunObject = Report "Timesheet Instructions";
+
+            //     trigger OnAction()
+            //     var
+            //         Instructions: Report "Timesheet Instructions";
+            //     begin
+            //         Report.Print(Instructions);
+            //         Clear(Instructions);
+            //     end;
+            // }
         }
     }
     var

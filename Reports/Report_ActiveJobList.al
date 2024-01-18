@@ -28,21 +28,11 @@ report 50106 "Active Jobs"
             { }
             column(CarMakeModel_Job; "Car Make/Model")
             { }
-            column(TotalHours_Job; TotalHours)
-            { }
-            column(InvoicedHours_Job; InvoicedHours)
-            { }
             column(ChassisNo_Job; ChassisNo)
             { }
             column(EngineNo_Job; EngineNo)
             { }
-            column(HoursToInvoice; TotalHours + InvoicedHours)
-            { }
-            column(TotalValue; TotalValue)
-            { }
-            column(InvoicedValue; InvoicedValue)
-            { }
-            column(ToBeInvoiced; TotalValue + InvoicedValue)
+            column(ToInvoice; ToInvoice)
             { }
             // trigger OnAfterGetRecord()
             // var
@@ -98,11 +88,6 @@ report 50106 "Active Jobs"
         Lbl_ChassisNo = 'Chassis No.:';
         Lbl_EngineNo = 'Engine No.:';
         Lbl_DateArrived = 'Date in:';
-        Lbl_TotalHours = 'Ttl hrs:';
-        Lbl_InvoicedHours = 'Inv. hrs:';
-        Lbl_HoursToInvoice = 'Hrs to inv:';
-        Lbl_ValueSpent = 'Ttl £:';
-        Lbl_ValueInvoiced = 'Inv''d £:';
         Lbl_ValveToInvoice = '£ to inv:';
     }
 }

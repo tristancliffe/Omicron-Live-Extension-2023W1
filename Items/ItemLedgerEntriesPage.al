@@ -21,5 +21,8 @@ pageextension 50180 ItemLedgerEntriesExt extends "Item Ledger Entries"
                 ToolTip = 'Shows who created this entry.';
             }
         }
+        moveafter("Entry No."; RunningBalance)
+        modify(RunningBalance)
+        { Visible = true; }
     }
 }

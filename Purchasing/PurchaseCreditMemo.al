@@ -95,4 +95,9 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
     begin
         Rec."Assigned User ID" := USERID;
     end;
+
+    trigger OnAfterGetRecord()
+    begin
+        Rec.CalcFields("Amount Including VAT");
+    end;
 }

@@ -50,7 +50,6 @@ pageextension 50100 ItemCardExt extends "Item Card"
                 ApplicationArea = All;
                 Caption = 'Old Supplier Ref';
                 ToolTip = 'Brief summary of main supplier and/or part number. No longed editable. Use the Vendor Catalogue to record suppliers, their part numbers and lead times, and use the Vendor No. and Vendor Item No. below to define the default vendor used for purchasing.';
-                Editable = false;
             }
             group("NonStockGroup")
             {

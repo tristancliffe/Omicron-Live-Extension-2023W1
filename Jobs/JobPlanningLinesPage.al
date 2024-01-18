@@ -61,7 +61,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         { StyleExpr = SellingPriceStyle; }
         movebefore("Invoiced Amount (LCY)"; "Qty. Invoiced")
         modify("Qty. Invoiced")
-        { Visible = true; Style = Favorable; }
+        { Visible = true; Style = Favorable; BlankZero = true; }
         movelast(Control1; "User ID")
         modify("User ID")
         { Visible = true; }

@@ -23,8 +23,15 @@ reportextension 50104 OmicronPurchaseOrder extends "Order"
         {
             Type = Word;
             LayoutFile = './OmicronPurchOrder.docx';
-            Caption = 'Omicron Word Purchase Order';
-            Summary = 'Omicron Word Purchase Order';
+            Caption = 'Omicron Purchase Order';
+            Summary = 'Omicron Purchase Order';
+        }
+        layout("./OmicronPurchOrderNoPrices.docx")
+        {
+            Type = Word;
+            LayoutFile = './OmicronPurchOrderNoPrices.docx';
+            Caption = 'Omicron No-Price Purchase Order';
+            Summary = 'Omicron No-Price Purchase Order';
         }
     }
 }

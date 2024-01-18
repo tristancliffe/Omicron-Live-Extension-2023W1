@@ -308,6 +308,7 @@ tableextension 50105 JobNotes extends Job
             DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
             CalcFormula = sum("Job Planning Line".InvoicePrice where("Job No." = field("No."),
+                                                                    "Line Type" = filter("Billable" | "Both Budget and Billable"),
                                                                     "Qty. Transferred to Invoice" = filter('0')));
         }
     }

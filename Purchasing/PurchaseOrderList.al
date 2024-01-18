@@ -118,7 +118,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 StatusStyle := 'Favorable'
             else
                 if Rec."Partially Invoiced" = true then
-                    StatusStyle := 'Unfavorable'
+                    StatusStyle := 'Attention'
                 else
                     if Rec.Status = Rec.Status::Released then
                         StatusStyle := 'StrongAccent'

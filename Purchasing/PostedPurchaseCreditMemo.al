@@ -1,4 +1,4 @@
-pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
+pageextension 50214 PostedPurchCreditMemoExt extends "Posted Purchase Credit Memo"
 {
     layout
     {
@@ -8,12 +8,10 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
             field("Your Reference"; Rec."Your Reference")
             { ApplicationArea = All; QuickEntry = true; }
         }
-        moveafter("Your Reference"; "Vendor Invoice No.")
-        modify("Vendor Invoice No.")
+        moveafter("Your Reference"; "Vendor Cr. Memo No.")
+        modify("Vendor Cr. Memo No.")
         { Visible = true; Importance = Standard; }
         modify("Document Date")
-        { Visible = true; Importance = Standard; }
-        modify("Due Date")
         { Visible = true; Importance = Standard; }
         modify("Posting Date")
         { Visible = true; Importance = Standard; }
@@ -21,8 +19,6 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
         { Visible = true; Importance = Standard; }
         modify("Purchaser Code")
         { Visible = false; }
-        modify("Payment Method Code")
-        { Importance = Standard; }
         modify(BuyFromContactMobilePhoneNo)
         { Importance = Standard; }
         modify(BuyFromContactPhoneNo)

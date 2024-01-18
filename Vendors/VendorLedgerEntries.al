@@ -2,7 +2,7 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
 {
     layout
     {
-        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Payment Method Code", "Original Amount", "Amount (LCY)", "User ID")
+        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Payment Method Code", "Original Amount", "Amount (LCY)", "User ID", RunningBalanceLCY)
         modify("User ID")
         { Visible = true; ApplicationArea = All; }
         modify("Pmt. Discount Date")
@@ -30,6 +30,10 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
         { StyleExpr = TypeStyle; }
         moveafter("Document Type"; Reversed)
         modify(Reversed)
+        { Visible = true; }
+        modify("Document No.")
+        { Visible = false; }
+        modify(RunningBalanceLCY)
         { Visible = true; }
     }
     actions

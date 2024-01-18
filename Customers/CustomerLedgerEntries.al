@@ -11,7 +11,7 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
 {
     layout
     {
-        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Original Amount", "Amount (LCY)", "User ID")
+        moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Original Amount", "Amount (LCY)", "User ID", RunningBalanceLCY)
         modify("User ID")
         { Visible = true; ApplicationArea = All; }
         modify("Pmt. Discount Date")
@@ -32,6 +32,10 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         { StyleExpr = TypeStyle; }
         moveafter("Document Type"; Reversed)
         modify(Reversed)
+        { Visible = true; }
+        modify("Document No.")
+        { Visible = false; }
+        modify(RunningBalanceLCY)
         { Visible = true; }
     }
     actions

@@ -1,5 +1,6 @@
 tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
 {
+    DataCaptionFields = "No.", "Buy-from Vendor Name", "Amount Including VAT";
     fields
     {
         modify("Buy-from Vendor No.")

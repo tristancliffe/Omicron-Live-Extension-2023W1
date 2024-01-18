@@ -292,6 +292,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
     trigger OnAfterGetRecord()
     begin
         InitPageControllers();
+        Rec.CalcFields("Amount Including VAT");
         RecVendor.SetRange("No.", Rec."Buy-from Vendor No.");
         if RecVendor.FindSet() then begin
             VendorNotes := RecVendor."Vendor Notes";

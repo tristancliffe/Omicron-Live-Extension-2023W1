@@ -24,6 +24,9 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
             field(Comment; Rec.Comment)
             { ApplicationArea = All; }
         }
+        moveafter("Bal. Account No."; RunningBalance)
+        modify(RunningBalance)
+        { Visible = true; }
     }
 
     var

@@ -13,12 +13,12 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ToolTip = 'Make & model of car in for work';
                 ShowMandatory = true;
             }
-            field("Job Notes"; Rec."Job Notes")
-            {
-                MultiLine = true;
-                ApplicationArea = All;
-                ToolTip = 'Notes about the job';
-            }
+            // field("Job Notes"; Rec."Job Notes")
+            // {
+            //     MultiLine = true;
+            //     ApplicationArea = All;
+            //     ToolTip = 'Notes about the job';
+            // }
         }
         modify(Status)
         {
