@@ -14,6 +14,8 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                         message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
             end;
         }
+        modify(Description)
+        { StyleExpr = CommentStyle; }
         modify(Quantity)
         { style = Strong; }
         modify("Bin Code")
@@ -136,10 +138,12 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
 
     var
         JobPriceMandatory: Boolean;
+        CommentStyle: Text;
 
     trigger OnAfterGetRecord()
     begin
-        GetInventory;
+        GetInventory();
+        SetCommentStyle();
         JobPriceMandatory := false;
     end;
 
@@ -162,5 +166,12 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                     // Rec.Modify()
                     Rec.Validate(Rec.Instock_PurchLine, 999)
                 end;
+    end;
+
+    procedure SetCommentStyle()
+    begin
+        CommentStyle := 'Standard';
+        If Rec.Type = Rec.Type::" " then
+            CommentStyle := 'Strong';
     end;
 }

@@ -60,7 +60,7 @@ pageextension 50112 JobListExtension extends "Job List"
                     Clear(JobInvoice);
                 end;
             }
-            action(ManagerTimeSheet)
+            action(SalesInvoiceList)
             {
                 Caption = 'Sales Invoices';
                 Image = SalesInvoice;
@@ -68,6 +68,17 @@ pageextension 50112 JobListExtension extends "Job List"
                 RunObject = Page "Sales Invoice List";
                 ShortcutKey = 'Shift+Ctrl+I';
                 ToolTip = 'Takes the user to the Sales Invoices list page';
+                Visible = true;
+                Promoted = true;
+                PromotedCategory = Process;
+            }
+            action(JobJournal)
+            {
+                Caption = 'Job Journal';
+                Image = JobJournal;
+                ApplicationArea = All;
+                RunObject = Page "Job Journal";
+                ToolTip = 'Open the Job Journal for posting to jobs';
                 Visible = true;
                 Promoted = true;
                 PromotedCategory = Process;

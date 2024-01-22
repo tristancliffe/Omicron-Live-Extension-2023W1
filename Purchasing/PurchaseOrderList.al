@@ -57,7 +57,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 Visible = true;
             }
             field("Expected Receipt Date"; Rec."Expected Receipt Date")
-            { ApplicationArea = All; Visible = true; }
+            { ApplicationArea = All; Visible = true; StyleExpr = OverdueStyle; }
         }
         moveafter("Expected Receipt Date"; "Payment Method Code")
         modify("Payment Method Code")
@@ -100,12 +100,14 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
     trigger OnAfterGetRecord()
     begin
         SetStatusStyle();
-        UpdateTotalLCY()
+        SetOverdueStyle();
+        UpdateTotalLCY();
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
         SetStatusStyle();
+        SetOverdueStyle();
     end;
 
     procedure SetStatusStyle()
@@ -129,8 +131,16 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                             StatusStyle := 'Standard';
     end;
 
+    procedure SetOverdueStyle()
+    begin
+        OverdueStyle := 'Standard';
+        if Rec."Expected Receipt Date" < Today then
+            OverdueStyle := 'Unfavorable';
+    end;
+
     var
         StatusStyle: Text;
+        OverdueStyle: Text;
         TotalAmountLCY: Decimal;
         Currency: Record Currency;
 

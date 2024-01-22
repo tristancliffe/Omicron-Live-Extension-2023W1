@@ -55,6 +55,9 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         { Visible = false; }
         modify("Applies-to Entry")
         { Visible = false; }
+        moveafter("Shortcut Dimension 2 Code"; "Gen. Prod. Posting Group")
+        modify("Gen. Prod. Posting Group")
+        { Visible = true; }
         addafter(Quantity)
         {
             field(Instock_SalesLine; rec.Instock_JobJournalLine)

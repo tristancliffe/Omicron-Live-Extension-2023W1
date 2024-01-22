@@ -30,11 +30,11 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         { StyleExpr = TypeStyle; }
         modify(Description)
         { StyleExpr = TypeStyle; }
-        moveafter("Document Type"; Reversed)
+        moveafter("Document Type"; "Document No.", Reversed)
         modify(Reversed)
         { Visible = true; }
         modify("Document No.")
-        { Visible = false; }
+        { Visible = true; }
         modify(RunningBalanceLCY)
         { Visible = true; }
     }
