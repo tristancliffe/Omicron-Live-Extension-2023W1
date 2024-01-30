@@ -34,14 +34,24 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Hours This Month';
                 AutoFormatExpression = '<precision, 0:0><standard format, 0>';
+                ToolTip = 'Number of approved/journalled hours in the last 30 days, including Admin.';
                 AutoFormatType = 11;
             }
             field(ChargeableThisMonth; Rec.ChargeableThisMonth)
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Chargeable This Month';
+                ToolTip = 'Number of approved/journalled hours that can be charged from the last 30 days, excluding Admin.';
                 AutoFormatExpression = '<precision, 0:0><standard format, 0>';
                 AutoFormatType = 11;
+            }
+            field(OpenTimesheetHours; Rec.OpenTimeSheetHours)
+            {
+                ApplicationArea = Basic, Suite;
+                DrillDownPageId = "Time Sheet Lines Subform";
+                Tooltip = 'Number of ''Open'' hours in timesheets not submitted or approved';
+                Caption = 'Open Time Sheet Hours';
+                Visible = true;
             }
         }
         modify("Completed - WIP Not Calculated")

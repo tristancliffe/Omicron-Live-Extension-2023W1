@@ -279,7 +279,7 @@ pageextension 50112 JobListExtension extends "Job List"
     begin
         Rec.SetCurrentKey("No.");
         Rec.Ascending(true);
-        Rec.SetFilter("Status", 'Planning|Quote|Open');
+        Rec.SetFilter("Status", 'Planning|Quote|Open|Paused');
     end;
 
     trigger OnAfterGetRecord()

@@ -55,9 +55,29 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
             {
                 ApplicationArea = all;
                 Caption = 'Posted Invoices';
-                ToolTip = 'Opens the list of posted sales invoices';
-                Image = PurchaseInvoice;
+                ToolTip = 'Opens the list of posted sales invoices for all customers';
+                Image = SalesInvoice;
                 RunObject = Page "Posted Sales Invoices";
+            }
+            action(CustomerInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Invoices';
+                ToolTip = 'Open a list of posted invoices for this customer';
+                Image = SalesInvoice;
+                Scope = Repeater;
+                RunObject = page "Posted Sales Invoices";
+                RunPageLink = "Sell-to Customer No." = field("Sell-to Customer No.");
+            }
+            action(CustomerLedger)
+            {
+                ApplicationArea = All;
+                Caption = 'Ledger';
+                Tooltip = 'Open the customer ledger entries list for this customer';
+                image = LedgerEntries;
+                Scope = Repeater;
+                RunObject = page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = field("Sell-to Customer No.");
             }
         }
         addlast(Promoted)

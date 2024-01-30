@@ -49,6 +49,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 ApplicationArea = All;
                 Caption = 'Completely Received';
                 Visible = true;
+                StyleExpr = ReceivedStyle;
             }
             field("Partially Invoiced"; Rec."Partially Invoiced")
             {
@@ -66,6 +67,8 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         { Visible = false; }
         modify("Currency Code")
         { Visible = true; Width = 7; }
+        modify("Amount Received Not Invoiced (LCY)")
+        { StyleExpr = ReceivedStyle; }
     }
     actions
     {
@@ -79,9 +82,29 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             {
                 ApplicationArea = all;
                 Caption = 'Posted Invoices';
-                ToolTip = 'Opens the list of posted purchase invoices';
+                ToolTip = 'Opens the list of posted purchase invoices for all vendors';
                 Image = PurchaseInvoice;
                 RunObject = Page "Posted Purchase Invoices";
+            }
+            action(VendorInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Invoices';
+                ToolTip = 'Open a list of posted invoices for this vendor';
+                Image = PurchaseInvoice;
+                Scope = Repeater;
+                RunObject = page "Posted Purchase Invoices";
+                RunPageLink = "Buy-from Vendor No." = field("Buy-from Vendor No.");
+            }
+            action(VendorLedger)
+            {
+                ApplicationArea = All;
+                Caption = 'Ledger';
+                Tooltip = 'Open the vendor entries list for this vendor';
+                image = LedgerEntries;
+                Scope = Repeater;
+                RunObject = page "Vendor Ledger Entries";
+                RunPageLink = "Vendor No." = field("Buy-from Vendor No.");
             }
         }
         addlast(Promoted)
@@ -113,11 +136,14 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
     procedure SetStatusStyle()
     begin
         StatusStyle := 'Standard';
+        ReceivedStyle := 'StandardAccent';
         if (Rec."Completely Received" = true) AND (Rec."Partially Invoiced" = true) then
             StatusStyle := 'Strong'
         else
-            if Rec."Completely Received" = true then
-                StatusStyle := 'Favorable'
+            if Rec."Completely Received" = true then begin
+                StatusStyle := 'Favorable';
+                ReceivedStyle := 'Unfavorable';
+            end
             else
                 if Rec."Partially Invoiced" = true then
                     StatusStyle := 'Attention'
@@ -141,6 +167,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
     var
         StatusStyle: Text;
         OverdueStyle: Text;
+        ReceivedStyle: Text;
         TotalAmountLCY: Decimal;
         Currency: Record Currency;
 

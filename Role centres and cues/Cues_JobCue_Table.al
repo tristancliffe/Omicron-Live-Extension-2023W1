@@ -23,16 +23,35 @@ tableextension 50112 ProjectManagerExt extends "Job Cue"
         field(50103; HoursThisMonth; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'), "Planning Date" = filter('-1M..Today')));
+            CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'),
+                                                                "Planning Date" = filter('-1M..Today')));
             Caption = 'Hours Last Month';
         }
         field(50104; ChargeableThisMonth; Decimal)
         {
             FieldClass = FlowField;
             CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'),
-                                                                    "Planning Date" = filter('-1M..Today'),
-                                                                    "Line Type" = filter(Billable)));
+                                                                "Planning Date" = filter('-1M..Today'),
+                                                                "Line Type" = filter(Billable)));
             Caption = 'Chargeable Hours Last Month';
+        }
+        field(50105; "Invoiceable"; Decimal)
+        {
+            FieldClass = FlowField;
+            AutoFormatExpression = '£<precision, 0:0><standard format, 0>';  //GetAmountFormat();
+            AutoFormatType = 11;
+            Caption = 'Invoiceable Jobs';
+            CalcFormula = sum("Job Planning Line".InvoicePrice where("Line Type" = filter("Billable" | "Both Budget and Billable"),
+                                                                    "Qty. Transferred to Invoice" = filter('0'),
+                                                                    "Qty. to Transfer to Invoice" = filter('>0'),
+                                                                    Status = filter("Order")));
+        }
+        field(50106; "OpenTimeSheetHours"; Decimal)
+        {
+            FieldClass = FlowField;
+            Caption = 'Open hours not submitted or approved';
+            CalcFormula = sum("Time Sheet Detail".Quantity where(Status = filter(Open | Submitted)));
+            //sum("Time Sheet Header"."Quantity Open");
         }
     }
 }

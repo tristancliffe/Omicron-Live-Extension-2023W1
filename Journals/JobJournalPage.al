@@ -55,9 +55,10 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         { Visible = false; }
         modify("Applies-to Entry")
         { Visible = false; }
-        moveafter("Shortcut Dimension 2 Code"; "Gen. Prod. Posting Group")
         modify("Gen. Prod. Posting Group")
         { Visible = true; }
+        modify(Quantity)
+        { StyleExpr = InsufficientStockStyle; }
         addafter(Quantity)
         {
             field(Instock_SalesLine; rec.Instock_JobJournalLine)
@@ -68,7 +69,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 ApplicationArea = All;
                 Visible = true;
                 BlankZero = false;
-                Style = StandardAccent;
+                StyleExpr = OutOfStockStyle;
                 Width = 5;
                 QuickEntry = false;
             }
@@ -210,6 +211,8 @@ pageextension 50114 JobJournalExt extends "Job Journal"
     var
         BillableStyle: Text;
         BudgetStyle: Text;
+        OutOfStockStyle: Text;
+        InsufficientStockStyle: Text;
         SellingPriceStyle: Text;
 
     local procedure SetStyles()
@@ -217,6 +220,8 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         BillableStyle := 'Standard';
         BudgetStyle := 'Standard';
         SellingPriceStyle := 'Standard';
+        OutOfStockStyle := 'StandardAccent';
+        InsufficientStockStyle := 'Standard';
         case Rec."Line Type" of
             Rec."Line Type"::Budget:
                 BudgetStyle := 'Attention';
@@ -227,6 +232,10 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         end;
         if Rec."Unit Price" < Rec."Unit Cost" then
             SellingPriceStyle := 'Unfavorable';
+        if (Rec.Instock_JobJournalLine = 0) or (Rec.Instock_JobJournalLine < Rec.Quantity) then
+            OutOfStockStyle := 'Unfavorable';
+        if Rec.Quantity > Rec.Instock_JobJournalLine then
+            InsufficientStockStyle := 'Unfavorable';
     end;
 
     local procedure GetInventory()

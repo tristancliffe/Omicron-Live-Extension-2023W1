@@ -46,6 +46,26 @@ pageextension 50154 PurchaseQuoteListExt extends "Purchase Quotes"
                 Image = PurchaseInvoice;
                 RunObject = Page "Posted Purchase Invoices";
             }
+            action(VendorInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Invoices';
+                ToolTip = 'Open a list of posted invoices for this vendor';
+                Image = PurchaseInvoice;
+                Scope = Repeater;
+                RunObject = page "Posted Purchase Invoices";
+                RunPageLink = "Buy-from Vendor No." = field("Buy-from Vendor No.");
+            }
+            action(VendorLedger)
+            {
+                ApplicationArea = All;
+                Caption = 'Ledger';
+                Tooltip = 'Open the vendor entries list for this vendor';
+                image = LedgerEntries;
+                Scope = Repeater;
+                RunObject = page "Vendor Ledger Entries";
+                RunPageLink = "Vendor No." = field("Buy-from Vendor No.");
+            }
         }
         addlast(Promoted)
         {

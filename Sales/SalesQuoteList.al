@@ -71,6 +71,26 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
                 Image = PurchaseInvoice;
                 RunObject = Page "Posted Sales Invoices";
             }
+            action(CustomerInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Invoices';
+                ToolTip = 'Open a list of posted invoices for this customer';
+                Image = SalesInvoice;
+                Scope = Repeater;
+                RunObject = page "Posted Sales Invoices";
+                RunPageLink = "Sell-to Customer No." = field("Sell-to Customer No.");
+            }
+            action(CustomerLedger)
+            {
+                ApplicationArea = All;
+                Caption = 'Ledger';
+                Tooltip = 'Open the customer ledger entries list for this customer';
+                image = LedgerEntries;
+                Scope = Repeater;
+                RunObject = page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = field("Sell-to Customer No.");
+            }
         }
         addlast(Promoted)
         {

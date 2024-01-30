@@ -21,6 +21,8 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
         {
             part(ProjectCues; "Project Manager Activities")
             { ApplicationArea = All; Visible = True; }
+            part(JobCues; "Job Cues")
+            { ApplicationArea = All; Visible = true; }
         }
     }
     actions
