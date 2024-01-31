@@ -7,9 +7,9 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         {
             trigger OnAfterValidate()
             begin
-                GetInventory;
-                if (rec."Unit Price" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
-                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+                GetInventory();
+                CheckProfit();
+                AssemblyWarning();
             end;
         }
         modify(Description)
@@ -60,9 +60,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         {
             trigger OnAfterValidate()
             begin
-                GetInventory;
-                if (rec."Unit Price" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
-                    message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+                GetInventory();
+                CheckProfit();
             end;
         }
         moveafter("Qty. Assigned"; "Unit Cost (LCY)")
@@ -159,6 +158,22 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                     Rec.Modify();
                     Commit();
                 end;
+    end;
+
+    local procedure CheckProfit()
+    begin
+        if (rec."Unit Price" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
+            message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+    end;
+
+    local procedure AssemblyWarning()
+    var
+        ItemRec: Record Item;
+    begin
+        if ItemRec.Get(Rec."No.") and (ItemRec."Replenishment System" = ItemRec."Replenishment System"::Assembly) and (Rec.Instock_SalesLine = 0) then begin
+            if ItemRec."Assembly Policy" = ItemRec."Assembly Policy"::"Assemble-to-Stock" then
+                message('This is an assemble-to-stock ASSEMBLY, and should be assembled manually via Assembly Orders.\ \Using this item journal will probably result in stock levels being incorrect afterwards.')
+        end
     end;
 
     var

@@ -6,7 +6,8 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
         {
             trigger OnAfterValidate()
             begin
-                GetInventory;
+                GetInventory();
+                AssemblyWarning();
             end;
         }
         modify(Quantity)
@@ -129,5 +130,15 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                     Rec.Modify();
                     Commit();
                 end
+    end;
+
+    local procedure AssemblyWarning()
+    var
+        ItemRec: Record Item;
+    begin
+        if ItemRec.Get(Rec."No.") and (ItemRec."Replenishment System" = ItemRec."Replenishment System"::Assembly) and (Rec.Instock_SalesLine = 0) then begin
+            if ItemRec."Assembly Policy" = ItemRec."Assembly Policy"::"Assemble-to-Stock" then
+                message('This is an assemble-to-stock ASSEMBLY, and should be assembled manually via Assembly Orders.\ \Using this item journal will probably result in stock levels being incorrect afterwards.')
+        end
     end;
 }

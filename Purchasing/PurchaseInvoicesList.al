@@ -11,6 +11,10 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
                 Visible = true;
             }
         }
+        modify("Buy-from Vendor No.")
+        { StyleExpr = StatusStyle; }
+        modify("Buy-from Vendor Name")
+        { StyleExpr = StatusStyle; }
         modify("Your Reference")
         {
             ApplicationArea = All;
@@ -96,4 +100,24 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
         Rec.SetCurrentKey("Order Date", "No.");
         Rec.Ascending(false);
     end;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetStatusStyle();
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        SetStatusStyle();
+    end;
+
+    procedure SetStatusStyle()
+    begin
+        StatusStyle := 'Standard';
+        if Rec.Status = Rec.Status::Released then
+            StatusStyle := 'StrongAccent'
+    end;
+
+    var
+        StatusStyle: Text;
 }

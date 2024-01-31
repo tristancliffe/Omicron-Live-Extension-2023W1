@@ -18,6 +18,7 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
             trigger OnAfterValidate()
             begin
                 GetInventory;
+                AssemblyWarning;
             end;
         }
         modify("Reason Code")
@@ -38,7 +39,8 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
             trigger OnAfterValidate()
             begin
                 if Rec."Location Code" = '' then
-                    Rec.Validate("Location Code", 'STORES')
+                    Rec.Validate("Location Code", 'STORES');
+                PurchaseWarning;
             end;
         }
         addbefore(Quantity)
@@ -97,7 +99,6 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
         }
     }
 
-
     trigger OnOpenPage()
     begin
         message('Please don''t forget to set if positive or negative adjustment, rather than purchase or sale (unless it is).\ \For putting purchases into stock, please use Purchase Orders to record prices, suppliers, quantities etc.\ \Not following this rule may result in the death of a kitten.');
@@ -117,5 +118,23 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
             Rec.Instock_ItemJournalLine := Items.Inventory;
             //Rec.Modify();
         end;
+    end;
+
+    local procedure AssemblyWarning()
+    var
+        ItemRec: Record Item;
+    begin
+        if ItemRec.Get(Rec."Item No.") and (ItemRec."Replenishment System" = ItemRec."Replenishment System"::Assembly) then begin
+            if ItemRec."Assembly Policy" = ItemRec."Assembly Policy"::"Assemble-to-Order" then
+                message('This is an assemble-to-order ASSEMBLY, and should be assembled automatically when posting an invoice, or can be done manually via Assembly Orders.\ \Using this item journal will probably result in stock levels being incorrect afterwards.');
+            if ItemRec."Assembly Policy" = ItemRec."Assembly Policy"::"Assemble-to-Stock" then
+                message('This is an assemble-to-stock ASSEMBLY, and should be assembled manually via Assembly Orders.\ \Using this item journal will probably result in stock levels being incorrect afterwards.')
+        end
+    end;
+
+    local procedure PurchaseWarning()
+    begin
+        if (Rec."Entry Type" = Rec."Entry Type"::Purchase) or (Rec."Entry Type" = Rec."Entry Type"::Sale) then
+            message('Make sure you change the entry type to Positive or Negative Adj. unless you really intend to use type Purchase')
     end;
 }

@@ -644,14 +644,14 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 //     RunObject = Page "Shpfy Log Entries";
                 //     ToolTip = 'Shopify log entries to see what''s working and what''s broken';
                 // }
-                // action(ReportLayouts)
-                // {
-                //     ApplicationArea = Basic, Suite;
-                //     Caption = 'Report Layouts';
-                //     Image = User;
-                //     RunObject = page "Report Layout Lookup";
-                //     ToolTip = 'Manage document report layouts';
-                // }
+                action(PhoneNumberReport)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Phone Numbers';
+                    Image = ContactPerson;
+                    RunObject = report "Phone Numbers";
+                    ToolTip = 'Export phone numbers for active customers, vendors and employees';
+                }
             }
         }
         addafter(Action3)
