@@ -113,7 +113,7 @@ pageextension 50112 JobListExtension extends "Job List"
                 ApplicationArea = Suite;
                 Caption = 'Time Sheet Report';
                 Image = "Report";
-                ToolTip = 'Open the Time Sheet report.';
+                ToolTip = 'Open the Time Sheet report - print on Grey';
                 Promoted = true;
                 PromotedCategory = Report;
 
@@ -163,7 +163,7 @@ pageextension 50112 JobListExtension extends "Job List"
                 ApplicationArea = Suite;
                 Caption = 'Job Card';
                 Image = "Report";
-                ToolTip = 'Produce a job card';
+                ToolTip = 'Produce a job card (Send to Word Document, save in the job''s folder, and print on Orange)';
                 Promoted = true;
                 PromotedCategory = Report;
 
@@ -178,12 +178,32 @@ pageextension 50112 JobListExtension extends "Job List"
                     Clear(JobCard);
                 end;
             }
+            action("Job Invoice")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Job Invoice Template';
+                Image = "Report";
+                ToolTip = 'Produce a job invoice template (Send to Word Document, and save to invoices folder)';
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    JobInvoiceTemplate: Report "Job Invoice";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    JobInvoiceTemplate.SetTableView(Job);
+                    JobInvoiceTemplate.RunModal();
+                    Clear(JobInvoiceTemplate);
+                end;
+            }
             action("Workshop Request")
             {
                 ApplicationArea = Suite;
                 Caption = 'Workshop Request Jobcard';
                 Image = "Report";
-                ToolTip = 'Produce the workshop request jobcard';
+                ToolTip = 'Produce the workshop request jobcard (Send to Word Document, edit, then print on Green)';
                 Promoted = true;
                 PromotedCategory = Report;
 

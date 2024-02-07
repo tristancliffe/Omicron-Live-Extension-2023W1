@@ -2,7 +2,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
 {
     layout
     {
-        moveafter("Sell-to Customer Name"; "Your Reference")
+        moveafter("Sell-to Customer Name"; "Your Reference", Status, Correction)
         moveafter("Sell-to Contact"; "External Document No.")
         modify("Sell-to Customer No.")
         { Importance = Standard; }
@@ -45,6 +45,17 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
             { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
             field("Mobile No."; Rec."Mobile No.")
             { ApplicationArea = All; CaptionML = ENU = 'Mobile Phone No.'; }
+        }
+        addafter(Correction)
+        {
+            field("Order Notes"; Rec."Order Notes")
+            {
+                ApplicationArea = All;
+                QuickEntry = false;
+                Importance = Standard;
+                ShowMandatory = true;
+                MultiLine = true;
+            }
         }
     }
     actions

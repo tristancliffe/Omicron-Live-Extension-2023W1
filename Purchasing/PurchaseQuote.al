@@ -12,16 +12,8 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
                 QuickEntry = true;
             }
         }
-        addafter("Your Reference")
+        addafter(Status)
         {
-            field("Preferred Payment Method"; PaymentMethod)
-            {
-                ApplicationArea = All;
-                Caption = 'Preferred Payment Method';
-                ToolTip = 'Pulled from Vendor card';
-                Editable = false;
-                Style = Strong;
-            }
             field("Order Notes"; Rec."Order Notes")
             {
                 ApplicationArea = All;
@@ -47,6 +39,14 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
                     RecVendor."Vendor Notes" := VendorNotes;
                     RecVendor.Modify()
                 end;
+            }
+            field("Preferred Payment Method"; PaymentMethod)
+            {
+                ApplicationArea = All;
+                Caption = 'Preferred Payment Method';
+                ToolTip = 'Pulled from Vendor card';
+                Editable = false;
+                Style = Strong;
             }
         }
         modify("Document Date")
@@ -76,6 +76,7 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         modify("Currency Code")
         { Importance = Standard; }
         movebefore(Control1904651607; Control5)
+        moveafter(Status; "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
     }
     actions
     {

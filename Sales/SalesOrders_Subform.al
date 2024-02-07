@@ -77,6 +77,24 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             field("Amount Including VAT"; Rec."Amount Including VAT")
             { ApplicationArea = All; Visible = true; Editable = false; }
         }
+        modify("Planned Shipment Date")
+        { QuickEntry = false; }
+        modify("Shortcut Dimension 1 Code")
+        { QuickEntry = false; }
+        modify("Shortcut Dimension 2 Code")
+        { QuickEntry = false; }
+        modify(ShortcutDimCode3)
+        { QuickEntry = false; }
+        modify(ShortcutDimCode4)
+        { QuickEntry = false; }
+        modify(ShortcutDimCode5)
+        { QuickEntry = false; }
+        modify(ShortcutDimCode6)
+        { QuickEntry = false; }
+        modify(ShortcutDimCode7)
+        { QuickEntry = false; }
+        modify(ShortcutDimCode8)
+        { QuickEntry = false; }
     }
     actions
     {

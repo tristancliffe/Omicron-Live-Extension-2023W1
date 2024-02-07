@@ -2,7 +2,18 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
 {
     layout
     {
-        moveafter("Sell-to Customer Name"; "Your Reference")
+        addafter("Sell-to Customer Name")
+        {
+            field("Order Notes"; Rec."Order Notes")
+            {
+                ApplicationArea = All;
+                QuickEntry = false;
+                Importance = Standard;
+                ShowMandatory = true;
+                MultiLine = true;
+            }
+        }
+        moveafter("Sell-to Customer Name"; "Your Reference", Status)
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
@@ -80,18 +91,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         { Importance = Standard; }
         modify("Assigned User ID")
         { Importance = Standard; QuickEntry = false; }
-        addafter("Your Reference")
-        {
-            field("Order Notes47091"; Rec."Order Notes")
-            {
-                ApplicationArea = All;
-                QuickEntry = false;
-                Importance = Standard;
-                ShowMandatory = true;
-                MultiLine = true;
-            }
-        }
-        moveafter("Order Notes47091"; Status)
+
         addafter("Sell-to Country/Region Code")
         {
             field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")

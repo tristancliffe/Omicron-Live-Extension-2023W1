@@ -79,6 +79,16 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
                 PromotedOnly = true;
                 PromotedCategory = Process;
             }
+            action(OpenTimeSheet)
+            {
+                ApplicationArea = All;
+                Caption = 'Open Time Sheet';
+                Image = Timesheet;
+                RunObject = Page "Time Sheet Card";
+                RunPageLink = "No." = field("No.");
+                ToolTip = 'Open this time sheet for editing (not as Manager).';
+                Scope = Repeater;
+            }
         }
     }
     trigger OnOpenPage()

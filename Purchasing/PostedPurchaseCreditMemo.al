@@ -6,7 +6,7 @@ pageextension 50214 PostedPurchCreditMemoExt extends "Posted Purchase Credit Mem
         addafter("Buy-from Vendor Name")
         {
             field("Your Reference"; Rec."Your Reference")
-            { ApplicationArea = All; QuickEntry = true; }
+            { ApplicationArea = All; QuickEntry = true; Editable = false; }
         }
         moveafter("Your Reference"; "Vendor Cr. Memo No.")
         modify("Vendor Cr. Memo No.")

@@ -7,6 +7,28 @@ reportextension 50103 OmicronSalesInvoiceExt extends "Standard Sales - Invoice"
             column(WorkDone_Line; "Work Done")
             { }
         }
+        modify(Line)
+        {
+            trigger OnAfterAfterGetRecord()
+            begin
+                if (Line.Quantity = 0) and (PrintZeroQtyLines = false) then
+                    CurrReport.Skip();
+            end;
+        }
+
+    }
+    requestpage
+    {
+        layout
+        {
+            addafter(DisplayAdditionalFeeNote)
+            {
+                field(PrintZeroQtyLines; PrintZeroQtyLines)
+                {
+                    ApplicationArea = All;
+                }
+            }
+        }
     }
 
     rendering
@@ -26,4 +48,7 @@ reportextension 50103 OmicronSalesInvoiceExt extends "Standard Sales - Invoice"
             Summary = 'Omicron Job Sales Invoice';
         }
     }
+
+    var
+        PrintZeroQtyLines: Boolean;
 }

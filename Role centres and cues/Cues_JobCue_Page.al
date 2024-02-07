@@ -49,7 +49,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageId = "Time Sheet Lines Subform";
-                Tooltip = 'Number of ''Open'' hours in timesheets not submitted or approved';
+                Tooltip = 'Number of ''Open'' or ''Submitted'' hours in timesheets, not approved';
                 Caption = 'Open Time Sheet Hours';
                 Visible = true;
             }

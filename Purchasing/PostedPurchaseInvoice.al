@@ -8,7 +8,7 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
             field("Your Reference"; Rec."Your Reference")
             { ApplicationArea = All; QuickEntry = true; }
         }
-        moveafter("Your Reference"; "Vendor Invoice No.")
+        moveafter("Your Reference"; "Vendor Invoice No.", "Payment Method Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
         modify("Vendor Invoice No.")
         { Visible = true; Importance = Standard; }
         modify("Document Date")

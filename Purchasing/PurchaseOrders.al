@@ -12,13 +12,12 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         }
         addafter("Vendor Invoice No.")
         {
-            field("Preferred Payment Method"; PaymentMethod)
+            field("Order Notes"; Rec."Order Notes")
             {
                 ApplicationArea = All;
-                Caption = 'Preferred Payment Method';
-                ToolTip = 'Pulled from Vendor card';
-                Editable = false;
-                Style = Strong;
+                QuickEntry = false;
+                Importance = Standard;
+                MultiLine = true;
             }
         }
         addafter("Buy-from")
@@ -39,15 +38,13 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                     RecVendor.Modify()
                 end;
             }
-        }
-        addafter("Preferred Payment Method")
-        {
-            field("Order Notes"; Rec."Order Notes")
+            field("Preferred Payment Method"; PaymentMethod)
             {
                 ApplicationArea = All;
-                QuickEntry = false;
-                Importance = Standard;
-                MultiLine = true;
+                Caption = 'Preferred Payment Method';
+                ToolTip = 'Pulled from Vendor card';
+                Editable = false;
+                Style = Strong;
             }
         }
         modify("Order Date")
@@ -108,6 +105,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         movebefore(Control1904651607; Control3)
         modify(Control1903326807)
         { Visible = true; }
+        moveafter(Status; "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
     }
     actions
     {

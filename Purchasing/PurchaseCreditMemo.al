@@ -2,7 +2,12 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
 {
     layout
     {
-        moveafter("Buy-from Vendor Name"; "Vendor Cr. Memo No.")
+        moveafter("Buy-from Vendor Name"; Status, "Vendor Cr. Memo No.", Correction, "Payment Method Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
+        addafter("Buy-from Vendor Name")
+        {
+            field("Your Reference"; Rec."Your Reference")
+            { ApplicationArea = All; QuickEntry = true; Visible = true; }
+        }
         modify("Posting Date")
         { Visible = true; Importance = Standard; }
         modify("Document Date")

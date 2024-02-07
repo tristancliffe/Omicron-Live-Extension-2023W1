@@ -2,7 +2,18 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
 {
     layout
     {
-        moveafter("Sell-to Customer Name"; "Your Reference")
+        addafter("Sell-to Customer Name")
+        {
+            field("Order Notes"; Rec."Order Notes")
+            {
+                ApplicationArea = All;
+                QuickEntry = false;
+                Importance = Standard;
+                ShowMandatory = true;
+                MultiLine = true;
+            }
+        }
+        moveafter("Sell-to Customer Name"; "Your Reference", Status)
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
@@ -81,17 +92,6 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         { Importance = Standard; }
         modify("Assigned User ID")
         { Importance = Standard; QuickEntry = false; }
-        addafter("Your Reference")
-        {
-            field("Order Notes47091"; Rec."Order Notes")
-            {
-                ApplicationArea = All;
-                QuickEntry = false;
-                Importance = Standard;
-                ShowMandatory = true;
-                MultiLine = true;
-            }
-        }
         addafter("Sell-to Country/Region Code")
         {
             field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")

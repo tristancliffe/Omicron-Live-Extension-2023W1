@@ -2,7 +2,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
 {
     layout
     {
-        moveafter("Sell-to Customer Name"; "Your Reference")
+        moveafter("Sell-to Customer Name"; "Your Reference", Status)
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
@@ -74,7 +74,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         { Importance = Standard; }
         modify("Assigned User ID")
         { Importance = Standard; QuickEntry = false; }
-        addafter("Your Reference")
+        addafter(Status)
         {
             field("Order Notes47091"; Rec."Order Notes")
             {

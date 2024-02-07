@@ -30,9 +30,6 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                     Commit();
                 end;
             }
-        }
-        addafter("Your Reference")
-        {
             field("Preferred Payment Method"; PaymentMethod)
             {
                 ApplicationArea = All;
@@ -41,6 +38,9 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 Editable = false;
                 Style = Strong;
             }
+        }
+        addafter("Your Reference")
+        {
             field("Order Notes"; Rec."Order Notes")
             {
                 ApplicationArea = All;
@@ -49,7 +49,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 MultiLine = true;
             }
         }
-        moveafter("Your Reference"; Status, "Vendor Invoice No.")
+        moveafter("Your Reference"; Status, "Vendor Invoice No.", "Payment Method Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
         modify("Document Date")
         { Visible = true; Importance = Standard; }
         moveafter("VAT Reporting Date"; "Document Date")

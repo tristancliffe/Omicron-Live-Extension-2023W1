@@ -130,7 +130,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ApplicationArea = Suite;
                 Caption = 'Time Sheet Report';
                 Image = "Report";
-                ToolTip = 'Open the Time Sheet report.';
+                ToolTip = 'Open the Time Sheet report - print on Grey';
 
                 trigger OnAction()
                 begin
@@ -158,9 +158,9 @@ pageextension 50111 JobCardExt extends "Job Card"
             action("Job Card")
             {
                 ApplicationArea = Suite;
-                Caption = 'Job Card/Invoice';
+                Caption = 'Job Card';
                 Image = "Report";
-                ToolTip = 'Produce a job card';
+                ToolTip = 'Produce a job card (Send to Word Document and save it in the job''s folder, and print on Orange)';
 
                 trigger OnAction()
                 begin
@@ -170,12 +170,27 @@ pageextension 50111 JobCardExt extends "Job Card"
                     Clear(JobCard);
                 end;
             }
+            action("Job Invoice")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Job Invoice Template';
+                Image = "Report";
+                ToolTip = 'Produce a job invoice template (Send to Word document and save in the invoice folder)';
+
+                trigger OnAction()
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    JobInvoiceTemplate.SetTableView(Job);
+                    JobInvoiceTemplate.RunModal();
+                    Clear(JobInvoiceTemplate);
+                end;
+            }
             action("Workshop Request")
             {
                 ApplicationArea = Suite;
                 Caption = 'Workshop Request Jobcard';
                 Image = "Report";
-                ToolTip = 'Produce the workshop request jobcard';
+                ToolTip = 'Produce the workshop request jobcard (Send to Word Document to edit, and print on Green paper)';
 
                 trigger OnAction()
                 begin
@@ -256,6 +271,8 @@ pageextension 50111 JobCardExt extends "Job Card"
                 { }
                 actionref(WorkshopRequest; "Workshop Request")
                 { }
+                actionref(JobInvoiceTemplate; "Job Invoice")
+                { }
                 actionref(TimesheetEntries; "Report Timesheet Entries")
                 { }
             }
@@ -270,6 +287,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         Job: Record Job;
         JobTask: Record "Job Task";
         JobCard: Report "Service Instruction";
+        JobInvoiceTemplate: Report "Job Invoice";
         WorkshopRequest: Report "Workshop Request";
         ExcelReport: Report "Job Billing Excel";
         TimesheetReport: Report "Timesheet Entries";
