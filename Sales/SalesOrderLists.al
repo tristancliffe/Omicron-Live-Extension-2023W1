@@ -18,22 +18,21 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         { Visible = false; }
         modify("Sell-To Contact")
         { Visible = false; }
-        addafter("Sell-to Customer Name")
+        moveafter("Sell-to Customer Name"; Amount, Status, "Amount Including VAT", "Your Reference")
+        modify("Your Reference")
+        { Width = 14; Visible = true; }
+        addafter("Amount Including VAT")
         {
-            field("Order Date98002"; Rec."Order Date")
-            { ApplicationArea = All; }
-            field("Your Reference50380"; Rec."Your Reference")
-            { ApplicationArea = All; Width = 14; }
-        }
-        addafter("Your Reference50380")
-        {
-            field("Order Notes1"; Rec."Order Notes")
+            field("Order Date"; Rec."Order Date")
             { ApplicationArea = All; }
         }
-        moveafter("Sell-to Customer Name"; Amount, "Amount Including VAT")
+        addafter("Your Reference")
+        {
+            field("Order Notes"; Rec."Order Notes")
+            { ApplicationArea = All; }
+        }
         modify("Completely Shipped")
         { Visible = true; }
-        moveafter(Amount; Status)
         moveafter("Document Date"; "Completely Shipped")
         addafter("Completely Shipped")
         {

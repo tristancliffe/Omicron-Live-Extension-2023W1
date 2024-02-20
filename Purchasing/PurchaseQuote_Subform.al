@@ -9,6 +9,8 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 GetInventory();
             end;
         }
+        modify(Description)
+        { QuickEntry = true; StyleExpr = CommentStyle; }
         modify(Quantity)
         { style = Strong; }
         addafter(Description)
@@ -119,10 +121,13 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
             }
         }
     }
+    var
+        CommentStyle: Text;
+
     trigger OnAfterGetRecord()
     begin
         GetInventory;
-
+        SetCommentStyle();
     end;
 
     local procedure GetInventory()
@@ -144,5 +149,12 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                     // Rec.Modify()
                     Rec.Validate(Instock_PurchLine, 999)
                 end;
+    end;
+
+    procedure SetCommentStyle()
+    begin
+        CommentStyle := 'Standard';
+        If Rec.Type = Rec.Type::" " then
+            CommentStyle := 'Strong';
     end;
 }

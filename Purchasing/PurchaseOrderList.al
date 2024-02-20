@@ -8,7 +8,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         { StyleExpr = StatusStyle; }
         modify("Buy-from Vendor Name")
         { StyleExpr = StatusStyle; AboutTitle = 'Colour Codes'; AboutText = 'When an order is *Released* it will become **BLUE**. When an order is *partially invoiced* it will become **RED**. When an order is *completely received* it will become **GREEN**. When an order is *partially invoiced and completely received* it will be **BLACK**. If the order has been pre-paid it will be shown in **RED**.'; }
-        moveafter("Buy-from Vendor Name"; "Your Reference", "Amount", Status, "Document Date", "Amount Received Not Invoiced (LCY)", "Amount Including VAT", "Currency Code", "Assigned User ID")
+        moveafter("Buy-from Vendor Name"; "Your Reference", "Amount", Status, "Document Date", "Amount Including VAT", "Currency Code", "Assigned User ID")
         modify(Status)
         { AboutTitle = 'Order Statuses'; AboutText = '**Open** means that the order is *NOT YET FINALISED*. This should mean the order hasn'' been placed, and can be modified. **Released** means that the order has been sent to the supplier, and whilst prices might change, the order is *essentially fixed*. **Pending Prepayment** means a prepayment invoice has been posted.'; }
         modify("Your Reference")
@@ -69,6 +69,11 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         { Visible = true; Width = 7; }
         modify("Amount Received Not Invoiced (LCY)")
         { StyleExpr = ReceivedStyle; }
+        addafter("Amount Received Not Invoiced (LCY)")
+        {
+            field("Prepayment %"; Rec."Prepayment %")
+            { ApplicationArea = All; BlankZero = true; }
+        }
     }
     actions
     {

@@ -20,9 +20,9 @@ pageextension 50196 JobCostFactboxExt extends "Job Cost Factbox"
             {
                 Caption = 'Job Profitability';
                 field(TotalValue; Rec.TotalValue)
-                { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the job so far.'; }
+                { ApplicationArea = All; Visible = true; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the job so far.'; }
                 field(InvoicedValue; Rec.InvoicedValue)
-                { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
+                { ApplicationArea = All; Visible = true; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
                 field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue))
                 { ApplicationArea = All; Visible = true; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; StyleExpr = ProfitStyle; }
             }

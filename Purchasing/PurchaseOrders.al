@@ -2,7 +2,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
 {
     layout
     {
-        moveafter("Buy-from Vendor Name"; "Your Reference", Status, "Vendor Invoice No.")
+        moveafter("Buy-from Vendor Name"; "Your Reference", Status, "Vendor Invoice No.", "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
+
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
         modify("Your Reference")
         {
@@ -105,7 +106,6 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         movebefore(Control1904651607; Control3)
         modify(Control1903326807)
         { Visible = true; }
-        moveafter(Status; "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
     }
     actions
     {

@@ -12,7 +12,7 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
             end;
         }
         modify(Description)
-        { QuickEntry = true; }
+        { QuickEntry = true; StyleExpr = CommentStyle; }
         modify(Quantity)
         { style = Strong; }
         Modify("Qty. to Assemble to Order")
@@ -99,9 +99,14 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
             }
         }
     }
+
+    var
+        CommentStyle: Text;
+
     trigger OnAfterGetRecord() // Triggered on page load to update inventory field
     begin
         GetInventory;
+        SetCommentStyle();
     end;
 
     local procedure GetInventory()
@@ -144,5 +149,12 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
             if ItemRec."Assembly Policy" = ItemRec."Assembly Policy"::"Assemble-to-Stock" then
                 message('This is an assemble-to-stock ASSEMBLY, and should be assembled manually via Assembly Orders.\ \Using this item journal will probably result in stock levels being incorrect afterwards.')
         end
+    end;
+
+    procedure SetCommentStyle()
+    begin
+        CommentStyle := 'Standard';
+        If Rec.Type = Rec.Type::" " then
+            CommentStyle := 'Strong';
     end;
 }

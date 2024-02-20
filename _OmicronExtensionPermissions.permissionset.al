@@ -28,5 +28,6 @@ permissionset 50100 OmicronPermissions
         page "Job Planning History" = X,
         page "Job Planning Lines All" = X,
         report "Timesheet Instructions" = X,
-        page "Job Cues" = X;
+        page "Job Cues" = X,
+        report "Item Prices" = X;
 }

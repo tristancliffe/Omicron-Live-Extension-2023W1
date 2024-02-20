@@ -25,6 +25,12 @@ pageextension 50112 JobListExtension extends "Job List"
             { ApplicationArea = All; BlankZero = true; ToolTip = 'The total number of INVOICED HOURS entered against the job'; Width = 8; }
             field(ToInvoice; Rec.ToInvoice)
             { ApplicationArea = All; StyleExpr = InvoiceStyle; BlankZero = true; }
+            field(TotalValue; Rec.TotalValue)
+            { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the job so far.'; }
+            field(InvoicedValue; Rec.InvoicedValue)
+            { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
+            field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue))
+            { ApplicationArea = All; StyleExpr = ProfitStyle; BlankZero = true; Visible = false; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; }
         }
         moveafter("Date of Arrival"; "Person Responsible")
         modify("Person Responsible")
@@ -294,6 +300,7 @@ pageextension 50112 JobListExtension extends "Job List"
 
     var
         InvoiceStyle: Text;
+        ProfitStyle: Text;
 
     trigger OnOpenPage()
     begin
@@ -305,8 +312,11 @@ pageextension 50112 JobListExtension extends "Job List"
     trigger OnAfterGetRecord()
     begin
         InvoiceStyle := 'StandardAccent';
+        ProfitStyle := 'Standard';
         If Rec.ToInvoice > 3000 then
             InvoiceStyle := 'Attention';
+        if -(Rec.TotalValue + Rec.InvoicedValue) < 0 then
+            ProfitStyle := 'Attention';
     end;
 
     // trigger OnAfterGetRecord()

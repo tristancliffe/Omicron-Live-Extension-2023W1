@@ -115,6 +115,9 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             field(LineAmountInclVAT; Rec."Amount Including VAT")
             { ApplicationArea = All; Visible = true; Caption = 'Line Amount incl. VAT'; }
         }
+        movebefore("Over-Receipt Quantity"; "Prepayment %")
+        modify("Prepayment %")
+        { Visible = true; }
     }
     actions
     {

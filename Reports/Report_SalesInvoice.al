@@ -11,7 +11,7 @@ reportextension 50103 OmicronSalesInvoiceExt extends "Standard Sales - Invoice"
         {
             trigger OnAfterAfterGetRecord()
             begin
-                if (Line.Quantity = 0) and (PrintZeroQtyLines = false) then
+                if (Line.Type = Line.Type::Item) and (Line.Quantity = 0) and (PrintZeroQtyLines = false) then
                     CurrReport.Skip();
             end;
         }

@@ -1,5 +1,28 @@
 pageextension 50175 SalesCreditMemoSubformExt extends "Sales Cr. Memo Subform"
 {
+    layout
+    {
+        modify(Description)
+        { QuickEntry = true; }
+        modify(Quantity)
+        { style = Strong; }
+        Modify("Qty. to Assign")
+        { QuickEntry = true; }
+        modify("Item Reference No.")
+        { Visible = false; }
+        addafter("Qty. Assigned")
+        {
+            field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
+            { ApplicationArea = All; style = Ambiguous; }
+            field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
+            { ApplicationArea = All; style = AttentionAccent; }
+        }
+        addafter("Line Amount")
+        {
+            field("Amount Including VAT"; Rec."Amount Including VAT")
+            { ApplicationArea = All; Visible = true; Editable = false; }
+        }
+    }
     actions
     {
         addlast(processing)

@@ -12,7 +12,7 @@
 // A variable "IsReady" is defined to handle the large notes field.
 // An "OnAfterGetCurrRecord" trigger is added to the page extension to check if the user control is ready, then it calls the "FillAddIn" function.
 // A local procedure "FillAddIn" is defined to set the content of the user control for the large notes field.
-pageextension 50102 CustomerCardExt extends "Customer Card"
+pageextension 50102 CustomerCardExtension extends "Customer Card"
 {
     layout
     {

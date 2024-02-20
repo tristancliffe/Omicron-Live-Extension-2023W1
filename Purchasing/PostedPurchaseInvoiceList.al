@@ -3,6 +3,8 @@ pageextension 50179 PostedPurchInvoiceListExt extends "Posted Purchase Invoices"
     layout
     {
         movebefore("Buy-from Vendor No."; "Posting Date", "Document Date", Cancelled)
+        moveafter(Amount; "Amount Including VAT", "Remaining Amount")
+        movebefore(Amount; "Vendor Invoice No.")
         modify("Posting Date")
         {
             ApplicationArea = All;
@@ -10,17 +12,17 @@ pageextension 50179 PostedPurchInvoiceListExt extends "Posted Purchase Invoices"
             Caption = 'Posted Date';
             ToolTip = 'The date that the invoice was posted.';
         }
-        moveafter(Amount; "Amount Including VAT")
         modify("Amount Including VAT")
         {
             Caption = 'Amount incl. VAT';
             Visible = true;
         }
+        modify("Remaining Amount")
+        { Visible = true; }
         modify("Document Date")
         { Visible = true; }
         modify(Cancelled)
         { Visible = true; }
-        movebefore(Amount; "Vendor Invoice No.")
         modify("Currency Code")
         { Visible = false; }
     }

@@ -11,7 +11,7 @@
 // Changing the caption of the "BOM Level" field to "BOM Availability"
 // Making some fields more prominent by setting their Importance property to "Promoted"
 // The code also contains a trigger for the "No." field, which runs after validation and checks if the "Description" field is blank. If it is, the trigger sets the values of the "Reordering Policy" and "Automatic Ext. Texts" fields to default values.
-pageextension 50100 ItemCardExt extends "Item Card"
+pageextension 50100 ItemCardExtension extends "Item Card"
 {
     layout
     {

@@ -218,4 +218,12 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
         ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
+
+    procedure CheckNotificationsOnce()
+    begin
+        CallNotificationCheck := true;
+    end;
+
+    protected var
+        CallNotificationCheck: Boolean;
 }

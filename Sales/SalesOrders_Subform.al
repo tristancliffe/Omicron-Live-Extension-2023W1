@@ -13,7 +13,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             end;
         }
         modify(Description)
-        { QuickEntry = true; }
+        { QuickEntry = true; StyleExpr = CommentStyle; }
         modify(Quantity)
         { style = Strong; }
         Modify("Qty. to Assign")
@@ -151,6 +151,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
+        SetCommentStyle();
     end;
 
     local procedure GetInventory()
@@ -196,6 +197,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
 
     var
         IsOpenOrder: Boolean;
+        CommentStyle: Text;
 
     trigger OnOpenPage()
     var
@@ -203,5 +205,12 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     begin
         if Order.Status = Order.Status::Open then
             IsOpenOrder := true;
+    end;
+
+    procedure SetCommentStyle()
+    begin
+        CommentStyle := 'Standard';
+        If Rec.Type = Rec.Type::" " then
+            CommentStyle := 'Strong';
     end;
 }

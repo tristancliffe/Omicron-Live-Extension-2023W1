@@ -246,6 +246,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         MobileNo: Text[30];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
+        IsCustomerOrContactNotEmpty: Boolean;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin

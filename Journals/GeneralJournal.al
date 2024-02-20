@@ -23,6 +23,11 @@ pageextension 50163 GeneralJournalExt extends "General Journal"
         { Visible = true; }
         modify("VAT Amount")
         { Visible = true; }
+        // addafter(ShortcutDimCode8)
+        // {
+        //     field("FA Posting Type"; Rec."FA Posting Type")
+        //     { ApplicationArea = all; Visible = true;    }
+        // }
         //moveafter("Bal. Gen. Prod. Posting Group"; "Applies-to Doc. Type", "Applies-to Doc. No.")
     }
     actions
