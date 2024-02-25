@@ -44,6 +44,12 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
                 AutoFormatType = 1;
                 Width = 8;
             }
+            field("Partially Received"; Rec."Partially Received")
+            {
+                StyleExpr = PartiallyReceivedStyle;
+                ApplicationArea = All;
+                Editable = false;
+            }
             field("Completely Received"; Rec."Completely Received")
             {
                 ApplicationArea = All;
@@ -53,6 +59,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             }
             field("Partially Invoiced"; Rec."Partially Invoiced")
             {
+                StyleExpr = PartiallyInvoicedStyle;
                 ApplicationArea = All;
                 Caption = 'Partially Invoiced';
                 Visible = true;
@@ -127,6 +134,7 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
 
     trigger OnAfterGetRecord()
     begin
+        SetPartiallyReceived();
         SetStatusStyle();
         SetOverdueStyle();
         UpdateTotalLCY();
@@ -142,6 +150,12 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
     begin
         StatusStyle := 'Standard';
         ReceivedStyle := 'StandardAccent';
+        PartiallyReceivedStyle := 'StandardAccent';
+        PartiallyInvoicedStyle := 'StandardAccent';
+        If Rec."Partially Received" = true then
+            PartiallyReceivedStyle := 'Unfavorable';
+        if Rec."Partially Invoiced" = true then
+            PartiallyInvoicedStyle := 'Unfavorable';
         if (Rec."Completely Received" = true) AND (Rec."Partially Invoiced" = true) then
             StatusStyle := 'Strong'
         else
@@ -169,10 +183,21 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             OverdueStyle := 'Unfavorable';
     end;
 
+    procedure SetPartiallyReceived()
+    begin
+        if Rec."Last Receiving No." = '' then
+            Rec."Partially Received" := false
+        else
+            if Rec."Completely Received" = false then
+                Rec."Partially Received" := true;
+    end;
+
     var
         StatusStyle: Text;
         OverdueStyle: Text;
         ReceivedStyle: Text;
+        PartiallyReceivedStyle: Text;
+        PartiallyInvoicedStyle: Text;
         TotalAmountLCY: Decimal;
         Currency: Record Currency;
 

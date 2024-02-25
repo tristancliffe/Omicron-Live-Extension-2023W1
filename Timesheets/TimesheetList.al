@@ -1,11 +1,23 @@
 pageextension 50142 TimeSheetList extends "Time Sheet List"
 {
+
+    AboutTitle = 'List colours';
+    AboutText = '**Bold** text means no times recorded. **Green** means more than 35 hours have been entered and submitted. ***Red italic*** means more than 20 but less than 35 hours have been submitted. **Red bold** means less than 35 hours have been entered.';
+
     layout
     {
         modify(Description)
-        { StyleExpr = PendingStyle; }
+        {
+            StyleExpr = PendingStyle;
+            AboutTitle = 'List colours';
+            AboutText = '**Bold** text means no times recorded. **Green** means more than 35 hours have been entered and submitted. ***Red italic*** means more than 20 but less than 35 hours have been submitted. **Red bold** means less than 35 hours have been entered.';
+        }
         modify("Resource No.")
-        { StyleExpr = PendingStyle; }
+        {
+            StyleExpr = PendingStyle;
+            AboutTitle = 'List colours';
+            AboutText = '**Bold** text means no times recorded. **Green** means more than 35 hours have been entered and submitted. ***Red italic*** means more than 20 but less than 35 hours have been submitted. **Red bold** means less than 35 hours have been entered.';
+        }
         modify(Quantity)
         { BlankZero = true; }
         modify("Quantity Open")
@@ -95,8 +107,6 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
     procedure SetPendingStyle()
     begin
         PendingStyle := 'Standard';
-        // if (Rec.Quantity < 40.0) and (rec.Quantity > 0) then
-        //     PendingStyle := 'Unfavorable';
         if rec.Quantity = 0 then
             PendingStyle := 'Strong'
         else
@@ -108,7 +118,6 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
                 else
                     if rec.Quantity < 35 then
                         PendingStyle := 'Unfavorable';
-        //PendingStyle := 'Standard';
     end;
 
     var

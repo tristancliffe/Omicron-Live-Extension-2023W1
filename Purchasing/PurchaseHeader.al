@@ -41,5 +41,16 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
             CaptionML = ENG = 'Preferred Payment Method';
             DataClassification = CustomerContent;
         }
+        field(50103; "Partially Received"; Boolean)
+        {
+            //DataClassification = CustomerContent;
+            Caption = 'Partially Received';
+            FieldClass = FlowField;
+            CalcFormula = exist("Purchase Line" where("Document Type" = field("Document Type"),
+                                                       "Document No." = field("No."),
+                                                       Type = filter(<> " "),
+                                                       "Location Code" = field("Location Filter"),
+                                                       "Quantity Received" = filter(<> 0)));
+        }
     }
 }

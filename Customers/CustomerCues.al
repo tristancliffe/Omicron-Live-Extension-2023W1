@@ -4,7 +4,7 @@
 // The field has a custom caption of "Ongoing Jobs".
 // The field has a tooltip that explains that it shows the number of ongoing jobs for the customer.
 // The field is linked to a drilldown page with ID "Job List".
-pageextension 50158 CustomerCueExt extends "Sales Hist. Sell-to FactBox"
+pageextension 50158 CustomerCueFactboxExt extends "Sales Hist. Sell-to FactBox"
 {
     layout
     {

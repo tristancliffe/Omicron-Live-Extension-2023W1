@@ -83,6 +83,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 ToolTip = 'The Requisition Worksheet page lists items that you want to order. Requisition worksheet lines contain detailed information about the items that need to be reordered. You can edit and delete the lines to adjust your replenishment plan.';
             }
         }
+        moveafter("<Page Purchase Invoices>"; "Blanket Purchase Orders", "Incoming Documents")
         addlast(Action41)
         {
             action("Aged Creditors")
@@ -107,6 +108,17 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Image = PeriodEntries;
                 RunObject = page "VAT Return Period List";
                 Tooltip = 'Register new VAT return periods and see list of open/submitted/closed periods';
+            }
+        }
+        moveafter("Sales Invoices"; "Blanket Sales Orders")
+        addafter("Sales Invoices")
+        {
+            action(ContactsList)
+            {
+                ApplicationArea = All;
+                Caption = 'Contacts';
+                Image = CustomerContact;
+                RunObject = page "Contact List";
             }
         }
         addlast(Action40)
