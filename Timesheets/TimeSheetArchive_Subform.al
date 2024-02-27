@@ -15,6 +15,14 @@ pageextension 50204 "Time Sheet Archive Subform Ext" extends "Time Sheet Archive
                 end;
             }
         }
+        modify("Work Type Code")
+        { Visible = false; }
+        modify("Service Order No.")
+        { Visible = false; }
+        modify("Assembly Order No.")
+        { Visible = false; }
+        moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
+        moveafter(Type; Status)
     }
     actions
     {

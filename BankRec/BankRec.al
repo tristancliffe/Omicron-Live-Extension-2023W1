@@ -28,9 +28,9 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
             }
         }
         modify(MatchManually)
-        { ShortcutKey = 'Alt+M'; }
+        { ShortcutKey = 'Alt+M'; CaptionML = ENG = 'MATCH'; }
         modify(RemoveMatch)
-        { ShortcutKey = 'Alt+R'; }
+        { ShortcutKey = 'Alt+R'; CaptionML = ENG = 'UN-MATCH'; }
         modify(MatchAutomatically)
         { ShortcutKey = 'Alt+X'; }
         modify(MatchDetails)
@@ -38,9 +38,9 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
         modify("&Test Report")
         { ShortcutKey = 'Ctrl+Alt+T'; }
         modify(NotMatched)
-        { ShortcutKey = 'Alt+S'; CaptionML = ENG = 'Hide Matched'; }
+        { ShortcutKey = 'Alt+S'; CaptionML = ENG = 'HIDE Matched'; }
         modify(All)
-        { ShortcutKey = 'Alt+A'; }
+        { ShortcutKey = 'Alt+A'; CaptionML = ENG = 'SHOW All'; }
         modify("Transfer to General Journal_Promoted")
         { Visible = false; }
         modify(SuggestLines_Promoted)

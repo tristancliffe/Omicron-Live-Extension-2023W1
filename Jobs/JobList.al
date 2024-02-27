@@ -34,7 +34,7 @@ pageextension 50112 JobListExtension extends "Job List"
         }
         moveafter("Date of Arrival"; "Person Responsible")
         modify("Person Responsible")
-        { Visible = true; ToolTip = 'Whom is ''doing'' the job, or whom is responsible for it.'; }
+        { Visible = false; ToolTip = 'Whom is ''doing'' the job, or whom is responsible for it.'; }
         moveafter(Control1905650007; Control1907234507, Control1902018507)
         modify(Control1907234507)
         { Visible = true; }

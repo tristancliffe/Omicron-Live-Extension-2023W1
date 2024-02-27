@@ -778,5 +778,16 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 }
             }
         }
+        addlast(Shpfy)
+        {
+            action(ShpfyLog)
+            {
+                ApplicationArea = All;
+                Caption = 'Log';
+                Image = Log;
+                RunObject = page "Shpfy Log Entries";
+                ToolTip = 'View the logged, raw transaction entries for the Shopify connector';
+            }
+        }
     }
 }

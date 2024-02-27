@@ -154,6 +154,16 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 Visible = true;
                 Enabled = true;
             }
+            action(ItemsFromVendor)
+            {
+                ApplicationArea = All;
+                Caption = 'Items from Vendor';
+                Image = Item;
+                RunObject = Page "Vendor Item Catalog";
+                RunPageLink = "Vendor No." = FIELD("Buy-from Vendor No.");
+                RunPageView = SORTING("Vendor No.", "Item No.");
+                ToolTip = 'Open the list of items that you trade in with this vendor.';
+            }
         }
         addlast(Category_Process)
         {
@@ -162,6 +172,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             actionref(PostedReceipts_Promoted; Receipts)
             { }
             actionref(VendorCard; Vendor)
+            { }
+            actionref(ItemsFromVendor_Promoted; ItemsFromVendor)
             { }
             actionref(PostedInvoices_Promoted; PostedInvoices)
             { }
