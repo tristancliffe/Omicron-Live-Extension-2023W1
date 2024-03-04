@@ -295,8 +295,11 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         if RecVendor.FindSet() then begin
             VendorNotes := RecVendor."Vendor Notes";
             PaymentMethod := RecVendor."Preferred Payment Method";
-            // Rec.Modify()
         end;
+        // if Rec."Posting Date" <> Today then begin
+        //     Rec.Validate(Rec."Posting Date", Today);
+        //     Rec.Modify();
+        // end;
     end;
 
     trigger OnAfterGetRecord()

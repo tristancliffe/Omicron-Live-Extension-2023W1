@@ -13,7 +13,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 MultiLine = true;
             }
         }
-        moveafter("Sell-to Customer Name"; "Your Reference", Status)
+        moveafter("Sell-to Customer Name"; "Your Reference", Status, "Shipping Advice")
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
@@ -88,10 +88,11 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Ship-to Post Code")
         { Importance = Standard; }
         modify("Shipment Date")
-        { Importance = Standard; }
+        { Importance = Standard; Visible = true; }
         modify("Assigned User ID")
         { Importance = Standard; QuickEntry = false; }
-
+        modify("Shipping Advice")
+        { Importance = Standard; }
         addafter("Sell-to Country/Region Code")
         {
             field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
@@ -150,21 +151,10 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             actionref(Statistics2; Statistics)
             { }
         }
-        // modify("Pick Instruction")
-        // {
-        //     Promoted = true;
-        //     PromotedCategory = Process;
-        //     PromotedOnly = true;
-        // }
         modify("Create &Warehouse Shipment")
         { Visible = false; }
         modify("Create Inventor&y Put-away/Pick")
         { Visible = false; }
-        // modify("Print Confirmation")
-        // {
-        //     Promoted = true;
-        //     PromotedCategory = Process;
-        // }
         addlast("F&unctions")
         {
             action(ItemJournal)
@@ -176,9 +166,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 ShortcutKey = 'Shift+Ctrl+I';
                 ToolTip = 'Takes the user to the item journal to add [secondhand] stock';
                 Visible = true;
-                // Promoted = true;
-                // PromotedOnly = true;
-                // PromotedCategory = Process;
             }
             action(ItemList)
             {
@@ -189,9 +176,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 ShortcutKey = 'Shift+Ctrl+L';
                 ToolTip = 'Takes the user to the item list';
                 Visible = true;
-                // Promoted = true;
-                // PromotedOnly = true;
-                // PromotedCategory = Process;
             }
         }
         modify(Post)
@@ -200,7 +184,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    //Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -210,7 +194,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    //Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -220,7 +204,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    //Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -229,7 +213,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         //     trigger OnBeforeAction()
         //     begin
         //         if rec."Posting Date" = 0D then begin
-        //             Rec.Validate("Posting Date", Today);
+        //             Rec.Validate(Rec."Posting Date", Today);
         //             Rec.Modify();
         //         end;
         //     end;
@@ -271,6 +255,10 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             CustomerNotes := RecCustomer."Customer Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
+        // if Rec."Posting Date" <> Today then begin
+        //     Rec.Validate(Rec."Posting Date", Today);
+        //     Rec.Modify();
+        // end;
     end;
 
     trigger OnAfterGetRecord()

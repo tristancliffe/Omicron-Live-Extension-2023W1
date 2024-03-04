@@ -149,7 +149,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    // Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -159,7 +159,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    // Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -169,7 +169,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    // Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -221,6 +221,10 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             PaymentMethod := RecVendor."Preferred Payment Method";
             //Rec.Modify()
         end;
+        // if () and (Rec."Posting Date" <> Today) then begin
+        //     Rec.Validate(Rec."Posting Date", Today);
+        //     Rec.Modify();
+        // end;
     end;
 
     trigger OnAfterGetRecord()

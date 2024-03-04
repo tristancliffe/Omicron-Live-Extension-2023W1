@@ -239,6 +239,10 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             CustomerNotes := RecCustomer."Customer Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
+        // if Rec."Posting Date" <> Today then begin
+        //     Rec.Validate(Rec."Posting Date", Today);
+        //     Rec.Modify();
+        // end;
     end;
 
     trigger OnAfterGetRecord()
