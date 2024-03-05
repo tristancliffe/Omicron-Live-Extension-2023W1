@@ -31,10 +31,15 @@ pageextension 50223 TimesheetArchiveListExt extends "Time Sheet Archive List"
     trigger OnAfterGetRecord()
     begin
         Rec.CalcFields(Quantity);
-        QuantityStyle := 'Standard';
-        if Rec.Quantity > 40 then
-            QuantityStyle := 'Favorable';
-        if Rec.Quantity < 40 then
-            QuantityStyle := 'Attention';
+        QuantityStyle := SetQuantityStyle();
+    end;
+
+    procedure SetQuantityStyle(): Text
+    begin
+        if rec.Quantity > 40 then
+            exit('Favorable');
+        if rec.Quantity < 40 then
+            exit('Attension');
+        exit('');
     end;
 }

@@ -198,14 +198,17 @@ pageextension 50114 JobJournalExt extends "Job Journal"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
-        SetStyles();
+        BillableStyle := SetBillableStyle();
+        BudgetStyle := SetBudgetStyle();
+        SellingPriceStyle := SetSellingPriceStyle();
+        OutOfStockStyle := SetOutOfStockStyle();
+        InsufficientStockStyle := SetInsufficientStockStyle();
     end;
 
     trigger OnOpenPage()
     begin
         Rec.SetCurrentKey("Posting Date", "Job Planning Line No.");
         Rec.Ascending(true);
-        SetStyles;
     end;
 
     var
@@ -215,27 +218,45 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         InsufficientStockStyle: Text;
         SellingPriceStyle: Text;
 
-    local procedure SetStyles()
+    local procedure SetBillableStyle(): Text
     begin
-        BillableStyle := 'Standard';
-        BudgetStyle := 'Standard';
-        SellingPriceStyle := 'Standard';
-        OutOfStockStyle := 'StandardAccent';
-        InsufficientStockStyle := 'Standard';
+        case Rec."Line Type" of
+            Rec."Line Type"::Billable:
+                exit('Favorable');
+            Rec."Line Type"::"Both Budget and Billable":
+                exit('Ambiguous');
+        end;
+        exit('');
+    end;
+
+    local procedure SetBudgetStyle(): Text
+    begin
         case Rec."Line Type" of
             Rec."Line Type"::Budget:
-                BudgetStyle := 'Attention';
-            Rec."Line Type"::Billable:
-                BillableStyle := 'Favorable';
-            Rec."Line Type"::"Both Budget and Billable":
-                BillableStyle := 'Ambiguous';
+                exit('Attention');
         end;
+        exit('');
+    end;
+
+    local procedure SetSellingPriceStyle(): Text
+    begin
         if Rec."Unit Price" < Rec."Unit Cost" then
-            SellingPriceStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    local procedure SetOutOfStockStyle(): Text
+    begin
         if (Rec.Instock_JobJournalLine = 0) or (Rec.Instock_JobJournalLine < Rec.Quantity) then
-            OutOfStockStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    local procedure SetInsufficientStockStyle(): Text
+    begin
         if Rec.Quantity > Rec.Instock_JobJournalLine then
-            InsufficientStockStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
     end;
 
     local procedure GetInventory()

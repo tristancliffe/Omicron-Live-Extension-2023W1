@@ -79,6 +79,7 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
             BlankZero = true;
         }
         moveafter("Qty. Assigned"; "Unit Cost (LCY)")
+        moveafter("Qty. to Assemble to Order"; WSB_AvailabilityIndicator)
     }
     actions
     {
@@ -106,7 +107,7 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
     trigger OnAfterGetRecord() // Triggered on page load to update inventory field
     begin
         GetInventory;
-        SetCommentStyle();
+        CommentStyle := SetCommentStyle();
     end;
 
     local procedure GetInventory()
@@ -151,10 +152,10 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
         end
     end;
 
-    procedure SetCommentStyle()
+    procedure SetCommentStyle(): Text
     begin
-        CommentStyle := 'Standard';
-        If Rec.Type = Rec.Type::" " then
-            CommentStyle := 'Strong';
+        if Rec.Type = Rec.Type::" " then
+            exit('Strong');
+        exit('');
     end;
 }

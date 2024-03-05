@@ -32,14 +32,15 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
     var
         BalanceColour: Text;
 
-    local procedure SetBalanceColours()
+    local procedure SetBalanceColours(): Text
     begin
-        BalanceColour := 'Standard';
-        if Rec.Amount < 0 then BalanceColour := 'Attention'
+        if Rec.Amount < 0 then
+            exit('Attention');
+        exit('');
     end;
 
     trigger OnAfterGetRecord()
     begin
-        SetBalanceColours();
+        BalanceColour := SetBalanceColours();
     end;
 }

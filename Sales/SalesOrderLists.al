@@ -4,14 +4,14 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
     {
         modify("Sell-to Customer No.")
         {
-            StyleExpr = ShippedStatus;
+            StyleExpr = ShippedStatusStyle;
             AboutTitle = 'Sales Order Colours';
             AboutText = 'Orders that have *completely shipped* are shown in **bold RED**. If *partially invoiced* they are shown in **bold GREEN**. If some other condition exists they are shown in **BLUE**. *Released* orders are shown as **RED**. Pre-paid invoices are shown in **YELLOW**. Other orders are shown as **BLACK**.';
         }
         modify(Status)
         { AboutTitle = 'Order Status'; AboutText = '**Open** means that the order is *NOT YET FINALISED*. This should mean the order hasn'' been placed, and can be modified. **Released** means that the order has been sent to the supplier, and whilst prices might change, the order is *essentially fixed*. **Pending Prepayment** means a prepayment invoice has been posted.'; }
         modify("Sell-to Customer Name")
-        { StyleExpr = ShippedStatus; }
+        { StyleExpr = ShippedStatusStyle; }
         modify("External Document No.")
         { Visible = false; }
         modify("Location Code")
@@ -24,7 +24,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         addafter("Amount Including VAT")
         {
             field("Order Date"; Rec."Order Date")
-            { ApplicationArea = All; }
+            { ApplicationArea = All; StyleExpr = OrderDateStyle; }
         }
         addafter("Your Reference")
         {
@@ -37,10 +37,19 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
         addafter("Completely Shipped")
         {
             field(InvoicedLineExists; Rec.InvoicedLineExists)
-            { ApplicationArea = All; }
+            { ApplicationArea = All; Caption = 'Invoiced Lines Exist'; Visible = false; }
         }
         modify("Document Date")
         { Visible = false; }
+        addbefore("Completely Shipped")
+        {
+            field("Partially Shipped"; Rec."Partially Shipped")
+            {
+                StyleExpr = PartiallyShippedStyle;
+                ApplicationArea = All;
+                Editable = false;
+            }
+        }
     }
     actions
     {
@@ -93,33 +102,52 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
 
     trigger OnAfterGetRecord()
     begin
-        SetShippedStatus();
+        ShippedStatusStyle := SetShippedStatus();
+        PartiallyShippedStyle := SetPartiallyShippedStyle();
+        OrderDateStyle := CheckOrderDate();
     end;
 
-    procedure SetShippedStatus()
+    procedure SetPartiallyShippedStyle(): Text
     begin
-        ShippedStatus := 'Standard';
+        if (Rec.InvoicedLineExists = true) or (Rec."Partially Shipped" = true) then
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    procedure SetShippedStatus(): Text
+    begin
+        //ShippedStatusStyle := 'Standard';
         if (Rec."Completely Shipped" = true) then
-            ShippedStatus := 'Unfavorable'
+            exit('Unfavorable')
         else
-            if (Rec.InvoicedLineExists = true) then
-                ShippedStatus := 'Favorable'
+            if (Rec.InvoicedLineExists = true) or (Rec."Partially Shipped" = true) then
+                exit('Favorable')
             else
                 if rec.Ship = true then
-                    ShippedStatus := 'StrongAccent'
+                    exit('StrongAccent')
                 else
                     if Rec."Shpfy Order Id" > 0 then
-                        ShippedStatus := 'Strong'
+                        exit('Strong')
                     else
                         if Rec.Status = Rec.Status::Released then
-                            ShippedStatus := 'Attention'
+                            exit('Attention')
                         else
                             if Rec.Status = Rec.Status::"Pending Prepayment" then
-                                ShippedStatus := 'Ambiguous'
-                            else
-                                ShippedStatus := 'Standard';
+                                exit('Ambiguous');
+        exit('')
+    end;
+
+    procedure CheckOrderDate(): Text;
+    begin
+        if Rec."Order Date" < CalcDate('-12M', Today()) then
+            exit('Unfavorable');
+        exit('');
     end;
 
     var
-        ShippedStatus: Text;
+        ShippedStatusStyle: Text;
+        PartiallyShippedStyle: Text;
+        OrderDateStyle: Text;
+        TodayDate: Date;
+        MaxOrderDate: Date;
 }

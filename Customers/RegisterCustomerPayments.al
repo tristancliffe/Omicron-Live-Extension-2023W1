@@ -30,12 +30,13 @@ pageextension 50191 RegisterCustomerPaymentsExt extends "Payment Registration"
 
     trigger OnAfterGetRecord()
     begin
-        SetBalanceColours();
+        BalanceColours := SetBalanceColours();
     end;
 
-    local procedure SetBalanceColours()
+    local procedure SetBalanceColours(): Text
     begin
-        BalanceColours := 'Standard';
-        if Rec."Remaining Amount" < 1 then BalanceColours := 'Attention';
+        if Rec."Remaining Amount" < 1 then
+            exit('Attention');
+        exit('');
     end;
 }

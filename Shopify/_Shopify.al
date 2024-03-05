@@ -25,9 +25,9 @@ codeunit 50102 "Shpfy Order External Doc. No"
 enumextension 50101 "Extended Stock Calculations" extends "Shpfy Stock Calculation"
 {
     // Adds the option "Inventory on hand" to the Shopify stock calulation system rather than future availability
-    value(50101; "Non-reserved Inventory")
+    value(50101; "Omicron Non-Reserved Inventory")
     {
-        Caption = 'Free Inventory (not reserved)';
+        Caption = 'Omicron - Available Inventory (not reserved)';
         Implementation = "Shpfy Stock Calculation" = "Shpfy Stock Calc. Inventory",
                          "Shpfy IStock Available" = "Shpfy Can Have Stock";
     }

@@ -124,20 +124,20 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
                     else
                         OrderQty := 0;
             end;
-            SetReorderStatus();
+            ReorderStatus := SetReorderStatus();
 
         end;
     end;
 
-    procedure SetReorderStatus()
+    procedure SetReorderStatus(): Text
     begin
-        ReorderStatus := 'StandardAccent';
         if QtyInStock <= LowStockThreshold then
-            ReorderStatus := 'Unfavorable'
+            exit('Unfavorable')
         else
             if (QtyInStock >= ((OrderQty + LowStockThreshold) / 2)) then
-                ReorderStatus := 'StandardAccent'
+                exit('StandardAccent')
             else
-                ReorderStatus := 'Attention';
+                exit('Attention');
+        exit('');
     end;
 }

@@ -95,6 +95,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         { QuickEntry = false; }
         modify(ShortcutDimCode8)
         { QuickEntry = false; }
+        moveafter("Qty. to Assemble to Order"; WSB_AvailabilityIndicator)
     }
     actions
     {
@@ -151,7 +152,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
-        SetCommentStyle();
+        CommentStyle := SetCommentStyle();
     end;
 
     local procedure GetInventory()
@@ -207,10 +208,10 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             IsOpenOrder := true;
     end;
 
-    procedure SetCommentStyle()
+    procedure SetCommentStyle(): Text
     begin
-        CommentStyle := 'Standard';
         If Rec.Type = Rec.Type::" " then
-            CommentStyle := 'Strong';
+            exit('Strong');
+        exit('');
     end;
 }

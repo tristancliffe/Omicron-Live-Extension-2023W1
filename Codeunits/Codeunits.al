@@ -5,13 +5,12 @@ codeunit 50100 ChangeStatusColour
         case Line.Status of
             Line.status::Approved:
                 exit('favorable');
-            Line.Status::Open:
-                exit('standard');
             Line.Status::Rejected:
                 exit('unfavorable');
             Line.Status::Submitted:
                 exit('standardaccent');
         end;
+        exit('');
     end;
 }
 

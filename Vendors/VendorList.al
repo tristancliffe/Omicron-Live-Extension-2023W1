@@ -3,7 +3,7 @@ pageextension 50106 VendorListExtension extends "Vendor List"
     layout
     {
         modify("No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyle; }
         modify(Name)
         { StyleExpr = BlockedStyle; }
         modify(Control1)
@@ -22,7 +22,7 @@ pageextension 50106 VendorListExtension extends "Vendor List"
         modify("Phone No.")
         {
             ApplicationArea = All;
-            StyleExpr = BlockedStyleNo;
+            StyleExpr = BlockedStyle;
         }
         addafter("Phone No.")
         {
@@ -30,13 +30,13 @@ pageextension 50106 VendorListExtension extends "Vendor List"
             {
                 ApplicationArea = All;
                 ExtendedDatatype = PhoneNo;
-                StyleExpr = BlockedStyleNo;
+                StyleExpr = BlockedStyle;
             }
             field("E-Mail"; Rec."E-Mail")
             {
                 ApplicationArea = All;
                 ExtendedDatatype = EMail;
-                StyleExpr = BlockedStyleNo;
+                StyleExpr = BlockedStyle;
             }
         }
         addafter("Payments (LCY)")
@@ -153,33 +153,43 @@ pageextension 50106 VendorListExtension extends "Vendor List"
 
     trigger OnAfterGetRecord()
     begin
-        SetBlockedStyle();
+        BlockedStyle := SetBlockedStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetBlockedStyle();
-    end;
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     BlockedStyle := SetBlockedStyle();
+    // end;
 
-    procedure SetBlockedStyle()
+
+    procedure SetBlockedStyle(): Text
     begin
-        if Rec.Blocked = Rec.Blocked::" " then begin
-            BlockedStyle := 'Standard';
-            BlockedStyleNo := 'StandardAccent';
-        end else
-            if Rec.Blocked = Rec.Blocked::All then begin
-                BlockedStyle := 'Subordinate';
-                BlockedStyleNo := 'Subordinate';
-            end else
-                if Rec.Blocked = Rec.Blocked::Payment then begin
-                    BlockedStyle := 'Ambiguous';
-                    BlockedStyleNo := 'Ambiguous';
-                end;
+        if Rec.Blocked = Rec.Blocked::All then
+            exit('Subordinate')
+        else
+            if Rec.Blocked = Rec.Blocked::Payment then
+                exit('Ambiguous');
+        exit('');
     end;
+    // procedure SetBlockedStyle()
+    // begin
+    //     if Rec.Blocked = Rec.Blocked::" " then begin
+    //         BlockedStyle := 'Standard';
+    //         BlockedStyleNo := 'StandardAccent';
+    //     end else
+    //         if Rec.Blocked = Rec.Blocked::All then begin
+    //             BlockedStyle := 'Subordinate';
+    //             BlockedStyleNo := 'Subordinate';
+    //         end else
+    //             if Rec.Blocked = Rec.Blocked::Payment then begin
+    //                 BlockedStyle := 'Ambiguous';
+    //                 BlockedStyleNo := 'Ambiguous';
+    //             end;
+    // end;
 
     var
         BlockedStyle: Text;
-        BlockedStyleNo: Text;
+    //BlockedStyleNo: Text;
 
     // trigger OnOpenPage()
     // begin

@@ -5,7 +5,7 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
     layout
     {
         modify("No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyle; }
         modify("First Name")
         { StyleExpr = BlockedStyle; }
         modify("Last Name")
@@ -13,11 +13,11 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
         modify("Job Title")
         { StyleExpr = BlockedStyle; }
         modify("Phone No.")
-        { StyleExpr = BlockedStyleNo; CaptionML = ENG = 'Home Phone No.'; }
+        { StyleExpr = BlockedStyle; CaptionML = ENG = 'Home Phone No.'; }
         addafter("Phone No.")
         {
             field("Mobile Phone No.1"; Rec."Mobile Phone No.")
-            { ApplicationArea = All; StyleExpr = BlockedStyleNo; }
+            { ApplicationArea = All; StyleExpr = BlockedStyle; }
         }
         addafter("Search Name")
         {
@@ -62,33 +62,21 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
 
     trigger OnAfterGetRecord()
     begin
-        SetBlockedStyle();
+        BlockedStyle := SetBlockedStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
+    procedure SetBlockedStyle(): Text
     begin
-        SetBlockedStyle();
-    end;
-
-    procedure SetBlockedStyle()
-    begin
-        if Rec.Status = Rec.Status::Active then begin
-            BlockedStyle := 'Standard';
-            BlockedStyleNo := 'StandardAccent';
-        end else
-            if Rec.Status = Rec.Status::Inactive then begin
-                BlockedStyle := 'Subordinate';
-                BlockedStyleNo := 'Subordinate';
-            end else
-                if Rec.Status = Rec.Status::Terminated then begin
-                    BlockedStyle := 'Ambiguous';
-                    BlockedStyleNo := 'Ambiguous';
-                end;
+        if Rec.Status = Rec.Status::Inactive then
+            exit('Subordinate')
+        else
+            if Rec.Status = Rec.Status::Terminated then
+                exit('Ambiguous');
+        exit('');
     end;
 
     var
         BlockedStyle: Text;
-        BlockedStyleNo: Text;
 
     // trigger OnOpenPage()
     // begin

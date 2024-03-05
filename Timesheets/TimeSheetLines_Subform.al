@@ -134,12 +134,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             // }
         }
     }
-    trigger OnAfterGetCurrRecord()
-    var
-        Job: Record Job;
-    Begin
-        SetStyles();
-    End;
+    // trigger OnAfterGetCurrRecord()
+    // var
+    //     Job: Record Job;
+    // Begin
+    //     SetStyles();
+    // End;
 
     trigger OnAfterGetRecord()
     begin

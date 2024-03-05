@@ -96,28 +96,28 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
 
     trigger OnAfterGetRecord()
     begin
-        SetPendingStyle();
+        PendingStyle := SetPendingStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetPendingStyle();
-    end;
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     SetPendingStyle();
+    // end;
 
-    procedure SetPendingStyle()
+    procedure SetPendingStyle(): Text
     begin
-        PendingStyle := 'Standard';
         if rec.Quantity = 0 then
-            PendingStyle := 'Strong'
+            exit('Strong')
         else
             if (Rec.Quantity > 35) and (Rec.Quantity = (Rec."Quantity Approved" + Rec."Quantity Submitted")) then
-                PendingStyle := 'Favorable'
+                exit('Favorable')
             else
                 if (Rec.Quantity > 20) and (Rec.Quantity = (Rec."Quantity Approved" + Rec."Quantity Submitted")) then
-                    PendingStyle := 'Attention'
+                    exit('Attention')
                 else
                     if rec.Quantity < 35 then
-                        PendingStyle := 'Unfavorable';
+                        exit('Unfavorable');
+        exit('');
     end;
 
     var

@@ -33,11 +33,16 @@ pageextension 50196 JobCostFactboxExt extends "Job Cost Factbox"
 
     trigger OnAfterGetRecord()
     begin
-        ProfitStyle := 'Standard';
+        ProfitStyle := SetProfitStyle();
+    end;
+
+    procedure SetProfitStyle(): Text
+    begin
         if (Rec.TotalValue + Rec.InvoicedValue) < -100 then
-            ProfitStyle := 'Favorable'
+            exit('Favorable')
         else
             if (Rec.TotalValue + Rec.InvoicedValue) > 100 then
-                ProfitStyle := 'Unfavorable';
+                exit('Unfavorable');
+        exit('');
     end;
 }

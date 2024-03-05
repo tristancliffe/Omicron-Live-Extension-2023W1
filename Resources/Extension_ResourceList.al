@@ -5,7 +5,7 @@ pageextension 50119 ResourceListExtension extends "Resource List"
     layout
     {
         modify("No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyle; }
         modify(Name)
         { StyleExpr = BlockedStyle; }
         modify(Type)
@@ -89,33 +89,27 @@ pageextension 50119 ResourceListExtension extends "Resource List"
 
     trigger OnAfterGetRecord()
     begin
-        SetBlockedStyle();
+        BlockedStyle := SetBlockedStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetBlockedStyle();
-    end;
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     SetBlockedStyle();
+    // end;
 
-    procedure SetBlockedStyle()
+    procedure SetBlockedStyle(): Text
     begin
-        if Rec.Blocked = false then begin
-            BlockedStyle := 'Standard';
-            BlockedStyleNo := 'StandardAccent';
-        end else
-            if Rec.Blocked = true then begin
-                BlockedStyle := 'Subordinate';
-                BlockedStyleNo := 'Subordinate';
-            end else
-                if Rec."Privacy Blocked" = true then begin
-                    BlockedStyle := 'Ambiguous';
-                    BlockedStyleNo := 'Ambiguous';
-                end;
+        if Rec.Blocked = true then
+            exit('Subordinate')
+        else
+            if Rec."Privacy Blocked" = true then
+                exit('Ambiguous');
+        exit('');
+
     end;
 
     var
         BlockedStyle: Text;
-        BlockedStyleNo: Text;
 
     // trigger OnOpenPage()
     // begin

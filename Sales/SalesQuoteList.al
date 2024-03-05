@@ -11,7 +11,7 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
         addafter("Sell-to Customer Name")
         {
             field("Order Date98002"; Rec."Order Date")
-            { ApplicationArea = All; }
+            { ApplicationArea = All; StyleExpr = OldQuoteStyle; }
             field("Your Reference50380"; Rec."Your Reference")
             { ApplicationArea = All; Width = 14; }
         }
@@ -107,4 +107,19 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
         Rec.SetCurrentKey("No.");
         Rec.Ascending(false);
     end;
+
+    trigger OnAfterGetRecord()
+    begin
+        OldQuoteStyle := SetOldQuoteStyle();
+    end;
+
+    procedure SetOldQuoteStyle(): Text;
+    begin
+        if (Rec."Quote Valid Until Date" <> 0D) and (Rec."Quote Valid Until Date" < CalcDate('-12M', WorkDate())) then
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    var
+        OldQuoteStyle: Text;
 }

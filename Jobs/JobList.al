@@ -311,12 +311,22 @@ pageextension 50112 JobListExtension extends "Job List"
 
     trigger OnAfterGetRecord()
     begin
-        InvoiceStyle := 'StandardAccent';
-        ProfitStyle := 'Standard';
+        InvoiceStyle := SetInvoiceStyle();
+        ProfitStyle := SetProfitStyle();
+    end;
+
+    procedure SetInvoiceStyle(): Text
+    begin
         If Rec.ToInvoice > 3000 then
-            InvoiceStyle := 'Attention';
+            exit('Attention');
+        exit('');
+    end;
+
+    procedure SetProfitStyle(): Text
+    begin
         if -(Rec.TotalValue + Rec.InvoicedValue) < 0 then
-            ProfitStyle := 'Attention';
+            exit('Attention');
+        exit('');
     end;
 
     // trigger OnAfterGetRecord()

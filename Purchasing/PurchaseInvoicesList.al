@@ -103,19 +103,14 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
 
     trigger OnAfterGetRecord()
     begin
-        SetStatusStyle();
+        StatusStyle := SetStatusStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
+    procedure SetStatusStyle(): Text
     begin
-        SetStatusStyle();
-    end;
-
-    procedure SetStatusStyle()
-    begin
-        StatusStyle := 'Standard';
         if Rec.Status = Rec.Status::Released then
-            StatusStyle := 'StrongAccent'
+            exit('StrongAccent');
+        exit('');
     end;
 
     var

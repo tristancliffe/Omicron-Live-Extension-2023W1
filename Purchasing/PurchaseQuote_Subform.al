@@ -127,7 +127,7 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
     trigger OnAfterGetRecord()
     begin
         GetInventory;
-        SetCommentStyle();
+        CommentStyle := SetCommentStyle();
     end;
 
     local procedure GetInventory()
@@ -151,10 +151,10 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 end;
     end;
 
-    procedure SetCommentStyle()
+    procedure SetCommentStyle(): Text
     begin
-        CommentStyle := 'Standard';
         If Rec.Type = Rec.Type::" " then
-            CommentStyle := 'Strong';
+            exit('Strong');
+        exit('');
     end;
 }

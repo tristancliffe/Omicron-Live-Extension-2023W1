@@ -22,7 +22,7 @@ pageextension 50103 CustomerListExt extends "Customer List"
     layout
     {
         modify("No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyle; }
         modify(Name)
         { StyleExpr = BlockedStyle; }
         modify(Control1)
@@ -41,21 +41,21 @@ pageextension 50103 CustomerListExt extends "Customer List"
             { ApplicationArea = All; }
         }
         modify("Phone No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyle; }
         addafter("Phone No.")
         {
             field("Mobile Phone No."; Rec."Mobile Phone No.")
             {
                 ApplicationArea = All;
                 ExtendedDatatype = PhoneNo;
-                StyleExpr = BlockedStyleNo;
+                StyleExpr = BlockedStyle;
 
             }
             field("E-Mail"; Rec."E-Mail")
             {
                 ApplicationArea = All;
                 ExtendedDatatype = EMail;
-                StyleExpr = BlockedStyleNo;
+                StyleExpr = BlockedStyle;
             }
         }
         addafter("Payments (LCY)")
@@ -170,38 +170,20 @@ pageextension 50103 CustomerListExt extends "Customer List"
 
     trigger OnAfterGetRecord()
     begin
-        SetBlockedStyle();
+        BlockedStyle := SetBlockedStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetBlockedStyle();
-    end;
-
-    procedure SetBlockedStyle()
+    procedure SetBlockedStyle(): Text
     begin
         case Rec.Blocked of
-            Rec.Blocked::" ":
-                begin
-                    BlockedStyle := 'Standard';
-                    BlockedStyleNo := 'StandardAccent';
-                end;
             Rec.Blocked::All:
-                begin
-                    BlockedStyle := 'Subordinate';
-                    BlockedStyleNo := 'Subordinate';
-                end;
+                exit('Subordinate');
             Rec.Blocked::Invoice:
-                begin
-                    BlockedStyle := 'Ambiguous';
-                    BlockedStyleNo := 'Ambiguous';
-                end;
+                exit('Ambiguous');
             rec.Blocked::Ship:
-                begin
-                    BlockedStyle := 'Ambiguous';
-                    BlockedStyleNo := 'Ambiguous';
-                end;
+                exit('Ambiguous');
         end;
+        exit('');
 
         // if Rec.Blocked = Rec.Blocked::" " then begin
         //     BlockedStyle := 'Standard';
@@ -223,7 +205,6 @@ pageextension 50103 CustomerListExt extends "Customer List"
 
     var
         BlockedStyle: Text;
-        BlockedStyleNo: Text;
 
     // trigger OnOpenPage()
     // begin

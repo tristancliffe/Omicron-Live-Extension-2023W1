@@ -146,7 +146,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
     trigger OnAfterGetRecord()
     begin
         GetInventory();
-        SetCommentStyle();
+        CommentStyle := SetCommentStyle();
         JobPriceMandatory := false;
     end;
 
@@ -171,10 +171,10 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 end;
     end;
 
-    procedure SetCommentStyle()
+    procedure SetCommentStyle(): Text
     begin
-        CommentStyle := 'Standard';
         If Rec.Type = Rec.Type::" " then
-            CommentStyle := 'Strong';
+            exit('Strong');
+        exit('');
     end;
 }

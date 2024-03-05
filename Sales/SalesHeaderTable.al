@@ -36,6 +36,21 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
         { CaptionML = ENU = 'Order Notes'; DataClassification = CustomerContent; }
         field(50102; "Mobile No."; text[30])
         { CaptionML = ENU = 'Mobile Phone No.'; DataClassification = CustomerContent; }
+
+        field(50103; "Partially Shipped"; Boolean)
+        {
+            //DataClassification = CustomerContent;
+            Caption = 'Partially Shipped';
+            FieldClass = FlowField;
+            CalcFormula = exist("Sales Line" where("Document Type" = field("Document Type"),
+                                                       "Document No." = field("No."),
+                                                       Type = filter(<> " "),
+                                                       "Location Code" = field("Location Filter"),
+                                                       "Quantity Shipped" = filter(<> 0)));
+        }
+
+
+
         // field(50103; "Shopify Order Value"; Decimal)
         // { Caption = 'Shopify Order Value'; DataClassification = CustomerContent; DecimalPlaces = 2 : 2; }
     }

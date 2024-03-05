@@ -246,7 +246,10 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
 
     trigger OnAfterGetRecord()
     begin
-        SetStyles();
+        SellingPriceStyle := SetSellingPriceStyle();
+        TypeStyle := SetTypeStyle();
+        InvoicedStyle := SetInvoicedStyle();
+        SetLocationMandatory();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
             Rec.Validate("Work Done", Rec.Description);
 
@@ -264,17 +267,8 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         // UpdateJobPlanningLines.UpdateLines(Rec);
     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetStyles();
-        if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
-            Rec.Validate("Work Done", Rec.Description);
-        //rec.Modify() - THIS BREAKS STUFF
-    end;
-
     trigger OnOpenPage()
     begin
-        SetStyles();
         if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
             Device := false
         else
@@ -283,21 +277,34 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         Rec.Ascending(true);
     end;
 
-    local procedure SetStyles()
+    local procedure SetSellingPriceStyle(): Text
     begin
-        SellingPriceStyle := 'Standard';
-        TypeStyle := 'Standard';
-        InvoicedStyle := 'Standard';
-        MandatoryLocation := false;
         if (Rec."Unit Price" < Rec."Unit Cost") then // or (Rec."Unit Price" = 0) then
-            SellingPriceStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    local procedure SetTypeStyle(): Text
+    begin
+        MandatoryLocation := false;
         if Rec."Unit of Measure Code" <> 'HOUR' then
-            TypeStyle := 'Ambiguous';
+            exit('Ambiguous');
+        if (Rec."Qty. Invoiced" > 0) or (Rec."Qty. to Transfer to Invoice" = 0) then
+            exit('Subordinate');
+        exit('');
+    end;
+
+    local procedure SetInvoicedStyle(): Text
+    begin
+        if (Rec."Qty. Invoiced" > 0) or (Rec."Qty. to Transfer to Invoice" = 0) then
+            exit('Subordinate');
+        exit('');
+    end;
+
+    local procedure SetLocationMandatory()
+    begin
+        MandatoryLocation := false;
         if Rec.Type = Rec.Type::Item then
             MandatoryLocation := true;
-        if (Rec."Qty. Invoiced" > 0) or (Rec."Qty. to Transfer to Invoice" = 0) then begin
-            InvoicedStyle := 'Subordinate';
-            TypeStyle := 'Subordinate';
-        end;
     end;
 }

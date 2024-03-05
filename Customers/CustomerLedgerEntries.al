@@ -63,15 +63,14 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
 
     trigger OnAfterGetRecord()
     begin
-        SetTypeStyle();
+        TypeStyle := SetTypeStyle();
     end;
 
-    local procedure SetTypeStyle()
+    local procedure SetTypeStyle(): Text
     begin
-        TypeStyle := 'Standard';
-        if Rec."Document Type" <> Rec."Document Type"::Invoice then begin
-            TypeStyle := 'Ambiguous';
-        end;
+        if Rec."Document Type" <> Rec."Document Type"::Invoice then
+            exit('Ambiguous');
+        exit('');
     end;
 
     // trigger OnOpenPage()

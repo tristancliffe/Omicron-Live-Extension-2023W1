@@ -15,14 +15,13 @@ pageextension 50184 BankRecLinesExt extends "Bank Acc. Reconciliation Lines"
 
     trigger OnAfterGetRecord()
     begin
-        UpdateNegativeStyle();
+        NegativeAmounts := UpdateNegativeStyle();
     end;
 
-    procedure UpdateNegativeStyle()
+    procedure UpdateNegativeStyle(): Text
     begin
         if Rec.Difference < 0 then
-            NegativeAmounts := 'Attention'
-        else
-            NegativeAmounts := 'Standard';
+            exit('Attention');
+        exit('');
     end;
 }

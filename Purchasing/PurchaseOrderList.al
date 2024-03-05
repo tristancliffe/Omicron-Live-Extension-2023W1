@@ -134,63 +134,70 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
 
     trigger OnAfterGetRecord()
     begin
-        SetPartiallyReceived();
-        SetStatusStyle();
-        SetOverdueStyle();
+        // SetPartiallyReceived();
+        StatusStyle := SetStatusStyle();
+        PartiallyReceivedStyle := SetPartiallyReceivedStyle();
+        ReceivedStyle := SetReceivedStyle();
+        PartiallyInvoicedStyle := SetPartiallyInvoicedStyle();
+        OverdueStyle := SetOverdueStyle();
         UpdateTotalLCY();
     end;
 
-    trigger OnAfterGetCurrRecord()
+    procedure SetReceivedStyle(): Text
     begin
-        SetStatusStyle();
-        SetOverdueStyle();
+        if Rec."Completely Received" = true then
+            exit('Unfavorable');
+        exit('');
     end;
 
-    procedure SetStatusStyle()
+    procedure SetPartiallyReceivedStyle(): Text
     begin
-        StatusStyle := 'Standard';
-        ReceivedStyle := 'StandardAccent';
-        PartiallyReceivedStyle := 'StandardAccent';
-        PartiallyInvoicedStyle := 'StandardAccent';
         If Rec."Partially Received" = true then
-            PartiallyReceivedStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    procedure SetPartiallyInvoicedStyle(): Text
+    begin
         if Rec."Partially Invoiced" = true then
-            PartiallyInvoicedStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
+    end;
+
+    procedure SetStatusStyle(): Text
+    begin
         if (Rec."Completely Received" = true) AND (Rec."Partially Invoiced" = true) then
-            StatusStyle := 'Strong'
+            exit('Strong')
         else
-            if Rec."Completely Received" = true then begin
-                StatusStyle := 'Favorable';
-                ReceivedStyle := 'Unfavorable';
-            end
+            if Rec."Completely Received" = true then
+                exit('Favorable')
             else
                 if Rec."Partially Invoiced" = true then
-                    StatusStyle := 'Attention'
+                    exit('Attention')
                 else
                     if Rec.Status = Rec.Status::Released then
-                        StatusStyle := 'StrongAccent'
+                        exit('StrongAccent')
                     else
                         if Rec.Status = Rec.Status::"Pending Prepayment" then
-                            StatusStyle := 'Unfavorable'
-                        else
-                            StatusStyle := 'Standard';
+                            exit('Unfavorable');
+        exit('');
     end;
 
-    procedure SetOverdueStyle()
+    procedure SetOverdueStyle(): Text;
     begin
-        OverdueStyle := 'Standard';
         if Rec."Expected Receipt Date" < Today then
-            OverdueStyle := 'Unfavorable';
+            exit('Unfavorable');
+        exit('');
     end;
 
-    procedure SetPartiallyReceived()
-    begin
-        if Rec."Last Receiving No." = '' then
-            Rec."Partially Received" := false
-        else
-            if Rec."Completely Received" = false then
-                Rec."Partially Received" := true;
-    end;
+    // procedure SetPartiallyReceived()
+    // begin
+    //     if Rec."Last Receiving No." = '' then
+    //         Rec."Partially Received" := false
+    //     else
+    //         if Rec."Completely Received" = false then
+    //             Rec."Partially Received" := true;
+    // end;
 
     var
         StatusStyle: Text;

@@ -13,7 +13,7 @@ pageextension 50101 ItemListExtension extends "Item List"
     layout
     {
         modify("No.")
-        { StyleExpr = BlockedStyleNo; }
+        { StyleExpr = BlockedStyle; }
         modify(Description)
         {
             StyleExpr = BlockedStyle;
@@ -182,37 +182,21 @@ pageextension 50101 ItemListExtension extends "Item List"
 
     trigger OnAfterGetRecord()
     begin
-        SetBlockedStyle();
+        BlockedStyle := SetBlockedStyle();
     end;
 
-    trigger OnAfterGetCurrRecord()
+    procedure SetBlockedStyle(): Text
     begin
-        SetBlockedStyle();
+        if Rec.Blocked = true then
+            exit('Subordinate')
+        else
+            if Rec."Sales Blocked" = true then
+                exit('Ambiguous')
+            else
+                if Rec."Purchasing Blocked" = true then
+                    exit('Ambiguous');
+        exit('');
     end;
-
-    procedure SetBlockedStyle()
-    begin
-        if Rec.Blocked = false then begin
-            BlockedStyle := 'Standard';
-            BlockedStyleNo := 'StandardAccent';
-        end else
-            if Rec.Blocked = true then begin
-                BlockedStyle := 'Subordinate';
-                BlockedStyleNo := 'Subordinate';
-            end else
-                if Rec."Sales Blocked" = true then begin
-                    BlockedStyle := 'Ambiguous';
-                    BlockedStyleNo := 'Ambiguous';
-                end else
-                    if Rec."Purchasing Blocked" = true then begin
-                        BlockedStyle := 'Ambiguous';
-                        BlockedStyleNo := 'Ambiguous';
-                    end;
-    end;
-
-    var
-        BlockedStyle: Text;
-        BlockedStyleNo: Text;
 
     // trigger OnOpenPage()
     // begin
@@ -241,4 +225,5 @@ pageextension 50101 ItemListExtension extends "Item List"
         ApplyFilters: Text;
         OldApplyFilters: Text;
         FindPos: Integer;
+        BlockedStyle: Text;
 }
