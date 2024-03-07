@@ -24,6 +24,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
                 Caption = 'Qty in Stock';
                 StyleExpr = ReorderStatus;
                 Width = 6;
+                DecimalPlaces = 0 : 2;
             }
             field(LowStockThreshold; LowStockThreshold)
             {

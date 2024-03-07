@@ -10,7 +10,7 @@ tableextension 50201 "Job Journal Line Ext" extends "Job Journal Line"
         field(50101; Instock_JobJournalLine; Decimal)
         {
             Caption = 'Available';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }

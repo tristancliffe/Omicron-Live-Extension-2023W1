@@ -12,6 +12,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 AssemblyWarning();
             end;
         }
+        modify("Substitution Available")
+        { Visible = true; }
         modify(Description)
         { QuickEntry = true; StyleExpr = CommentStyle; }
         modify(Quantity)
@@ -32,6 +34,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 BlankZero = true;
                 Style = StandardAccent;
                 Width = 5;
+                DecimalPlaces = 0 : 2;
             }
         }
         modify("Item Reference No.")
@@ -171,7 +174,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
                 // Rec.Instock_SalesLine := Item.Inventory;
                 // Rec.Modify();
-                Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory");
+                Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory" + Rec."Reserved Quantity");
                 Rec.Modify();
                 Commit();
             end

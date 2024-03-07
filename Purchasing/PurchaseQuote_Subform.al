@@ -30,6 +30,7 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 BlankZero = true;
                 Style = StandardAccent;
                 Width = 5;
+                DecimalPlaces = 0 : 2;
             }
         }
         addafter("Qty. Assigned")

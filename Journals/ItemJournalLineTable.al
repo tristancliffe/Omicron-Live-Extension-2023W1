@@ -20,7 +20,7 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
         field(50101; Instock_ItemJournalLine; Decimal)
         {
             Caption = 'Available';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }

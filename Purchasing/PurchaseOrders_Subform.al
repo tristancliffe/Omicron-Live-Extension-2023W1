@@ -37,6 +37,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 BlankZero = true;
                 Style = StandardAccent;
                 Width = 5;
+                DecimalPlaces = 0 : 2;
             }
         }
         modify("Item Reference No.")

@@ -26,14 +26,14 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
         field(50103; Instock_PurchLine; Decimal)
         {
             Caption = 'Stock level';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }
         field(50104; QtyOnSalesOrder_PurchLine; Decimal)
         {
             Caption = 'Qty. on Sales Orders';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }

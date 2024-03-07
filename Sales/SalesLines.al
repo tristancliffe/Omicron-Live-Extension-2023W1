@@ -21,7 +21,7 @@ tableextension 50140 SalesLineExt extends "Sales Line"
         field(50103; Instock_SalesLine; Decimal)
         {
             Caption = 'Stock level';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }
@@ -63,7 +63,7 @@ tableextension 50140 SalesLineExt extends "Sales Line"
         field(50109; ItemQtyOnOrder_SalesLine; Decimal)
         {
             Caption = 'Qty on order';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }
@@ -90,7 +90,7 @@ tableextension 50141 AssemblyLineExt extends "Assembly Line"
         field(50101; Instock_AssemblyLine; Decimal)
         {
             Caption = 'Stock Level';
-            DecimalPlaces = 1 : 2;
+            DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
         }

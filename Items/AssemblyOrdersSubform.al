@@ -27,6 +27,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 Editable = false;
                 Style = StandardAccent;
                 Width = 5;
+                DecimalPlaces = 0 : 2;
             }
         }
         moveafter("Unit of Measure Code"; "Location Code")

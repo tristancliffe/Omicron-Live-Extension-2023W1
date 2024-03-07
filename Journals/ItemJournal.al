@@ -56,6 +56,7 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
                 Style = StandardAccent;
                 Width = 5;
                 QuickEntry = false;
+                DecimalPlaces = 0 : 2;
             }
         }
         modify("Price Calculation Method")

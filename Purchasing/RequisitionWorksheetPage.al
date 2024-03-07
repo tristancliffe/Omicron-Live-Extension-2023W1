@@ -12,6 +12,7 @@ pageextension 50152 RequisitionWorksheetExt extends "Req. Worksheet"
     //             Visible = true;
     //             BlankZero = false;
     //             Style = Strong;
+    // DecimalPlaces = 0 : 2;
     //         }
     //     }
     // }
@@ -28,6 +29,7 @@ pageextension 50152 RequisitionWorksheetExt extends "Req. Worksheet"
                 //BlankZero = true;
                 Style = StandardAccent;
                 Width = 5;
+                DecimalPlaces = 0 : 2;
             }
         }
     }
