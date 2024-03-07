@@ -111,11 +111,11 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
 
     local procedure GetInventory()
     var
-        Items: Record Item;
+        Item: Record Item;
     begin
-        if Items.Get(Rec."Item No.") and (Items.Type = Items.Type::Inventory) then begin
-            Items.CalcFields(Inventory);
-            Rec.Instock_ItemJournalLine := Items.Inventory;
+        if Item.Get(Rec."Item No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields(Inventory);
+            Rec.Instock_ItemJournalLine := Item.Inventory;
             //Rec.Modify();
         end;
     end;

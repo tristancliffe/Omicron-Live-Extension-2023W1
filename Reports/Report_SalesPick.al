@@ -67,17 +67,17 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
 
     local procedure GetInventory()
     var
-        Items: Record Item;
+        Item: Record Item;
     begin
-        if Items.Get("Assembly Line"."No.") then begin
-            Items.CalcFields(Inventory);
-            "Assembly Line".Instock_AssemblyLine := Items.Inventory;
+        if Item.Get("Assembly Line"."No.") then begin
+            Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+            "Assembly Line".Validate(Instock_AssemblyLine, Item.Inventory - Item."Reserved Qty. on Inventory");
             "Assembly Line".Modify();
             Commit();
         end
         else
-            if Items.Get("Assembly Line"."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
-                "Assembly Line".Instock_AssemblyLine := 999;
+            if Item.Get("Assembly Line"."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
+                "Assembly Line".Validate(Instock_AssemblyLine, 999);
                 "Assembly Line".Modify();
                 Commit();
             end;

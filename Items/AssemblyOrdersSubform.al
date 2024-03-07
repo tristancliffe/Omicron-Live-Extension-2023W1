@@ -68,18 +68,18 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
 
     local procedure GetInventory()
     var
-        Items: Record Item;
+        Item: Record Item;
     begin
-        if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
-            Items.CalcFields(Inventory);
-            // Rec.Instock_AssemblyLine := Items.Inventory;
+        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+            // Rec.Instock_AssemblyLine := Item.Inventory;
             // Rec.Modify();
-            Rec.Validate(Rec.Instock_AssemblyLine, Items.Inventory);
+            Rec.Validate(Rec.Instock_AssemblyLine, Item.Inventory - Item."Reserved Qty. on Inventory");
             Rec.Modify();
             Commit();
         end
         else
-            if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
+            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
                 // Rec.Instock_AssemblyLine := 999;
                 // Rec.Modify()
                 Rec.Validate(Instock_AssemblyLine, 999);

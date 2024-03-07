@@ -102,7 +102,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
     //     Items: Record Item;
     // begin
     //     Items.CalcFields(Inventory);
-    //     QtyInStock := Items.Inventory;
+    //     QtyInStock := Item.Inventory;
     // end;
 
     trigger OnAfterGetRecord()
@@ -112,8 +112,8 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
         OrderQty := 0;
         if Item.Get(Rec."Item No.") then begin
             Rec.ItemDescription := Item.Description;
-            Item.CalcFields(Inventory);
-            QtyInStock := Item.Inventory;
+            Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+            QtyInStock := Item.Inventory - Item."Reserved Qty. on Inventory";
             LowStockThreshold := Item."Reorder Point";
             if Item."Replenishment System" = Item."Replenishment System"::Purchase then begin
                 if Item."Reordering Policy" = Item."Reordering Policy"::"Fixed Reorder Qty." then

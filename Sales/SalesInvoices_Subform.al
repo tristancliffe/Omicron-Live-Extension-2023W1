@@ -109,21 +109,21 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
 
     local procedure GetInventory()
     var
-        Items: Record Item;
+        Item: Record Item;
     begin
         if Rec.Type <> Rec.Type::Item then
             Rec.Instock_SalesLine := 0
         else
-            if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
-                Items.CalcFields(Inventory);
-                // Rec.Instock_SalesLine := Items.Inventory;
+            if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+                Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+                // Rec.Instock_SalesLine := Item.Inventory;
                 // Rec.Modify();
-                Rec.Validate(Instock_SalesLine, Items.Inventory);
+                Rec.Validate(Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory");
                 Rec.Modify();
                 Commit();
             end
             else
-                if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then begin
+                if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
                     // Rec.Instock_SalesLine := 999;
                     // Rec.Modify();
                     Rec.Validate(Instock_SalesLine, 999);

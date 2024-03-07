@@ -101,8 +101,8 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                 QtyToOrder := item."Reorder Quantity"
             else
                 if item."Reordering Policy" = item."Reordering Policy"::"Maximum Qty." then begin
-                    Item.CalcFields(Inventory);
-                    QtyToOrder := item."Reorder Quantity" - item.Inventory
+                    Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+                    QtyToOrder := item."Reorder Quantity" - item.Inventory + item."Reserved Qty. on Inventory"
                 end
                 else
                     QtyToOrder := 0

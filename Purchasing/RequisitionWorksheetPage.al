@@ -79,14 +79,14 @@ pageextension 50152 RequisitionWorksheetExt extends "Req. Worksheet"
     }
     local procedure QtyInStock(): Decimal
     var
-        Items: Record Item;
+        Item: Record Item;
     begin
-        if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
-            Items.CalcFields(Inventory);
-            exit(Items.Inventory);
+        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+            exit(Item.Inventory - Item."Reserved Qty. on Inventory");
         end
         else
-            if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then
+            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then
                 exit(999);
     end;
 }

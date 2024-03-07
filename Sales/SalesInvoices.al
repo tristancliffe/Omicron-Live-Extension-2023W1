@@ -169,7 +169,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    //Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -179,7 +179,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    //Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }
@@ -189,7 +189,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             begin
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
-                    // Rec.Modify();
+                    Rec.Modify();
                 end;
             end;
         }

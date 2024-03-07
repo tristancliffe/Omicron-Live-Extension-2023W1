@@ -261,15 +261,20 @@ pageextension 50114 JobJournalExt extends "Job Journal"
 
     local procedure GetInventory()
     var
-        Items: Record Item;
+        Item: Record Item;
     begin
-        if Items.Get(Rec."No.") and (Items.Type = Items.Type::Inventory) then begin
-            Items.CalcFields(Inventory);
-            Rec.Instock_JobJournalLine := Items.Inventory;
+        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+            Rec.Validate(Instock_JobJournalLine, Item.Inventory - Item."Reserved Qty. on Inventory");
+            Rec.Modify();
+            Commit();
             //Rec.Modify();
         end
         else
-            if Items.Get(Rec."No.") and ((Items.Type = Items.Type::"Non-Inventory") or (Items.Type = Items.Type::Service)) then
-                Rec.Instock_JobJournalLine := 999;
+            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
+                Rec.Validate(Instock_JobJournalLine, 999);
+                Rec.Modify();
+                Commit();
+            end;
     end;
 }
