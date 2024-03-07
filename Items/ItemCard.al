@@ -25,6 +25,13 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 end;
             end;
         }
+        addbefore("Qty. on Purch. Order")
+        {
+            field("Reserved Qty. on Inventory"; Rec."Reserved Qty. on Inventory")
+            { ApplicationArea = All; Style = StrongAccent; }
+            field("Available Stock"; Rec.Inventory - Rec."Reserved Qty. on Inventory")
+            { ApplicationArea = All; Style = Unfavorable; Caption = 'Non-reserved stock'; DecimalPlaces = 0 : 5; }
+        }
         modify("Item Category Code")
         { ShowMandatory = true; }
         addafter("Item Category Code")
