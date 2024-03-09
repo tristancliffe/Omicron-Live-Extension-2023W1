@@ -87,6 +87,13 @@ pageextension 50119 ResourceListExtension extends "Resource List"
         }
     }
 
+    trigger OnOpenPage()
+    begin
+        Rec.SetCurrentKey("No.");
+        Rec.Ascending(true);
+        Rec.SetRange(Blocked, false);
+    end;
+
     trigger OnAfterGetRecord()
     begin
         BlockedStyle := SetBlockedStyle();
