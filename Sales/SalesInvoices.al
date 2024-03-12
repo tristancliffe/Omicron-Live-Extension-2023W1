@@ -193,6 +193,29 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 end;
             end;
         }
+        addlast("P&osting")
+        {
+            action(SendEmailDraftInvoice)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Email Draft Invoice';
+                Ellipsis = true;
+                Image = Email;
+                ToolTip = 'Send a draft sales invoice by email. The attachment is sent as a .pdf.';
+
+                trigger OnAction()
+                var
+                    DocumentPrint: Codeunit "Document-Print";
+                begin
+                    DocumentPrint.EmailSalesHeader(Rec);
+                end;
+            }
+        }
+        addlast(Category_PrintSend)
+        {
+            actionref(EmailDraft_Promoted; SendEmailDraftInvoice)
+            { }
+        }
         // modify(Preview)
         // {
         //     trigger OnBeforeAction()

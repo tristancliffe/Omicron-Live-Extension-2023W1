@@ -70,8 +70,8 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
         Item: Record Item;
     begin
         if Item.Get("Assembly Line"."No.") then begin
-            Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
-            "Assembly Line".Validate(Instock_AssemblyLine, Item.Inventory - Item."Reserved Qty. on Inventory");
+            Item.CalcFields(Inventory);
+            "Assembly Line".Validate(Instock_AssemblyLine, Item.Inventory);
             "Assembly Line".Modify();
             Commit();
         end

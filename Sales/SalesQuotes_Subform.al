@@ -130,7 +130,7 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
                 // Rec.Instock_SalesLine := Item.Inventory;
                 // Rec.Modify();
-                Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory" + rec."Reserved Quantity");
+                Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory");
                 Rec.Modify();
                 Commit();
             end

@@ -171,10 +171,10 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             Rec.Instock_SalesLine := 0
         else
             if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
-                Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
+                Item.CalcFields(Inventory);
                 // Rec.Instock_SalesLine := Item.Inventory;
                 // Rec.Modify();
-                Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory" + Rec."Reserved Quantity");
+                Rec.Validate(Rec.Instock_SalesLine, Item.Inventory);
                 Rec.Modify();
                 Commit();
             end
