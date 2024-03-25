@@ -66,7 +66,7 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
         {
             Caption = 'Files';
             FieldClass = FlowField;
-            CalcFormula = exist("Sales Line" where("Document Type" = field("Document Type"),
+            CalcFormula = exist("Purchase Line" where("Document Type" = field("Document Type"),
                                                        "Document No." = field("No."),
                                                        Type = filter(<> " "),
                                                        "Location Code" = field("Location Filter"),
