@@ -50,6 +50,11 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
                 Editable = false;
             }
         }
+        addafter(Status)
+        {
+            field("Attachments Exist"; Rec."Attachments Exist")
+            { ApplicationArea = All; Tooltip = 'This order has line(s) with attachments.'; Width = 2; DrillDown = false; Editable = false; }
+        }
     }
     actions
     {

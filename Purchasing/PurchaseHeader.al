@@ -62,5 +62,15 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
                                                        "Location Code" = field("Location Filter"),
                                                        "Job No." = filter(<> '')));
         }
+        field(50105; "Attachments Exist"; Boolean)
+        {
+            Caption = 'Files';
+            FieldClass = FlowField;
+            CalcFormula = exist("Sales Line" where("Document Type" = field("Document Type"),
+                                                       "Document No." = field("No."),
+                                                       Type = filter(<> " "),
+                                                       "Location Code" = field("Location Filter"),
+                                                       "Attached Doc Count" = filter(<> 0)));
+        }
     }
 }

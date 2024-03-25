@@ -48,6 +48,16 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
                                                        "Location Code" = field("Location Filter"),
                                                        "Quantity Shipped" = filter(<> 0)));
         }
+        field(50104; "Attachments Exist"; Boolean)
+        {
+            Caption = 'Files';
+            FieldClass = FlowField;
+            CalcFormula = exist("Sales Line" where("Document Type" = field("Document Type"),
+                                                       "Document No." = field("No."),
+                                                       Type = filter(<> " "),
+                                                       "Location Code" = field("Location Filter"),
+                                                       "Attached Doc Count" = filter(<> 0)));
+        }
 
 
 
