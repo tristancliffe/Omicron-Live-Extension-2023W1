@@ -106,6 +106,17 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         movebefore(Control1904651607; Control3)
         modify(Control1903326807)
         { Visible = true; }
+        addafter(Control1906949207)
+        {
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Provider = PurchLines;
+                SubPageLink = "Item No." = FIELD("No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
+        }
     }
     actions
     {

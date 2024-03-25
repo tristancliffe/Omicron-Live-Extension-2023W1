@@ -52,5 +52,15 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
                                                        "Location Code" = field("Location Filter"),
                                                        "Quantity Received" = filter(<> 0)));
         }
+        field(50104; "Has Job Lines"; Boolean)
+        {
+            Caption = 'Job';
+            FieldClass = FlowField;
+            CalcFormula = exist("Purchase Line" where("Document Type" = field("Document Type"),
+                                                       "Document No." = field("No."),
+                                                       Type = filter(<> " "),
+                                                       "Location Code" = field("Location Filter"),
+                                                       "Job No." = filter(<> '')));
+        }
     }
 }

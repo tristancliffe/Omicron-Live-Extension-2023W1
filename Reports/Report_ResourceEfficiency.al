@@ -12,7 +12,6 @@ report 50102 ResourceEfficiency
     {
         dataitem(Resource; Resource)
         {
-            RequestFilterFields = "No.", "Use Time Sheet";
             column(Name; Name)
             { }
             dataitem(ResourceLedgerEntries; "Res. Ledger Entry")
@@ -42,7 +41,7 @@ report 50102 ResourceEfficiency
             }
             trigger OnAfterGetRecord()
             begin
-                if (Blocked = true) or (Type = Type::Machine) then begin
+                if (Blocked = true) or (Type = Type::Machine) or ("Use Time Sheet" = false) then begin
                     PrintSection := false;
                     CurrReport.Skip();
                 end;
@@ -50,7 +49,6 @@ report 50102 ResourceEfficiency
         }
         dataitem("Employee Absence"; Resource)
         {
-            RequestFilterFields = "No.", "Use Time Sheet";
             column(Name2; Name)
             { }
             dataitem("Absence Data"; "Employee Absence")
@@ -71,6 +69,12 @@ report 50102 ResourceEfficiency
                 column(Employee_Absence__Unit_of_Measure_Code_; "Unit of Measure Code")
                 { }
             }
+            trigger OnAfterGetRecord()
+            begin
+                if (Blocked = true) or ("Use Time Sheet" = false) then
+                    CurrReport.Skip();
+
+            end;
         }
     }
 
@@ -78,14 +82,6 @@ report 50102 ResourceEfficiency
     requestpage
     {
         SaveValues = true;
-        layout
-        {
-            area(Content)
-            { }
-        }
-
-        actions
-        { }
     }
 
     rendering

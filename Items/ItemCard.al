@@ -133,6 +133,16 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 end;
             }
         }
+        addafter(ItemAttributesFactbox)
+        {
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                SubPageLink = "Item No." = FIELD("No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
+        }
     }
     actions
     {

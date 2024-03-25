@@ -67,6 +67,15 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             Editable = false;
             DataClassification = CustomerContent;
         }
+        // field(50110; Attachments_SalesLine; Integer)
+        // {
+        //     Caption = 'Files';
+        //     Editable = false;
+        //     FieldClass = FlowField;
+        //     CalcFormula = count("Document Attachment" where("No." = field("Document No."),
+        //                                                     "Document Type" = field("Document Type"),
+        //                                                     "Line No." = field("Line No.")));
+        // }
     }
 }
 tableextension 50141 AssemblyLineExt extends "Assembly Line"

@@ -2,6 +2,11 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
 {
     layout
     {
+        addbefore(Type)
+        {
+            field(IsJobLine; IsJobLine)
+            { ApplicationArea = all; Caption = 'Job Line'; Editable = false; QuickEntry = false; }
+        }
         addafter("Qty. Assigned")
         {
             field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
@@ -36,4 +41,18 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
             { ApplicationArea = All; Visible = true; }
         }
     }
+    var
+        IsJobLine: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        IsJobLineCheck();
+    end;
+
+    local procedure IsJobLineCheck()
+    begin
+        IsJobLine := false;
+        if rec."Job No." <> '' then
+            IsJobLine := true;
+    end;
 }

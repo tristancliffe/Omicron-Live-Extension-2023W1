@@ -35,6 +35,14 @@ tableextension 50100 ItemTableExt extends Item
             CaptionML = ENU = 'Search field';
             DataClassification = CustomerContent;
         }
+        field(50104; NumberOfAttachments; Integer)
+        {
+            Caption = 'Files';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = count("Document Attachment" where("Table ID" = const(27),
+                                                            "No." = field("No.")));
+        }
     }
     fieldgroups
     {

@@ -20,6 +20,9 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
                 field(ItemQtyOnOrder_SalesLine; Rec.ItemQtyOnOrder_SalesLine)
                 { ApplicationArea = All; Visible = true; DrillDown = false; }
             }
+        }
+        addafter(Attachments)
+        {
             group(Notes)
             {
                 Caption = 'Item Notes';

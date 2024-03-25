@@ -2,6 +2,11 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
 {
     layout
     {
+        addbefore(Type)
+        {
+            field(IsJobLine; IsJobLine)
+            { ApplicationArea = all; Caption = 'Job Line'; Editable = false; QuickEntry = false; }
+        }
         modify("No.")
         {
             trigger OnAfterValidate()
@@ -119,6 +124,27 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         movebefore("Over-Receipt Quantity"; "Prepayment %")
         modify("Prepayment %")
         { Visible = true; }
+        addafter(Description)
+        {
+            field("Attached Doc Count"; Rec."Attached Doc Count")
+            {
+                ApplicationArea = All;
+                Caption = 'Files';
+                ToolTip = 'Number of files attached to this record. Click to open and then print. Can be brought into emails sent within Business Central.';
+                Width = 2;
+                BlankZero = true;
+
+                trigger OnDrillDown()
+                var
+                    DocumentAttachmentDetails: Page "Document Attachment Details";
+                    RecRef: RecordRef;
+                begin
+                    RecRef.GetTable(Rec);
+                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                    DocumentAttachmentDetails.RunModal();
+                end;
+            }
+        }
     }
     actions
     {
@@ -137,18 +163,37 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 Visible = true;
                 Enabled = Rec.Type = Rec.Type::Item;
             }
+            action(DocAttach2)
+            {
+                ApplicationArea = All;
+                Caption = 'Attachments';
+                Image = Attach;
+                ToolTip = 'Add a file as an attachment. You can attach images as well as documents.';
+
+                trigger OnAction()
+                var
+                    DocumentAttachmentDetails: Page "Document Attachment Details";
+                    RecRef: RecordRef;
+                begin
+                    RecRef.GetTable(Rec);
+                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                    DocumentAttachmentDetails.RunModal();
+                end;
+            }
         }
     }
 
     var
         JobPriceMandatory: Boolean;
         CommentStyle: Text;
+        IsJobLine: Boolean;
 
     trigger OnAfterGetRecord()
     begin
         GetInventory();
         CommentStyle := SetCommentStyle();
         JobPriceMandatory := false;
+        IsJobLineCheck();
     end;
 
     local procedure GetInventory()
@@ -177,5 +222,12 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         If Rec.Type = Rec.Type::" " then
             exit('Strong');
         exit('');
+    end;
+
+    local procedure IsJobLineCheck()
+    begin
+        IsJobLine := false;
+        if rec."Job No." <> '' then
+            IsJobLine := true;
     end;
 }

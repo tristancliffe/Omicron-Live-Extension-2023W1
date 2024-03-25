@@ -95,6 +95,21 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         { Importance = Standard; }
         addafter("Sell-to Country/Region Code")
         {
+            field(ShowMap; ShowMapLbl)
+            {
+                ApplicationArea = Basic, Suite;
+                Editable = false;
+                ShowCaption = false;
+                Style = StrongAccent;
+                StyleExpr = TRUE;
+                ToolTip = 'Specifies the customer''s address on your preferred map website.';
+
+                trigger OnDrillDown()
+                begin
+                    CurrPage.Update(true);
+                    Rec.DisplayMap();
+                end;
+            }
             field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
             { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
             field("Sell-to E-Mail2"; Rec."Sell-to E-Mail")
@@ -131,6 +146,17 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             { ApplicationArea = All; Visible = true; }
             field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
             { ApplicationArea = All; Visible = true; }
+        }
+        addbefore(IncomingDocAttachFactBox)
+        {
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Provider = SalesLines;
+                SubPageLink = "Item No." = FIELD("No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
         }
     }
     actions
@@ -231,6 +257,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
+        ShowMapLbl: Label 'Show on Map';
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin

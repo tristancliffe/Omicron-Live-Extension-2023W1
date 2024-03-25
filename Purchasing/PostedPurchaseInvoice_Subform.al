@@ -2,6 +2,11 @@ pageextension 50171 PostedPurchInvoiceSubExt extends "Posted Purch. Invoice Subf
 {
     layout
     {
+        addbefore(Type)
+        {
+            field(IsJobLine; IsJobLine)
+            { ApplicationArea = all; Caption = 'Job Line'; Editable = false; QuickEntry = false; }
+        }
         modify("Item Reference No.")
         { Visible = false; }
         modify(Quantity)
@@ -51,4 +56,19 @@ pageextension 50171 PostedPurchInvoiceSubExt extends "Posted Purch. Invoice Subf
         }
         moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)")
     }
+
+    var
+        IsJobLine: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        IsJobLineCheck();
+    end;
+
+    local procedure IsJobLineCheck()
+    begin
+        IsJobLine := false;
+        if rec."Job No." <> '' then
+            IsJobLine := true;
+    end;
 }

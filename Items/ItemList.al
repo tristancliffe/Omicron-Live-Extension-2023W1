@@ -18,7 +18,7 @@ pageextension 50101 ItemListExtension extends "Item List"
         {
             StyleExpr = BlockedStyle;
             AboutTitle = 'Item List Colours';
-            AboutText = 'Normal items are shown in **black**. Items that are blocked for sales or purchasing are shown in **yellow**. Items that are blocked for both sales AND purchasing are shown in **grey**.';
+            AboutText = 'Normal items are shown in **black**. Items that are blocked for sales are **red**, and for purchasing are shown in **yellow**. Items that are blocked for both sales AND purchasing are shown in **grey**.';
         }
         modify(Control1)
         { Editable = false; FreezeColumn = Description; }
@@ -118,6 +118,61 @@ pageextension 50101 ItemListExtension extends "Item List"
                 Visible = true;
             }
         }
+        addbefore(ItemAttributesFactBox)
+        {
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                SubPageLink = "Item No." = FIELD("No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
+        }
+        addafter("Assembly BOM")
+        {
+            field(NumberOfAttachments; Rec.NumberOfAttachments)
+            {
+                ApplicationArea = all;
+                Width = 2;
+                BlankZero = true;
+                ToolTip = 'Number of attachments to this record. These can simply exist, or be transferred to sales/purchase documents for processing/printing/emails with orders.';
+                trigger OnDrillDown()
+                var
+                    DocumentAttachmentDetails: Page "Document Attachment Details";
+                    RecRef: RecordRef;
+                begin
+                    RecRef.GetTable(Rec);
+                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                    DocumentAttachmentDetails.RunModal();
+                end;
+            }
+            // field(Documents; NumberOfRecords)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Documents';
+            //     StyleExpr = TRUE;
+            //     ToolTip = 'Specifies the number of attachments.';
+
+            //     trigger OnDrillDown()
+            //     var
+            //         DocAttachments: Record "Document Attachment";
+            //         Item: Record Item;
+            //         DocumentAttachmentDetails: Page "Document Attachment Details";
+            //         RecRef: RecordRef;
+            //     begin
+            //         case DocAttachments."Table ID" of
+            //             0:
+            //                 exit;
+            //             DATABASE::Item:
+            //                 begin
+            //                     RecRef.Open(DATABASE::Item);
+            //                     if Item.Get(Rec."No.") then
+            //                         RecRef.GetTable(Item);
+            //                 end;
+            //         end;
+            //     end;
+            // }
+        }
     }
     actions
     {
@@ -191,7 +246,7 @@ pageextension 50101 ItemListExtension extends "Item List"
             exit('Subordinate')
         else
             if Rec."Sales Blocked" = true then
-                exit('Ambiguous')
+                exit('Attention')
             else
                 if Rec."Purchasing Blocked" = true then
                     exit('Ambiguous');
@@ -226,4 +281,5 @@ pageextension 50101 ItemListExtension extends "Item List"
         OldApplyFilters: Text;
         FindPos: Integer;
         BlockedStyle: Text;
+        NumberOfRecords: Integer;
 }

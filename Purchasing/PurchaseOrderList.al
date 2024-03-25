@@ -81,6 +81,11 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             field("Prepayment %"; Rec."Prepayment %")
             { ApplicationArea = All; BlankZero = true; }
         }
+        addafter("Payment Method Code")
+        {
+            field("Has Job Lines"; Rec."Has Job Lines")
+            { ApplicationArea = All; Caption = 'Job'; ToolTip = 'This order has lines linked to a job'; Visible = true; Editable = false; DrillDown = false; }
+        }
     }
     actions
     {

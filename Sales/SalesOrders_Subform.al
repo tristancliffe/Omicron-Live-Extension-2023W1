@@ -104,6 +104,27 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         modify(ShortcutDimCode8)
         { QuickEntry = false; }
         moveafter("Qty. to Assemble to Order"; WSB_AvailabilityIndicator)
+        addafter(Description)
+        {
+            field("Attached Doc Count"; Rec."Attached Doc Count")
+            {
+                ApplicationArea = All;
+                Caption = 'Files';
+                ToolTip = 'Specified the number of files attached to this record. Click to open and then print. Can be brought into emails sent within Business Central.';
+                Width = 2;
+                BlankZero = true;
+
+                trigger OnDrillDown()
+                var
+                    DocumentAttachmentDetails: Page "Document Attachment Details";
+                    RecRef: RecordRef;
+                begin
+                    RecRef.GetTable(Rec);
+                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                    DocumentAttachmentDetails.RunModal();
+                end;
+            }
+        }
     }
     actions
     {
@@ -138,6 +159,26 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                     Rec.ShowReservation();
                 end;
             }
+            action(SelectItemSubstitution2)
+            {
+                AccessByPermission = TableData "Item Substitution" = R;
+                ApplicationArea = Suite;
+                Caption = 'Item Substitution';
+                Image = SelectItemSubstitution;
+                Scope = Repeater;
+                ToolTip = 'Select another item that has been set up to be sold instead of the original item if it is unavailable.';
+
+                trigger OnAction()
+                begin
+                    CurrPage.SaveRecord();
+                    Rec.ShowItemSub();
+                    CurrPage.Update(true);
+                    if (Rec.Reserve = Rec.Reserve::Always) and (Rec."No." <> xRec."No.") then begin
+                        Rec.AutoReserve();
+                        CurrPage.Update(false);
+                    end;
+                end;
+            }
             action("BOM Level_Promoted")
             {
                 AccessByPermission = TableData "BOM Buffer" = R;
@@ -149,6 +190,23 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 trigger OnAction()
                 begin
                     ItemAvailFormsMgt.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt.ByBOM())
+                end;
+            }
+            action(DocAttach2)
+            {
+                ApplicationArea = All;
+                Caption = 'Attachments';
+                Image = Attach;
+                ToolTip = 'Add a file as an attachment. You can attach images as well as documents.';
+
+                trigger OnAction()
+                var
+                    DocumentAttachmentDetails: Page "Document Attachment Details";
+                    RecRef: RecordRef;
+                begin
+                    RecRef.GetTable(Rec);
+                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                    DocumentAttachmentDetails.RunModal();
                 end;
             }
         }

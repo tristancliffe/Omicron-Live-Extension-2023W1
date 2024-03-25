@@ -6,26 +6,9 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
         {
             field(QtyOnSalesOrder_PurchLine; Rec.QtyOnSalesOrder_PurchLine)
             { ApplicationArea = All; Visible = true; DrillDown = false; }
-            // group(Type)
-            // {
-            //     ShowCaption = false;
-            //     Visible = TypeExists;
-
-            //     field(ItemType; Rec.ItemType_PurchLine) //ShowType())
-            //     {
-            //         ApplicationArea = All;
-            //         Caption = 'Item Type';
-            //         Visible = true;
-            //         DrillDown = false;
-            //     }
-            //     field(QtyToOrder; QtyToOrder)
-            //     {
-            //         ApplicationArea = All;
-            //         Caption = 'Quantity to Order';
-            //         Visible = true;
-            //         DrillDown = false;
-            //     }
-            // }
+        }
+        addafter(Attachments)
+        {
             group(Notes)
             {
                 Caption = 'Item Notes';

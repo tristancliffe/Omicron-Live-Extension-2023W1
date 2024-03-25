@@ -12,6 +12,20 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         {
             field("Resource Name1"; Rec."Resource Name")
             { ApplicationArea = All; Importance = Promoted; }
+            // field(SubmitMsg; SubmitLbl)
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Editable = false;
+            //     ShowCaption = false;
+            //     Style = StrongAccent;
+            //     StyleExpr = TRUE;
+            //     ToolTip = 'Submit all open lines - use this when you have finished updating your timesheet please.';
+
+            //     trigger OnDrillDown()
+            //     begin
+            //         SubmitLines();
+            //     end;
+            // }
             field(Reminder; Reminder)
             {
                 ApplicationArea = All;
@@ -20,24 +34,8 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                 Editable = false;
                 MultiLine = true;
                 Style = Attention;
+                ToolTip = 'You must submit your timesheet lines when you have finished them or at the end of the week.';
             }
-            // field("Dropbox Link"; "Dropbox Link")
-            // {
-            //     ApplicationArea = All;
-            //     Importance = Promoted;
-            //     Description = 'The link to the Dropbox image upload page';
-            //     ExtendedDatatype = URL;
-            //     Editable = false;
-            // }
-            // field(Reminder2; Reminder2)
-            // {
-            //     ApplicationArea = All;
-            //     Importance = Promoted;
-            //     ShowCaption = false;
-            //     Editable = false;
-            //     //MultiLine = true;
-            //     Style = Attention;
-            // }
         }
     }
     actions
@@ -117,32 +115,13 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                 PromotedCategory = Process;
                 PromotedOnly = true;
             }
-            // action(Instructions)
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Timesheet Instructions';
-            //     Image = Help;
-            //     ToolTip = 'Open the timesheet instructions';
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     PromotedOnly = true;
-            //     // RunObject = Report "Timesheet Instructions";
-
-            //     trigger OnAction()
-            //     var
-            //         Instructions: Report "Timesheet Instructions";
-            //     begin
-            //         Report.Print(Instructions);
-            //         Clear(Instructions);
-            //     end;
-            // }
         }
     }
     var
         Device: Boolean;
         "Dropbox Link": Text[50];
         Reminder: Text[150];
-        Reminder2: Text[150];
+        SubmitLbl: Label 'Submit Lines';
 
     trigger OnOpenPage()
     begin
@@ -152,7 +131,5 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             Device := true;
         "Dropbox Link" := 'https://bit.ly/omicronltd';
         Reminder := 'Don''t forget to SUBMIT timesheets regularly. \Keep STOCK CARDS up to date. Upload PICTURES.';
-        //Reminder := 'Don''t forget to SUBMIT timesheets regularly.';
-        //Reminder2 := 'Keep STOCK CARDS updated. Upload PICTURES.';
     end;
 }
