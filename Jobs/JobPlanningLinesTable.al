@@ -17,7 +17,7 @@ tableextension 50107 JobPlanningLinesExt extends "Job Planning Line"
     trigger OnModify()
     begin
         if ((rec."Line Type" = Rec."Line Type"::Billable) or (rec."Line Type" = Rec."Line Type"::"Both Budget and Billable")) then begin
-            Rec.Validate(InvoicePrice, round(Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice", 0.01));
+            Rec.Validate(InvoicePrice, round((Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01));
             Rec.Validate(InvoiceCost, round(Rec."Total Cost", 0.01));
             Rec.Validate(VAT, round(Rec.InvoicePrice * 0.2, 0.01));
             Rec.Validate(InvoicePriceInclVAT, round(Rec.InvoicePrice + Rec.VAT, 0.01));
