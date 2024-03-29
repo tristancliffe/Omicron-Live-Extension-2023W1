@@ -46,6 +46,8 @@ pageextension 50111 JobCardExt extends "Job Card"
             { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; }
             field("Date of Arrival"; Rec."Date of Arrival")
             { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
+            field("Customer Balance"; Rec."Customer Balance")
+            { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
         }
         moveafter("No."; Status)
         modify("Bill-to County") { Importance = Additional; }

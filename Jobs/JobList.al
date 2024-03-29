@@ -17,6 +17,8 @@ pageextension 50112 JobListExtension extends "Job List"
             { ApplicationArea = All; ToolTip = 'Registration No.'; }
             field("Job Notes"; Rec."Job Notes")
             { ApplicationArea = All; ToolTip = 'Job notes'; }
+            field("Customer Balance"; Rec."Customer Balance")
+            { Caption = 'Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
             field("Date of Arrival"; Rec."Date of Arrival")
             { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; }
             field(TotalHours; Rec.TotalHours)

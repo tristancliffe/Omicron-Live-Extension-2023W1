@@ -311,6 +311,16 @@ tableextension 50105 JobNotes extends Job
                                                                     "Line Type" = filter("Billable" | "Both Budget and Billable"),
                                                                     "Qty. Transferred to Invoice" = filter('0')));
         }
+        field(50115; "Customer Balance"; Decimal)
+        {
+            Caption = 'Balance';
+            AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
+            AutoFormatType = 1;
+            DecimalPlaces = 2 : 2;
+            FieldClass = FlowField;
+            CalcFormula = sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" where("Customer No." = field("Bill-to Customer No."),
+                                                                                 "Ledger Entry Amount" = const(true)));
+        }
     }
 
     fieldgroups
