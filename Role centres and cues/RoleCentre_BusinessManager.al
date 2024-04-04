@@ -95,20 +95,66 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 ToolTip = 'Shows the Aged Creditors report';
             }
         }
-        // modify("Intrastat Journals")
-        // { Visible = false; }
         modify(PostedGeneralJournals)
+        { Visible = false; }
+        modify("VAT Returns")
+        { Visible = false; }
+        modify("VAT Statements")
         { Visible = false; }
         addlast(Action39)
         {
-            action(VATReturnPeriods)
+            group(VAT)
             {
-                ApplicationArea = Basic, Suite;
-                Caption = 'VAT Return Periods';
-                Image = PeriodEntries;
-                RunObject = page "VAT Return Period List";
-                Tooltip = 'Register new VAT return periods and see list of open/submitted/closed periods';
+                Caption = 'VAT';
+                Visible = true;
+                action(VATReturns)
+                {
+                    ApplicationArea = VAT;
+                    Caption = 'VAT Returns';
+                    RunObject = Page "VAT Report List";
+                    ToolTip = 'Prepare the VAT Return report so you can submit VAT amounts to a tax authority.';
+                }
+                action(VATStatements)
+                {
+                    ApplicationArea = VAT;
+                    Caption = 'VAT Statements';
+                    RunObject = Page "VAT Statement Names";
+                    ToolTip = 'View a statement of posted VAT amounts, calculate your VAT settlement amount for a certain period, such as a quarter, and prepare to send the settlement to the tax authorities.';
+                }
+                action(VATReturnPeriods)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'VAT Return Periods';
+                    Image = PeriodEntries;
+                    RunObject = page "VAT Return Period List";
+                    Tooltip = 'Register new VAT return periods and see list of open/submitted/closed periods';
+                }
+                action(VATEntries)
+                {
+                    ApplicationArea = All;
+                    Caption = 'VAT Entries';
+                    Image = VATEntries;
+                    RunObject = Page "VAT Entries";
+                    ToolTip = 'Opens the list of VAT entries';
+                }
+                action(DaybooksVAT)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'VAT Day Books';
+                    Image = VATLedger;
+                    RunObject = Report "Day Book VAT Entry";
+                    ToolTip = 'View VAT transactions over a given period';
+                }
+                action(VATSetup)
+                {
+                    ApplicationArea = All;
+                    Caption = 'VAT Report Setup';
+                    Image = VATPostingSetup;
+                    RunObject = Page "VAT Report Setup";
+                    ToolTip = 'Opens the VAT Report Setup screen to set up VAT reporting';
+                }
             }
+
         }
         moveafter("Sales Invoices"; "Blanket Sales Orders")
         addafter("Sales Invoices")
@@ -648,14 +694,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 //     RunObject = Page "Phone Number Lists";
                 //     ToolTip = 'Lists of phone numbers';
                 // }
-                action(VATSetup)
-                {
-                    ApplicationArea = All;
-                    Caption = 'VAT Report Setup';
-                    Image = VATPostingSetup;
-                    RunObject = Page "VAT Report Setup";
-                    ToolTip = 'Opens the VAT Report Setup screen to set up VAT reporting';
-                }
+
                 // action(ShopifyLogs)
                 // {
                 //     ApplicationArea = All;

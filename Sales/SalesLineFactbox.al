@@ -17,8 +17,8 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
                 { ApplicationArea = All; Visible = true; Drilldown = true; }
                 field(ItemVendorNo; Rec.ItemVendorNo_SalesLine)
                 { ApplicationArea = All; Visible = true; DrillDown = false; }
-                field(ItemQtyOnOrder_SalesLine; Rec.ItemQtyOnOrder_SalesLine)
-                { ApplicationArea = All; Visible = true; DrillDown = false; }
+                field(ItemQtyOnOrder_SalesLine; Rec.CalcItemQtyOnOrder_SalesLine)
+                { ApplicationArea = All; Visible = true; DrillDown = true; }
             }
         }
         addafter(Attachments)
@@ -70,13 +70,13 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
             TypeExists := false;
         If strlen(Rec.ItemNotes_SalesLine) = 0 then
             NotesExist := false;
-        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
-            Item.CalcFields("Qty. on Purch. Order");
-            Rec.Validate(Rec.ItemQtyOnOrder_SalesLine, Item."Qty. on Purch. Order")
-        end
-        else
-            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then
-                Rec.Validate(ItemQtyOnOrder_SalesLine, 0)
+        // if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+        //     Item.CalcFields("Qty. on Purch. Order");
+        //     Rec.Validate(Rec.ItemQtyOnOrder_SalesLine, Item."Qty. on Purch. Order")
+        // end
+        // else
+        //     if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then
+        //         Rec.Validate(ItemQtyOnOrder_SalesLine, 0)
     end;
 
 

@@ -115,7 +115,7 @@ pageextension 50142 TimeSheetList extends "Time Sheet List"
                 if (Rec.Quantity > 20) and (Rec.Quantity = (Rec."Quantity Approved" + Rec."Quantity Submitted")) then
                     exit('Attention')
                 else
-                    if rec.Quantity < 35 then
+                    if rec.Quantity < 39 then
                         exit('Unfavorable');
         exit('');
     end;

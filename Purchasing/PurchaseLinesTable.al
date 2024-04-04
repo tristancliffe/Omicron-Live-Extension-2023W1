@@ -36,6 +36,8 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
             DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
+            ObsoleteState = Removed;
+            ObsoleteReason = 'Replaced with Flowfield';
         }
         field(50105; ShelfNo_PurchLine; Code[10])
         {
@@ -43,6 +45,17 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
             FieldClass = FlowField;
             Editable = false;
             CalcFormula = lookup(Item."Shelf No." where("No." = field("No.")));
+        }
+        field(50106; CalcQtyOnSalesOrder_PurchLine; Decimal)
+        {
+            Caption = 'Qty. on Sales Orders';
+            DecimalPlaces = 0 : 2;
+            Editable = false;
+            // DataClassification = CustomerContent;
+            FieldClass = FlowField;
+            CalcFormula = sum("Sales Line"."Qty. to Ship" where("No." = field("No."),
+                                                                "Document Type" = field("Document Type"),
+                                                                "Location Code" = field("Location Code")));
         }
     }
 }

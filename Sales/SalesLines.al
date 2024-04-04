@@ -66,16 +66,20 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
+            ObsoleteState = Removed;
+            ObsoleteReason = 'Changed to a Flowfield';
         }
-        // field(50110; Attachments_SalesLine; Integer)
-        // {
-        //     Caption = 'Files';
-        //     Editable = false;
-        //     FieldClass = FlowField;
-        //     CalcFormula = count("Document Attachment" where("No." = field("Document No."),
-        //                                                     "Document Type" = field("Document Type"),
-        //                                                     "Line No." = field("Line No.")));
-        // }
+        field(50110; CalcItemQtyOnOrder_SalesLine; Decimal)
+        {
+            Caption = 'Qty. on Purchase Orders';
+            DecimalPlaces = 0 : 2;
+            Editable = false;
+            // DataClassification = CustomerContent;
+            FieldClass = FlowField;
+            CalcFormula = sum("Purchase Line"."Qty. to Receive" where("No." = field("No."),
+                                                                      "Document Type" = field("Document Type"),
+                                                                      "Location Code" = field("Location Code")));
+        }
     }
 }
 tableextension 50141 AssemblyLineExt extends "Assembly Line"
