@@ -5,18 +5,20 @@ pageextension 50225 ShipmentPlanningExt extends WSB_ShipmentPlanningAI
     {
         addafter("No.")
         {
+            field("Shpfy Order No."; Rec."Shpfy Order No.")
+            { ApplicationArea = All; ToolTip = 'Shows if the order was received via Shopify'; }
             field(Amount; Rec.Amount)
-            { ApplicationArea = All; }
+            { ApplicationArea = All; ToolTip = 'The value of the order excluding VAT'; }
         }
-        moveafter("No."; "Order Date", Status, AvailabilityIndicatorRed, AvailabilityIndicatorOrange, AvailabilityIndicatorGreen)
+        moveafter("Shpfy Order No."; "Order Date", Status, AvailabilityIndicatorRed, AvailabilityIndicatorOrange, AvailabilityIndicatorGreen)
         moveafter("Sell-to Customer Name"; AvailabilityIndicatorShipment)
         moveafter("Shipment Date"; ShippingStatus, InvoiceStatus)
         modify(AvailabilityIndicatorGreen)
-        { Width = 4; }
+        { Width = 4; Tooltip = 'Has lines that can be shipped now'; }
         modify(AvailabilityIndicatorRed)
-        { Width = 4; }
+        { Width = 4; ToolTip = 'Has lines that cannot be shipped yet (no stock availability)'; }
         modify(AvailabilityIndicatorOrange)
-        { Width = 4; }
+        { Width = 4; ToolTip = 'Has lines that will soon be available to shop (purchase in progress)'; }
         modify(ShippingStatus)
         { Width = 4; }
         modify(InvoiceStatus)
