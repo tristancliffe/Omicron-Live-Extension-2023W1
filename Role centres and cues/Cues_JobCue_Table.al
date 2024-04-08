@@ -1,4 +1,4 @@
-tableextension 50112 ProjectManagerExt extends "Job Cue"
+tableextension 50112 ProjectManagerCueExt extends "Job Cue"
 {
     fields
     {

@@ -6,7 +6,7 @@
 // The first trigger is an OnAfterModify trigger that converts the "Vehicle Model" field value to uppercase after a modification is made to the record.
 // The second trigger is an OnBeforeDelete trigger that generates a random warning message asking the user to confirm the deletion of the record. The message is randomly selected from a list of 25 messages.
 // If the user confirms the deletion, the record is deleted. If not, the trigger throws an error and cancels the deletion.
-tableextension 50101 CustomerTableExt extends Customer
+tableextension 50101 CustomerTableExtCue extends Customer
 {
     fields
     {

@@ -100,6 +100,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 Importance = Additional;
             }
         }
+        modify("Foreign Trade")
+        { Visible = false; }
     }
     actions
     {

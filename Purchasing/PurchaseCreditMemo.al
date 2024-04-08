@@ -20,6 +20,9 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
         { Importance = Standard; ShowMandatory = true; }
         modify("Currency Code")
         { Importance = Standard; }
+        moveafter("Location Code"; "Applies-to Doc. No.", "Applies-to Doc. Type", "Applies-to ID")
+        modify("Foreign Trade")
+        { Visible = false; }
     }
     actions
     {

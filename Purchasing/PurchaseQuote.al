@@ -77,6 +77,8 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         { Importance = Standard; }
         movebefore(Control1904651607; Control5)
         moveafter(Status; "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
+        modify("Foreign Trade")
+        { Visible = false; }
     }
     actions
     {

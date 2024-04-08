@@ -68,10 +68,32 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Ellipsis = true;
             }
         }
-        addfirst(embedding)
+        modify(Items)
+        { Visible = false; }
+        modify("Bank Accounts")
+        { Visible = false; }
+        modify("Chart of Accounts")
+        { Visible = false; }
+        addafter(Vendors)
         {
-            //Could add the Search In Data [Preview] page here if I knew how...
+            action(JobsList)
+            {
+                ApplicationArea = All;
+                Caption = 'Projects';
+                Image = Job;
+                RunObject = page "Job List";
+                ToolTip = 'Show a list of active jobs and their details.';
+            }
         }
+        //     action(ShipmentPlanning)
+        //     {
+        //         ApplicationArea = All;
+        //         Caption = 'Shipment Planning';
+        //         Image = ShipmentLines;
+        //         RunObject = Page WSB_ShipmentPlanningAI;
+        //         ToolTip = 'View the Shipment Planning app page to see what can be shipped and what can''t.';
+        //     }
+        // }
         addafter(Action131)
         {
             action("Req. Worksheet")
@@ -101,6 +123,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
         { Visible = false; }
         modify("VAT Statements")
         { Visible = false; }
+
         addlast(Action39)
         {
             group(VAT)

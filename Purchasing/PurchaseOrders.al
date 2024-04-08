@@ -117,6 +117,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 SubPageView = sorting("Vendor No.", "Vendor Item No.");
             }
         }
+        modify("Foreign Trade")
+        { Visible = false; }
     }
     actions
     {
