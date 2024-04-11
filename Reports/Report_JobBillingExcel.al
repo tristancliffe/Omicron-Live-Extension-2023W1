@@ -59,6 +59,8 @@ report 50101 "Job Billing Excel"
                 { }
                 column(InvoicePriceInclVAT; InvoicePriceInclVAT)
                 { }
+                column(QtyTransferredToInvoice; "Qty. Transferred to Invoice")
+                { }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -76,16 +78,24 @@ report 50101 "Job Billing Excel"
                             CurrReport.Skip();
                         "Qty. to Transfer to Invoice" := "Qty. Invoiced";
                         InvoicePrice := round(("Unit Price (LCY)" * "Qty. Invoiced") - "Line Discount Amount (LCY)", 0.01);
-                        InvoiceCost := round("Total Cost", 0.01);
                         VAT := round(InvoicePrice * 0.2, 0.01);
                         InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
-                    end;
-                    if (InvoicedSelector = false) then begin
+                    end
+                    else if AddedToInvoiceSelector = true then begin
+                        if "Qty. Invoiced" > 0 then
+                            CurrReport.Skip();
+                        "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice";
+                        InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
+                        VAT := round(InvoicePrice * 0.2, 0.01);
+                        InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
+                    end
+                    else begin
                         if ("Qty. Invoiced" <> 0) then
                             CurrReport.Skip();
                         if "Qty. to Transfer to Invoice" = 0 then
                             CurrReport.Skip();
                     end;
+
                     // if Quantity <> 0 then
                     //     InvoicePrice := round(("Line Amount" / Quantity) * "Qty. to Transfer to Invoice", 0.01);
                     // InvoiceCost := round("Total Cost", 0.01);
@@ -108,6 +118,12 @@ report 50101 "Job Billing Excel"
                     ApplicationArea = All;
                     Caption = 'Only include invoiced lines?';
                     ToolTip = 'If this is selected, then the Quantity field will show the quantity invoiced if it has been invoiced. Otherwise it will only include the amount left to invoice.';
+                }
+                field(AddedToInvoiceOption; AddedToInvoiceSelector)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Only include lines added to current invoice';
+                    ToolTip = 'If this is selected, then only lines and quantities added to a current invoice will be exported.';
                 }
             }
         }
@@ -171,4 +187,5 @@ report 50101 "Job Billing Excel"
         HeaderJobTaskNo: Text[250];
         HeaderJobTask: Text[250];
         InvoicedSelector: Boolean;
+        AddedToInvoiceSelector: Boolean;
 }

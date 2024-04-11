@@ -62,7 +62,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         modify("Sell-to Country/Region Code")
         { Importance = Standard; QuickEntry = false; }
         modify(WorkDescription)
-        { Importance = Additional; Visible = true; }
+        { Importance = Additional; Visible = true; QuickEntry = false; }
         modify("Document Date")
         {
             Visible = true;

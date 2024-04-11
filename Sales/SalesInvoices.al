@@ -47,7 +47,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         modify("Your Reference")
         { Importance = Standard; ShowMandatory = true; QuickEntry = true; }
         modify(WorkDescription)
-        { Importance = Additional; Visible = true; }
+        { Importance = Additional; Visible = true; QuickEntry = false; }
         modify("Document Date")
         { Visible = true; Importance = Standard; }
         modify("Due Date")
