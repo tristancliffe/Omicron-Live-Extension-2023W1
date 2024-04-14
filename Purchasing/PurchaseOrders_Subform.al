@@ -12,8 +12,8 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             trigger OnAfterValidate()
             begin
                 GetInventory();
-                if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) and ((Rec."No." <> 'JOB-PURCHASES') or (Rec."No." <> 'TEXT')) then
-                    if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT')) then
+                if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) and ((Rec."No." <> 'JOB-PURCHASES') or (Rec."No." <> 'TEXT') or (rec."No." = 'SUBCONTRACT')) then
+                    if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT') or (rec."No." = 'SUBCONTRACT')) then
                         exit
                     else
                         message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
@@ -90,7 +90,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             trigger OnAfterValidate()
             begin
                 if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
-                    if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT')) then
+                    if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT') or (rec."No." = 'SUBCONTRACT')) then
                         exit
                     else
                         message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
