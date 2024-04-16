@@ -122,8 +122,8 @@ pageextension 50111 JobCardExt extends "Job Card"
                 Image = SalesInvoice;
                 Caption = 'Sales Invoices List';
                 RunObject = page "Sales Invoice List";
-                Description = 'Go to the Sales Invoice list.';
-                ToolTip = 'Opens the list of sales invoices.';
+                Description = 'Go to the list of all active Sales Invoice.';
+                ToolTip = 'Opens the list of active sales invoices.';
                 Visible = true;
                 Enabled = true;
             }
@@ -247,6 +247,8 @@ pageextension 50111 JobCardExt extends "Job Card"
             {
                 ShowAs = SplitButton;
                 actionref(CreateSalesInvoice_Promoted; CreateSalesInvoice)
+                { }
+                actionref(JobInvoices_Promoted; SalesInvoicesCreditMemos)
                 { }
                 actionref(SalesInvoiceList_Promoted; SalesInvoiceList)
                 { }
