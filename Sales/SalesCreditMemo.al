@@ -57,6 +57,56 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
                 MultiLine = true;
             }
         }
+        addafter("Sell-to")
+        {
+            field(CustomerCar; RecCustomer."Vehicle Model")
+            {
+                Caption = 'Customer Car';
+                ApplicationArea = All;
+                Editable = false;
+                Importance = Standard;
+            }
+            field("Order Customer Notes"; CustomerNotes)
+            {
+                MultiLine = true;
+                Caption = 'Customer Notes';
+                ApplicationArea = All;
+                Importance = Standard;
+                ToolTip = 'This SHOULD be the customer notes brought across to the orders';
+                QuickEntry = false;
+                Editable = true;
+                trigger OnAssistEdit()
+                begin
+                    message(Rec."Order Customer Notes");
+                end;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer Notes" := CustomerNotes;
+                    RecCustomer.Modify()
+                end;
+            }
+        }
+        addafter("Sell-to Country/Region Code")
+        {
+            field(ShowMap; ShowMapLbl)
+            {
+                ApplicationArea = Basic, Suite;
+                Editable = false;
+                ShowCaption = false;
+                Style = StrongAccent;
+                StyleExpr = TRUE;
+                ToolTip = 'Specifies the customer''s address on your preferred map website.';
+
+                trigger OnDrillDown()
+                begin
+                    CurrPage.Update(true);
+                    Rec.DisplayMap();
+                end;
+            }
+        }
+        modify("Foreign Trade")
+        { Visible = false; }
     }
     actions
     {
@@ -93,34 +143,63 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
                 Visible = true;
             }
         }
-        modify(Post)
-        {
-            trigger OnBeforeAction()
-            begin
-                if rec."Posting Date" = 0D then begin
-                    Rec.Validate(Rec."Posting Date", Today);
-                    // Rec.Modify();
-                end;
-            end;
-        }
-        modify(PostAndSend)
-        {
-            trigger OnBeforeAction()
-            begin
-                if rec."Posting Date" = 0D then begin
-                    Rec.Validate(Rec."Posting Date", Today);
-                    // Rec.Modify();
-                end;
-            end;
-        }
+        modify(Release)
+        { Enabled = ReleaseControllerStatus; }
+        modify(Reopen)
+        { Enabled = ReopenControllerStatus; }
     }
+
+    var
+        RecCustomer: Record Customer;
+        CustomerNotes: Text[2000];
+        ReleaseControllerStatus: Boolean;
+        ReopenControllerStatus: Boolean;
+        ShowMapLbl: Label 'Show on Map';
+
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
         Rec."Assigned User ID" := USERID;
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+        end;
     end;
 
     trigger OnModifyRecord(): Boolean
     begin
         Rec.Validate(Rec."Your Reference", UpperCase(Rec."Your Reference"));
+    end;
+
+    trigger OnOpenPage()
+    begin
+        InitPageControllers();
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+        end;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        InitPageControllers();
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+        end;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        InitPageControllers();
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+        end;
+    end;
+
+    local procedure InitPageControllers()
+    begin
+        ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
+        ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 }

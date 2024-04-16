@@ -270,22 +270,22 @@ pageextension 50112 JobListExtension extends "Job List"
             view(CurrentJobs)
             {
                 Caption = 'Current Jobs';
-                Filters = where("Status" = filter('Planning|Quote|Open'));
+                Filters = where("Status" = filter('Planning|Quote|Open|Paused'));
             }
             view(AllJobs)
             {
                 Caption = 'All Jobs';
-                Filters = where("Status" = filter('Planning|Completed|Quote|Open'));
+                Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'));
             }
             view(JJobs)
             {
                 Caption = 'Current J Jobs';
-                Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open'));
+                Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open|Paused'));
             }
             view(PJobs)
             {
                 Caption = 'Current P Jobs';
-                Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open'));
+                Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open|Paused'));
             }
             view(CompletedJobs)
             {
@@ -295,7 +295,7 @@ pageextension 50112 JobListExtension extends "Job List"
             view("WIP to Post")
             {
                 Caption = 'WIP entries';
-                Filters = where("Status" = filter('Planning|Completed|Quote|Open'), "WIP Entries Exist" = const(true));
+                Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'), "WIP Entries Exist" = const(true));
             }
         }
     }

@@ -28,10 +28,10 @@ report 50110 "Item Prices"
         }
         dataitem(StockMovements; StockMovements)
         {
-            DataItemTableView = sorting(SM_STOCK_CODE) where(SM_TYPE = filter('SALE'), SM_STATUS = filter('OUT'));
+            DataItemTableView = sorting(SM_STOCK_CODE) where(SM_TYPE2 = filter('SALE'), SM_STATUS2 = filter('OUT'));
             column(STOCK_CODE; SM_STOCK_CODE)
             { }
-            column(TYPE; SM_TYPE)
+            column(TYPE; SM_TYPE2)
             { }
             column(DETAIL; SM_DETAIL)
             { }
