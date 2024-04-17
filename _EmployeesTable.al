@@ -3,7 +3,11 @@ tableextension 50104 EmployeeTableExt extends Employee
     fields
     {
         field(50100; "Employee Notes"; Text[1000])
-        { CaptionML = ENU = 'Employee Notes'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Employee Notes';
+            DataClassification = CustomerContent;
+            ToolTip = 'Notes about this employee.';
+        }
         field(50101; "Phone Numbers Exist"; Boolean)
         { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
         modify("Phone No.")

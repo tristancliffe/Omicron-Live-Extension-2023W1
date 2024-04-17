@@ -3,7 +3,11 @@ tableextension 50106 ResourceTable extends Resource
     fields
     {
         field(50100; "Resource Notes"; Text[1000])
-        { CaptionML = ENU = 'Resource Notes'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Resource Notes';
+            DataClassification = CustomerContent;
+            ToolTip = 'Resource notes';
+        }
     }
     fieldgroups
     {

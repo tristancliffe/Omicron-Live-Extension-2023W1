@@ -5,7 +5,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
         field(50100; OngoingJobs; Integer)
         {
             CalcFormula = count(Job where(Status = filter(Open)));
-            Caption = 'Ongoing Jobs';
+            Caption = 'Ongoing Projects';
             FieldClass = FlowField;
         }
         field(50101; OpenTimeSheetsCue; Integer)
@@ -41,7 +41,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
             FieldClass = FlowField;
             AutoFormatExpression = '£<precision, 0:0><standard format, 0>';  //GetAmountFormat();
             AutoFormatType = 11;
-            Caption = 'Invoiceable Jobs';
+            Caption = 'Invoiceable Projects';
             CalcFormula = sum("Job Planning Line".InvoicePrice where("Line Type" = filter("Billable" | "Both Budget and Billable"),
                                                                     "Qty. Transferred to Invoice" = filter('0'),
                                                                     "Qty. to Transfer to Invoice" = filter('>0'),

@@ -33,7 +33,7 @@ pageextension 50204 "Time Sheet Archive Subform Ext" extends "Time Sheet Archive
                 ApplicationArea = All;
                 Caption = 'Timesheet Entries';
                 Image = History;
-                ToolTip = 'Shows the entries made for the job so far that have been approved and posted';
+                ToolTip = 'Shows the entries made for the project so far that have been approved and posted';
                 Scope = Repeater;
                 RunObject = Page "Job Planning Lines";
                 RunPageLink = "Job No." = FIELD("Job No.");

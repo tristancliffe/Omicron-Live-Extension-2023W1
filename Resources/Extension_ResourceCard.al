@@ -24,7 +24,7 @@ pageextension 50118 ResourceCardExt extends "Resource Card"
         addafter("Search Name")
         {
             field("Resource Notes"; Rec."Resource Notes")
-            { MultiLine = true; ApplicationArea = All; ToolTip = 'Resource notes'; }
+            { MultiLine = true; ApplicationArea = All; }
         }
     }
     actions

@@ -88,11 +88,11 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
             {
                 ApplicationArea = All;
                 Image = Job;
-                Caption = 'Job Card';
+                Caption = 'Project Card';
                 RunObject = page "Job Card";
                 RunPageLink = "No." = field("Job No.");
-                Description = 'Go to the Job card';
-                ToolTip = 'Opens the Job Card for this line';
+                Description = 'Go to the Project card';
+                ToolTip = 'Opens the PRpject Card for this line';
                 Scope = Repeater;
                 Visible = true;
                 Enabled = true;

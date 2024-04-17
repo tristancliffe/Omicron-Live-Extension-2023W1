@@ -1,6 +1,6 @@
 page 50105 "Job Cues"
 {
-    Caption = 'Jobs';
+    Caption = 'Projects';
     PageType = CardPart;
     RefreshOnActivate = true;
     ShowFilter = false;
@@ -12,13 +12,13 @@ page 50105 "Job Cues"
         {
             cuegroup(JobsToInvoice)
             {
-                Caption = 'Jobs To Invoice';
+                Caption = 'Projects To Invoice';
                 CuegroupLayout = Wide;
                 field(Invoiceable; Rec.Invoiceable)
                 {
                     ApplicationArea = All;
                     Image = Cash;
-                    ToolTip = 'The amount that can be currently be invoiced from all Active jobs - check stock and time sheets are up to date before doing so.';
+                    ToolTip = 'The amount that can be currently be invoiced from all Active projects - check stock and time sheets are up to date before doing so.';
                 }
             }
         }

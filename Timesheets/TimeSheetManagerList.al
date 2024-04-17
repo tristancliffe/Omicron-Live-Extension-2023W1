@@ -21,12 +21,12 @@ pageextension 50141 TimeSheetManagerListExt extends "Manager Time Sheet List"
         {
             action(JobJournal)
             {
-                Caption = 'Job Journal';
+                Caption = 'Project Journal';
                 Image = JobJournal;
                 ApplicationArea = All;
                 RunObject = Page "Job Journal";
                 ShortcutKey = 'Shift+Ctrl+J';
-                ToolTip = 'Takes the user to the Job Journal';
+                ToolTip = 'Takes the user to the Project Journal';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;

@@ -17,16 +17,18 @@ tableextension 50101 CustomerTableExtCue extends Customer
         field(50200; "No. of Jobs"; Integer)
         {
             FieldClass = FlowField;
-            Caption = 'Number of jobs with the customer';
+            Caption = 'Number of projects with the customer';
             Editable = false;
             CalcFormula = count(Job where(Status = filter('Open|Paused'), "Sell-to Customer No." = FIELD("No.")));
+            ToolTip = 'Specifies the number of projects ongoing for the customer.';
         }
         field(50201; "No. of Completed Jobs"; Integer)
         {
             FieldClass = FlowField;
-            Caption = 'Number of completed jobs with the customer';
+            Caption = 'Number of completed projects with the customer';
             Editable = false;
             CalcFormula = count(Job where(Status = filter(Completed), "Sell-to Customer No." = FIELD("No.")));
+            ToolTip = 'Specifies the number of projects completed for the customer.';
         }
         field(50102; "Phone Numbers Exist"; Boolean)
         { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }

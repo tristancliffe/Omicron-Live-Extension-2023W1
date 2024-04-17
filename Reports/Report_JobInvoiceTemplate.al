@@ -4,7 +4,7 @@ report 50109 "Job Invoice"
     UsageCategory = Documents;
     ApplicationArea = All;
     DefaultRenderingLayout = JobInvoice;
-    Description = 'Produces a job invoice template';
+    Description = 'Produces a project invoice template';
     PreviewMode = PrintLayout;
 
     dataset

@@ -82,7 +82,7 @@ tableextension 50105 JobNotes extends Job
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarStock;
-                DefaultTask.Description := 'Stock used on job';
+                DefaultTask.Description := 'Stock used on project';
                 DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
                 DefaultTask."Job Posting Group" := JobPostingGroup;
                 DefaultTask.Insert();
@@ -114,7 +114,7 @@ tableextension 50105 JobNotes extends Job
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarPurch;
-                DefaultTask.Description := 'Purchases made for job';
+                DefaultTask.Description := 'Purchases made for project';
                 DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
                 DefaultTask."Job Posting Group" := JobPostingGroup;
                 DefaultTask.Insert();
@@ -146,7 +146,7 @@ tableextension 50105 JobNotes extends Job
                 DefaultTask.Init();
                 DefaultTask."Job No." := Rec."No.";
                 DefaultTask."Job Task No." := VarSubContr;
-                DefaultTask.Description := 'Subcontracted services used for job';
+                DefaultTask.Description := 'Subcontracted services used for project';
                 DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
                 DefaultTask."Job Posting Group" := JobPostingGroup;
                 DefaultTask.Insert();
@@ -247,13 +247,29 @@ tableextension 50105 JobNotes extends Job
         field(50100; "Parts Location"; Text[100])
         { CaptionML = ENU = 'Parts Location'; DataClassification = CustomerContent; }
         field(50101; "Vehicle Reg"; Text[20])
-        { CaptionML = ENU = 'Vehicle Reg'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Vehicle Reg';
+            DataClassification = CustomerContent;
+            ToolTip = 'Registration No.';
+        }
         field(50102; "Date of Arrival"; Date)
-        { CaptionML = ENU = 'Date of Arrival'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Date of Arrival';
+            DataClassification = CustomerContent;
+            ToolTip = 'Date of arrival at Omicron';
+        }
         field(50103; "Job Notes"; Text[1000])
-        { CaptionML = ENU = 'Job Notes'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Project Notes';
+            DataClassification = CustomerContent;
+            ToolTip = 'Notes about the project - up to 1000 characters.';
+        }
         field(50104; "Car Make/Model"; Text[100])
-        { CaptionML = ENU = 'Car Make/Model/Series'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Car Make/Model/Series';
+            DataClassification = CustomerContent;
+            ToolTip = 'Make & model of car in for work';
+        }
         field(50105; "Work Required"; Text[500])
         { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
         field(50106; "Sell-to Mobile Number"; Text[30])
@@ -266,6 +282,7 @@ tableextension 50105 JobNotes extends Job
                                                                 "Entry Type" = filter('Usage'),
                                                                 Type = filter('Resource'),
                                                                 "Unit of Measure Code" = filter('HOUR')));
+            ToolTip = 'The total number of HOURS entered against the project, regardless of adjustments and invoicing';
         }
         field(50108; InvoicedHours; Decimal)
         {
@@ -275,6 +292,7 @@ tableextension 50105 JobNotes extends Job
                                                                 "Entry Type" = filter('Sale'),
                                                                 Type = filter('Resource'),
                                                                 "Unit of Measure Code" = filter('HOUR')));
+            ToolTip = 'The total number of INVOICED HOURS entered against the project';
         }
         field(50109; ChassisNo; Code[30])
         { CaptionML = ENU = 'Chassis No.'; DataClassification = CustomerContent; }
@@ -290,6 +308,7 @@ tableextension 50105 JobNotes extends Job
                                                                 "Entry Type" = filter('Usage')));
             AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
             AutoFormatType = 1;
+            ToolTip = 'The value committed to the project so far.';
         }
         field(50113; InvoicedValue; Decimal)
         {
@@ -299,6 +318,7 @@ tableextension 50105 JobNotes extends Job
                                                                 "Entry Type" = filter('Sale')));
             AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
             AutoFormatType = 1;
+            ToolTip = 'The value invoiced to date.';
         }
         field(50114; ToInvoice; Decimal)
         {
@@ -320,6 +340,7 @@ tableextension 50105 JobNotes extends Job
             FieldClass = FlowField;
             CalcFormula = sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" where("Customer No." = field("Bill-to Customer No."),
                                                                                  "Ledger Entry Amount" = const(true)));
+            ToolTip = 'The current customer balance outstanding. This can be used so that balances can be accounted for in project invoices - e.g. when they have paid a working capital deposit';
         }
     }
 

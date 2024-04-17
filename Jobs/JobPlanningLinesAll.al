@@ -1,7 +1,7 @@
 page 50104 "Job Planning Lines All"
 {
     //AutoSplitKey = true;
-    Caption = 'Job Planning Lines - All';
+    Caption = 'Project Planning Lines - All';
     // DataCaptionExpression = Caption();
     PageType = List;
     UsageCategory = Lists;
@@ -16,15 +16,15 @@ page 50104 "Job Planning Lines All"
             repeater(Control1)
             {
                 ShowCaption = false;
-                field("Job No."; Rec."Job No.")
+                field("Project No."; Rec."Job No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the number of the related job.';
+                    ToolTip = 'Specifies the number of the related project.';
                 }
-                field("Job Task No."; Rec."Job Task No.")
+                field("Project Task No."; Rec."Job Task No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the number of the related job task.';
+                    ToolTip = 'Specifies the number of the related project task.';
                 }
                 field("Line Type"; Rec."Line Type")
                 {
@@ -34,7 +34,7 @@ page 50104 "Job Planning Lines All"
                 field("Planning Date"; Rec."Planning Date")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the date of the planning line. You can use the planning date for filtering the totals of the job, for example, if you want to see the scheduled usage for a specific month of the year.';
+                    ToolTip = 'Specifies the date of the planning line. You can use the planning date for filtering the totals of the project, for example, if you want to see the scheduled usage for a specific month of the year.';
                 }
                 field("Document No."; Rec."Document No.")
                 {
@@ -86,7 +86,7 @@ page 50104 "Job Planning Lines All"
                 field("Total Cost"; Rec."Total Cost")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the total cost for the planning line. The total cost is in the job currency, which comes from the Currency Code field in the Job Card.';
+                    ToolTip = 'Specifies the total cost for the planning line. The total cost is in the project currency, which comes from the Currency Code field in the Job Card.';
                 }
                 field("Unit Price"; Rec."Unit Price")
                 {
@@ -96,12 +96,12 @@ page 50104 "Job Planning Lines All"
                 field("Line Amount"; Rec."Line Amount")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the amount that will be posted to the job ledger.';
+                    ToolTip = 'Specifies the amount that will be posted to the project ledger.';
                 }
                 field("Total Price"; Rec."Total Price")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the total price in the job currency on the planning line.';
+                    ToolTip = 'Specifies the total price in the project currency on the planning line.';
                     Visible = false;
                 }
                 field("Qty. Transferred to Invoice"; Rec."Qty. Transferred to Invoice")

@@ -6,19 +6,19 @@ pageextension 50197 JobWIP_RecognitionFactBoxExt extends "Job WIP/Recognition Fa
         {
             group(JobDetails)
             {
-                Caption = 'Job Details';
+                Caption = 'Project Details';
 
                 field(TotalHours; Rec.TotalHours)
                 {
                     ApplicationArea = All;
                     Visible = true;
-                    ToolTip = 'The total number of HOURS entered against the job, regardless of adjustments and invoicing';
+                    ToolTip = 'The total number of HOURS entered against the project, regardless of adjustments and invoicing';
                 }
                 field(InvoicedHours; Rec.InvoicedHours)
                 {
                     ApplicationArea = All;
                     Visible = true;
-                    ToolTip = 'The total number of INVOICED HOURS entered against the job';
+                    ToolTip = 'The total number of INVOICED HOURS entered against the project';
                 }
                 field("Vehicle Reg"; Rec."Vehicle Reg")
                 {
@@ -28,9 +28,9 @@ pageextension 50197 JobWIP_RecognitionFactBoxExt extends "Job WIP/Recognition Fa
             }
             group(JobCosts)
             {
-                Caption = 'Job Profitability';
+                Caption = 'Project Profitability';
                 field(TotalValue; Rec.TotalValue)
-                { ApplicationArea = All; Visible = true; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the job so far.'; }
+                { ApplicationArea = All; Visible = true; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the project so far.'; }
                 field(InvoicedValue; Rec.InvoicedValue)
                 { ApplicationArea = All; Visible = true; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
                 field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue))

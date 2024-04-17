@@ -103,7 +103,7 @@ pageextension 50101 ItemListExtension extends "Item List"
             field(Supplier; Rec.Supplier)
             { ApplicationArea = All; ToolTip = 'Short supplier notes. Ideally use the vendors functionality to record suppiers, prices and leadtimes.'; }
             field("Item Notes"; Rec."Item Notes")
-            { ApplicationArea = All; ToolTip = 'Item notes.'; }
+            { ApplicationArea = All; }
         }
         moveafter("Vendor No."; "Vendor Item No.")
         modify("Vendor Item No.")

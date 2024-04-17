@@ -42,12 +42,12 @@ pageextension 50145 TimeSheetManagerExt extends "Manager Time Sheet"
         {
             action(JobJournal)
             {
-                Caption = 'Job Journal';
+                Caption = 'Project Journal';
                 Image = JobJournal;
                 ApplicationArea = All;
                 RunObject = Page "Job Journal";
                 ShortcutKey = 'Shift+Ctrl+J';
-                ToolTip = 'Takes the user to the Job Journal';
+                ToolTip = 'Takes the user to the Project Journal';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;

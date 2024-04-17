@@ -14,29 +14,41 @@ pageextension 50112 JobListExtension extends "Job List"
             field("Car Make/Model"; Rec."Car Make/Model")
             { ApplicationArea = All; ToolTip = 'Car make/model'; }
             field("Vehicle Reg"; Rec."Vehicle Reg")
-            { ApplicationArea = All; ToolTip = 'Registration No.'; }
-            field("Job Notes"; Rec."Job Notes")
-            { ApplicationArea = All; ToolTip = 'Job notes'; }
+            {
+                ApplicationArea = All;
+            }
+            field("Project Notes"; Rec."Job Notes")
+            { ApplicationArea = All; ToolTip = 'Project notes'; }
             field("Customer Balance"; Rec."Customer Balance")
-            { Caption = 'Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
+            { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
             field("Date of Arrival"; Rec."Date of Arrival")
-            { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; }
+            {
+                ApplicationArea = All;
+            }
             field(TotalHours; Rec.TotalHours)
-            { ApplicationArea = All; BlankZero = true; ToolTip = 'The total number of HOURS entered against the job, regardless of adjustments and invoicing'; Width = 8; }
+            { ApplicationArea = All; BlankZero = true; Width = 8; }
             field(InvoicedHours; Rec.InvoicedHours)
-            { ApplicationArea = All; BlankZero = true; ToolTip = 'The total number of INVOICED HOURS entered against the job'; Width = 8; }
+            { ApplicationArea = All; BlankZero = true; Width = 8; }
             field(ToInvoice; Rec.ToInvoice)
             { ApplicationArea = All; StyleExpr = InvoiceStyle; BlankZero = true; }
             field(TotalValue; Rec.TotalValue)
-            { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; ToolTip = 'The value committed to the job so far.'; }
+            {
+                ApplicationArea = All;
+                Visible = false;
+                Caption = 'Total Cost, £';
+            }
             field(InvoicedValue; Rec.InvoicedValue)
-            { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; ToolTip = 'The value invoiced to date.'; }
+            {
+                ApplicationArea = All;
+                Visible = false;
+                Caption = 'Total Invoiced, £';
+            }
             field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue))
             { ApplicationArea = All; StyleExpr = ProfitStyle; BlankZero = true; Visible = false; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; }
         }
         moveafter("Date of Arrival"; "Person Responsible")
         modify("Person Responsible")
-        { Visible = false; ToolTip = 'Whom is ''doing'' the job, or whom is responsible for it.'; }
+        { Visible = false; ToolTip = 'Whom is ''doing'' the project, or whom is responsible for it.'; }
         moveafter(Control1905650007; Control1907234507, Control1902018507)
         modify(Control1907234507)
         { Visible = true; }
@@ -50,9 +62,9 @@ pageextension 50112 JobListExtension extends "Job List"
             action(CreateSalesInvoice)
             {
                 ApplicationArea = Jobs;
-                Caption = 'Create Job &Sales Invoice';
+                Caption = 'Create Project &Sales Invoice';
                 Image = JobSalesInvoice;
-                ToolTip = 'Use a batch job to help you create job sales invoices for the involved job planning lines.';
+                ToolTip = 'Use a batch job to help you create project sales invoices for the involved project planning lines.';
                 Visible = true;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -82,11 +94,11 @@ pageextension 50112 JobListExtension extends "Job List"
             }
             action(JobJournal)
             {
-                Caption = 'Job Journal';
+                Caption = 'Project Journal';
                 Image = JobJournal;
                 ApplicationArea = All;
                 RunObject = Page "Job Journal";
-                ToolTip = 'Open the Job Journal for posting to jobs';
+                ToolTip = 'Open the Project Journal for posting to projects';
                 Visible = true;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -159,7 +171,7 @@ pageextension 50112 JobListExtension extends "Job List"
             action("Active Jobs")
             {
                 ApplicationArea = Jobs;
-                Caption = 'Active Job List';
+                Caption = 'Active Project List';
                 Image = "Report";
                 RunObject = Report "Active Jobs";
                 ToolTip = 'View a list of all active J-jobs (use the filter ''J*|P*'')';
@@ -171,7 +183,7 @@ pageextension 50112 JobListExtension extends "Job List"
                 ApplicationArea = Suite;
                 Caption = 'Job Card';
                 Image = "Report";
-                ToolTip = 'Produce a job card (Send to Word Document, save in the job''s folder, and print on Orange)';
+                ToolTip = 'Produce a job card (Send to Word Document, save in the project''s folder, and print on Orange)';
                 Promoted = true;
                 PromotedCategory = Report;
 
@@ -232,9 +244,9 @@ pageextension 50112 JobListExtension extends "Job List"
             action(JobPlanningLines)
             {
                 ApplicationArea = Jobs;
-                Caption = 'Job &Planning Lines';
+                Caption = 'Project &Planning Lines';
                 Image = JobLines;
-                ToolTip = 'View all planning lines for the job. You use this window to plan what items, resources, and general ledger expenses that you expect to use on a job (Budget) or you can specify what you actually agreed with your customer that he should pay for the job (Billable).';
+                ToolTip = 'View all planning lines for the project. You use this window to plan what items, resources, and general ledger expenses that you expect to use on a project (Budget) or you can specify what you actually agreed with your customer that he should pay for the project (Billable).';
                 PromotedCategory = Process;
                 Promoted = true;
                 PromotedOnly = true;
@@ -269,12 +281,12 @@ pageextension 50112 JobListExtension extends "Job List"
         {
             view(CurrentJobs)
             {
-                Caption = 'Current Jobs';
+                Caption = 'Current Projects';
                 Filters = where("Status" = filter('Planning|Quote|Open|Paused'));
             }
             view(AllJobs)
             {
-                Caption = 'All Jobs';
+                Caption = 'All Projects';
                 Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'));
             }
             view(JJobs)
@@ -289,7 +301,7 @@ pageextension 50112 JobListExtension extends "Job List"
             }
             view(CompletedJobs)
             {
-                Caption = 'Completed Jobs';
+                Caption = 'Completed Projects';
                 Filters = where("Status" = filter('Completed'));
             }
             view("WIP to Post")

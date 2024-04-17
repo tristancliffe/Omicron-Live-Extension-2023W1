@@ -3,8 +3,8 @@ report 50101 "Job Billing Excel"
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
     DefaultRenderingLayout = "./OmicronJobBillingExcel.xlsx";
-    Caption = 'Job Calculator';
-    Description = 'Used to calculate handwritten invoices for jobs';
+    Caption = 'Project Calculator';
+    Description = 'Used to calculate handwritten invoices for projects';
     PreviewMode = PrintLayout;
 
     dataset
@@ -138,14 +138,14 @@ report 50101 "Job Billing Excel"
         {
             Type = Excel;
             LayoutFile = './OmicronJobBillingExcel.xlsx';
-            Caption = 'Omicron Excel Job Invoice Calculator';
-            Summary = 'Used to calculate and write handwritten job invoices and/or prepare quotes';
+            Caption = 'Omicron Excel Project Invoice Calculator';
+            Summary = 'Used to calculate and write handwritten project invoices and/or prepare quotes';
         }
     }
 
     labels
     {
-        JobNoLbl = 'Job No.';
+        JobNoLbl = 'Project No.';
         JobDescriptionLbl = 'Description';
     }
 
@@ -179,9 +179,9 @@ report 50101 "Job Billing Excel"
         CurrReportPageNoCaptionLbl: Label 'Page';
         JobQuoteCaptLbl: Label 'Timesheet Entries';
         DescriptionCaptionLbl: Label 'Description';
-        JobTaskNoCaptLbl: Label 'Job Task No.';
+        JobTaskNoCaptLbl: Label 'Project Task No.';
         QuantityLbl: Label 'Quantity';
-        JobTaskTypeLbl: Label 'Job Task Type';
+        JobTaskTypeLbl: Label 'Project Task Type';
         NoLbl: Label 'No.';
         NewTaskGroup: Integer;
         HeaderJobTaskNo: Text[250];

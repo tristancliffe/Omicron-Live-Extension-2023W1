@@ -38,7 +38,7 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
             //         Message(Rec."Vendor Notes")
             //     end;
             // }
-            usercontrol(UserControlDesc; "Microsoft.Dynamics.Nav.Client.WebPageViewer")
+            usercontrol(UserControlDesc; WebPageViewer) //"Microsoft.Dynamics.Nav.Client.WebPageViewer")
             {
                 ApplicationArea = All;
                 trigger ControlAddInReady(callbackUrl: Text)

@@ -38,19 +38,19 @@ reportextension 50100 ExcelQuoteExt extends "Job Quote"
     }
     rendering
     {
-        layout("Omicron Job Excel Quote")
-        {
-            Type = Excel;
-            LayoutFile = './OmicronJobQuoteExcel.xlsx';
-            Caption = 'Omicron Job Calculator';
-            Summary = 'Used to calculate handwritten invoices for jobs';
-        }
+        // layout("Omicron Job Excel Quote")
+        // {
+        //     Type = Excel;
+        //     LayoutFile = './OmicronJobQuoteExcel.xlsx';
+        //     Caption = 'Omicron Job Calculator';
+        //     Summary = 'Used to calculate handwritten invoices for jobs';
+        // }
         layout("Omicron Job Quote")
         {
             Type = RDLC;
             LayoutFile = './OmicronJobQuote.rdlc';
-            Caption = 'Omicron Job Quote (printing)';
-            Summary = 'Omicron Job Quote';
+            Caption = 'Omicron Project Quote (printing)';
+            Summary = 'Omicron Project Quote';
         }
         // layout("Omicron Time Sheet Records")
         // {

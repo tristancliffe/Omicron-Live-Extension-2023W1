@@ -1,8 +1,8 @@
 report 50106 "Active Jobs"
 {
     ApplicationArea = All;
-    Caption = 'Active Jobs';
-    Description = 'Prints a list of active, non-admin jobs';
+    Caption = 'Active Projects';
+    Description = 'Prints a list of active, non-admin projects';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
     WordLayout = './OmicronActiveJobs.docx';
@@ -78,9 +78,9 @@ report 50106 "Active Jobs"
     }
     labels
     {
-        Lbl_ReportName = 'Active Jobs', Comment = 'Report name';
+        Lbl_ReportName = 'Active Projects', Comment = 'Report name';
         Lbl_CompanyName = 'Omicron Engineering Ltd.';
-        Lbl_JobNo = 'Job No.';
+        Lbl_JobNo = 'Project No.';
         Lbl_Customer = 'Customer';
         Lbl_Vehicle = 'Make/Model';
         Lbl_Description = 'Description';

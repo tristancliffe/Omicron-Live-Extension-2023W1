@@ -10,15 +10,13 @@ pageextension 50111 JobCardExt extends "Job Card"
             {
                 MultiLine = false;
                 ApplicationArea = All;
-                ToolTip = 'Make & model of car in for work';
                 ShowMandatory = true;
             }
-            field("Job Notes"; Rec."Job Notes")
+            field("Project Notes"; Rec."Job Notes")
             {
                 MultiLine = true;
                 ApplicationArea = All;
                 QuickEntry = false;
-                ToolTip = 'Notes about the job - up to 1000 characters.';
             }
         }
         modify(Status)
@@ -28,7 +26,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             begin
                 if rec.Status = rec.status::Completed then
                     //message('Don''t forget to print the timesheet report for filing.')
-                    if not confirm('Have you printed the Time Sheet Report for this job?', false) then
+                    if not confirm('Have you printed the Time Sheet Report for this project?', false) then
                         ERROR('Print the Time Sheet Report first');
             end;
         }
@@ -72,6 +70,11 @@ pageextension 50111 JobCardExt extends "Job Card"
                 Caption = 'Picture';
                 SubPageLink = "No." = FIELD("Bill-to Customer No.");
             }
+            part(SalesHistSelltoFactBox; "Sales Hist. Sell-to FactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "No." = field("Bill-to Customer No.");
+            }
         }
     }
     actions
@@ -84,7 +87,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 Image = SalesInvoice;
                 ApplicationArea = All;
                 //RunObject = Report "Job Create Sales Invoice";
-                ToolTip = 'Create job sales invoices report';
+                ToolTip = 'Create project sales invoices report';
                 Visible = true;
 
                 trigger OnAction()
@@ -97,11 +100,11 @@ pageextension 50111 JobCardExt extends "Job Card"
             }
             action(JobJournal)
             {
-                Caption = 'Job Journal';
+                Caption = 'Project Journal';
                 Image = JobJournal;
                 ApplicationArea = All;
                 RunObject = Page "Job Journal";
-                ToolTip = 'Opens the job journal';
+                ToolTip = 'Opens the project journal';
                 Visible = true;
             }
             action(CustomerCard)
@@ -112,7 +115,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 RunObject = page "Customer Card";
                 RunPageLink = "No." = field("Sell-to Customer No.");
                 Description = 'Go to the Sell-To Customer''s Card';
-                ToolTip = 'Opens the sell-to customer card for this job';
+                ToolTip = 'Opens the sell-to customer card for this project';
                 Visible = true;
                 Enabled = true;
             }
@@ -160,7 +163,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             action("Job Card")
             {
                 ApplicationArea = Suite;
-                Caption = 'Job Card';
+                Caption = 'JoJ Card';
                 Image = "Report";
                 ToolTip = 'Produce a job card (Send to Word Document and save it in the job''s folder, and print on Orange)';
 

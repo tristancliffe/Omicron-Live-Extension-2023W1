@@ -1,6 +1,6 @@
 pageextension 50150 ProjectCues extends "Project Manager Activities"
 {
-    CaptionML = ENG = 'Job Activities';
+    CaptionML = ENG = 'Project Activities';
     layout
     {
         addlast("Jobs to Budget")
@@ -9,8 +9,8 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageID = "Job List";
-                ToolTip = 'Specifies number of currently active (Open) jobs';
-                Caption = 'Active Jobs';
+                ToolTip = 'Specifies number of currently active (Open) projects';
+                Caption = 'Active Projects';
                 Visible = true;
             }
             field(ActiveTimeSheetsCue; Rec.ActiveTimeSheetsCue)

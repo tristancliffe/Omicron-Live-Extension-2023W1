@@ -65,7 +65,7 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
             //         Message(Rec."Customer Notes")
             //     end;
             // }
-            usercontrol(UserControlDesc; "Microsoft.Dynamics.Nav.Client.WebPageViewer")
+            usercontrol(UserControlDesc; WebPageViewer) //"Microsoft.Dynamics.Nav.Client.WebPageViewer")
             {
                 ApplicationArea = All;
                 trigger ControlAddInReady(callbackUrl: Text)

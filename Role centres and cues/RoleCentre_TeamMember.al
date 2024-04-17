@@ -26,14 +26,14 @@ pageextension 50121 TeamMemberRoleExt extends "Team Member Role Center"
             action("Job List")
             {
                 ApplicationArea = All;
-                CaptionML = ENG = 'Jobs', ENU = 'Jobs';
+                CaptionML = ENG = 'Projects', ENU = 'Projects';
                 RunObject = page "Job List";
                 RunPageView = where(Status = filter(Open | Quote | Planning));
             }
             action("Job Journal")
             {
                 ApplicationArea = All;
-                CaptionML = ENG = 'Job Journals', ENU = 'Job Journals';
+                CaptionML = ENG = 'Project Journals', ENU = 'Project Journals';
                 RunObject = page "Job Journal";
                 Visible = false;
             }

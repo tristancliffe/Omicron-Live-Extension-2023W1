@@ -4,7 +4,7 @@ pageextension 50193 JobTaskLines extends "Job Task Lines"
     {
         modify("Job Task No.")
         {
-            Caption = 'Job Task';
+            Caption = 'Project Task';
             ShowMandatory = true;
 
             trigger OnAfterValidate()

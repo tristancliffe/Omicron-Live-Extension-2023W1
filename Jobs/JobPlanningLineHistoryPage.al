@@ -1,7 +1,7 @@
 page 50103 "Job Planning History"
 {
     AutoSplitKey = true;
-    Caption = 'Job Planning Line History';
+    Caption = 'Project Planning Line History';
     DataCaptionFields = "Job No.", "Job Task No.";
     //DataCaptionExpression = Caption();
     PageType = List;
@@ -16,16 +16,16 @@ page 50103 "Job Planning History"
             repeater(Control1)
             {
                 ShowCaption = false;
-                field("Job No."; Rec."Job No.")
+                field("Project No."; Rec."Job No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the number of the related job.';
+                    ToolTip = 'Specifies the number of the related project.';
                     //Visible = false;
                 }
-                field("Job Task No."; Rec."Job Task No.")
+                field("Project Task No."; Rec."Job Task No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the number of the related job task.';
+                    ToolTip = 'Specifies the number of the related project task.';
                 }
                 // field("Line Type"; Rec."Line Type")
                 // {
@@ -35,7 +35,7 @@ page 50103 "Job Planning History"
                 field("Planning Date"; Rec."Planning Date")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the date of the planning line. You can use the planning date for filtering the totals of the job, for example, if you want to see the scheduled usage for a specific month of the year.';
+                    ToolTip = 'Specifies the date of the planning line. You can use the planning date for filtering the totals of the project, for example, if you want to see the scheduled usage for a specific month of the year.';
                 }
                 field(Type; Rec.Type)
                 {
@@ -82,7 +82,7 @@ page 50103 "Job Planning History"
                 field("Line Amount"; Rec."Line Amount")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the amount that will be posted to the job ledger.';
+                    ToolTip = 'Specifies the amount that will be posted to the project ledger.';
                     Width = 8;
                 }
                 field("Invoiced Amount (LCY)"; Rec."Invoiced Amount (LCY)")

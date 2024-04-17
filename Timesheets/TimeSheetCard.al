@@ -1,7 +1,7 @@
 pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
 {
     AboutTitle = 'Timesheets';
-    AboutText = 'Use this page to enter timesheets to record hours on jobs & administration/clerical duties, and absenses from work.';
+    AboutText = 'Use this page to enter timesheets to record hours on projects & administration/clerical duties, and absenses from work.';
     layout
     {
         modify(Description)
@@ -69,12 +69,12 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             }
             action(JobJournalLink)
             {
-                Caption = 'Job Journal';
+                Caption = 'Project Journal';
                 Image = JobJournal;
                 ApplicationArea = All;
                 RunObject = Page "Job Journal";
                 ShortcutKey = 'Shift+Ctrl+K';
-                ToolTip = 'Takes the user to the Job Journal';
+                ToolTip = 'Takes the user to the Project Journal';
                 Visible = Device;
                 Promoted = true;
                 PromotedOnly = true;

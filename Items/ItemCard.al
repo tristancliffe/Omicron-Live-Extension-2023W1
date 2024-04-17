@@ -49,14 +49,12 @@ pageextension 50100 ItemCardExtension extends "Item Card"
             {
                 ApplicationArea = All;
                 Caption = 'Car Make/Model';
-                ToolTip = 'Known/intended application by model. For more specifics consider the Notes field';
                 ShowMandatory = true;
             }
             field("Supplier"; Rec."Supplier")
             {
                 ApplicationArea = All;
                 Caption = 'Old Supplier Ref';
-                ToolTip = 'Brief summary of main supplier and/or part number. No longed editable. Use the Vendor Catalogue to record suppliers, their part numbers and lead times, and use the Vendor No. and Vendor Item No. below to define the default vendor used for purchasing.';
             }
             group("NonStockGroup")
             {
@@ -67,7 +65,6 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Shelf No.';
-                    ToolTip = 'Only to be used when the Shelf No. field is not shown (e.g. on Non-Inventory items). Otherwise leave blank.';
                 }
             }
         }
@@ -117,7 +114,7 @@ pageextension 50100 ItemCardExtension extends "Item Card"
             //         Message(Rec."Item Notes")
             //     end;
             // }
-            usercontrol(UserControlDesc; "Microsoft.Dynamics.Nav.Client.WebPageViewer")
+            usercontrol(UserControlDesc; WebPageViewer) //"Microsoft.Dynamics.Nav.Client.WebPageViewer")
             {
                 ApplicationArea = All;
                 trigger ControlAddInReady(callbackUrl: Text)

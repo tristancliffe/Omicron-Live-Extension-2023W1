@@ -13,22 +13,26 @@ tableextension 50100 ItemTableExt extends Item
         {
             CaptionML = ENU = 'Vehicle Model';
             DataClassification = CustomerContent;
+            ToolTip = 'Known/intended application by model. For more specifics consider the Notes field';
         }
         field(50101; "Item Notes"; Text[1000])
         {
             CaptionML = ENU = 'Item Notes';
             DataClassification = CustomerContent;
+            ToolTip = 'Item notes...';
         }
         field(50102; "Supplier"; Text[50])
         {
             CaptionML = ENU = 'Supplier';
             DataClassification = CustomerContent;
+            ToolTip = 'Brief summary of main supplier and/or part number. No longed editable. Use the Vendor Catalogue to record suppliers, their part numbers and lead times, and use the Vendor No. and Vendor Item No. below to define the default vendor used for purchasing.';
         }
 
         field(50103; "NonStockShelf"; Text[20])
         {
             CaptionML = ENU = 'Non-Inventory Shelf';
             DataClassification = CustomerContent;
+            ToolTip = 'Only to be used when the Shelf No. field is not shown (e.g. on Non-Inventory items). Otherwise leave blank.';
         }
         field(50399; Search_Column; Text[1000])
         {

@@ -16,7 +16,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 if (Rec.Type = Rec.Type::Item) and (Rec."Location Code" = '') then
                     Rec.Validate("Location Code", 'STORES');
                 if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
-                    message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
+                    message('Using this G/L Account will probably result in the project invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
             end;
         }
         addafter(Description)
@@ -99,12 +99,12 @@ pageextension 50114 JobJournalExt extends "Job Journal"
         {
             action(JobList)
             {
-                Caption = 'Job List';
+                Caption = 'Project List';
                 Image = Job;
                 ApplicationArea = All;
                 RunObject = Page "Job List";
                 RunPageView = where(Status = filter(Open | Quote | Planning));
-                ToolTip = 'Takes the user to the Job List';
+                ToolTip = 'Takes the user to the Project List';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;
@@ -112,13 +112,13 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             }
             action(JobCard)
             {
-                Caption = 'Job Card';
+                Caption = 'Project Card';
                 Image = ViewJob;
                 ApplicationArea = All;
                 RunObject = Page "Job Card";
                 RunPageLink = "No." = field("Job No.");
                 ShortcutKey = 'Shift+Ctrl+J';
-                ToolTip = 'Takes the user to the Job Card of the selected line';
+                ToolTip = 'Takes the user to the Project Card of the selected line';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;
@@ -131,7 +131,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 ApplicationArea = All;
                 RunObject = Page "Assembly Orders";
                 ShortcutKey = 'Shift+Ctrl+A';
-                ToolTip = 'View the assembly order page, and create new assembly orders manually to fulfil job journal requirements. Assembly-to-order items are not automatically assembled by job journals.';
+                ToolTip = 'View the assembly order page, and create new assembly orders manually to fulfil project journal requirements. Assembly-to-order items are not automatically assembled by project journals.';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;

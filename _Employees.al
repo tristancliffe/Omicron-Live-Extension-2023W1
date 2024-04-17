@@ -19,7 +19,6 @@ pageextension 50107 EmployeeCardExt extends "Employee Card"
             {
                 MultiLine = true;
                 ApplicationArea = All;
-                ToolTip = 'Notes about this employee.';
             }
         }
         modify("Phone No.")

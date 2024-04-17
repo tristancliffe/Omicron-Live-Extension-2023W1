@@ -4,7 +4,7 @@ report 50104 "Service Instruction"
     UsageCategory = Documents;
     ApplicationArea = All;
     DefaultRenderingLayout = ServiceInstruction;
-    Description = 'Produces a job Service Instruction card';
+    Description = 'Produces a project Service Instruction card';
     PreviewMode = PrintLayout;
 
     dataset

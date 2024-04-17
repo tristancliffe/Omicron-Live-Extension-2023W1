@@ -205,37 +205,6 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         }
     }
 
-    views
-    {
-        addfirst
-        {
-            view(ToBeInvoiced)
-            {
-                Caption = 'To Be Invoiced (all jobs)';
-                Filters = where("Line Type" = filter("Billable" | "Both Budget and Billable"),
-                                "Qty. Transferred to Invoice" = filter('0'),
-                                "Qty. to Transfer to Invoice" = filter('>0'));
-            }
-            view(NotInvoiced)
-            {
-                Caption = 'Not Invoiced (all jobs)';
-                Filters = where("Line Type" = filter("Billable" | "Both Budget and Billable"),
-                                "Qty. Transferred to Invoice" = filter('0'));
-            }
-            view(Invoiced)
-            {
-                Caption = 'Invoiced (all jobs)';
-                Filters = where("Line Type" = filter("Billable" | "Both Budget and Billable"),
-                                "Qty. Transferred to Invoice" = filter('>0'));
-            }
-            view(Budget)
-            {
-                Caption = 'Budget (all jobs)';
-                Filters = where("Line Type" = filter("Budget" | "Both Budget and Billable"));
-            }
-        }
-    }
-
     var
         SellingPriceStyle: Text;
         TypeStyle: Text;

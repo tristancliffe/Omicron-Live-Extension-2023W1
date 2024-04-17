@@ -5,7 +5,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
     layout
     {
         modify(Type)
-        { AboutTitle = 'Type'; AboutText = 'Use **Job** or **Absence**. Don''t worry about Resource, Service or Assembly Order.'; }
+        { AboutTitle = 'Type'; AboutText = 'Use **Project** or **Absence**. Don''t worry about Resource, Service or Assembly Order.'; }
         modify(Status)
         { StyleExpr = StatusStyle; AboutTitle = 'Status'; AboutText = 'Open lines can be edited, but MUST be submitted when you''re finished. Submitted lines can be reopened until they are approved. Approved lines can be unapproved for editing unless they have been posted.'; }
         addafter(Description)
@@ -50,12 +50,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         modify(Description)
         { Visible = false; }
         modify("Job No.")
-        { Visible = true; AboutTitle = 'Job Number'; AboutText = 'Choose the job (or admin) that the work was done on from the drop-down list.'; }
+        { Visible = true; AboutTitle = 'Project Number'; AboutText = 'Choose the project (or admin) that the work was done on from the drop-down list.'; }
         modify("Job Task No.")
         {
-            AboutTitle = 'Job Task';
+            AboutTitle = 'Project Task';
             AboutText = 'Please use **appropriate* tasks. If work is carried out on two unrelated aspects then they should be recorded on separate lines. Removing a gearbox to get to a clutch can still be recorded under **Clutch** for example, but sorted the brake lights out at the same time needs a new line.';
-            Caption = 'Job Task';
+            Caption = 'Project Task';
             Visible = true;
             // trigger OnAfterValidate()
             // begin
@@ -74,6 +74,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         { QuickEntry = false; }
         modify(TimeSheetTotalQuantity)
         { QuickEntry = false; }
+
     }
     actions
     {
@@ -82,9 +83,9 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             action(JobPlanningLines)
             {
                 ApplicationArea = All;
-                Caption = 'Job Timesheet History';
+                Caption = 'Project Timesheet History';
                 Image = History;
-                ToolTip = 'Shows the entries made for the job so far that have been approved and posted';
+                ToolTip = 'Shows the entries made for the project so far that have been approved and posted';
                 Scope = Repeater;
                 RunObject = Page "Job Planning History";
                 RunPageLink = "Job No." = FIELD("Job No.");
@@ -106,9 +107,9 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             action(JobCard)
             {
                 ApplicationArea = All;
-                Caption = 'View Job Page';
+                Caption = 'View Project Card';
                 Image = Job;
-                ToolTip = 'Go to the main job card for the job.';
+                ToolTip = 'Go to the main project card for the project.';
                 Scope = Repeater;
                 RunObject = Page "Job Card";
                 RunPageLink = "No." = field("Job No.");

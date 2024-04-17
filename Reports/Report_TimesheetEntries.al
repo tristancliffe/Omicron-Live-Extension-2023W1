@@ -86,13 +86,13 @@ report 50100 "Timesheet Entries"
             Type = Word;
             LayoutFile = 'OmicronTimeSheetRecords.docx';
             Caption = 'Omicron Timesheet Entries';
-            Summary = 'Omicron Timesheet and stock entries for a job for historical archiving';
+            Summary = 'Omicron Timesheet and stock entries for a project for historical archiving';
         }
     }
 
     labels
     {
-        JobNoLbl = 'Job No.';
+        JobNoLbl = 'Project No.';
         JobDescriptionLbl = 'Description';
     }
 
@@ -120,9 +120,9 @@ report 50100 "Timesheet Entries"
         CurrReportPageNoCaptionLbl: Label 'Page';
         JobQuoteCaptLbl: Label 'Timesheet Entries';
         DescriptionCaptionLbl: Label 'Description';
-        JobTaskNoCaptLbl: Label 'Job Task No.';
+        JobTaskNoCaptLbl: Label 'Prpject Task No.';
         QuantityLbl: Label 'Quantity';
-        JobTaskTypeLbl: Label 'Job Task Type';
+        JobTaskTypeLbl: Label 'Project Task Type';
         NoLbl: Label 'No.';
         NewTaskGroup: Integer;
         HeaderJobTaskNo: Text[250];

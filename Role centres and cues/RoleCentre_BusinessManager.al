@@ -62,9 +62,9 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 RunObject = page "Job List";
                 //RunPageLink = Status = filter(Open | Quote | Planning);
                 RunPageView = where(Status = filter(Open | Quote | Planning));
-                Caption = 'Jobs';
+                Caption = 'Projects';
                 Image = ViewJob;
-                Tooltip = 'Show the list of current jobs';
+                Tooltip = 'Show the list of current projects';
                 Ellipsis = true;
             }
         }
@@ -82,7 +82,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Caption = 'Projects';
                 Image = Job;
                 RunObject = page "Job List";
-                ToolTip = 'Show a list of active jobs and their details.';
+                ToolTip = 'Show a list of active projects and their details.';
             }
         }
         //     action(ShipmentPlanning)
@@ -198,7 +198,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 CaptionML = ENG = 'Assembly Orders';
                 RunObject = page "Assembly Orders";
                 Image = AssemblyOrder;
-                ToolTip = 'View the list of assembly orders, and create new ones manually (for posting to job journals etc.';
+                ToolTip = 'View the list of assembly orders, and create new ones manually (for posting to project journals etc.';
             }
             action("Aged Debtors")
             {
@@ -447,16 +447,16 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             {
                 Caption = 'Projects';
                 Image = Job;
-                ToolTip = 'Tools to manage jobs and projects, timesheets, resources etc';
+                ToolTip = 'Tools to manage projects, timesheets, resources etc';
                 //ShowAs = SplitButton;
                 action("ActionJobs")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Jobs and Projects';
+                    Caption = 'Projects';
                     Image = Job;
                     RunObject = Page "Job List";
                     RunPageView = where(Status = filter(Open | Quote | Planning));
-                    ToolTip = 'See and edit the list of jobs, and then go to card list';
+                    ToolTip = 'See and edit the list of projects, and then go to card list';
                 }
                 action("ActionTimeSheets")
                 {
@@ -477,10 +477,10 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 action("ActionJobJournals")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Job Journals';
+                    Caption = 'Project Journals';
                     Image = JobJournal;
                     RunObject = Page "Job Journal";
-                    ToolTip = 'Job Journal view';
+                    ToolTip = 'Project Journal view';
                 }
                 action("ActionResources")
                 {
@@ -777,7 +777,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             {
                 AccessByPermission = TableData "Job" = IMD;
                 ApplicationArea = Basic, Suite;
-                Caption = 'Job';
+                Caption = 'Project';
                 Image = ViewJob;
                 RunObject = Page "Job Card";
                 RunPageMode = Create;
@@ -817,10 +817,10 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 action(JobSuggestedBilling)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Job Suggested Billing';
+                    Caption = 'Project Suggested Billing';
                     Image = JobListSetup;
                     RunObject = Report "Job Suggested Billing";
-                    ToolTip = 'View suggested billing for jobs and projects';
+                    ToolTip = 'View suggested billing for projects';
                 }
                 action(AgedDebtors)
                 {

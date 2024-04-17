@@ -22,7 +22,7 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
         addafter("Search Name")
         {
             field("Employee Notes"; Rec."Employee Notes")
-            { ApplicationArea = All; ToolTip = 'Employee notes'; }
+            { ApplicationArea = All; }
         }
     }
     views

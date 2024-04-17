@@ -23,26 +23,24 @@ pageextension 50158 CustomerCueFactboxExt extends "Sales Hist. Sell-to FactBox"
 
         addlast(Control2)
         {
-            field("No. of Jobs"; Rec."No. of Jobs")
+            field("No. of Projects"; Rec."No. of Jobs")
             {
                 ApplicationArea = Suite;
-                Caption = 'Ongoing Jobs';
+                Caption = 'Ongoing Projects';
                 DrillDownPageID = "Job List";
-                ToolTip = 'Specifies the number of jobs ongoing for the customer.';
-                StyleExpr = CurrentJobsStyle;
+                StyleExpr = CurrentProjectsStyle;
             }
-            field("No. of Completed Jobs"; Rec."No. of Completed Jobs")
+            field("No. of Completed Projects"; Rec."No. of Completed Jobs")
             {
                 ApplicationArea = Suite;
-                Caption = 'Completed Jobs';
+                Caption = 'Completed Projects';
                 DrillDownPageID = "Completed Job List";
-                ToolTip = 'Specifies the number of jobs completed for the customer.';
             }
         }
     }
 
     var
-        CurrentJobsStyle: Text;
+        CurrentProjectsStyle: Text;
         QuoteStyle: Text;
         BlanketStyle: Text;
         OrderStyle: Text;
@@ -70,6 +68,6 @@ pageextension 50158 CustomerCueFactboxExt extends "Sales Hist. Sell-to FactBox"
         if rec."No. of Credit Memos" > 0 then
             CreditStyle := 'Unfavorable';
         if Rec."No. of Jobs" > 0 then
-            CurrentJobsStyle := 'Unfavorable';
+            CurrentProjectsStyle := 'Unfavorable';
     end;
 }
