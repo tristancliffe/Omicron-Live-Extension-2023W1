@@ -19,12 +19,47 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
             Editable = false;
             FieldClass = FlowFilter;
         }
-        field(50103; HoursWorked; Decimal)
+
+        field(50103; HoursWorkedLastMonth; Decimal)
         {
             FieldClass = FlowField;
-            Caption = 'Hours Worked';
+            Caption = 'Hours Last Month';
+            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger SO FAR THIS MONTH.';
             CalcFormula = sum("Res. Ledger Entry".Quantity where("Resource No." = field("User ID Filter"),
-                                                                 "Posting Date" = field(LastMonth)));
+                                                                 "Posting Date" = field(LastMonth),
+                                                                 "Entry Type" = filter(Usage)));
+            DecimalPlaces = 0 : 2;
+        }
+        field(50104; ThisMonth; Date)
+        {
+            Editable = false;
+            FieldClass = FlowFilter;
+        }
+        field(50105; HoursWorkedThisMonth; Decimal)
+        {
+            FieldClass = FlowField;
+            Caption = 'Hours This Month';
+            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger LAST MONTH.';
+            CalcFormula = sum("Res. Ledger Entry".Quantity where("Resource No." = field("User ID Filter"),
+                                                                 "Posting Date" = field(ThisMonth),
+                                                                 "Entry Type" = filter(Usage)));
+            DecimalPlaces = 0 : 2;
+        }
+        field(50106; TwoLastMonth; Date)
+        {
+            Editable = false;
+            FieldClass = FlowFilter;
+        }
+
+        field(50107; HoursWorkedTwoLastMonth; Decimal)
+        {
+            FieldClass = FlowField;
+            Caption = 'Hours Two Months Ago';
+            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger TWO MONTHS AGO.';
+            CalcFormula = sum("Res. Ledger Entry".Quantity where("Resource No." = field("User ID Filter"),
+                                                                 "Posting Date" = field(TwoLastMonth),
+                                                                 "Entry Type" = filter(Usage)));
+            DecimalPlaces = 0 : 2;
         }
     }
 }
