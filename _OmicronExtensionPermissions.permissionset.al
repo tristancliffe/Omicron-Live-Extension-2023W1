@@ -30,5 +30,6 @@ permissionset 50100 OmicronPermissions
         report "Timesheet Instructions" = X,
         page "Job Cues" = X,
         report "Item Prices" = X,
-        page "Item Vendor List Factbox" = X;
+        page "Item Vendor List Factbox" = X,
+        page "Job Journal Factbox" = X;
 }

@@ -92,6 +92,11 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                     message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
             end;
         }
+        addafter(JournalErrorsFactBox)
+        {
+            part("Job Journal Factbox"; "Job Journal Factbox")
+            { ApplicationArea = All; SubPageLink = "No." = FIELD("No."); }
+        }
     }
     actions
     {
