@@ -6,10 +6,7 @@ pageextension 50161 TeamMemberTimeSheetCues extends "Team Member Activities"
         addafter(Approvals)
         {
             label("Timesheet History")
-            {
-                ApplicationArea = All;
-                Caption = 'Time Sheet History';
-            }
+            { ApplicationArea = All; Caption = 'Time Sheet History'; }
             cuegroup(TimeSheetHistory)
             {
                 CuegroupLayout = Wide;
@@ -20,6 +17,19 @@ pageextension 50161 TeamMemberTimeSheetCues extends "Team Member Activities"
                 { ApplicationArea = All; DrillDownPageId = "Resource Ledger Entries"; Style = Favorable; }
                 field(HoursWorkedTwoLastMonth; Rec.HoursWorkedTwoLastMonth)
                 { ApplicationArea = All; DrillDownPageId = "Resource Ledger Entries"; Style = Favorable; }
+            }
+            label("Active Jobs")
+            { ApplicationArea = All; }
+            cuegroup(ActiveJobs)
+            {
+                Caption = 'Active Jobs';
+                field(OngoingJobsCue; Rec.OngoingJobs)
+                {
+                    ApplicationArea = Basic, Suite;
+                    DrillDownPageID = "Job List";
+                    Caption = 'Active Projects';
+                    Visible = true;
+                }
             }
         }
         addafter("Open Time Sheets")

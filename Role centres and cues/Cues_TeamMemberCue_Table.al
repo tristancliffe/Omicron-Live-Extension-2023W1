@@ -61,5 +61,12 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
                                                                  "Entry Type" = filter(Usage)));
             DecimalPlaces = 0 : 2;
         }
+        field(50108; OngoingJobs; Integer)
+        {
+            CalcFormula = count(Job where(Status = filter(Open)));
+            Caption = 'Ongoing Projects';
+            FieldClass = FlowField;
+            ToolTip = 'Specifies number of currently active (Open) projects';
+        }
     }
 }
