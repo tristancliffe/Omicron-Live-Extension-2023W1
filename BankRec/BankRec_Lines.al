@@ -8,6 +8,13 @@ pageextension 50184 BankRecLinesExt extends "Bank Acc. Reconciliation Lines"
         { Visible = false; }
         modify(Difference)
         { StyleExpr = NegativeAmounts; }
+        addbefore(TotalDiff)
+        {
+            field(SumOfLines; Rec.SumOfLines)
+            { ApplicationArea = all; Editable = false; }
+        }
+        modify(Control13)
+        { Visible = false; }
     }
 
     var

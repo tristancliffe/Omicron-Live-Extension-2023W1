@@ -3,14 +3,17 @@ pageextension 50161 TeamMemberTimeSheetCues extends "Team Member Activities"
     CaptionML = ENG = 'Time Sheets';
     layout
     {
-        addbefore("Current Time Sheet")
+        addafter(Approvals)
         {
+            label("Timesheet History")
+            {
+                ApplicationArea = All;
+                Caption = 'Time Sheet History';
+            }
             cuegroup(TimeSheetHistory)
             {
                 CuegroupLayout = Wide;
-                Caption = 'Time Sheet History';
-                ShowCaption = false;
-
+                Caption = 'Hours submitted history...';
                 field(HoursWorkedThisMonth; Rec.HoursWorkedThisMonth)
                 { ApplicationArea = All; DrillDownPageId = "Resource Ledger Entries"; Style = Favorable; }
                 field(HoursWorkedLastMonth; Rec.HoursWorkedLastMonth)

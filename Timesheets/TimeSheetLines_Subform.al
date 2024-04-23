@@ -66,6 +66,8 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         }
         moveafter(Status; "Job No.", "Job Task No.")
         moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
+        modify("Work Type Code")
+        { Visible = false; }
         modify(Chargeable)
         { Visible = Device; }
         modify("Cause of Absence Code")

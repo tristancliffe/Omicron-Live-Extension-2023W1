@@ -36,6 +36,15 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
             field("Order Notes"; Rec."Order Vendor Notes") //* changed to order vendor notes due to mistake in table field numbering
             { ApplicationArea = All; }
         }
+        addafter(IncomingDocAttachFactBox)
+        {
+            part(ItemReplenishmentFactbox; "Item Replenishment FactBox")
+            {
+                ApplicationArea = All;
+                Provider = PurchInvLines;
+                SubPageLink = "No." = field("No.");
+            }
+        }
     }
 
     trigger OnAfterGetRecord()

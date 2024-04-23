@@ -24,6 +24,16 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             part(JobCues; "Job Cues")
             { ApplicationArea = All; Visible = true; }
         }
+        addafter(PowerBIEmbeddedReportPart3)
+        {
+            part(PowerBIEmbeddedReportPart4; "Power BI Embedded Report Part")
+            {
+                AccessByPermission = TableData "Power BI Context Settings" = I;
+                ApplicationArea = Basic, Suite;
+                SubPageView = where(Context = const('Power BI Part VI'));
+                Visible = false;
+            }
+        }
     }
     actions
     {
