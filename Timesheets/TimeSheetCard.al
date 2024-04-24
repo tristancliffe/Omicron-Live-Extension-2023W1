@@ -12,20 +12,20 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         {
             field("Resource Name1"; Rec."Resource Name")
             { ApplicationArea = All; Importance = Promoted; }
-            // field(SubmitMsg; SubmitLbl)
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Editable = false;
-            //     ShowCaption = false;
-            //     Style = StrongAccent;
-            //     StyleExpr = TRUE;
-            //     ToolTip = 'Submit all open lines - use this when you have finished updating your timesheet please.';
+            field(SubmitMsg; SubmitLbl)
+            {
+                ApplicationArea = Basic, Suite;
+                Editable = false;
+                ShowCaption = false;
+                Style = StrongAccent;
+                StyleExpr = TRUE;
+                ToolTip = 'Submit all open lines - use this when you have finished updating your timesheet please.';
 
-            //     trigger OnDrillDown()
-            //     begin
-            //         SubmitLines();
-            //     end;
-            // }
+                trigger OnDrillDown()
+                begin
+                    SubmitLines();
+                end;
+            }
             field(Reminder; Reminder)
             {
                 ApplicationArea = All;
@@ -121,7 +121,10 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         Device: Boolean;
         "Dropbox Link": Text[50];
         Reminder: Text[150];
-        SubmitLbl: Label 'Submit Lines';
+        SubmitLbl: Label 'Click here to submit all open lines...';
+        RefActionType: Option Submit,ReopenSubmitted,Approve,ReopenApproved,Reject;
+        EmploymentQst: Label 'Time Sheet: %1 for dates prior to the Employment Date: %2  for Resource user.Do you still want to submit open lines?', Comment = '%1=Time Sheet No; %2= Resource Employment Date';
+        TimeSheetApprovalMgt: Codeunit "Time Sheet Approval Management";
 
     trigger OnOpenPage()
     begin
@@ -131,5 +134,38 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             Device := true;
         "Dropbox Link" := 'https://bit.ly/omicronltd';
         Reminder := 'Don''t forget to SUBMIT timesheets regularly. \Keep STOCK CARDS up to date. Upload PICTURES.';
+    end;
+
+    local procedure SubmitLines()
+    var
+        IsHandled: Boolean;
+    begin
+        IsHandled := false;
+        OnBeforeSubmitLines2(Rec, IsHandled);
+        if IsHandled then
+            exit;
+
+        if not CheckResourceEmployment(RefActionType::Submit, Rec."Resource No.") then
+            if TimeSheetApprovalMgt.ConfirmAction(RefActionType::Submit) then
+                Process(RefActionType::Submit);
+    end;
+
+    local procedure CheckResourceEmployment(ActionType: Option Submit,Reopen,Approve,ReopenApproved,Reject; ResourceNo: Code[20]): Boolean
+    var
+        Resource: Record Resource;
+    begin
+        if Resource.Get(ResourceNo) then
+            if Resource."Employment Date" <> 0D then
+                if Resource."Employment Date" > Rec."Starting Date" then begin
+                    if Confirm(EmploymentQst, false, Rec."No.", Resource."Employment Date") then
+                        Process(ActionType);
+                    exit(true);
+                end;
+        exit(false)
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeSubmitLines2(var TimeSheetHeader: Record "Time Sheet Header"; var IsHandled: Boolean);
+    begin
     end;
 }

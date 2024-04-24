@@ -18,11 +18,12 @@ pageextension 50161 TeamMemberTimeSheetCues extends "Team Member Activities"
                 field(HoursWorkedTwoLastMonth; Rec.HoursWorkedTwoLastMonth)
                 { ApplicationArea = All; DrillDownPageId = "Resource Ledger Entries"; Style = Favorable; }
             }
-            label("Active Jobs")
+            label("Projects")
             { ApplicationArea = All; }
-            cuegroup(ActiveJobs)
+            cuegroup(ActiveProjects)
             {
-                Caption = 'Active Jobs';
+                Caption = 'Active Projects';
+                ShowCaption = false;
                 field(OngoingJobsCue; Rec.OngoingJobs)
                 {
                     ApplicationArea = Basic, Suite;
