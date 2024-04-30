@@ -12,6 +12,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 ToolTip = 'Specifies number of currently active (Open) projects';
                 Caption = 'Active Projects';
                 Visible = true;
+                Image = Calendar;
             }
             field(ActiveTimeSheetsCue; Rec.ActiveTimeSheetsCue)
             {
@@ -20,6 +21,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 Tooltip = 'Number of timesheets not submitted';
                 Caption = 'Open Time Sheets';
                 Visible = true;
+                Image = Time;
             }
             field(OpenTimeSheetsCue; Rec.OpenTimeSheetsCue)
             {
@@ -28,6 +30,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 ToolTip = 'Number of active Time Sheets';
                 Caption = 'Time Sheets';
                 Visible = true;
+                Image = Library;
             }
             field(HoursThisMonth; Rec.HoursThisMonth)
             {
@@ -36,6 +39,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 AutoFormatExpression = '<precision, 0:0><standard format, 0>';
                 ToolTip = 'Number of approved/journalled hours in the last 30 days, including Admin.';
                 AutoFormatType = 11;
+                Image = Funnel;
             }
             field(ChargeableThisMonth; Rec.ChargeableThisMonth)
             {
@@ -44,6 +48,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 ToolTip = 'Number of approved/journalled hours that can be charged from the last 30 days, excluding Admin.';
                 AutoFormatExpression = '<precision, 0:0><standard format, 0>';
                 AutoFormatType = 11;
+                Image = Cash;
             }
             field(OpenTimesheetHours; Rec.OpenTimeSheetHours)
             {
@@ -52,6 +57,7 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 Tooltip = 'Number of ''Open'' or ''Submitted'' hours in timesheets, not approved';
                 Caption = 'Open Time Sheet Hours';
                 Visible = true;
+                Image = Message;
             }
         }
         modify("Completed - WIP Not Calculated")

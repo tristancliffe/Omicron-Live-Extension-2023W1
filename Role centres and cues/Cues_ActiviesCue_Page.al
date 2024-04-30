@@ -10,6 +10,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 DrillDownPageID = "Sales Credit Memos";
                 ToolTip = 'Specifies sales credit memos that are active';
                 Caption = 'Sales Credit Memos';
+                Image = Cash;
             }
         }
         addbefore("Purchase Orders")
@@ -20,6 +21,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 DrillDownPageID = "Purchase Quotes";
                 ToolTip = 'Specifies purchases quotes that are active';
                 Caption = 'Purchase Quotes';
+                Image = Receipt;
             }
         }
         addafter("Ongoing Purchase Invoices")
@@ -30,6 +32,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 DrillDownPageID = "Purchase Credit Memos";
                 ToolTip = 'Specifies purchases credit memos that are active';
                 Caption = 'Purchase Credit Memos';
+                Image = Diagnostic;
             }
         }
         addafter("Overdue Purch. Invoice Amount")
@@ -40,6 +43,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 ToolTip = 'Specifies the sum of sales invoices to be sent.';
                 DrillDownPageId = "Sales Invoice List";
                 Visible = true;
+                Image = Chart;
             }
         }
         addlast(Control54)
@@ -51,6 +55,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 ToolTip = 'Specifies number of ''Open'' customer ledger entries';
                 Caption = 'Open Customer Entries';
                 Visible = true;
+                Image = Person;
             }
             field(SuppliersOpen; Rec.SuppliersOpen)
             {
@@ -59,6 +64,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 ToolTip = 'Specifies number of ''Open'' vendor ledger entries';
                 Caption = 'Open Vendor Entries';
                 Visible = true;
+                Image = People;
             }
         }
         modify("Ongoing Purchase Invoices")

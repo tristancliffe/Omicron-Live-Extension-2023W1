@@ -29,6 +29,7 @@ pageextension 50161 TeamMemberTimeSheetCues extends "Team Member Activities"
                     DrillDownPageID = "Job List";
                     Caption = 'Active Projects';
                     Visible = true;
+                    Image = Checklist;
                 }
             }
         }
