@@ -2,22 +2,13 @@ pageextension 50111 JobCardExt extends "Job Card"
 {
     layout
     {
-        modify(Description)
-        { ShowMandatory = true; }
+        modify(Description) { ShowMandatory = true; }
         addafter(Description)
         {
             field("Car Make/Model"; Rec."Car Make/Model")
-            {
-                MultiLine = false;
-                ApplicationArea = All;
-                ShowMandatory = true;
-            }
+            { MultiLine = false; ApplicationArea = All; ShowMandatory = true; }
             field("Project Notes"; Rec."Job Notes")
-            {
-                MultiLine = true;
-                ApplicationArea = All;
-                QuickEntry = false;
-            }
+            { MultiLine = true; ApplicationArea = All; QuickEntry = false; }
         }
         modify(Status)
         {
@@ -25,27 +16,19 @@ pageextension 50111 JobCardExt extends "Job Card"
             trigger OnBeforeValidate()
             begin
                 if rec.Status = rec.status::Completed then
-                    //message('Don''t forget to print the timesheet report for filing.')
                     if not confirm('Have you printed the Time Sheet Report for this project?', false) then
                         ERROR('Print the Time Sheet Report first');
             end;
         }
         addlast(General)
         {
-            field("Parts Location"; Rec."Parts Location")
-            { ApplicationArea = All; ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc'; }
-            field("Vehicle Reg"; Rec."Vehicle Reg")
-            { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; }
-            field("Chassis No."; Rec.ChassisNo)
-            { ApplicationArea = All; ToolTip = 'Chassis number, if known'; ShowMandatory = true; }
-            field("Engine No."; Rec.EngineNo)
-            { ApplicationArea = All; ToolTip = 'Engine number, if known'; ShowMandatory = true; }
-            field(Mileage; Rec.Mileage)
-            { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; }
-            field("Date of Arrival"; Rec."Date of Arrival")
-            { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
-            field("Customer Balance"; Rec."Customer Balance")
-            { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
+            field("Parts Location"; Rec."Parts Location") { ApplicationArea = All; ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc'; }
+            field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; }
+            field("Chassis No."; Rec.ChassisNo) { ApplicationArea = All; ToolTip = 'Chassis number, if known'; ShowMandatory = true; }
+            field("Engine No."; Rec.EngineNo) { ApplicationArea = All; ToolTip = 'Engine number, if known'; ShowMandatory = true; }
+            field(Mileage; Rec.Mileage) { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; }
+            field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
+            field("Customer Balance"; Rec."Customer Balance") { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
         }
         moveafter("No."; Status)
         modify("Bill-to County") { Importance = Additional; }
@@ -56,25 +39,28 @@ pageextension 50111 JobCardExt extends "Job Card"
         modify("Search Description") { Importance = Standard; }
         modify("External Document No.") { Visible = true; Importance = Standard; }
         modify("Your Reference") { Visible = true; Importance = Standard; }
+        addafter("Sell-to Customer Name")
+        {
+            field(ShowMap; ShowMapLbl)
+            {
+                ApplicationArea = Basic, Suite;
+                Editable = false;
+                ShowCaption = false;
+                Style = StrongAccent;
+                StyleExpr = TRUE;
+                ToolTip = 'Specifies the customer''s address on your preferred map website.';
 
-        // addafter("Payment Method Code")
-        // {
-        //     field("Next Invoice Date"; Rec."Next Invoice Date")
-        //     { ApplicationArea = All; Importance = Promoted; }
-        // }
+                trigger OnDrillDown()
+                begin
+                    CurrPage.Update(true);
+                    Rec.DisplayMap();
+                end;
+            }
+        }
         addfirst(factboxes)
         {
-            part(CustomerPicture; "Customer Picture")
-            {
-                ApplicationArea = All;
-                Caption = 'Picture';
-                SubPageLink = "No." = FIELD("Bill-to Customer No.");
-            }
-            part(SalesHistSelltoFactBox; "Sales Hist. Sell-to FactBox")
-            {
-                ApplicationArea = All;
-                SubPageLink = "No." = field("Bill-to Customer No.");
-            }
+            part(CustomerPicture; "Customer Picture") { ApplicationArea = All; Caption = 'Picture'; SubPageLink = "No." = FIELD("Bill-to Customer No."); }
+            part(SalesHistSelltoFactBox; "Sales Hist. Sell-to FactBox") { ApplicationArea = All; SubPageLink = "No." = field("Bill-to Customer No."); }
         }
     }
     actions
@@ -204,62 +190,21 @@ pageextension 50111 JobCardExt extends "Job Card"
                     WorkshopRequest.RunModal();
                     Clear(WorkshopRequest);
                 end;
-                //     ReportParameters: text;
-                //     TempBlob: Codeunit "Temp Blob";
-                //     FileManagement: Codeunit "File Management";
-                //     OStream: OutStream;
-                // begin
-                //     Clear(ReportParameters);
-                //     Clear(OStream);
-                //     Job.SetFilter("No.", Rec."No.");
-                //     WorkshopRequest.SetTableView(Job);
-                //     ReportParameters := Report.RunRequestPage(50103);
-                //     TempBlob.CreateOutStream(OStream);
-                //     Report.SaveAs(50103, ReportParameters, ReportFormat::Word, OStream);
-                //     FileManagement.BLOBExport(TempBlob, Format(Job."No.") + '_' + 'WorkshopRequest' + '_' + Format(CURRENTDATETIME, 0, '<Day,2><Month,2><Year4>') + '.docx', true);
-                // end;
             }
         }
-        // addafter("Report Job Quote")
-        // {
-        //     action("Excel Report")
-        //     {
-        //         ApplicationArea = All;
-        //         Caption = 'Excel Report';
-        //         Description = 'Downloads an excel report for this job to analyse costs and prices for writing the invoice.';
-        //         Image = Excel;
-
-        //         trigger OnAction()
-        //         var
-        //             ReportSelection: Record "Report Layout Selection";
-        //             JobHeader: Record Job;
-        //         begin
-        //             CurrPage.SetSelectionFilter(JobHeader);
-        //             ReportSelection.SetTempLayoutSelected('1016-000006');
-        //             Report.Run(Report::"Job Quote", true, true, JobHeader)
-        //         end;
-        //     }
-        // }
         addlast(Category_Process)
         {
-            actionref(JobJournal_Promoted; JobJournal)
-            { }
-            actionref(JobPlanningLinesLink; JobPlanningLines)
-            { }
+            actionref(JobJournal_Promoted; JobJournal) { }
+            actionref(JobPlanningLinesLink; JobPlanningLines) { }
             group(Invoicing)
             {
                 ShowAs = SplitButton;
-                actionref(CreateSalesInvoice_Promoted; CreateSalesInvoice)
-                { }
-                actionref(JobInvoices_Promoted; SalesInvoicesCreditMemos)
-                { }
-                actionref(SalesInvoiceList_Promoted; SalesInvoiceList)
-                { }
+                actionref(CreateSalesInvoice_Promoted; CreateSalesInvoice) { }
+                actionref(JobInvoices_Promoted; SalesInvoicesCreditMemos) { }
+                actionref(SalesInvoiceList_Promoted; SalesInvoiceList) { }
             }
-            actionref(CustomerCard_Promoted; CustomerCard)
-            { }
-            actionref(Dimensions_Promoted; "&Dimensions")
-            { }
+            actionref(CustomerCard_Promoted; CustomerCard) { }
+            actionref(Dimensions_Promoted; "&Dimensions") { }
         }
         addfirst(Category_Process)
         {
@@ -268,26 +213,16 @@ pageextension 50111 JobCardExt extends "Job Card"
                 ShowAs = SplitButton;
                 Caption = 'Reports';
                 ToolTip = 'Various Reports listed here.';
-                actionref(ExcelJobInvoicing; "Report Job Invoicing Excel")
-                { }
-                actionref(PreviewQuote_Promoted; "Report Job Quote")
-                { }
-                actionref(SuggestedBilling_Promoted; "Job - Suggested Billing")
-                { }
-                actionref(JobCard; "Job Card")
-                { }
-                actionref(WorkshopRequest; "Workshop Request")
-                { }
-                actionref(JobInvoiceTemplate; "Job Invoice")
-                { }
-                actionref(TimesheetEntries; "Report Timesheet Entries")
-                { }
+                actionref(ExcelJobInvoicing; "Report Job Invoicing Excel") { }
+                actionref(PreviewQuote_Promoted; "Report Job Quote") { }
+                actionref(SuggestedBilling_Promoted; "Job - Suggested Billing") { }
+                actionref(JobCard; "Job Card") { }
+                actionref(WorkshopRequest; "Workshop Request") { }
+                actionref(JobInvoiceTemplate; "Job Invoice") { }
+                actionref(TimesheetEntries; "Report Timesheet Entries") { }
             }
-            // actionref(ExcelReport_Promoted; "Excel Report")
-            // { }
         }
-        modify("Create Warehouse Pick_Promoted")
-        { Visible = false; }
+        modify("Create Warehouse Pick_Promoted") { Visible = false; }
     }
 
     var
@@ -299,11 +234,11 @@ pageextension 50111 JobCardExt extends "Job Card"
         ExcelReport: Report "Job Billing Excel";
         TimesheetReport: Report "Timesheet Entries";
         JobInvoice: Report "Job Create Sales Invoice";
+        ShowMapLbl: Label 'Show address on map';
 
     procedure RunTimesheetReport()
     begin
         Job.SetFilter("No.", Rec."No.");
         TimesheetReport.SetTableView(Job);
-        //TimesheetReport.RunModal();
     end;
 }

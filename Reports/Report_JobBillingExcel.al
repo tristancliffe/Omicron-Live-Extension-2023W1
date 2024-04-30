@@ -12,55 +12,35 @@ report 50101 "Job Billing Excel"
         dataitem(Job; Job)
         {
             //PrintOnlyIfDetail = true;
-            RequestFilterFields = "No.";//, "Planning Date Filter";
-            column(TodayFormatted; Format(Today, 0, 4))
-            { }
-            column(Job_No; "No.")
-            { }
-            column(Job_Description; Description)
-            { }
+            RequestFilterFields = "No.";
+            //, "Planning Date Filter";
+            column(TodayFormatted; Format(Today, 0, 4)) { }
+            column(Job_No; "No.") { }
+            column(Job_Description; Description) { }
             dataitem("Job Planning Line"; "Job Planning Line")
             {
                 DataItemLink = "Job No." = FIELD("No.");
                 DataItemTableView = SORTING("Job No.", "Planning Date", "Line No.");
                 RequestFilterFields = "Job Task No.", "Contract Line", "Qty. to Transfer to Invoice", "Planning Date";
                 //PrintOnlyIfDetail = true;
-                column(JobPlanningLine_JobTaskNo; "Job Task No.")
-                { }
-                column(Number; "No.")
-                { }
-                column(JobPlanningLine_LineType; "Line Type")
-                { }
-                column(Planning_Date; "Planning Date")
-                { }
-                column(QtyInvoiced; "Qty. Invoiced")
-                { }
-                column(Quantity; Quantity)
-                { }
-                column(Type; "Type")
-                { }
-                column(Planning_Line_Description; "Job Planning Line".Description)
-                { }
-                column(Line_No_; "Line No.")
-                { }
-                column(WorkDone; "Work Done")
-                { }
-                column(Qty__to_Transfer_to_Invoice; "Qty. to Transfer to Invoice")
-                { }
-                column(Unit_Cost; "Unit Cost")
-                { }
-                column(InvoiceCost; InvoiceCost)
-                { }
-                column(Unit_Price; "Unit Price")
-                { }
-                column(InvoicePrice; InvoicePrice)
-                { }
-                column(VAT; VAT)
-                { }
-                column(InvoicePriceInclVAT; InvoicePriceInclVAT)
-                { }
-                column(QtyTransferredToInvoice; "Qty. Transferred to Invoice")
-                { }
+                column(JobPlanningLine_JobTaskNo; "Job Task No.") { }
+                column(Number; "No.") { }
+                column(JobPlanningLine_LineType; "Line Type") { }
+                column(Planning_Date; "Planning Date") { }
+                column(QtyInvoiced; "Qty. Invoiced") { }
+                column(Quantity; Quantity) { }
+                column(Type; "Type") { }
+                column(Planning_Line_Description; "Job Planning Line".Description) { }
+                column(Line_No_; "Line No.") { }
+                column(WorkDone; "Work Done") { }
+                column(Qty__to_Transfer_to_Invoice; "Qty. to Transfer to Invoice") { }
+                column(Unit_Cost; "Unit Cost") { }
+                column(InvoiceCost; InvoiceCost) { }
+                column(Unit_Price; "Unit Price") { }
+                column(InvoicePrice; InvoicePrice) { }
+                column(VAT; VAT) { }
+                column(InvoicePriceInclVAT; InvoicePriceInclVAT) { }
+                column(QtyTransferredToInvoice; "Qty. Transferred to Invoice") { }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -127,9 +107,6 @@ report 50101 "Job Billing Excel"
                 }
             }
         }
-
-        actions
-        { }
     }
 
     rendering
@@ -141,12 +118,6 @@ report 50101 "Job Billing Excel"
             Caption = 'Omicron Excel Project Invoice Calculator';
             Summary = 'Used to calculate and write handwritten project invoices and/or prepare quotes';
         }
-    }
-
-    labels
-    {
-        JobNoLbl = 'Project No.';
-        JobDescriptionLbl = 'Description';
     }
 
     trigger OnInitReport()
@@ -183,6 +154,8 @@ report 50101 "Job Billing Excel"
         QuantityLbl: Label 'Quantity';
         JobTaskTypeLbl: Label 'Project Task Type';
         NoLbl: Label 'No.';
+        JobNoLbl: Label 'Project No.';
+        JobDescriptionLbl: Label 'Description';
         NewTaskGroup: Integer;
         HeaderJobTaskNo: Text[250];
         HeaderJobTask: Text[250];

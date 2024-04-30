@@ -26,6 +26,12 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                     SubmitLines();
                 end;
             }
+            label(BlankLabel)
+            {
+                ApplicationArea = Basic, Suite;
+                ShowCaption = false;
+                Caption = ' ';
+            }
             field(Reminder; Reminder)
             {
                 ApplicationArea = All;

@@ -5,11 +5,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
         addafter("Buy-from Vendor Name")
         {
-            field("Your Reference"; Rec."Your Reference")
-            {
-                ApplicationArea = All;
-                QuickEntry = true;
-            }
+            field("Your Reference"; Rec."Your Reference") { ApplicationArea = All; QuickEntry = true; }
         }
         addafter("Buy-from")
         {
@@ -50,35 +46,22 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
             }
         }
         moveafter("Your Reference"; Status, "Vendor Invoice No.", "Payment Method Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
-        modify("Document Date")
-        { Visible = true; Importance = Standard; }
+        modify("Buy-from Contact") { QuickEntry = false; }
+        modify("Document Date") { Visible = true; Importance = Standard; }
         moveafter("VAT Reporting Date"; "Document Date")
-        modify("Due Date")
-        { Visible = true; Importance = Standard; }
-        modify("Posting Date")
-        { Visible = true; Importance = Standard; }
-        modify("VAT Reporting Date")
-        { Visible = true; Importance = Standard; }
-        modify("Purchaser Code")
-        { Visible = false; }
-        modify("Campaign No.")
-        { Visible = false; }
-        modify("Buy-from Vendor No.")
-        { Importance = Standard; }
-        modify("Assigned User ID")
-        { Importance = Standard; }
-        modify("Payment Method Code")
-        { Importance = Standard; ShowMandatory = true; }
-        modify(BuyFromContactMobilePhoneNo)
-        { Importance = Standard; }
-        modify(BuyFromContactPhoneNo)
-        { Importance = Standard; }
-        modify(BuyFromContactEmail)
-        { Importance = Standard; }
-        modify("Payment Reference")
-        { Importance = Standard; }
-        modify("Currency Code")
-        { Importance = Standard; }
+        modify("Due Date") { Visible = true; Importance = Standard; }
+        modify("Posting Date") { Visible = true; Importance = Standard; }
+        modify("VAT Reporting Date") { Visible = true; Importance = Standard; }
+        modify("Purchaser Code") { Visible = false; }
+        modify("Campaign No.") { Visible = false; }
+        modify("Buy-from Vendor No.") { Importance = Standard; }
+        modify("Assigned User ID") { Importance = Standard; }
+        modify("Payment Method Code") { Importance = Standard; ShowMandatory = true; }
+        modify(BuyFromContactMobilePhoneNo) { Importance = Standard; }
+        modify(BuyFromContactPhoneNo) { Importance = Standard; }
+        modify(BuyFromContactEmail) { Importance = Standard; }
+        modify("Payment Reference") { Importance = Standard; }
+        modify("Currency Code") { Importance = Standard; }
         addafter("On Hold")
         {
             field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
@@ -100,8 +83,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 Importance = Additional;
             }
         }
-        modify("Foreign Trade")
-        { Visible = false; }
+        modify("Foreign Trade") { Visible = false; }
     }
     actions
     {
@@ -134,16 +116,11 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         }
         addlast(Category_Process)
         {
-            actionref(RecurringLines; GetRecurringPurchaseLines)
-            { }
-            actionref(VendorCard; Vendor)
-            { }
-            actionref(PostedInvoices_Promoted; PostedInvoices)
-            { }
-            actionref(VendorLedger_Promoted; VendorLedgerEntries)
-            { }
-            actionref(Statistics2; Statistics)
-            { }
+            actionref(RecurringLines; GetRecurringPurchaseLines) { }
+            actionref(VendorCard; Vendor) { }
+            actionref(PostedInvoices_Promoted; PostedInvoices) { }
+            actionref(VendorLedger_Promoted; VendorLedgerEntries) { }
+            actionref(Statistics2; Statistics) { }
         }
         modify(Post)
         {
@@ -185,10 +162,8 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         //         end;
         //     end;
         // }
-        modify("Re&lease")
-        { Enabled = ReleaseControllerStatus; }
-        modify(Reopen)
-        { Enabled = ReopenControllerStatus; }
+        modify("Re&lease") { Enabled = ReleaseControllerStatus; }
+        modify(Reopen) { Enabled = ReopenControllerStatus; }
     }
 
     var

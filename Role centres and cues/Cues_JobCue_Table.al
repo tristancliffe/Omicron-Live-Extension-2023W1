@@ -52,7 +52,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
             FieldClass = FlowField;
             Caption = 'Open hours not submitted or approved';
             CalcFormula = sum("Time Sheet Detail".Quantity where(Status = filter(Open | Submitted)));
-            //sum("Time Sheet Header"."Quantity Open");
+            DecimalPlaces = 0 : 2;
         }
     }
 }
