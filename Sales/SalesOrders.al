@@ -13,7 +13,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 MultiLine = true;
             }
         }
-        moveafter("Sell-to Customer Name"; "Your Reference", Status, "Shipping Advice")
+        moveafter("Sell-to Customer Name"; "Your Reference", Status, "Shipping Advice", "Payment Method Code", "Shortcut Dimension 1 Code")
         moveafter("Sell-to Contact"; "External Document No.")
         addafter("Sell-to")
         {
@@ -70,9 +70,10 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Ship-to County") { Importance = Standard; }
         modify("Ship-to Post Code") { Importance = Standard; }
         modify("Shipment Date") { Importance = Standard; Visible = true; }
-        modify("Requested Delivery Date") { QuickEntry = false; }
+        modify("Requested Delivery Date") { QuickEntry = false; Importance = Additional; }
         modify("Assigned User ID") { Importance = Standard; QuickEntry = false; }
         modify("Shipping Advice") { Importance = Standard; }
+        modify(ShpfyOrderNo) { Importance = Standard; }
         addafter("Sell-to Country/Region Code")
         {
             field(ShowMap; ShowMapLbl)

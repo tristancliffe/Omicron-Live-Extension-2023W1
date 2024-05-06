@@ -4,6 +4,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
     {
         moveafter("Sell-to Customer Name"; "Your Reference", Status)
         moveafter("Sell-to Contact"; "External Document No.")
+        moveafter("Posting Date"; "VAT Reporting Date", "Document Date", "Due Date")
         addafter("Sell-to")
         {
             field(CustomerCar; RecCustomer."Vehicle Model")
@@ -30,50 +31,31 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 end;
             }
         }
-        modify("Sell-to Customer No.")
-        { Importance = Standard; }
-        modify("Sell-to Address")
-        { Importance = Standard; QuickEntry = false; }
-        modify("Sell-to Address 2")
-        { Importance = Standard; QuickEntry = false; }
-        modify("Sell-to City")
-        { Importance = Standard; QuickEntry = false; }
-        modify("Sell-to County")
-        { Importance = Standard; QuickEntry = false; }
-        modify("Sell-to Post Code")
-        { Importance = Standard; QuickEntry = false; }
-        modify("Sell-to Country/Region Code")
-        { Importance = Standard; QuickEntry = false; }
-        modify("Your Reference")
-        { Importance = Standard; ShowMandatory = true; QuickEntry = true; }
-        modify(WorkDescription)
-        { Importance = Additional; Visible = true; QuickEntry = false; }
-        modify("Document Date")
-        { Visible = true; Importance = Standard; }
-        modify("Due Date")
-        { Visible = true; Importance = Standard; }
-        modify("Posting Date")
-        { Visible = true; Importance = Standard; }
-        modify("VAT Reporting Date")
-        { Visible = true; Importance = Standard; }
-        modify("Ship-to Name")
-        { Importance = Standard; }
-        modify("Ship-to Code")
-        { Importance = Standard; }
-        modify("Ship-to Address")
-        { Importance = Standard; }
-        modify("Ship-to Address 2")
-        { Importance = Standard; }
-        modify("Ship-to City")
-        { Importance = Standard; }
-        modify("Ship-to County")
-        { Importance = Standard; }
-        modify("Ship-to Post Code")
-        { Importance = Standard; }
-        modify("Shipment Date")
-        { Importance = Standard; }
-        modify("Assigned User ID")
-        { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to Customer No.") { Importance = Standard; }
+        modify("Sell-to Address") { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to Address 2") { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to City") { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to County") { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to Post Code") { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to Country/Region Code") { Importance = Standard; QuickEntry = false; }
+        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; }
+        modify(WorkDescription) { Importance = Additional; Visible = true; QuickEntry = false; }
+        modify("Document Date") { Visible = true; Importance = Standard; }
+        modify("Due Date") { Visible = true; Importance = Standard; }
+        modify("Posting Date") { Visible = true; Importance = Standard; }
+        modify("VAT Reporting Date") { Visible = true; Importance = Standard; }
+        modify("Ship-to Name") { Importance = Standard; }
+        modify("Ship-to Code") { Importance = Standard; }
+        modify("Ship-to Address") { Importance = Standard; }
+        modify("Ship-to Address 2") { Importance = Standard; }
+        modify("Ship-to City") { Importance = Standard; }
+        modify("Ship-to County") { Importance = Standard; }
+        modify("Ship-to Post Code") { Importance = Standard; }
+        modify("Shipment Date") { Importance = Standard; }
+        modify("Assigned User ID") { Importance = Standard; QuickEntry = false; }
+        modify("Sell-to Contact No.") { QuickEntry = false; }
+        modify("Sell-to Contact") { QuickEntry = false; }
+        moveafter("Sell-to Contact No."; "Sell-to Contact")
         addafter(Status)
         {
             field("Order Notes47091"; Rec."Order Notes")
@@ -85,43 +67,43 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 MultiLine = true;
             }
         }
-        modify("External Document No.")
-        { Importance = Standard; Visible = true; }
-        addafter("Sell-to Country/Region Code")
-        {
-            field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
-            { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
-            field("Sell-to E-Mail2"; Rec."Sell-to E-Mail")
-            { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
-            field("Mobile No."; MobileNo)
-            {
-                ApplicationArea = All;
-                CaptionML = ENU = 'Mobile Phone No.';
-                ExtendedDatatype = PhoneNo;
-                Numeric = true;
+        modify("External Document No.") { Importance = Standard; Visible = true; QuickEntry = false; }
+        modify("Salesperson Code") { QuickEntry = false; }
+        modify("Campaign No.") { QuickEntry = false; }
+        modify("Responsibility Center") { QuickEntry = false; }
+        // addafter("Sell-to Country/Region Code")
+        // {
+        //     field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
+        //     { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
+        //     field("Sell-to E-Mail2"; Rec."Sell-to E-Mail")
+        //     { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
+        //     field("Mobile No."; MobileNo)
+        //     {
+        //         ApplicationArea = All;
+        //         CaptionML = ENU = 'Mobile Phone No.';
+        //         ExtendedDatatype = PhoneNo;
+        //         Numeric = true;
 
-                trigger OnValidate()
-                begin
-                    RecCustomer."Mobile Phone No." := MobileNo;
-                    RecCustomer.Modify()
-                end;
-            }
+        //         trigger OnValidate()
+        //         begin
+        //             RecCustomer."Mobile Phone No." := MobileNo;
+        //             RecCustomer.Modify()
+        //         end;
+        //     }
+        // }
+        addafter("VAT Reporting Date")
+        {
+            field("Order Date"; Rec."Order Date") { ApplicationArea = All; Visible = true; }
         }
-        modify("EU 3-Party Trade")
-        { Visible = false; }
-        modify(SelectedPayments)
-        { Visible = false; }
-        modify("Direct Debit Mandate ID")
-        { Visible = false; }
+        modify("EU 3-Party Trade") { Visible = false; }
+        modify(SelectedPayments) { Visible = false; }
+        modify("Direct Debit Mandate ID") { Visible = false; }
         addafter("Pmt. Discount Date")
         {
-            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
-            { ApplicationArea = All; Visible = true; }
-            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
-            { ApplicationArea = All; Visible = true; }
+            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type") { ApplicationArea = All; Visible = true; }
+            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.") { ApplicationArea = All; Visible = true; }
         }
-        modify(Control202)
-        { Visible = true; }
+        modify(Control202) { Visible = true; }
         moveafter(SalesDocCheckFactbox; Control1906127307)
         modify(Control1906127307) { Visible = true; }
     }
@@ -226,10 +208,8 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         //         end;
         //     end;
         // }
-        modify(Release)
-        { Enabled = ReleaseControllerStatus; }
-        modify(Reopen)
-        { Enabled = ReopenControllerStatus; }
+        modify(Release) { Enabled = ReleaseControllerStatus; }
+        modify(Reopen) { Enabled = ReopenControllerStatus; }
     }
 
     var
