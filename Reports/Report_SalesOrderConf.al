@@ -2,14 +2,18 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
 {
     dataset
     {
+        add(Header)
+        {
+            column(Sell_to_Phone_No_; "Sell-to Phone No.") { }
+            column(Mobile_No_; "Mobile No.") { }
+            column(Sell_to_E_Mail; "Sell-to E-Mail") { }
+        }
         add(Line)
         {
-            column(ShelfNo_SalesLine; Line.ShelfNo_SalesLine)
-            { }
-            column(CommodityCode_SalesLine; Line.CommodityCode_SalesLine)
-            { }
-            column(Instock_SalesLine; Line.Instock_SalesLine)
-            { }
+            column(ShelfNo_SalesLine; Line.ShelfNo_SalesLine) { }
+            column(CommodityCode_SalesLine; Line.CommodityCode_SalesLine) { }
+            column(Instock_SalesLine; Line.Instock_SalesLine) { }
+
             // column(Image_SalesLine; Line.Image_SalesLine)
             // { }
         }
