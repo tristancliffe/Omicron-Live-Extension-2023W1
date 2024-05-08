@@ -149,7 +149,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             action("Job Card")
             {
                 ApplicationArea = Suite;
-                Caption = 'JoJ Card';
+                Caption = 'Job Card';
                 Image = "Report";
                 ToolTip = 'Produce a job card (Send to Word Document and save it in the job''s folder, and print on Orange)';
 

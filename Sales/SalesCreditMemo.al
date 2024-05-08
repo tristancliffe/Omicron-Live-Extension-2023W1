@@ -36,16 +36,6 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         { Importance = Standard; }
         modify("Assigned User ID")
         { Importance = Standard; QuickEntry = false; }
-        moveafter("Sell-to"; Status)
-        addafter("Sell-to Country/Region Code")
-        {
-            field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")
-            { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
-            field("Sell-to E-Mail2"; Rec."Sell-to E-Mail")
-            { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
-            field("Mobile No."; Rec."Mobile No.")
-            { ApplicationArea = All; CaptionML = ENU = 'Mobile Phone No.'; }
-        }
         addafter(Correction)
         {
             field("Order Notes"; Rec."Order Notes")
@@ -56,6 +46,9 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
                 ShowMandatory = true;
                 MultiLine = true;
             }
+            field("Sell-to Phone No."; Rec."Sell-to Phone No.") { ApplicationArea = All; Importance = Standard; }
+            field("Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }
+            field("Sell-to E-Mail"; Rec."Sell-to E-Mail") { ApplicationArea = All; Importance = Standard; }
         }
         addafter("Sell-to")
         {

@@ -12,6 +12,9 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
                 ShowMandatory = true;
                 MultiLine = true;
             }
+            field("Sell-to Phone No."; Rec."Sell-to Phone No.") { ApplicationArea = All; Importance = Standard; }
+            field("Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }
+            field("Sell-to E-Mail"; Rec."Sell-to E-Mail") { ApplicationArea = All; Importance = Standard; }
         }
         moveafter("Sell-to Customer Name"; "Your Reference", Status)
         moveafter("Sell-to Contact"; "Sell-to Contact No.", "External Document No.")
@@ -53,9 +56,9 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         modify("Sell-to Post Code") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code") { Importance = Standard; QuickEntry = false; }
         modify(WorkDescription) { Importance = Additional; Visible = true; QuickEntry = false; }
-        modify(SellToPhoneNo) { Editable = true; }
-        modify(SellToMobilePhoneNo) { Editable = true; }
-        modify(SellToEmail) { Editable = true; }
+        modify(SellToPhoneNo) { Visible = false; }
+        modify(SellToMobilePhoneNo) { Visible = false; }
+        modify(SellToEmail) { Visible = false; }
         modify("Document Date")
         {
             Visible = true;

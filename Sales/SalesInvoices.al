@@ -58,7 +58,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         moveafter("Sell-to Contact No."; "Sell-to Contact")
         addafter(Status)
         {
-            field("Order Notes47091"; Rec."Order Notes")
+            field("Order Notes"; Rec."Order Notes")
             {
                 ApplicationArea = All;
                 QuickEntry = false;
@@ -66,11 +66,18 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 ShowMandatory = true;
                 MultiLine = true;
             }
+            field("Sell-to Phone No."; Rec."Sell-to Phone No.") { ApplicationArea = All; Importance = Standard; }
+            field("Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }
+            field("Sell-to E-Mail"; Rec."Sell-to E-Mail") { ApplicationArea = All; Importance = Standard; }
         }
         modify("External Document No.") { Importance = Standard; Visible = true; QuickEntry = false; }
         modify("Salesperson Code") { QuickEntry = false; }
         modify("Campaign No.") { QuickEntry = false; }
         modify("Responsibility Center") { QuickEntry = false; }
+        modify(SellToPhoneNo) { Visible = false; }
+        modify(SellToMobilePhoneNo) { Visible = false; }
+        modify(SellToEmail) { Visible = false; }
+        movebefore("External Document No."; "Sell-to Contact No.")
         // addafter("Sell-to Country/Region Code")
         // {
         //     field("Sell-to Phone No.2"; Rec."Sell-to Phone No.")

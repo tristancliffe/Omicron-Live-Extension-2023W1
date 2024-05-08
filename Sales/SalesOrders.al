@@ -46,8 +46,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             }
         }
         modify("Sell-to Customer No.") { Importance = Standard; }
-        modify("Sell-to Phone No.") { QuickEntry = false; }
-        modify("Sell-to E-Mail") { QuickEntry = false; }
+        modify("Sell-to Phone No.") { QuickEntry = false; Importance = Standard; }
+        modify("Sell-to E-Mail") { QuickEntry = false; Importance = Standard; }
         modify("Sell-to Contact") { QuickEntry = false; }
         modify("Sell-to Address") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Address 2") { Importance = Standard; QuickEntry = false; }
@@ -91,22 +91,28 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                     Rec.DisplayMap();
                 end;
             }
-            field("Sell-to Phone No.2"; Rec."Sell-to Phone No.") { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
-            field("Sell-to E-Mail2"; Rec."Sell-to E-Mail") { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
-            field("Mobile No."; MobileNo)
-            {
-                ApplicationArea = All;
-                CaptionML = ENU = 'Mobile Phone No.';
-                ExtendedDatatype = PhoneNo;
-                Numeric = true;
-                QuickEntry = false;
-                trigger OnValidate()
-                begin
-                    RecCustomer."Mobile Phone No." := MobileNo;
-                    RecCustomer.Modify()
-                end;
-            }
+            //field("Sell-to Phone No.2"; Rec."Sell-to Phone No.") { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
+            //field("Sell-to E-Mail2"; Rec."Sell-to E-Mail") { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
+            // field("Mobile No."; MobileNo)
+            // {
+            //     ApplicationArea = All;
+            //     CaptionML = ENU = 'Mobile Phone No.';
+            //     ExtendedDatatype = PhoneNo;
+            //     Numeric = true;
+            //     QuickEntry = false;
+            //     trigger OnValidate()
+            //     begin
+            //         RecCustomer."Mobile Phone No." := MobileNo;
+            //         RecCustomer.Modify()
+            //     end;
+            // }
         }
+        addafter("Sell-to Phone No.")
+        {
+            field("Sell-to Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }
+        }
+        modify(SellToMobilePhoneNo) { Importance = Standard; CaptionML = ENG = 'Contact Mobile No.'; }
+        moveafter("Sell-to Contact"; SellToMobilePhoneNo)
         modify(Control4) { Visible = true; }
         moveafter(SalesDocCheckFactbox; Control1906127307)
         movelast(factboxes; Control1902018507)
@@ -215,7 +221,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     var
         RecCustomer: Record Customer;
         CustomerNotes: Text[2000];
-        MobileNo: Text[30];
+        //MobileNo: Text[30];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
@@ -227,7 +233,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            MobileNo := RecCustomer."Mobile Phone No.";
+            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
 
@@ -242,7 +248,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            MobileNo := RecCustomer."Mobile Phone No.";
+            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
         // if Rec."Posting Date" <> Today then begin
         //     Rec.Validate(Rec."Posting Date", Today);
@@ -256,7 +262,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            MobileNo := RecCustomer."Mobile Phone No.";
+            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
 
@@ -266,7 +272,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            MobileNo := RecCustomer."Mobile Phone No.";
+            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
 
