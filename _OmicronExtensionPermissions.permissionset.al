@@ -31,5 +31,6 @@ permissionset 50100 OmicronPermissions
         page "Job Cues" = X,
         report "Item Prices" = X,
         page "Item Vendor List Factbox" = X,
-        page "Job Journal Factbox" = X;
+        page "Job Journal Factbox" = X,
+        codeunit "Shpfy Order Line Dim" = X;
 }

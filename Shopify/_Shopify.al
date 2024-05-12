@@ -41,3 +41,14 @@ codeunit 50103 "Shpfy Stock Calc. Inventory" implements "Shpfy Stock Calculation
         exit(Item.Inventory - Item."Reserved Qty. on Inventory");
     end;
 }
+
+codeunit 50104 "Shpfy Order Line Dim"
+{
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", 'OnAfterCreateItemSalesLine', '', false, false)]
+
+    procedure OnAfterCreateItemSalesLine(ShopifyOrderHeader: Record "Shpfy Order Header"; ShopifyOrderLine: Record "Shpfy Order Line"; SalesHeader: Record "Sales Header"; var SalesLine: Record "Sales Line")
+    begin
+        SalesLine.Validate("Shortcut Dimension 1 Code", 'ONLINE');
+        SalesLine.Modify();
+    end;
+}
