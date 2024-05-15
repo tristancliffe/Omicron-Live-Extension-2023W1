@@ -11,6 +11,15 @@ pageextension 50232 PostedSalesInvoiceLineExt extends "Posted Sales Invoice Line
         {
             field("Unit Cost"; Rec."Unit Cost") { ApplicationArea = All; }
         }
+        addfirst(factboxes)
+        {
+            part(ItemPicture; "Item Picture")
+            {
+                ApplicationArea = All;
+                Caption = 'Picture';
+                SubPageLink = "No." = field("No.");
+            }
+        }
     }
     trigger OnOpenPage()
     begin
