@@ -342,6 +342,17 @@ tableextension 50105 JobNotes extends Job
                                                                                  "Ledger Entry Amount" = const(true)));
             ToolTip = 'The current customer balance outstanding. This can be used so that balances can be accounted for in project invoices - e.g. when they have paid a working capital deposit';
         }
+        field(50116; "Budgeted Price"; Decimal)
+        {
+            Caption = 'Budgeted Price';
+            ToolTip = 'The total amount budgeted for the project';
+            AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
+            AutoFormatType = 1;
+            DecimalPlaces = 2 : 2;
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line"."Line Amount" where("Job No." = field("No."),
+                                                                    "Line Type" = filter("Budget" | "Both Budget and Billable")));
+        }
     }
 
     fieldgroups

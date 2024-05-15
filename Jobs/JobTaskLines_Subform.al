@@ -9,17 +9,18 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
                 rec.Description := 'Labour re ' + LowerCase(rec."Job Task No.")
             end;
         }
-        modify(Control1)
-        { FreezeColumn = Description; }
+        modify(Control1) { FreezeColumn = Description; }
         addafter("Job Task Type")
         {
             field(TaskDimensionValue; TaskDimensionValue)
             { ApplicationArea = All; Caption = 'Dept.'; Editable = false; Style = Ambiguous; }
         }
-        modify("Contract (Total Price)")
-        { StyleExpr = InvoiceWarning; }
-        modify("Usage (Total Cost)")
-        { StyleExpr = LossWarning; }
+        modify("Contract (Total Price)") { StyleExpr = InvoiceWarning; }
+        modify("Usage (Total Cost)") { StyleExpr = LossWarning; }
+        addafter("Schedule (Total Cost)")
+        {
+            field("Usage (Total Hours)"; Rec."Usage (Total Hours)") { ApplicationArea = Jobs; }
+        }
     }
     // var
     //     TaskDimension: Record "Job Task Dimension";

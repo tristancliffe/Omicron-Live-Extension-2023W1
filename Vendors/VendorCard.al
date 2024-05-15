@@ -12,22 +12,17 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
                 end;
             end;
         }
-        modify("Search Name")
-        { Importance = Standard; }
-        modify("Fax No.")
-        { Importance = Standard; }
+        modify("Search Name") { Importance = Standard; }
+        modify("Fax No.") { Importance = Standard; }
         moveafter(AddressDetails; "Home Page")
-        modify("VAT Registration No.")
-        { Importance = Promoted; }
+        modify("VAT Registration No.") { Importance = Promoted; }
         moveafter("Post Code"; "Country/Region Code")
         moveafter(ShowMap; "Language Code")
         moveafter("Fax No."; "Home Page")
         addlast(General) //! User Control for the large notes field...
         {
-            field("Supply Type"; Rec."Supply Type")
-            { ApplicationArea = All; ToolTip = 'Supply type shortname (Access Dimensions SortKey)'; }
-            field("Preferred Payment Method"; Rec."Preferred Payment Method")
-            { ApplicationArea = All; ToolTip = 'Note about their preferred method of payment'; }
+            field("Supply Type"; Rec."Supply Type") { ApplicationArea = All; ToolTip = 'Supply type shortname (Access Dimensions SortKey)'; }
+            field("Preferred Payment Method"; Rec."Preferred Payment Method") { ApplicationArea = All; ToolTip = 'Note about their preferred method of payment'; }
             // field("Vendor Notes"; Rec."Vendor Notes")
             // {
             //     MultiLine = true;
@@ -54,19 +49,14 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
             }
         }
         moveafter("Preferred Payment Method"; Blocked)
-        modify("Payment Terms Code")
-        { ShowMandatory = true; }
-        modify("Location Code")
-        { ShowMandatory = true; }
-        modify("Gen. Bus. Posting Group")
-        { Importance = Standard; ShowMandatory = true; }
-        modify("VAT Bus. Posting Group")
-        { Importance = Standard; ShowMandatory = true; }
-        modify("Vendor Posting Group")
-        { Importance = Standard; ShowMandatory = true; }
+        modify("Payment Terms Code") { ShowMandatory = true; }
+        modify("Location Code") { ShowMandatory = true; }
+        modify("Gen. Bus. Posting Group") { Importance = Standard; ShowMandatory = true; }
+        modify("VAT Bus. Posting Group") { Importance = Standard; ShowMandatory = true; }
+        modify("Vendor Posting Group") { Importance = Standard; ShowMandatory = true; }
         modify("Country/Region Code")
         {
-            //ShowMandatory = true; //## This was used before I found out how to make County appear by default in General Ledger Setup
+            //ShowMandatory = true; //## This was used before I found out how to make Country appear by default in General Ledger Setup
             trigger OnAfterValidate()
             begin
                 if Rec."Country/Region Code" = 'GB' then begin
@@ -78,13 +68,11 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
         }
         addbefore("Balance (LCY)")
         {
-            field(Balance; Rec.Balance)
-            { ApplicationArea = All; }
+            field(Balance; Rec.Balance) { ApplicationArea = All; }
         }
         addbefore("Balance Due (LCY)")
         {
-            field("Balance Due"; Rec."Balance Due")
-            { ApplicationArea = All; }
+            field("Balance Due"; Rec."Balance Due") { ApplicationArea = All; }
         }
     }
     actions
@@ -104,18 +92,12 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
         }
         addlast(Category_Process)
         {
-            actionref(Dimensions_Promoted2; Dimensions)
-            { }
-            actionref(LedgerEntries_Promoted; "Ledger E&ntries")
-            { }
-            actionref(OrderAddress_Promoted; OrderAddresses)
-            { }
-            actionref(BankAccounts_Promoted; "Bank Accounts")
-            { }
-            actionref(CreatePayment_Promoted; "Create Payments")
-            { }
-            actionref(ItemsFromVendor_Promoted; ItemsFromVendor)
-            { }
+            actionref(Dimensions_Promoted2; Dimensions) { }
+            actionref(LedgerEntries_Promoted; "Ledger E&ntries") { }
+            actionref(OrderAddress_Promoted; OrderAddresses) { }
+            actionref(BankAccounts_Promoted; "Bank Accounts") { }
+            actionref(CreatePayment_Promoted; "Create Payments") { }
+            actionref(ItemsFromVendor_Promoted; ItemsFromVendor) { }
         }
     }
     var  //!To do with large notes field...

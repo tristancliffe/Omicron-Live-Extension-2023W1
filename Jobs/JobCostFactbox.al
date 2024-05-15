@@ -27,6 +27,19 @@ pageextension 50196 JobCostFactboxExt extends "Job Cost Factbox"
                 { ApplicationArea = All; Visible = true; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; StyleExpr = ProfitStyle; }
             }
         }
+        addafter("Budget Cost")
+        {
+            group("Budget Price")
+            {
+                Caption = 'Budgeted Price';
+                field("Budgeted Price"; Rec."Budgeted Price")
+                {
+                    ApplicationArea = Jobs;
+                    Editable = false;
+                    Style = Strong;
+                }
+            }
+        }
     }
     var
         ProfitStyle: Text;

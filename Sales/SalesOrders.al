@@ -28,6 +28,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             {
                 MultiLine = true;
                 Caption = 'Customer Notes';
+                ShowCaption = false;
+                InstructionalText = 'Customer Notes';
                 ApplicationArea = All;
                 Importance = Standard;
                 ToolTip = 'This SHOULD be the customer notes brought across to the orders';
