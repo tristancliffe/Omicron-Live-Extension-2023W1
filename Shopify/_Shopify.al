@@ -10,7 +10,7 @@ codeunit 50102 "Shpfy Order External Doc. No"
         Index: Integer;
         Status: Text;
     begin
-        SalesHeader."Your Reference" := 'Shopify ' + OrderHeader."Shopify Order No." + ' £' + format(OrderHeader."Total Amount");
+        SalesHeader."Your Reference" := CopyStr('Shopify ' + OrderHeader."Shopify Order No." + ' £' + format(OrderHeader."Total Amount") + format(OrderHeader."Financial Status", 0, 1), 1, MaxStrLen(SalesHeader."Your Reference"));
         SalesHeader."Shortcut Dimension 1 Code" := 'ONLINE';
         OrderHeader.CalcFields("Work Description");
         If OrderHeader."Work Description".HasValue() then begin
