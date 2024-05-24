@@ -12,18 +12,29 @@ pageextension 50179 PostedPurchInvoiceListExt extends "Posted Purchase Invoices"
             Caption = 'Posted Date';
             ToolTip = 'The date that the invoice was posted.';
         }
-        modify("Amount Including VAT")
+        modify("Amount Including VAT") { Caption = 'Amount incl. VAT'; Visible = true; }
+        modify("Remaining Amount") { Visible = true; }
+        modify("Document Date") { Visible = true; }
+        modify(Cancelled) { Visible = true; }
+        modify("Currency Code") { Visible = true; }
+        addafter(Corrective)
         {
-            Caption = 'Amount incl. VAT';
-            Visible = true;
+            field("User ID"; GetFullName(Rec.SystemCreatedBy))
+            {
+                ApplicationArea = All;
+                Caption = 'Posted by';
+                Tooltip = 'The user name of the account that posted the bank reconciliation.';
+                Editable = false;
+            }
         }
-        modify("Remaining Amount")
-        { Visible = true; }
-        modify("Document Date")
-        { Visible = true; }
-        modify(Cancelled)
-        { Visible = true; }
-        modify("Currency Code")
-        { Visible = false; }
     }
+
+    procedure GetFullName(userID: Guid): Text
+    var
+        UserInfo: Record User;
+    begin
+        if not UserInfo.Get(userID) then
+            exit('');
+        exit(UserInfo."Full Name");
+    end;
 }

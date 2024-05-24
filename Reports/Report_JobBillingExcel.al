@@ -53,34 +53,39 @@ report 50101 "Job Billing Excel"
                         WorkDoneDescription := "Job Planning Line".Description
                     else
                         WorkDoneDescription := "Work Done";
-                    if (InvoicedSelector = true) then begin
-                        if "Qty. to Transfer to Invoice" > 0 then
-                            CurrReport.Skip();
-                        "Qty. to Transfer to Invoice" := "Qty. Invoiced";
-                        InvoicePrice := round(("Unit Price (LCY)" * "Qty. Invoiced") - "Line Discount Amount (LCY)", 0.01);
-                        VAT := round(InvoicePrice * 0.2, 0.01);
-                        InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
-                    end
-                    else if AddedToInvoiceSelector = true then begin
-                        if "Qty. Invoiced" > 0 then
-                            CurrReport.Skip();
-                        "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice";
+                    if AllLinesSelector = true then begin
+                        if ("Qty. Invoiced" > 0) or ("Qty. Transferred to Invoice" > 0) then
+                            "Qty. to Transfer to Invoice" := "Qty. Invoiced"
+                        else
+                            "Qty. to Transfer to Invoice" := "Qty. to Transfer to Invoice";
                         InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
                         VAT := round(InvoicePrice * 0.2, 0.01);
                         InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
-                    end
-                    else begin
-                        if ("Qty. Invoiced" <> 0) then
-                            CurrReport.Skip();
-                        if "Qty. to Transfer to Invoice" = 0 then
-                            CurrReport.Skip();
                     end;
-
-                    // if Quantity <> 0 then
-                    //     InvoicePrice := round(("Line Amount" / Quantity) * "Qty. to Transfer to Invoice", 0.01);
-                    // InvoiceCost := round("Total Cost", 0.01);
-                    // VAT := round(InvoicePrice * 0.2, 0.01);
-                    // InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
+                    if AllLinesSelector = false then begin
+                        if (InvoicedSelector = true) then begin
+                            if "Qty. to Transfer to Invoice" > 0 then
+                                CurrReport.Skip();
+                            "Qty. to Transfer to Invoice" := "Qty. Invoiced";
+                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. Invoiced") - "Line Discount Amount (LCY)", 0.01);
+                            VAT := round(InvoicePrice * 0.2, 0.01);
+                            InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
+                        end
+                        else if AddedToInvoiceSelector = true then begin
+                            if "Qty. Invoiced" > 0 then
+                                CurrReport.Skip();
+                            "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice";
+                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
+                            VAT := round(InvoicePrice * 0.2, 0.01);
+                            InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
+                        end
+                        else begin
+                            if ("Qty. Invoiced" <> 0) then
+                                CurrReport.Skip();
+                            if "Qty. to Transfer to Invoice" = 0 then
+                                CurrReport.Skip();
+                        end;
+                    end;
                 end;
             }
         }
@@ -93,6 +98,12 @@ report 50101 "Job Billing Excel"
         {
             area(content)
             {
+                field(AllLinesOption; AllLinesSelector)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Include all billable lines.';
+                    ToolTip = 'If this is selected then all lines will be added to the report.';
+                }
                 field(InvoiceOption; InvoicedSelector)
                 {
                     ApplicationArea = All;
@@ -161,4 +172,5 @@ report 50101 "Job Billing Excel"
         HeaderJobTask: Text[250];
         InvoicedSelector: Boolean;
         AddedToInvoiceSelector: Boolean;
+        AllLinesSelector: Boolean;
 }

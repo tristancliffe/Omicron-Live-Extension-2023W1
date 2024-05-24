@@ -141,6 +141,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 Promoted = true;
                 PromotedOnly = true;
                 PromotedCategory = Process;
+                Enabled = true;
             }
             action(ItemCardLink)
             {
@@ -167,6 +168,7 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 ToolTip = 'Opens the item journal for entering second-hand stock';
                 Promoted = true;
                 PromotedCategory = Process;
+                Scope = Repeater;
                 Visible = true;
                 Enabled = true;
             }

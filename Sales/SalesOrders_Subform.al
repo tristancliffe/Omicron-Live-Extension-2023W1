@@ -143,6 +143,17 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 Visible = true;
                 Enabled = Rec.Type = Rec.Type::Item;
             }
+            action(ItemJournal)
+            {
+                Caption = 'Item Journal';
+                Image = ItemRegisters;
+                ApplicationArea = All;
+                RunObject = Page "Item Journal";
+                ToolTip = 'Takes the user to the item journal to add [secondhand] stock';
+                Visible = true;
+                Scope = Repeater;
+                Enabled = Rec.Type = Rec.Type::Item;
+            }
             action(Reserve2)
             {
                 ApplicationArea = Reservation;

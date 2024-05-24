@@ -23,7 +23,8 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                     Dialog: Page "Work Done Dialog";
                     Check: Boolean;
                 begin
-                    if CanEdit = false then
+                    if rec.Status <> rec.Status::Open then
+                        // if CanEdit = false then
                         message('%1', rec."Work Done") //exit
                     else begin
                         Dialog.GetText(rec."Work Done");

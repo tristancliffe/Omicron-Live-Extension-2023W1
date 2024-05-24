@@ -12,23 +12,17 @@ report 50102 ResourceEfficiency
     {
         dataitem(Resource; Resource)
         {
-            column(Name; Name)
-            { }
+            column(Name; Name) { }
             dataitem(ResourceLedgerEntries; "Res. Ledger Entry")
             {
                 DataItemLink = "Resource No." = FIELD("No.");
                 DataItemTableView = SORTING("Resource No.", "Posting Date");
                 RequestFilterFields = "Posting Date";
-                column(JobNo; "Job No.")
-                { }
-                column(PostingDate; "Posting Date")
-                { }
-                column(Quantity; Quantity)
-                { }
-                column(Description; Description)
-                { }
-                column(Work_Done; "Work Done")
-                { }
+                column(JobNo; "Job No.") { }
+                column(PostingDate; "Posting Date") { }
+                column(Quantity; Quantity) { }
+                column(Description; Description) { }
+                column(Work_Done; "Work Done") { }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -41,7 +35,7 @@ report 50102 ResourceEfficiency
             }
             trigger OnAfterGetRecord()
             begin
-                if (Blocked = true) or (Type = Type::Machine) or ("Use Time Sheet" = false) then begin
+                if (Blocked = true) or (Type = Type::Machine) and not (("Resource Group No." = 'WORKSHOP') or ("Resource Group No." = 'BODYSHOP')) then begin
                     PrintSection := false;
                     CurrReport.Skip();
                 end;
@@ -49,31 +43,23 @@ report 50102 ResourceEfficiency
         }
         dataitem("Employee Absence"; Resource)
         {
-            column(Name2; Name)
-            { }
+            column(Name2; Name) { }
             dataitem("Absence Data"; "Employee Absence")
             {
                 DataItemLink = "Employee No." = FIELD("No.");
                 DataItemTableView = sorting("Employee No.", "From Date");
                 RequestFilterFields = "From Date";
-                column(Employee_Absence__Employee_No__; "Employee No.")
-                { }
-                column(Employee_Absence__From_Date_; Format("From Date"))
-                { }
-                column(Employee_Absence__Cause_of_Absence_Code_; "Cause of Absence Code")
-                { }
-                column(Employee_Absence_Description; Description)
-                { }
-                column(Employee_Absence_Quantity; Quantity)
-                { }
-                column(Employee_Absence__Unit_of_Measure_Code_; "Unit of Measure Code")
-                { }
+                column(Employee_Absence__Employee_No__; "Employee No.") { }
+                column(Employee_Absence__From_Date_; Format("From Date")) { }
+                column(Employee_Absence__Cause_of_Absence_Code_; "Cause of Absence Code") { }
+                column(Employee_Absence_Description; Description) { }
+                column(Employee_Absence_Quantity; Quantity) { }
+                column(Employee_Absence__Unit_of_Measure_Code_; "Unit of Measure Code") { }
             }
             trigger OnAfterGetRecord()
             begin
                 if (Blocked = true) or ("Use Time Sheet" = false) then
                     CurrReport.Skip();
-
             end;
         }
     }
