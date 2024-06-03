@@ -2,58 +2,30 @@ pageextension 50112 JobListExtension extends "Job List"
 {
     layout
     {
-        modify(Control1)
-        { FreezeColumn = Description; }
+        modify(Control1) { FreezeColumn = Description; }
         moveafter("Search Description"; "Status")
-        modify("Search Description")
-        { Visible = false; }
-        modify("Status")
-        { Visible = true; }
+        modify("Search Description") { Visible = false; }
+        modify("Status") { Visible = true; }
         addafter(Status)
         {
-            field("Car Make/Model"; Rec."Car Make/Model")
-            { ApplicationArea = All; ToolTip = 'Car make/model'; }
-            field("Vehicle Reg"; Rec."Vehicle Reg")
-            {
-                ApplicationArea = All;
-            }
-            field("Project Notes"; Rec."Job Notes")
-            { ApplicationArea = All; ToolTip = 'Project notes'; }
-            field("Customer Balance"; Rec."Customer Balance")
-            { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
-            field("Date of Arrival"; Rec."Date of Arrival")
-            {
-                ApplicationArea = All;
-            }
-            field(TotalHours; Rec.TotalHours)
-            { ApplicationArea = All; BlankZero = true; Width = 8; }
-            field(InvoicedHours; Rec.InvoicedHours)
-            { ApplicationArea = All; BlankZero = true; Width = 8; }
-            field(ToInvoice; Rec.ToInvoice)
-            { ApplicationArea = All; StyleExpr = InvoiceStyle; BlankZero = true; }
-            field(TotalValue; Rec.TotalValue)
-            {
-                ApplicationArea = All;
-                Visible = false;
-                Caption = 'Total Cost, £';
-            }
-            field(InvoicedValue; Rec.InvoicedValue)
-            {
-                ApplicationArea = All;
-                Visible = false;
-                Caption = 'Total Invoiced, £';
-            }
-            field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue))
-            { ApplicationArea = All; StyleExpr = ProfitStyle; BlankZero = true; Visible = false; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; }
+            field("Car Make/Model"; Rec."Car Make/Model") { ApplicationArea = All; ToolTip = 'Car make/model'; }
+            field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; }
+            field("Project Notes"; Rec."Job Notes") { ApplicationArea = All; ToolTip = 'Project notes'; }
+            field("Customer Balance"; Rec."Customer Balance") { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; StyleExpr = BalanceStyle; }
+            field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; }
+            field(TotalHours; Rec.TotalHours) { ApplicationArea = All; BlankZero = true; Width = 8; }
+            field(InvoicedHours; Rec.InvoicedHours) { ApplicationArea = All; BlankZero = true; Width = 8; }
+            field(ToInvoice; Rec.ToInvoice) { ApplicationArea = All; StyleExpr = InvoiceStyle; BlankZero = true; }
+            field(TotalValue; Rec.TotalValue) { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; }
+            field(InvoicedValue; Rec.InvoicedValue) { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; }
+            field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue)) { ApplicationArea = All; StyleExpr = ProfitStyle; BlankZero = true; Visible = false; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; }
+            field(PercentCompleted; Rec.PercentCompleted) { ApplicationArea = All; BlankZero = true; Caption = '% Complete'; }
         }
         moveafter("Date of Arrival"; "Person Responsible")
-        modify("Person Responsible")
-        { Visible = false; ToolTip = 'Whom is ''doing'' the project, or whom is responsible for it.'; }
+        modify("Person Responsible") { Visible = false; ToolTip = 'Whom is ''doing'' the project, or whom is responsible for it.'; }
         moveafter(Control1905650007; Control1907234507, Control1902018507)
-        modify(Control1907234507)
-        { Visible = true; }
-        modify(Control1902018507)
-        { Visible = true; }
+        modify(Control1907234507) { Visible = true; }
+        modify(Control1902018507) { Visible = true; }
     }
     actions
     {
@@ -279,42 +251,19 @@ pageextension 50112 JobListExtension extends "Job List"
     {
         addfirst
         {
-            view(CurrentJobs)
-            {
-                Caption = 'Current Projects';
-                Filters = where("Status" = filter('Planning|Quote|Open|Paused'));
-            }
-            view(AllJobs)
-            {
-                Caption = 'All Projects';
-                Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'));
-            }
-            view(JJobs)
-            {
-                Caption = 'Current J Jobs';
-                Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open|Paused'));
-            }
-            view(PJobs)
-            {
-                Caption = 'Current P Jobs';
-                Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open|Paused'));
-            }
-            view(CompletedJobs)
-            {
-                Caption = 'Completed Projects';
-                Filters = where("Status" = filter('Completed'));
-            }
-            view("WIP to Post")
-            {
-                Caption = 'WIP entries';
-                Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'), "WIP Entries Exist" = const(true));
-            }
+            view(CurrentJobs) { Caption = 'Current Projects'; Filters = where("Status" = filter('Planning|Quote|Open|Paused')); }
+            view(AllJobs) { Caption = 'All Projects'; Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused')); }
+            view(JJobs) { Caption = 'Current J Jobs'; Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open|Paused')); }
+            view(PJobs) { Caption = 'Current P Jobs'; Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open|Paused')); }
+            view(CompletedJobs) { Caption = 'Completed Projects'; Filters = where("Status" = filter('Completed')); }
+            view("WIP to Post") { Caption = 'WIP entries'; Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'), "WIP Entries Exist" = const(true)); }
         }
     }
 
     var
         InvoiceStyle: Text;
         ProfitStyle: Text;
+        BalanceStyle: Text;
 
     trigger OnOpenPage()
     begin
@@ -327,6 +276,7 @@ pageextension 50112 JobListExtension extends "Job List"
     begin
         InvoiceStyle := SetInvoiceStyle();
         ProfitStyle := SetProfitStyle();
+        BalanceStyle := SetBalanceStyle();
     end;
 
     procedure SetInvoiceStyle(): Text
@@ -339,6 +289,13 @@ pageextension 50112 JobListExtension extends "Job List"
     procedure SetProfitStyle(): Text
     begin
         if -(Rec.TotalValue + Rec.InvoicedValue) < 0 then
+            exit('Attention');
+        exit('');
+    end;
+
+    procedure SetBalanceStyle(): Text
+    begin
+        if Rec."Customer Balance" > 0 then
             exit('Attention');
         exit('');
     end;

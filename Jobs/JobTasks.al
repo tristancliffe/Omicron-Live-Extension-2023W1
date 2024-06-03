@@ -15,5 +15,17 @@ tableextension 50126 "Job Task Extension" extends "Job Task"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(50101; ToInvoice; Decimal)
+        {
+            Caption = 'To Invoice';
+            AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
+            AutoFormatType = 1;
+            DecimalPlaces = 2 : 2;
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".InvoicePrice where("Job No." = field("Job No."),
+                                                                    "Job Task No." = field("Job Task No."),
+                                                                    "Line Type" = filter("Billable" | "Both Budget and Billable"),
+                                                                    "Qty. Transferred to Invoice" = filter('0')));
+        }
     }
 }
