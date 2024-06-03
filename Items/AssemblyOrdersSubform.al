@@ -14,8 +14,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 GetInventory;
             end;
         }
-        modify("Variant Code")
-        { Visible = false; }
+        modify("Variant Code") { Visible = false; }
         addafter(Description)
         {
             field(Instock_AssemblyLine; Rec.Instock_AssemblyLine)

@@ -12,25 +12,19 @@ pageextension 50101 ItemListExtension extends "Item List"
     editable = true;
     layout
     {
-        modify("No.")
-        { StyleExpr = BlockedStyle; }
+        modify("No.") { StyleExpr = BlockedStyle; }
         modify(Description)
         {
             StyleExpr = BlockedStyle;
             AboutTitle = 'Item List Colours';
             AboutText = 'Normal items are shown in **black**. Items that are blocked for sales are **red**, and for purchasing are shown in **yellow**. Items that are blocked for both sales AND purchasing are shown in **grey**.';
         }
-        modify(Control1)
-        { Editable = false; FreezeColumn = Description; }
-        modify("Unit Cost")
-        { Visible = false; }
-        modify("Sales Unit of Measure")
-        { Visible = true; }
-        modify("Base Unit of Measure")
-        { Visible = false; }
+        modify(Control1) { Editable = false; FreezeColumn = Description; }
+        modify("Unit Cost") { Visible = false; }
+        modify("Sales Unit of Measure") { Visible = true; }
+        modify("Base Unit of Measure") { Visible = false; }
         moveafter("Base Unit of Measure"; "Sales Unit of Measure")
-        modify("Unit Price")
-        { Style = Strong; }
+        modify("Unit Price") { Style = Strong; }
         addbefore(Control1)
         {
             group(General)
@@ -68,46 +62,27 @@ pageextension 50101 ItemListExtension extends "Item List"
                 }
             }
         }
-        modify("Cost is Adjusted")
-        { Visible = false; }
-        modify("Reverse Charge Applies")
-        { Visible = false; }
-        modify("Default Deferral Template Code")
-        { Visible = false; }
+        modify("Cost is Adjusted") { Visible = false; }
+        modify("Reverse Charge Applies") { Visible = false; }
+        modify("Default Deferral Template Code") { Visible = false; }
         addafter(InventoryField)
         {
-            field("Shelf No.1"; Rec."Shelf No.")
-            {
-                ApplicationArea = All;
-                ToolTip = 'The shelf location in the stores';
-                Style = Strong;
-            }
-            field("Stockout Warning"; Rec."Stockout Warning")
-            { ApplicationArea = All; Visible = false; }
+            field("Shelf No.1"; Rec."Shelf No.") { ApplicationArea = All; ToolTip = 'The shelf location in the stores'; Style = Strong; }
+            field("Stockout Warning"; Rec."Stockout Warning") { ApplicationArea = All; Visible = false; }
         }
         addafter(Description)
         {
-            field("Item Category Code1"; Rec."Item Category Code")
-            {
-                ApplicationArea = All;
-                StyleExpr = BlockedStyle;
-                ToolTip = 'The Item Category Code field, called the SORTKEY or SHORTNAME in Access Dimensions.';
-            }
+            field("Item Category Code1"; Rec."Item Category Code") { ApplicationArea = All; StyleExpr = BlockedStyle; ToolTip = 'The Item Category Code field, called the SORTKEY or SHORTNAME in Access Dimensions.'; }
         }
-        modify(Type)
-        { StyleExpr = BlockedStyle; }
+        modify(Type) { StyleExpr = BlockedStyle; }
         addafter("Vendor No.")
         {
-            field(Model; Rec.Model)
-            { ApplicationArea = All; ToolTip = 'Vehicle model and detaisl. Use the Notes field for more information like chassis numbers et cetera.'; }
-            field(Supplier; Rec.Supplier)
-            { ApplicationArea = All; ToolTip = 'Short supplier notes. Ideally use the vendors functionality to record suppiers, prices and leadtimes.'; }
-            field("Item Notes"; Rec."Item Notes")
-            { ApplicationArea = All; }
+            field(Model; Rec.Model) { ApplicationArea = All; ToolTip = 'Vehicle model and detaisl. Use the Notes field for more information like chassis numbers et cetera.'; }
+            field(Supplier; Rec.Supplier) { ApplicationArea = All; ToolTip = 'Short supplier notes. Ideally use the vendors functionality to record suppiers, prices and leadtimes.'; }
+            field("Item Notes"; Rec."Item Notes") { ApplicationArea = All; }
         }
         moveafter("Vendor No."; "Vendor Item No.")
-        modify("Vendor Item No.")
-        { ApplicationArea = All; Visible = true; }
+        modify("Vendor Item No.") { ApplicationArea = All; Visible = true; }
         addfirst(factboxes)
         {
             part(ItemPicture; "Item Picture")
@@ -178,60 +153,28 @@ pageextension 50101 ItemListExtension extends "Item List"
     {
         addfirst(Category_Category4)
         {
-            actionref(ItemJournal_promoted; "Item Journal")
-            { }
-            actionref("E&xtended Texts_Promoted1"; "E&xtended Texts")
-            { }
-            actionref("Ven&dors_Promoted64734"; "Ven&dors")
-            { }
+            actionref(ItemJournal_promoted; "Item Journal") { }
+            actionref("E&xtended Texts_Promoted1"; "E&xtended Texts") { }
+            actionref("Ven&dors_Promoted64734"; "Ven&dors") { }
         }
         addlast(Promoted)
         {
-            actionref(Action37_Promoted1; Action37)
-            { }
-            actionref(Action40_Promoted1; Action40)
-            { }
+            actionref(Action37_Promoted1; Action37) { }
+            actionref(Action40_Promoted1; Action40) { }
         }
-        modify(AdjustInventory)
-        { Visible = false; }
-        modify("Item Journal")
-        { Visible = true; }
+        modify(AdjustInventory) { Visible = false; }
+        modify("Item Journal") { Visible = true; }
     }
     views
     {
         addfirst
         {
-            view(ActiveItems)
-            {
-                Caption = 'Active Items';
-                Filters = where("Blocked" = const(false));
-            }
-            view(InactiveItems)
-            {
-                Caption = 'Inactive Items';
-                Filters = where("Blocked" = const(true));
-            }
-            view(Assemblies)
-            {
-                Caption = 'Assemblies';
-                Filters = where("Assembly BOM" = const(true));
-                OrderBy = ascending("No.");
-            }
-            view(Instock)
-            {
-                Caption = 'In Stock';
-                Filters = where("Inventory" = filter('>0'));
-            }
-            view(NonInventory)
-            {
-                Caption = 'Non-Inventory';
-                Filters = where(Type = const("Non-Inventory"));
-            }
-            view(Services)
-            {
-                Caption = 'Services';
-                Filters = where(Type = const(Service));
-            }
+            view(ActiveItems) { Caption = 'Active Items'; Filters = where("Blocked" = const(false)); }
+            view(InactiveItems) { Caption = 'Inactive Items'; Filters = where("Blocked" = const(true)); }
+            view(Assemblies) { Caption = 'Assemblies'; Filters = where("Assembly BOM" = const(true)); OrderBy = ascending("No."); }
+            view(Instock) { Caption = 'In Stock'; Filters = where("Inventory" = filter('>0')); }
+            view(NonInventory) { Caption = 'Non-Inventory'; Filters = where(Type = const("Non-Inventory")); }
+            view(Services) { Caption = 'Services'; Filters = where(Type = const(Service)); }
         }
     }
 

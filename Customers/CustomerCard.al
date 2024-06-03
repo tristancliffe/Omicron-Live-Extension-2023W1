@@ -31,27 +31,17 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
             field("Vehicle Model"; Rec."Vehicle Model")
             { MultiLine = false; ApplicationArea = All; }
         }
-        modify("Search Name")
-        { Visible = true; Importance = Standard; }
+        modify("Search Name") { Visible = true; Importance = Standard; }
         moveafter("Post Code"; "Country/Region Code")
-        modify("Fax No.")
-        { Importance = Standard; }
-        modify("Phone No.")
-        { Importance = Promoted; }
-        modify(MobilePhoneNo)
-        { Importance = Promoted; }
-        modify("VAT Registration No.")
-        { Importance = Standard; }
-        modify("Ship-to Code")
-        { Importance = Promoted; }
-        modify("Shipping Advice")
-        { Importance = Standard; }
-        modify("Balance (LCY)2")
-        { Importance = Standard; }
-        modify("Primary Contact No.")
-        { Importance = Standard; }
-        modify(ContactName)
-        { Importance = Standard; }
+        modify("Fax No.") { Importance = Standard; }
+        modify("Phone No.") { Importance = Promoted; }
+        modify(MobilePhoneNo) { Importance = Promoted; }
+        modify("VAT Registration No.") { Importance = Standard; }
+        modify("Ship-to Code") { Importance = Promoted; }
+        modify("Shipping Advice") { Importance = Standard; }
+        modify("Balance (LCY)2") { Importance = Standard; }
+        modify("Primary Contact No.") { Importance = Standard; }
+        modify(ContactName) { Importance = Standard; }
         movelast(General; Blocked)
         addlast(General) //! User Control for the large notes field...
         {
@@ -80,16 +70,11 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
                 end;
             }
         }
-        modify("Payment Terms Code")
-        { ShowMandatory = true; }
-        modify("Location Code")
-        { ShowMandatory = true; }
-        modify("Gen. Bus. Posting Group")
-        { Importance = Standard; ShowMandatory = true; }
-        modify("VAT Bus. Posting Group")
-        { Importance = Standard; ShowMandatory = true; }
-        modify("Customer Posting Group")
-        { Importance = Standard; ShowMandatory = true; }
+        modify("Payment Terms Code") { ShowMandatory = true; }
+        modify("Location Code") { ShowMandatory = true; }
+        modify("Gen. Bus. Posting Group") { Importance = Standard; ShowMandatory = true; }
+        modify("VAT Bus. Posting Group") { Importance = Standard; ShowMandatory = true; }
+        modify("Customer Posting Group") { Importance = Standard; ShowMandatory = true; }
         modify("Country/Region Code")
         {
             trigger OnAfterValidate()
@@ -106,14 +91,10 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
     {
         addlast(Category_Process)
         {
-            actionref(LedgerEntries_Promoted; "Ledger E&ntries")
-            { }
-            actionref(Addresses_Promoted; ShipToAddresses)
-            { }
-            actionref(CashReceipt_Promoted; "Post Cash Receipts")
-            { }
-            actionref(RequestPayment_Promoted; PaymentRegistration)
-            { }
+            actionref(LedgerEntries_Promoted; "Ledger E&ntries") { }
+            actionref(Addresses_Promoted; ShipToAddresses) { }
+            actionref(CashReceipt_Promoted; "Post Cash Receipts") { }
+            actionref(RequestPayment_Promoted; PaymentRegistration) { }
         }
     }
     var  //!To do with large notes field...

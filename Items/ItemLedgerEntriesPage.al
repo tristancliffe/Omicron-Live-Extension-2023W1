@@ -22,7 +22,6 @@ pageextension 50180 ItemLedgerEntriesExt extends "Item Ledger Entries"
             }
         }
         moveafter("Entry No."; RunningBalance)
-        modify(RunningBalance)
-        { Visible = true; }
+        modify(RunningBalance) { Visible = true; }
     }
 }

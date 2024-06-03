@@ -16,11 +16,8 @@ pageextension 50219 FixedAssetCardExt extends "Fixed Asset Card"
                 end;
             }
         }
-        modify(Inactive)
-        { Importance = Standard; }
-        modify(Blocked)
-        { Importance = Standard; }
-        modify(Acquired)
-        { Importance = Standard; }
+        modify(Inactive) { Importance = Standard; }
+        modify(Blocked) { Importance = Standard; }
+        modify(Acquired) { Importance = Standard; }
     }
 }

@@ -2,19 +2,14 @@ pageextension 50184 BankRecLinesExt extends "Bank Acc. Reconciliation Lines"
 {
     layout
     {
-        modify("Document No.")
-        { Visible = false; }
-        modify("Check No.")
-        { Visible = false; }
-        modify(Difference)
-        { StyleExpr = NegativeAmounts; }
+        modify("Document No.") { Visible = false; }
+        modify("Check No.") { Visible = false; }
+        modify(Difference) { StyleExpr = NegativeAmounts; }
         addbefore(TotalDiff)
         {
-            field(SumOfLines; Rec.SumOfLines)
-            { ApplicationArea = all; Editable = false; }
+            field(SumOfLines; Rec.SumOfLines) { ApplicationArea = all; Editable = false; }
         }
-        modify(Control13)
-        { Visible = false; }
+        modify(Control13) { Visible = false; }
     }
 
     var

@@ -6,17 +6,11 @@ pageextension 50104 ShipToCardExt extends "Ship-to Address"
 {
     layout
     {
-        modify(Code)
-        {
-            Caption = 'Address Code';
-            ToolTipML = ENG = 'Specifies a ship-to address code. Use 1,2,3 or 10000,20000,30000, or "Minerva" for Minerva Cottage';
-        }
+        modify(Code) { Caption = 'Address Code'; ToolTipML = ENG = 'Specifies a ship-to address code. Use 1,2,3 or 10000,20000,30000, or "Minerva" for Minerva Cottage'; }
         addafter(Name)
         {
-            field("Address Notes"; Rec."Address Notes")
-            { MultiLine = true; ApplicationArea = All; }
+            field("Address Notes"; Rec."Address Notes") { MultiLine = true; ApplicationArea = All; }
         }
-        modify(GLN)
-        { Visible = false; }
+        modify(GLN) { Visible = false; }
     }
 }

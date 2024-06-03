@@ -8,18 +8,12 @@ pageextension 50158 CustomerCueFactboxExt extends "Sales Hist. Sell-to FactBox"
 {
     layout
     {
-        modify(NoofQuotesTile)
-        { StyleExpr = QuoteStyle; }
-        modify(NoofBlanketOrdersTile)
-        { StyleExpr = BlanketStyle; }
-        modify(NoofOrdersTile)
-        { StyleExpr = OrderStyle; }
-        modify(NoofInvoicesTile)
-        { StyleExpr = InvoiceStyle; }
-        modify(NoofCreditMemosTile)
-        { StyleExpr = CreditStyle; }
-        modify(NoofReturnOrdersTile)
-        { StyleExpr = ReturnStyle; }
+        modify(NoofQuotesTile) { StyleExpr = QuoteStyle; }
+        modify(NoofBlanketOrdersTile) { StyleExpr = BlanketStyle; }
+        modify(NoofOrdersTile) { StyleExpr = OrderStyle; }
+        modify(NoofInvoicesTile) { StyleExpr = InvoiceStyle; }
+        modify(NoofCreditMemosTile) { StyleExpr = CreditStyle; }
+        modify(NoofReturnOrdersTile) { StyleExpr = ReturnStyle; }
 
         addlast(Control2)
         {

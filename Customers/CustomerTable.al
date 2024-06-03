@@ -10,10 +10,8 @@ tableextension 50101 CustomerTableExtCue extends Customer
 {
     fields
     {
-        field(50100; "Customer Notes"; text[2000])
-        { CaptionML = ENU = 'Customer Notes'; DataClassification = CustomerContent; }
-        field(50101; "Vehicle Model"; text[100])
-        { CaptionML = ENU = 'Customer Vehicle Model'; DataClassification = CustomerContent; }
+        field(50100; "Customer Notes"; text[2000]) { CaptionML = ENU = 'Customer Notes'; DataClassification = CustomerContent; }
+        field(50101; "Vehicle Model"; text[100]) { CaptionML = ENU = 'Customer Vehicle Model'; DataClassification = CustomerContent; }
         field(50200; "No. of Jobs"; Integer)
         {
             FieldClass = FlowField;
@@ -30,13 +28,11 @@ tableextension 50101 CustomerTableExtCue extends Customer
             CalcFormula = count(Job where(Status = filter(Completed), "Sell-to Customer No." = FIELD("No.")));
             ToolTip = 'Specifies the number of projects completed for the customer.';
         }
-        field(50102; "Phone Numbers Exist"; Boolean)
-        { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
+        field(50102; "Phone Numbers Exist"; Boolean) { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {
-        addlast(DropDown; "Mobile Phone No.", "E-Mail", "Vehicle Model")
-        { }
+        addlast(DropDown; "Mobile Phone No.", "E-Mail", "Vehicle Model") { }
     }
 
     trigger OnAfterModify()

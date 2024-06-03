@@ -4,21 +4,16 @@ pageextension 50185 BankRecLedgerLinesExt extends "Apply Bank Acc. Ledger Entrie
     {
         addafter("Posting Date")
         {
-            field("Document Date"; Rec."Document Date")
-            { ApplicationArea = All; Visible = true; }
+            field("Document Date"; Rec."Document Date") { ApplicationArea = All; Visible = true; }
         }
         moveafter(Open; "Bal. Account No.")
-        modify("Bal. Account No.")
-        { Visible = true; }
+        modify("Bal. Account No.") { Visible = true; }
         addafter(Open)
         {
-            field("User ID"; Rec."User ID")
-            { ApplicationArea = All; }
+            field("User ID"; Rec."User ID") { ApplicationArea = All; }
         }
-        modify("Check Ledger Entries")
-        { Visible = false; }
-        modify("External Document No.")
-        { Visible = false; }
+        modify("Check Ledger Entries") { Visible = false; }
+        modify("External Document No.") { Visible = false; }
     }
     actions
     {

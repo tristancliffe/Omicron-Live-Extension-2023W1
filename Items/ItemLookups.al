@@ -13,27 +13,21 @@ pageextension 50137 ItemLookupExt extends "Item Lookup"
     {
         addafter(Description)
         {
-            field(Inventory; Rec.Inventory)
-            { ApplicationArea = All; }
-            field("Shelf No.1"; Rec."Shelf No.")
-            { ApplicationArea = All; }
+            field(Inventory; Rec.Inventory) { ApplicationArea = All; }
+            field("Shelf No.1"; Rec."Shelf No.") { ApplicationArea = All; }
         }
         moveafter("Shelf No.1"; "Unit Price", "Unit Cost", "Base Unit of Measure")
         addafter("Base Unit of Measure")
         {
-            field("Item Category Code1"; Rec."Item Category Code")
-            { ApplicationArea = All; }
+            field("Item Category Code1"; Rec."Item Category Code") { ApplicationArea = All; }
         }
         moveafter("Item Category Code1"; "Vendor No.")
         addafter("Vendor No.")
         {
-            field("Assembly Status"; Rec."Assembly BOM")
-            { ApplicationArea = All; }
+            field("Assembly Status"; Rec."Assembly BOM") { ApplicationArea = All; }
         }
-        modify("Routing No.")
-        { QuickEntry = false; Visible = false; }
-        modify("Vendor Item No.")
-        { Visible = false; }
+        modify("Routing No.") { QuickEntry = false; Visible = false; }
+        modify("Vendor Item No.") { Visible = false; }
     }
     // trigger OnOpenPage()
     // var

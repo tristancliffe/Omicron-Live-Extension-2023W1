@@ -40,10 +40,8 @@ pageextension 50190 BankStatementListExt extends "Bank Account Statement List"
     {
         addfirst
         {
-            view(CurrentAccount)
-            { Caption = 'Current Account'; Filters = where("Bank Account No." = filter('CURRENT_BANK')); }
-            view(CreditCard)
-            { Caption = 'Credit Card'; Filters = where("Bank Account No." = filter('NATWEST_CREDIT')); }
+            view(CurrentAccount) { Caption = 'Current Account'; Filters = where("Bank Account No." = filter('CURRENT_BANK')); }
+            view(CreditCard) { Caption = 'Credit Card'; Filters = where("Bank Account No." = filter('NATWEST_CREDIT')); }
         }
     }
 

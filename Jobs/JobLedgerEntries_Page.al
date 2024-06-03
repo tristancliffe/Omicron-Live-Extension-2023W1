@@ -4,15 +4,12 @@ pageextension 50202 "Job Ledger Entries Ext" extends "Job Ledger Entries"
     {
         addafter("Entry Type")
         {
-            field("Line Type"; Rec."Line Type")
-            { ApplicationArea = All; Visible = true; }
+            field("Line Type"; Rec."Line Type") { ApplicationArea = All; Visible = true; }
         }
         movebefore(Description; "Job No.")
         movebefore(Description; "Job Task No.")
-        modify("Job No.")
-        { Visible = true; ApplicationArea = All; }
-        modify("Job Task No.")
-        { Visible = true; ApplicationArea = All; }
+        modify("Job No.") { Visible = true; ApplicationArea = All; }
+        modify("Job Task No.") { Visible = true; ApplicationArea = All; }
         addafter(Description)
         {
             field("Work Done"; Rec."Work Done")
@@ -31,7 +28,6 @@ pageextension 50202 "Job Ledger Entries Ext" extends "Job Ledger Entries"
             }
         }
         movelast(Control1; "User ID")
-        modify("User ID")
-        { Visible = true; }
+        modify("User ID") { Visible = true; }
     }
 }

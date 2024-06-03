@@ -5,7 +5,6 @@ tableextension 50102 ShipToNotesExt extends "Ship-to Address"
 {
     fields
     {
-        field(50100; "Address Notes"; Text[500])
-        { CaptionML = ENU = 'Address Notes'; DataClassification = CustomerContent; }
+        field(50100; "Address Notes"; Text[500]) { CaptionML = ENU = 'Address Notes'; DataClassification = CustomerContent; }
     }
 }

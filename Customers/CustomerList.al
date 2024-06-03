@@ -21,27 +21,18 @@ pageextension 50103 CustomerListExt extends "Customer List"
     AboutText = 'The colours on the list show if an account is active (**black**) or blocked (**grey**) or partially blocked (**yellow**).';
     layout
     {
-        modify("No.")
-        { StyleExpr = BlockedStyle; }
-        modify(Name)
-        { StyleExpr = BlockedStyle; }
-        modify(Control1)
-        { FreezeColumn = Name; }
-        modify("Responsibility Center")
-        { Visible = false; }
-        modify("Location Code")
-        { Visible = false; }
+        modify("No.") { StyleExpr = BlockedStyle; }
+        modify(Name) { StyleExpr = BlockedStyle; }
+        modify(Control1) { FreezeColumn = Name; }
+        modify("Responsibility Center") { Visible = false; }
+        modify("Location Code") { Visible = false; }
         addafter(Contact)
         {
-            field(City; Rec.City)
-            { ApplicationArea = All; }
-            field("Post Code1"; Rec."Post Code")
-            { ApplicationArea = All; }
-            field("Country/Region Code1"; Rec."Country/Region Code")
-            { ApplicationArea = All; }
+            field(City; Rec.City) { ApplicationArea = All; }
+            field("Post Code1"; Rec."Post Code") { ApplicationArea = All; }
+            field("Country/Region Code1"; Rec."Country/Region Code") { ApplicationArea = All; }
         }
-        modify("Phone No.")
-        { StyleExpr = BlockedStyle; }
+        modify("Phone No.") { StyleExpr = BlockedStyle; }
         addafter("Phone No.")
         {
             field("Mobile Phone No."; Rec."Mobile Phone No.")
@@ -60,28 +51,23 @@ pageextension 50103 CustomerListExt extends "Customer List"
         }
         addafter("Payments (LCY)")
         {
-            field("Vehicle Model"; Rec."Vehicle Model")
-            { ApplicationArea = All; }
-            field("Customer Notes"; Rec."Customer Notes")
-            { ApplicationArea = All; }
+            field("Vehicle Model"; Rec."Vehicle Model") { ApplicationArea = All; }
+            field("Customer Notes"; Rec."Customer Notes") { ApplicationArea = All; }
         }
     }
     actions
     {
         addafter(PaymentRegistration_Promoted)
         {
-            actionref("Cash Receipt Journal_Promoted1"; "Cash Receipt Journal")
-            { }
+            actionref("Cash Receipt Journal_Promoted1"; "Cash Receipt Journal") { }
         }
         addafter(ApplyTemplate_Promoted)
         {
-            actionref("Sales Journal_Promoted1"; "Sales Journal")
-            { }
+            actionref("Sales Journal_Promoted1"; "Sales Journal") { }
         }
         addafter(CustomerLedgerEntries_Promoted)
         {
-            actionref(ShipToAddresses_Promoted1; ShipToAddresses)
-            { }
+            actionref(ShipToAddresses_Promoted1; ShipToAddresses) { }
         }
         addlast("&Customer")
         {
@@ -115,21 +101,9 @@ pageextension 50103 CustomerListExt extends "Customer List"
     {
         addfirst
         {
-            view(ActiveCustomers)
-            {
-                Caption = 'Active Customers';
-                Filters = where("Blocked" = const(" "));
-            }
-            view(InactiveCustomers)
-            {
-                Caption = 'Inactive Customers';
-                Filters = where("Blocked" = filter('All|Ship|Invoice'));
-            }
-            view(Balance)
-            {
-                Caption = 'Balance';
-                Filters = where("Balance" = filter('<>0'));
-            }
+            view(ActiveCustomers) { Caption = 'Active Customers'; Filters = where("Blocked" = const(" ")); }
+            view(InactiveCustomers) { Caption = 'Inactive Customers'; Filters = where("Blocked" = filter('All|Ship|Invoice')); }
+            view(Balance) { Caption = 'Balance'; Filters = where("Balance" = filter('<>0')); }
             view(PhoneNumbers)
             {
                 Caption = 'Phone Numbers';

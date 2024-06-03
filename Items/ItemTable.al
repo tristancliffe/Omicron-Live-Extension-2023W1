@@ -50,8 +50,7 @@ tableextension 50100 ItemTableExt extends Item
     }
     fieldgroups
     {
-        addlast(DropDown; "Item Category Code", Inventory, "Shelf No.", "Assembly BOM", "Vendor Item No.", Supplier)
-        { }
+        addlast(DropDown; "Item Category Code", Inventory, "Shelf No.", "Assembly BOM", "Vendor Item No.", Supplier) { }
     }
     trigger OnAfterModify()
     begin

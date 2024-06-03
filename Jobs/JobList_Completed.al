@@ -17,68 +17,24 @@ page 50107 "Completed Job List"
             {
                 ShowCaption = false;
                 FreezeColumn = Description;
-                field("No."; Rec."No.")
-                {
-                    ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the number of the involved entry or record, according to the specified number series.';
-                }
-                field(Description; Rec.Description)
-                {
-                    ApplicationArea = Jobs;
-                    ToolTip = 'Specifies a short description of the project.';
-                }
-                field("Bill-to Customer No."; Rec."Bill-to Customer No.")
-                {
-                    ApplicationArea = Jobs;
-                    ToolTip = 'Specifies the number of the customer who pays for the project.';
-                }
-                field(Status; Rec.Status)
-                {
-                    ApplicationArea = Jobs;
-                    ToolTip = 'Specifies a status for the current project. You can change the status for the project as it progresses. Final calculations can be made on completed projects.';
-                }
-                field("Car Make/Model"; Rec."Car Make/Model")
-                { ApplicationArea = All; ToolTip = 'Car make/model'; }
-                field("Vehicle Reg"; Rec."Vehicle Reg")
-                { ApplicationArea = All; ToolTip = 'Registration No.'; }
-                field("Job Notes"; Rec."Job Notes")
-                { ApplicationArea = All; ToolTip = 'Project notes'; }
+                field("No."; Rec."No.") { ApplicationArea = Jobs; ToolTip = 'Specifies the number of the involved entry or record, according to the specified number series.'; }
+                field(Description; Rec.Description) { ApplicationArea = Jobs; ToolTip = 'Specifies a short description of the project.'; }
+                field("Bill-to Customer No."; Rec."Bill-to Customer No.") { ApplicationArea = Jobs; ToolTip = 'Specifies the number of the customer who pays for the project.'; }
+                field(Status; Rec.Status) { ApplicationArea = Jobs; ToolTip = 'Specifies a status for the current project. You can change the status for the project as it progresses. Final calculations can be made on completed projects.'; }
+                field("Car Make/Model"; Rec."Car Make/Model") { ApplicationArea = All; ToolTip = 'Car make/model'; }
+                field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; ToolTip = 'Registration No.'; }
+                field("Job Notes"; Rec."Job Notes") { ApplicationArea = All; ToolTip = 'Project notes'; }
             }
         }
         area(factboxes)
         {
-            part(Control1905650007; "Job WIP/Recognition FactBox")
-            {
-                ApplicationArea = Jobs;
-                SubPageLink = "No." = field("No.");
-            }
-            part(Control1907234507; "Sales Hist. Bill-to FactBox")
-            {
-                ApplicationArea = Jobs;
-                SubPageLink = "No." = field("Bill-to Customer No.");
-            }
-            part(Control1902018507; "Customer Statistics FactBox")
-            {
-                ApplicationArea = Jobs;
-                SubPageLink = "No." = field("Bill-to Customer No.");
-            }
+            part(Control1905650007; "Job WIP/Recognition FactBox") { ApplicationArea = Jobs; SubPageLink = "No." = field("No."); }
+            part(Control1907234507; "Sales Hist. Bill-to FactBox") { ApplicationArea = Jobs; SubPageLink = "No." = field("Bill-to Customer No."); }
+            part(Control1902018507; "Customer Statistics FactBox") { ApplicationArea = Jobs; SubPageLink = "No." = field("Bill-to Customer No."); }
 
-            part("Attached Documents"; "Document Attachment Factbox")
-            {
-                ApplicationArea = All;
-                Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(Database::Job),
-                              "No." = field("No.");
-            }
-            systempart(Control1900383207; Links)
-            {
-                ApplicationArea = RecordLinks;
-                Visible = false;
-            }
-            systempart(Control1905767507; Notes)
-            {
-                ApplicationArea = Notes;
-            }
+            part("Attached Documents"; "Document Attachment Factbox") { ApplicationArea = All; Caption = 'Attachments'; SubPageLink = "Table ID" = const(Database::Job), "No." = field("No."); }
+            systempart(Control1900383207; Links) { ApplicationArea = RecordLinks; Visible = false; }
+            systempart(Control1905767507; Notes) { ApplicationArea = Notes; }
         }
     }
 

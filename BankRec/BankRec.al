@@ -27,42 +27,25 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
                 ToolTip = 'View statements for selected bank accounts. For each bank transaction, the report shows a description, an applied amount, a statement amount, and other information.';
             }
         }
-        modify(MatchManually)
-        { ShortcutKey = 'Alt+M'; CaptionML = ENG = 'MATCH'; }
-        modify(RemoveMatch)
-        { ShortcutKey = 'Alt+R'; CaptionML = ENG = 'UN-MATCH'; }
-        modify(MatchAutomatically)
-        { ShortcutKey = 'Alt+X'; }
-        modify(MatchDetails)
-        { ShortcutKey = 'Alt+D'; }
-        modify("&Test Report")
-        { ShortcutKey = 'Ctrl+Alt+T'; }
-        modify(NotMatched)
-        { ShortcutKey = 'Alt+S'; CaptionML = ENG = 'HIDE Matched'; }
-        modify(All)
-        { ShortcutKey = 'Alt+A'; CaptionML = ENG = 'SHOW All'; }
-        modify("Transfer to General Journal_Promoted")
-        { Visible = false; }
-        modify(SuggestLines_Promoted)
-        { Visible = false; }
+        modify(MatchManually) { ShortcutKey = 'Alt+M'; CaptionML = ENG = 'MATCH'; }
+        modify(RemoveMatch) { ShortcutKey = 'Alt+R'; CaptionML = ENG = 'UN-MATCH'; }
+        modify(MatchAutomatically) { ShortcutKey = 'Alt+X'; }
+        modify(MatchDetails) { ShortcutKey = 'Alt+D'; }
+        modify("&Test Report") { ShortcutKey = 'Ctrl+Alt+T'; }
+        modify(NotMatched) { ShortcutKey = 'Alt+S'; CaptionML = ENG = 'HIDE Matched'; }
+        modify(All) { ShortcutKey = 'Alt+A'; CaptionML = ENG = 'SHOW All'; }
+        modify("Transfer to General Journal_Promoted") { Visible = false; }
+        modify(SuggestLines_Promoted) { Visible = false; }
         addfirst(Category_Process)
         {
-            actionref(ImportStatement_Promoted; ImportBankStatement)
-            { }
-            actionref(AutoMatch_Promoted; MatchAutomatically)
-            { }
-            actionref(ManualMatch_Promoted; MatchManually)
-            { }
-            actionref(UnMatch_Promoted; RemoveMatch)
-            { }
-            actionref(HideMatched_Promoted; NotMatched)
-            { }
-            actionref(ShowMatched_Promoted; All)
-            { }
-            actionref(BankStatements; "Bank Acc. Statements")
-            { }
-            actionref(TestReport; "&Test Report")
-            { }
+            actionref(ImportStatement_Promoted; ImportBankStatement) { }
+            actionref(AutoMatch_Promoted; MatchAutomatically) { }
+            actionref(ManualMatch_Promoted; MatchManually) { }
+            actionref(UnMatch_Promoted; RemoveMatch) { }
+            actionref(HideMatched_Promoted; NotMatched) { }
+            actionref(ShowMatched_Promoted; All) { }
+            actionref(BankStatements; "Bank Acc. Statements") { }
+            actionref(TestReport; "&Test Report") { }
         }
     }
 }

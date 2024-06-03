@@ -16,8 +16,7 @@ page 50106 "Item Vendor List Factbox"
             repeater(VendorList)
             {
                 ShowCaption = false;
-                field("Item No."; Rec."Item No.")
-                { ApplicationArea = All; Visible = false; }
+                field("Item No."; Rec."Item No.") { ApplicationArea = All; Visible = false; }
                 field("Vendor No."; Rec."Vendor No.")
                 {
                     ApplicationArea = Basic, Suite;

@@ -27,13 +27,10 @@ pageextension 50100 ItemCardExtension extends "Item Card"
         }
         addbefore("Qty. on Purch. Order")
         {
-            field("Reserved Qty. on Inventory"; Rec."Reserved Qty. on Inventory")
-            { ApplicationArea = All; Style = StrongAccent; }
-            field("Available Stock"; Rec.Inventory - Rec."Reserved Qty. on Inventory")
-            { ApplicationArea = All; Style = Unfavorable; Caption = 'Non-reserved stock'; DecimalPlaces = 0 : 5; }
+            field("Reserved Qty. on Inventory"; Rec."Reserved Qty. on Inventory") { ApplicationArea = All; Style = StrongAccent; }
+            field("Available Stock"; Rec.Inventory - Rec."Reserved Qty. on Inventory") { ApplicationArea = All; Style = Unfavorable; Caption = 'Non-reserved stock'; DecimalPlaces = 0 : 5; }
         }
-        modify("Item Category Code")
-        { ShowMandatory = true; }
+        modify("Item Category Code") { ShowMandatory = true; }
         addafter("Item Category Code")
         {
             // field("Description 2"; Rec."Description 2")
@@ -45,63 +42,34 @@ pageextension 50100 ItemCardExtension extends "Item Card"
             //     Visible = true;
             //     QuickEntry = false;
             // }
-            field("Model"; Rec."Model")
-            {
-                ApplicationArea = All;
-                Caption = 'Car Make/Model';
-                ShowMandatory = true;
-            }
-            field("Supplier"; Rec."Supplier")
-            {
-                ApplicationArea = All;
-                Caption = 'Old Supplier Ref';
-            }
+            field("Model"; Rec."Model") { ApplicationArea = All; Caption = 'Car Make/Model'; ShowMandatory = true; }
+            field("Supplier"; Rec."Supplier") { ApplicationArea = All; Caption = 'Old Supplier Ref'; }
             group("NonStockGroup")
             {
                 visible = NonStockShelfVisible;
                 ShowCaption = false;
 
-                field("NonStockShelf"; Rec.NonStockShelf)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Shelf No.';
-                }
+                field("NonStockShelf"; Rec.NonStockShelf) { ApplicationArea = All; Caption = 'Shelf No.'; }
             }
         }
         movelast(Item; "Tariff No.")
         moveafter(Blocked; "Unit Cost", "Unit Price")
-        modify("Blocked")
-        { Visible = true; }
-        modify("Automatic Ext. Texts")
-        { Importance = Standard; }
-        modify("Shelf No.")
-        { Importance = Promoted; ShowMandatory = true; }
-        modify("Search Description")
-        { Importance = Standard; }
-        modify("Costing Method")
-        { Importance = Standard; }
-        modify("VAT Prod. Posting Group")
-        { Importance = Standard; }
-        modify("Profit %")
-        { Importance = Standard; }
-        modify("Sales Unit of Measure")
-        { Importance = Standard; ShowMandatory = true; }
-        modify("Vendor No.")
-        { Importance = Promoted; }
-        modify("Vendor Item No.")
-        { Importance = Standard; }
-        modify("Purch. Unit of Measure")
-        { Importance = Standard; ShowMandatory = true; }
-        modify("Tariff No.")
-        { ShowMandatory = true; }
-        modify("Reordering Policy")
-        { ShowMandatory = true; }
-        modify("Reorder Point")
-        { ShowMandatory = true; }
-        modify("Reorder Quantity")
-        { ShowMandatory = true; }
-        modify("Lead Time Calculation")
-        { ShowMandatory = true; }
+        modify("Blocked") { Visible = true; }
+        modify("Automatic Ext. Texts") { Importance = Standard; }
+        modify("Shelf No.") { Importance = Promoted; ShowMandatory = true; }
+        modify("Search Description") { Importance = Standard; }
+        modify("Costing Method") { Importance = Standard; }
+        modify("VAT Prod. Posting Group") { Importance = Standard; }
+        modify("Profit %") { Importance = Standard; }
+        modify("Sales Unit of Measure") { Importance = Standard; ShowMandatory = true; }
+        modify("Vendor No.") { Importance = Promoted; }
+        modify("Vendor Item No.") { Importance = Standard; }
+        modify("Purch. Unit of Measure") { Importance = Standard; ShowMandatory = true; }
+        modify("Tariff No.") { ShowMandatory = true; }
+        modify("Reordering Policy") { ShowMandatory = true; }
+        modify("Reorder Point") { ShowMandatory = true; }
+        modify("Reorder Quantity") { ShowMandatory = true; }
+        modify("Lead Time Calculation") { ShowMandatory = true; }
         addlast(Item) //! User Control for the large notes field...
         {
             // field("Item Notes"; Rec."Item Notes")
@@ -169,37 +137,22 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 ToolTip = 'View the list of vendors who can supply the item, and at which lead time.';
             }
         }
-        modify("BOM Level")
-        {
-            CaptionML = ENG = 'BOM Availability';
-        }
+        modify("BOM Level") { CaptionML = ENG = 'BOM Availability'; }
         addlast(Category_Process)
         {
-            actionref(ItemJournal_Omicron; "Item Journal")
-            { }
-            actionref(ItemLedger; "Ledger E&ntries")
-            { }
-            actionref(Substitutions; "Substituti&ons")
-            { }
-            actionref(ExtendedTexts; "E&xtended Texts")
-            { }
-            actionref(VendorCatalogue; ItemsFromVendors)
-            { }
-            actionref(BOMAvailability; "BOM Level")
-            { }
-            actionref(WhereUsed; "Where-Used")
-            { }
-            actionref(NewSalesOrder_Promoted; NewSalesOrder)
-            { }
+            actionref(ItemJournal_Omicron; "Item Journal") { }
+            actionref(ItemLedger; "Ledger E&ntries") { }
+            actionref(Substitutions; "Substituti&ons") { }
+            actionref(ExtendedTexts; "E&xtended Texts") { }
+            actionref(VendorCatalogue; ItemsFromVendors) { }
+            actionref(BOMAvailability; "BOM Level") { }
+            actionref(WhereUsed; "Where-Used") { }
+            actionref(NewSalesOrder_Promoted; NewSalesOrder) { }
         }
-        modify(AdjustInventory_Promoted)
-        { Visible = false; }
-        modify(AdjustInventory)
-        { Visible = false; }
-        modify("&Create Stockkeeping Unit_Promoted")
-        { Visible = false; }
-        modify(ApplyTemplate_Promoted)
-        { Visible = false; }
+        modify(AdjustInventory_Promoted) { Visible = false; }
+        modify(AdjustInventory) { Visible = false; }
+        modify("&Create Stockkeeping Unit_Promoted") { Visible = false; }
+        modify(ApplyTemplate_Promoted) { Visible = false; }
     }
     trigger OnOpenPage();
     begin

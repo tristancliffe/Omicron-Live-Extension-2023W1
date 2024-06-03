@@ -2,7 +2,6 @@ tableextension 50118 BankStatementTableExt extends "Bank Account Statement"
 {
     keys
     {
-        key(StatementDate; "Statement Date")
-        { }
+        key(StatementDate; "Statement Date") { }
     }
 }

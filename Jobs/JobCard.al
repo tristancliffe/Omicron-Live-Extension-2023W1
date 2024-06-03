@@ -5,10 +5,8 @@ pageextension 50111 JobCardExt extends "Job Card"
         modify(Description) { ShowMandatory = true; }
         addafter(Description)
         {
-            field("Car Make/Model"; Rec."Car Make/Model")
-            { MultiLine = false; ApplicationArea = All; ShowMandatory = true; }
-            field("Project Notes"; Rec."Job Notes")
-            { MultiLine = true; ApplicationArea = All; QuickEntry = false; }
+            field("Car Make/Model"; Rec."Car Make/Model") { MultiLine = false; ApplicationArea = All; ShowMandatory = true; }
+            field("Project Notes"; Rec."Job Notes") { MultiLine = true; ApplicationArea = All; QuickEntry = false; }
         }
         modify(Status)
         {

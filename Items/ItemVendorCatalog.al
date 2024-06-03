@@ -2,10 +2,8 @@ pageextension 50172 "ItemVendorCatalogExt" extends "Item Vendor Catalog"
 {
     layout
     {
-        modify("Item No.")
-        { Visible = true; }
-        modify("Variant Code")
-        { Visible = false; }
+        modify("Item No.") { Visible = true; }
+        modify("Variant Code") { Visible = false; }
         addafter("Item No.")
         {
             field(ItemDescription; Rec.ItemDescription)
