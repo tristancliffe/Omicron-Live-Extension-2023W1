@@ -254,14 +254,14 @@ pageextension 50114 JobJournalExt extends "Job Journal"
 
     local procedure SetOutOfStockStyle(): Text
     begin
-        if (Rec.Instock_JobJournalLine = 0) or (Rec.Instock_JobJournalLine < Rec.Quantity) then
+        if (Rec.Type = rec.type::Item) and ((Rec.Instock_JobJournalLine = 0) or (Rec.Instock_JobJournalLine < Rec.Quantity)) then
             exit('Unfavorable');
         exit('');
     end;
 
     local procedure SetInsufficientStockStyle(): Text
     begin
-        if Rec.Quantity > Rec.Instock_JobJournalLine then
+        if (Rec.Type = rec.type::Item) and (Rec.Quantity > Rec.Instock_JobJournalLine) then
             exit('Unfavorable');
         exit('');
     end;

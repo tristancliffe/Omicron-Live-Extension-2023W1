@@ -93,11 +93,11 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
 
     procedure PercentCompletedCalc(): Text
     begin
-        if (Rec."Schedule (Total Cost)" = 0) or (Rec."Usage (Total Cost)" = 0) then
+        if (Rec."Schedule (Total Price)" = 0) or (Rec."Usage (Total Price)" = 0) then
             PercentCompleted := 0
         else
-            PercentCompleted := 100 * Rec."Usage (Total Cost)" / rec."Schedule (Total Cost)";
-        if PercentCompleted > 90 then
+            PercentCompleted := 100 * Rec."Usage (Total Price)" / rec."Schedule (Total Price)";
+        if PercentCompleted > 95 then
             exit('Unfavorable');
         exit('');
     end;
