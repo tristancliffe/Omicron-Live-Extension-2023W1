@@ -67,6 +67,12 @@ codeunit 50200 "Table Page Events"
         JobPlanningLine."Work Done" := JobLedgEntry."Work Done";
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Time Sheet Approval Management", OnBeforeInsertEmployeeAbsence, '', false, false)]
+    local procedure OnBeforeInsertEmployeeAbsence(TimeSheetLine: Record "Time Sheet Line"; var EmployeeAbsence: Record "Employee Absence")
+    begin
+        EmployeeAbsence."Work Done" := TimeSheetLine."Work Done";
+    end;
+
     var
         JJPLine: Codeunit "Job Jnl.-Post Line";
 }

@@ -47,5 +47,11 @@ tableextension 50200 "Time Sheet Line Ext" extends "Time Sheet Line"
         { Caption = 'Project Task'; }
         field(50100; "Work Done"; Text[700])
         { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; }
+        field(50101; "Resource No."; Code[20])
+        {
+            Caption = 'Resource Name';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Time Sheet Header"."Resource No." where("No." = field("Time Sheet No.")));
+        }
     }
 }

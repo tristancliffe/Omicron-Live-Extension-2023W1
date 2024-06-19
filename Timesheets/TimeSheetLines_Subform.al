@@ -6,6 +6,14 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
     {
         modify(Type) { AboutTitle = 'Type'; AboutText = 'Use **Project** or **Absence**. Don''t worry about Resource, Service or Assembly Order.'; }
         modify(Status) { StyleExpr = StatusStyle; AboutTitle = 'Status'; AboutText = 'Open lines can be edited, but MUST be submitted when you''re finished. Submitted lines can be reopened until they are approved. Approved lines can be unapproved for editing unless they have been posted.'; }
+        addbefore(Type)
+        {
+            field("Resource No."; Rec."Resource No.")
+            {
+                ApplicationArea = Jobs;
+                Visible = false;
+            }
+        }
         addafter(Description)
         {
             field("Work Done"; Rec."Work Done")
