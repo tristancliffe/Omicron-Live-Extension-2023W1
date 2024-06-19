@@ -39,26 +39,9 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         }
         modify("Item Reference No.")
         { Visible = false; }
-        addafter("Qty. Assigned")
-        {
-            field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
-            { ApplicationArea = All; style = Ambiguous; }
-            field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            { ApplicationArea = All; style = AttentionAccent; }
-            // field("Job No.1"; Rec."Job No.")
-            // {
-            //     ApplicationArea = All;
-            //     Width = 8;
-            //     trigger OnValidate()
-            //     begin
-            //         Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-            //         Rec.Modify();
-            //         //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
-            //     end;
-            // }
-            // field("Job Task No.1"; Rec."Job Task No.")
-            // { ApplicationArea = All; }
-        }
+        moveafter("Qty. Assigned"; "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "VAT Bus. Posting Group", "VAT Prod. Posting Group")
+        modify("Gen. Prod. Posting Group") { Style = Ambiguous; }
+        modify("VAT Prod. Posting Group") { Style = AttentionAccent; }
         modify("Unit Price")
         {
             trigger OnAfterValidate()
@@ -67,6 +50,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 CheckProfit();
             end;
         }
+        moveafter("Line Discount %"; "Line Discount Amount")
+        modify("Line Discount Amount") { Visible = true; }
         moveafter("Qty. Assigned"; "Unit Cost (LCY)")
         modify("Unit Cost (LCY)")
         {
@@ -130,6 +115,20 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     {
         addlast(processing)
         {
+            action(SummaryPage)
+            {
+                ApplicationArea = All;
+                Caption = 'Summary';
+                Image = CoupledSalesInvoice;
+                RunObject = page "SalesOrderLineSummary";
+                RunPageOnRec = true;
+                RunPageView = sorting("Document Type", "Document No.", "Line No.");
+                // RunPageLink = "No." = field("No.");
+                Description = 'View a summary of this line';
+                ToolTip = 'Opens the summary card for this line';
+                Scope = Repeater;
+                Visible = true;
+            }
             action(ItemCardLink)
             {
                 ApplicationArea = All;

@@ -47,40 +47,67 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         }
         modify("Item Reference No.")
         { Visible = false; }
-        addafter("Expected Receipt Date")
+        modify("Promised Receipt Date") { Visible = false; }
+        moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group", "VAT Prod. Posting Group", "Job No.", "Job Task No.", "Job Line Type", "Job Unit Price", "Job Line Amount (LCY)")
+        modify("VAT Prod. Posting Group") { Visible = true; Style = AttentionAccent; }
+        modify("Job No.")
         {
-            field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
-            { ApplicationArea = All; style = AttentionAccent; }
-            field("Job No.1"; Rec."Job No.")
-            {
-                ApplicationArea = All;
-                Width = 8;
-                trigger OnValidate()
-                begin
-                    Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    // Rec.Modify();
-                    JobPriceMandatory := true;
-                    if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
-                        message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
-                    //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
-                end;
-            }
-            field("Job Task No.1"; Rec."Job Task No.")
-            {
-                ApplicationArea = All;
-                ShowMandatory = JobPriceMandatory;
-                trigger OnValidate()
-                begin
-                    Rec.Validate("Job Line Type", Rec."Job Line Type"::Billable)
-                end;
-            }
-            field("Job Line Type2"; Rec."Job Line Type")
-            { ApplicationArea = All; ShowMandatory = true; }
-            field("Job Unit Price2"; Rec."Job Unit Price")
-            { ApplicationArea = All; Width = 8; ShowMandatory = JobPriceMandatory; }
-            field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
-            { ApplicationArea = All; }
+            Width = 8;
+            Visible = True;
+            trigger OnAfterValidate()
+            begin
+                Rec.ValidateShortcutDimCode(3, Rec."Job No.");
+                JobPriceMandatory := true;
+                if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
+                    message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
+            end;
         }
+        modify("Job Task No.")
+        {
+            ShowMandatory = JobPriceMandatory;
+            Visible = True;
+            trigger OnAfterValidate()
+            begin
+                Rec.Validate("Job Line Type", Rec."Job Line Type"::Billable)
+            end;
+        }
+        modify("Job Line Type") { ShowMandatory = true; Visible = True; }
+        modify("Job Unit Price") { Visible = True; }
+        modify("Job Line Amount") { Width = 8; ShowMandatory = JobPriceMandatory; Visible = True; }
+        // addafter("Expected Receipt Date")
+        // {
+        //     field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
+        //     { ApplicationArea = All; style = AttentionAccent; }
+        //     field("Job No.1"; Rec."Job No.")
+        //     {
+        //         ApplicationArea = All;
+        //         Width = 8;
+        //         trigger OnValidate()
+        //         begin
+        //             Rec.ValidateShortcutDimCode(3, Rec."Job No.");
+        //             // Rec.Modify();
+        //             JobPriceMandatory := true;
+        //             if (Rec.Type = Rec.Type::"G/L Account") and (Rec."No." <> '1115') then
+        //                 message('Using this G/L Account will probably result in the job invoice line not posting to a sales account. \Consider using ''Item: Job-Purchases'' instead.')
+        //             //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
+        //         end;
+        //     }
+        //     field("Job Task No.1"; Rec."Job Task No.")
+        //     {
+        //         ApplicationArea = All;
+        //         ShowMandatory = JobPriceMandatory;
+        //         trigger OnValidate()
+        //         begin
+        //             Rec.Validate("Job Line Type", Rec."Job Line Type"::Billable)
+        //         end;
+        //     }
+        //     field("Job Line Type2"; Rec."Job Line Type")
+        //     { ApplicationArea = All; ShowMandatory = true; }
+        //     field("Job Unit Price2"; Rec."Job Unit Price")
+        //     { ApplicationArea = All; Width = 8; ShowMandatory = JobPriceMandatory; }
+        //     field("Job Line Amount (LCY)2"; Rec."Job Line Amount (LCY)")
+        //     { ApplicationArea = All; }
+        // }
         moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group")
         moveafter("Direct Unit Cost"; "Unit Cost (LCY)", "Unit Price (LCY)", "Line Discount Amount", "Line Discount %")
         modify("Gen. Prod. Posting Group")
@@ -150,6 +177,20 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
     {
         addlast(processing)
         {
+            action(SummaryPage)
+            {
+                ApplicationArea = All;
+                Caption = 'Summary';
+                Image = PurchaseCreditMemo;
+                RunObject = page "PurchaseOrderLineSummary";
+                RunPageOnRec = true;
+                RunPageView = sorting("Document Type", "Document No.", "Line No.");
+                // RunPageLink = "No." = field("No.");
+                Description = 'View a summary of this line';
+                ToolTip = 'Opens the summary card for this line';
+                Scope = Repeater;
+                Visible = true;
+            }
             action(ItemCardLink)
             {
                 ApplicationArea = All;
