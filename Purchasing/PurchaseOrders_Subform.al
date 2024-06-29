@@ -48,7 +48,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         modify("Item Reference No.")
         { Visible = false; }
         modify("Promised Receipt Date") { Visible = false; }
-        moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group", "VAT Prod. Posting Group", "Job No.", "Job Task No.", "Job Line Type", "Job Unit Price", "Job Line Amount (LCY)")
+        moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group", "VAT Prod. Posting Group", "Job No.", "Job Task No.", "Job Line Type", "Job Unit Price", "Job Line Amount", "Job Line Amount (LCY)")
         modify("VAT Prod. Posting Group") { Visible = true; Style = AttentionAccent; }
         modify("Job No.")
         {
@@ -73,7 +73,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         }
         modify("Job Line Type") { ShowMandatory = true; Visible = True; }
         modify("Job Unit Price") { Visible = True; }
-        modify("Job Line Amount") { Width = 8; ShowMandatory = JobPriceMandatory; Visible = True; }
+        modify("Job Line Amount (LCY)") { Width = 8; ShowMandatory = JobPriceMandatory; Visible = True; }
         // addafter("Expected Receipt Date")
         // {
         //     field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")

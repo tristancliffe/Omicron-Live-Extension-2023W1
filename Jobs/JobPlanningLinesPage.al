@@ -75,8 +75,18 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
     }
     actions
     {
+        modify("&Open Job Journal") { Visible = false; }
         addlast("F&unctions")
         {
+            action(JobJournal)
+            {
+                Caption = 'Project Journal';
+                Image = JobJournal;
+                ApplicationArea = All;
+                RunObject = Page "Job Journal";
+                ToolTip = 'Opens the project journal';
+                Visible = true;
+            }
             action(CopyPurchaseLinestoSalesLines)
             {
                 Caption = 'Changes Purchases to Sales';
@@ -115,29 +125,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                             end;
                         until Line.Next = 0;
                 end;
-
-                // trigger OnAction()
-                // var
-                //     Line: Record "Job Planning Line";
-                //     NewLine: Record "Job Planning Line";
-                // begin
-                //     Line.SetRange("Job No.", Line."Job No.");
-                //     while Line.Next() <> 0 do begin
-                //         if (Line.Type = Line.Type::"G/L Account") and (Line."No." > '2000') then begin
-                //             NewLine.Reset();
-                //             NewLine."Job No." := Line."Job No.";
-                //             NewLine."Type" := Line.Type;
-                //             NewLine."No." := '1115';
-                //             NewLine.Insert();
-                //             Line.Delete();
-                //             MESSAGE('Successfully deleted original record with Job No. %1 and No. %2 and inserted new record with Job No. %3 and No. %4', Line."Job No.", Line."No.", NewLine."Job No.", NewLine."No.");
-                //         end;
-                //     end;
-                // end;
             }
-        }
-        addlast("F&unctions")
-        {
             action(ItemCardLink)
             {
                 ApplicationArea = All;
@@ -153,11 +141,6 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 Visible = true;
                 Enabled = Rec.Type = Rec.Type::Item;
             }
-        }
-        // modify("Create &Sales Invoice")
-        // { Caption = 'Line to Sales Order'; }
-        addlast("F&unctions")
-        {
             action(CreateSalesInvoice)
             {
                 Caption = 'Create Job Sales Invoice';
