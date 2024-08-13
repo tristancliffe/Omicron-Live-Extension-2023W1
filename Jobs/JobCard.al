@@ -6,7 +6,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         addafter(Description)
         {
             field("Car Make/Model"; Rec."Car Make/Model") { MultiLine = false; ApplicationArea = All; ShowMandatory = true; }
-            field("Project Notes"; Rec."Job Notes") { MultiLine = true; ApplicationArea = All; QuickEntry = false; }
+            field("Project Notes"; Rec."Job Notes") { MultiLine = true; ApplicationArea = All; QuickEntry = false; InstructionalText = 'Summary of job tasks required...'; }
         }
         modify(Status)
         {
@@ -20,11 +20,11 @@ pageextension 50111 JobCardExt extends "Job Card"
         }
         addlast(General)
         {
-            field("Parts Location"; Rec."Parts Location") { ApplicationArea = All; ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc'; }
-            field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; }
-            field("Chassis No."; Rec.ChassisNo) { ApplicationArea = All; ToolTip = 'Chassis number, if known'; ShowMandatory = true; }
-            field("Engine No."; Rec.EngineNo) { ApplicationArea = All; ToolTip = 'Engine number, if known'; ShowMandatory = true; }
-            field(Mileage; Rec.Mileage) { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; }
+            field("Parts Location"; Rec."Parts Location") { ApplicationArea = All; ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc'; InstructionalText = 'Shelf Code'; }
+            field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; InstructionalText = 'Reg. No.'; }
+            field("Chassis No."; Rec.ChassisNo) { ApplicationArea = All; ToolTip = 'Chassis number, if known'; ShowMandatory = true; InstructionalText = 'Chassis No.'; }
+            field("Engine No."; Rec.EngineNo) { ApplicationArea = All; ToolTip = 'Engine number, if known'; ShowMandatory = true; InstructionalText = 'Engine No.'; }
+            field(Mileage; Rec.Mileage) { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; InstructionalText = 'Mileage with units'; }
             field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
             field("Customer Balance"; Rec."Customer Balance") { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
         }

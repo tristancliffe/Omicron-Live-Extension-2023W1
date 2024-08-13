@@ -4,9 +4,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
     AboutText = 'Use this section to enter the times for each day...';
     layout
     {
-        modify(Type) { AboutTitle = 'Type'; AboutText = 'Use **Project** or **Absence**. Don''t worry about Resource, Service or Assembly Order.'; }
+        modify(Control1) { FreezeColumn = "Resource No."; }
+        modify(Type) { AboutTitle = 'Type'; Width = 6; AboutText = 'Use **Project** or **Absence**. Don''t worry about Resource, Service or Assembly Order.'; }
         modify(Status) { StyleExpr = StatusStyle; AboutTitle = 'Status'; AboutText = 'Open lines can be edited, but MUST be submitted when you''re finished. Submitted lines can be reopened until they are approved. Approved lines can be unapproved for editing unless they have been posted.'; }
-        addbefore(Type)
+
+        movefirst(Control1; Status, Type, "Job No.", "Job Task No.")
+        addfirst(Control1)
         {
             field("Resource No."; Rec."Resource No.")
             {
@@ -57,14 +60,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             //     Rec.Modify();
             // end;
         }
-        moveafter(Status; "Job No.", "Job Task No.")
         moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
         modify("Work Type Code") { Visible = false; }
         modify(Chargeable) { Visible = Device; }
         modify("Cause of Absence Code") { Visible = true; ShowMandatory = AbsenceStyle; AboutTitle = 'Absences'; AboutText = 'Use this, and NOT Admin to record time off work, including bank holidays, sickness, approved holiday etc.'; }
         modify(UnitOfMeasureCode) { QuickEntry = false; }
         modify(TimeSheetTotalQuantity) { QuickEntry = false; }
-
     }
     actions
     {

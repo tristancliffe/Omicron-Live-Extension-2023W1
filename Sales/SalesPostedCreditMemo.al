@@ -8,5 +8,6 @@ pageextension 50216 PostedSalesCreditMemoExt extends "Posted Sales Credit Memo"
             { ApplicationArea = All; }
         }
         moveafter("Sell-to Customer Name"; "Your Reference")
+        modify("Your Reference") { Visible = true; }
     }
 }

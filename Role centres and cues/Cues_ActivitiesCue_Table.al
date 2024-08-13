@@ -47,6 +47,24 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             Caption = 'Ongoing Sales Credit Memo';
             FieldClass = FlowField;
         }
+        field(50106; ItemsOnShopify; Integer)
+        {
+            Caption = 'Items On Shopify Shop';
+            FieldClass = FlowField;
+            CalcFormula = count("Shpfy Variant" where("Mapped By Item" = filter(true)));
+        }
+        // field(50107; "No. of Items"; Integer)
+        // {
+        //     Caption = 'No. of Active Items';
+        //     FieldClass = FlowField;
+        //     CalcFormula = count(Item where(Blocked = filter(false)));
+        // }
+        // field(50108; "No. of Items in Stock"; Integer)
+        // {
+        //     Caption = 'No. of Stocked Active Items';
+        //     FieldClass = FlowField;
+        //     CalcFormula = count(Item where(Blocked = filter(false), Inventory = filter('>0')));
+        // }
     }
 }
 

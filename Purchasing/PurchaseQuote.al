@@ -6,21 +6,11 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
         addafter("Buy-from Vendor Name")
         {
-            field("Your Reference"; Rec."Your Reference")
-            {
-                ApplicationArea = All;
-                QuickEntry = true;
-            }
+            field("Your Reference"; Rec."Your Reference") { ApplicationArea = All; QuickEntry = true; InstructionalText = 'What the order is for...'; }
         }
         addafter(Status)
         {
-            field("Order Notes"; Rec."Order Notes")
-            {
-                ApplicationArea = All;
-                QuickEntry = false;
-                Importance = Standard;
-                MultiLine = true;
-            }
+            field("Order Notes"; Rec."Order Notes") { ApplicationArea = All; QuickEntry = false; Importance = Standard; MultiLine = true; InstructionalText = 'Notes about this order...'; }
         }
         addafter("Buy-from")
         {
@@ -40,57 +30,30 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
                     RecVendor.Modify()
                 end;
             }
-            field("Preferred Payment Method"; PaymentMethod)
-            {
-                ApplicationArea = All;
-                Caption = 'Preferred Payment Method';
-                ToolTip = 'Pulled from Vendor card';
-                Editable = false;
-                Style = Strong;
-            }
+            field("Preferred Payment Method"; PaymentMethod) { ApplicationArea = All; Caption = 'Preferred Payment Method'; ToolTip = 'Pulled from Vendor card'; Editable = false; Style = Strong; }
         }
-        modify("Document Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
-        modify("Due Date")
-        {
-            Visible = true;
-            Importance = Standard;
-        }
-        modify("Buy-from Vendor No.")
-        { Importance = Standard; }
-        modify("Assigned User ID")
-        { Importance = Standard; }
-        modify("Vendor Order No.")
-        { Importance = Standard; }
-        modify("Payment Method Code")
-        { Importance = Promoted; }
-        modify(BuyFromContactPhoneNo)
-        { Importance = Standard; }
-        modify(BuyFromContactMobilePhoneNo)
-        { Importance = Standard; }
-        modify(BuyFromContactEmail)
-        { Importance = Standard; }
-        modify("Currency Code")
-        { Importance = Standard; }
+        modify("Document Date") { Visible = true; Importance = Standard; }
+        modify("Due Date") { Visible = true; Importance = Standard; }
+        modify("Buy-from Vendor No.") { Importance = Standard; }
+        modify("Assigned User ID") { Importance = Standard; }
+        modify("Vendor Order No.") { Importance = Standard; }
+        modify("Payment Method Code") { Importance = Promoted; }
+        modify(BuyFromContactPhoneNo) { Importance = Standard; }
+        modify(BuyFromContactMobilePhoneNo) { Importance = Standard; }
+        modify(BuyFromContactEmail) { Importance = Standard; }
+        modify("Currency Code") { Importance = Standard; }
         movebefore(Control1904651607; Control5)
         moveafter(Status; "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
-        modify("Foreign Trade")
-        { Visible = false; }
+        modify("Foreign Trade") { Visible = false; }
     }
     actions
     {
         addlast(Category_Process)
         {
-            actionref(VendorCard; Vendor)
-            { }
+            actionref(VendorCard; Vendor) { }
         }
-        modify(Release)
-        { Enabled = ReleaseControllerStatus; }
-        modify(Reopen)
-        { Enabled = ReopenControllerStatus; }
+        modify(Release) { Enabled = ReleaseControllerStatus; }
+        modify(Reopen) { Enabled = ReopenControllerStatus; }
     }
 
     var

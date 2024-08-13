@@ -5,6 +5,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     {
         modify("No.")
         {
+            StyleExpr = LineStatusStyle;
+
             trigger OnAfterValidate()
             begin
                 GetInventory();
@@ -12,16 +14,13 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 AssemblyWarning();
             end;
         }
-        modify("Substitution Available")
-        { Visible = true; }
-        modify(Description)
-        { QuickEntry = true; StyleExpr = CommentStyle; }
-        modify(Quantity)
-        { style = Strong; }
-        Modify("Qty. to Assign")
-        { QuickEntry = true; }
-        Modify("Item Charge Qty. to Handle")
-        { QuickEntry = true; }
+        modify("Substitution Available") { Visible = true; }
+        modify(Description) { QuickEntry = true; StyleExpr = CommentStyle; }
+        modify(Quantity) { StyleExpr = QuantityStyle; }
+        Modify("Qty. to Assign") { QuickEntry = true; }
+        Modify("Item Charge Qty. to Handle") { QuickEntry = true; }
+        modify("Unit of Measure Code") { StyleExpr = LineStatusStyle; }
+        modify("Location Code") { StyleExpr = LineStatusStyle; }
         addafter("Unit of Measure Code")
         {
             field(Instock_SalesLine; rec.Instock_SalesLine)
@@ -36,6 +35,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 Width = 5;
                 DecimalPlaces = 0 : 2;
             }
+            // field(AvailabletoMake; AvailableToMake)
+            // { ApplicationArea = All; DecimalPlaces = 0 : 2; }
         }
         modify("Item Reference No.")
         { Visible = false; }
@@ -44,6 +45,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         modify("VAT Prod. Posting Group") { Style = AttentionAccent; }
         modify("Unit Price")
         {
+            StyleExpr = LineStatusStyle;
+
             trigger OnAfterValidate()
             begin
                 GetInventory();
@@ -51,7 +54,9 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             end;
         }
         moveafter("Line Discount %"; "Line Discount Amount")
-        modify("Line Discount Amount") { Visible = true; }
+        modify("Line Discount Amount") { Visible = true; StyleExpr = LineStatusStyle; }
+        modify("Total Amount Excl. VAT") { StyleExpr = LineStatusStyle; }
+
         moveafter("Qty. Assigned"; "Unit Cost (LCY)")
         modify("Unit Cost (LCY)")
         {
@@ -63,12 +68,12 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         addafter("Line Amount")
         {
             field("Amount Including VAT"; Rec."Amount Including VAT")
-            { ApplicationArea = All; Visible = true; Editable = false; }
+            { ApplicationArea = All; Visible = true; Editable = false; StyleExpr = LineStatusStyle; }
         }
         addafter("Unit Cost (LCY)")
         {
             field("Line Profit"; Rec."Line Amount" - (Rec.Quantity * Rec."Unit Cost (LCY)"))
-            { ApplicationArea = all; Editable = false; Caption = 'Line Profit'; ToolTip = 'The amount of profit, including customer discount but not invoice discount, on this line compared to the displayed cost'; }
+            { ApplicationArea = all; Editable = false; Caption = 'Line Profit'; StyleExpr = LineStatusStyle; ToolTip = 'The amount of profit, including customer discount but not invoice discount, on this line compared to the displayed cost'; }
         }
         modify("Planned Shipment Date")
         { QuickEntry = false; }
@@ -224,12 +229,73 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
 
     var
         ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        IsOpenOrder: Boolean;
+        CommentStyle: Text;
+        LineStatusStyle: Text;
+        QuantityStyle: Text;
+        Item: Record Item;
+        AvailableToMake: Decimal;
 
     trigger OnAfterGetRecord()
     begin
         GetInventory;
         CommentStyle := SetCommentStyle();
+        LineStatusStyle := SetLineStatusStyle();
+        QuantityStyle := SetQuantityStyle();
+        //CalcBOM();
     end;
+
+    // local procedure CalcBOM()
+    // var
+    //     CalcBOMTree: Codeunit "Calculate BOM Tree";
+    //     BOMBuffer: Record "BOM Buffer" temporary;
+    //     IsHandled: Boolean;
+    //     Item: Record Item;
+    //     ShowTotalAvailability: Boolean;
+    //     ShowBy: Enum "BOM Structure Show By";
+    //     ProdOrderLine: Record "Prod. Order Line";
+    //     AsmHeader: Record "Assembly Header";
+    //     IsCalculated: Boolean;
+    //     Text000: Label 'Could not find items with BOM levels.';
+    //     Text001: Label 'There are no warnings.';
+    // begin
+    //     Item.SetRange("Date Filter", 0D, Today);
+    //     Item.SetFilter("Location Filter", 'STORES');
+    //     Item.SetFilter("No.", Rec."No.");
+    //     CalcBOMTree.SetItemFilter(Item);
+
+    //     CalcBOMTree.SetShowTotalAvailability(true);
+    //     case ShowBy of
+    //         ShowBy::Item:
+    //             begin
+    //                 Item.FindFirst();
+    //                 IsHandled := false;
+    //                 OnRefreshPageOnBeforeCheckItemHasBOM(Item, IsHandled);
+    //                 if not IsHandled then
+    //                     if not Item.HasBOM() then
+    //                         exit;
+    //                 CalcBOMTree.GenerateTreeForItems(Item, BOMBuffer, 1);
+    //             end;
+    //         ShowBy::Production:
+    //             begin
+    //                 ProdOrderLine."Due Date" := Today;
+    //                 CalcBOMTree.GenerateTreeForProdLine(ProdOrderLine, BOMBuffer, 1);
+    //             end;
+    //         ShowBy::Assembly:
+    //             begin
+    //                 AsmHeader."Due Date" := Today;
+    //                 CalcBOMTree.GenerateTreeForAsm(AsmHeader, BOMBuffer, 1);
+    //             end;
+    //     end;
+    //     IsCalculated := true;
+    //     message('%1 - %2 - %3 - %4 - %5', Rec."No.", BOMBuffer."No.", BOMBuffer."Able to Make Top Item", BOMBuffer."Replenishment System", BOMBuffer."Able to Make Parent");
+    //     AvailableToMake := BOMBuffer."Able to Make Top Item";
+    // end;
+
+    // [IntegrationEvent(false, false)]
+    // local procedure OnRefreshPageOnBeforeCheckItemHasBOM(var Item: Record Item; var IsHandled: Boolean)
+    // begin
+    // end;
 
     local procedure GetInventory()
     var
@@ -272,10 +338,6 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         end
     end;
 
-    var
-        IsOpenOrder: Boolean;
-        CommentStyle: Text;
-
     trigger OnOpenPage()
     var
         Order: Record "Sales Header";
@@ -287,7 +349,20 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     procedure SetCommentStyle(): Text
     begin
         If Rec.Type = Rec.Type::" " then
-            exit('Strong');
-        exit('');
+            exit('Strong')
+        else if Rec."Qty. to Ship" = 0 then
+            exit('Subordinate')
+        else
+            exit('');
+    end;
+
+    procedure SetLineStatusStyle(): Text
+    begin
+        If Rec."Qty. to Ship" = 0 then exit('Subordinate') else exit('');
+    end;
+
+    procedure SetQuantityStyle(): Text
+    begin
+        If Rec."Qty. to Ship" = 0 then exit('Subordinate') else exit('Strong');
     end;
 }

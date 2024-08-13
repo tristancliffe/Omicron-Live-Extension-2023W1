@@ -26,11 +26,20 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
                     SubmitLines();
                 end;
             }
+            field("Dropbox Link"; "Dropbox Link")
+            {
+                ApplicationArea = All;
+                Caption = 'Image Uploads:';
+                ShowCaption = true;
+                Editable = false;
+                Style = Strong;
+            }
             label(BlankLabel)
             {
                 ApplicationArea = Basic, Suite;
                 ShowCaption = false;
                 Caption = ' ';
+                Visible = false;
             }
             field(Reminder; Reminder)
             {
@@ -138,7 +147,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
             Device := false
         else
             Device := true;
-        "Dropbox Link" := 'https://bit.ly/omicronltd';
+        "Dropbox Link" := 'bit.ly/omicronltd';
         Reminder := 'Don''t forget to SUBMIT timesheets regularly. \Keep STOCK CARDS up to date. Upload PICTURES.';
     end;
 

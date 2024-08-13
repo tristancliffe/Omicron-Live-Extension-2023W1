@@ -3,38 +3,26 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
     layout
     {
         moveafter(Description; "Due Date", "Remaining Amount", "Remaining Amt. (LCY)", "Payment Method Code", "Original Amount", "Amount (LCY)", "User ID", RunningBalanceLCY)
-        modify("User ID")
-        { Visible = true; ApplicationArea = All; }
-        modify("Pmt. Discount Date")
-        { Visible = false; }
-        modify("Pmt. Disc. Tolerance Date")
-        { Visible = false; }
-        modify("Original Pmt. Disc. Possible")
-        { Visible = false; }
-        modify("Remaining Pmt. Disc. Possible")
-        { Visible = false; }
-        modify("Max. Payment Tolerance")
-        { Visible = false; }
-        modify("Exported to Payment File")
-        { Visible = false; }
-        modify("Payment Method Code")
-        { Visible = true; }
+        modify("User ID") { Visible = true; ApplicationArea = All; }
+        modify("Pmt. Discount Date") { Visible = false; }
+        modify("Pmt. Disc. Tolerance Date") { Visible = false; }
+        modify("Original Pmt. Disc. Possible") { Visible = false; }
+        modify("Remaining Pmt. Disc. Possible") { Visible = false; }
+        modify("Max. Payment Tolerance") { Visible = false; }
+        modify("Exported to Payment File") { Visible = false; }
+        modify("Payment Method Code") { Visible = true; }
         addafter("Due Date")
         {
-            field(VendorPriority; Priority)
-            { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = true; Editable = false; }
+            field(VendorPriority; Priority) { ApplicationArea = All; Caption = 'Priority'; ToolTip = 'Vendor payment priority'; BlankZero = true; Editable = false; }
         }
-        modify("Vendor Name")
-        { StyleExpr = TypeStyle; }
-        modify(Description)
-        { StyleExpr = TypeStyle; }
+        modify("Vendor Name") { StyleExpr = TypeStyle; }
+        modify(Description) { StyleExpr = TypeStyle; }
         moveafter("Document Type"; Reversed)
-        modify(Reversed)
-        { Visible = true; }
-        modify("Document No.")
-        { Visible = false; }
-        modify(RunningBalanceLCY)
-        { Visible = true; }
+        modify(Reversed) { Visible = true; }
+        modify("Document No.") { Visible = false; }
+        modify(RunningBalanceLCY) { Visible = true; }
+        moveafter("Entry No."; "Message to Recipient")
+        modify("Message to Recipient") { Visible = true; }
     }
     actions
     {

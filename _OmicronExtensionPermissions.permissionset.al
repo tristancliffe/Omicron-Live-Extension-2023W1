@@ -32,5 +32,7 @@ permissionset 50100 OmicronPermissions
         report "Item Prices" = X,
         page "Item Vendor List Factbox" = X,
         page "Job Journal Factbox" = X,
-        codeunit "Shpfy Order Line Dim" = X;
+        codeunit "Shpfy Order Line Dim" = X,
+        page PurchaseOrderLineSummary = X,
+        page SalesOrderLineSummary = X;
 }

@@ -23,6 +23,16 @@ pageextension 50199 PaymentJournalExt extends "Payment Journal"
         { Visible = false; }
         modify("Remit-to Code")
         { Visible = false; }
+        addafter("Number of Lines")
+        {
+            group("Sum of Lines")
+            {
+                Caption = 'Sum of Lines';
+                field(SumOfLines; Rec.SumOfLines)
+                { ApplicationArea = All; Visible = true; ShowCaption = false; Editable = false; ToolTip = 'Total Amount (LCY) of the lines in the current journal batch.'; AutoFormatType = 1; }
+            }
+
+        }
     }
     actions
     {

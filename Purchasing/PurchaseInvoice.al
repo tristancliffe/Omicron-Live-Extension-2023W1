@@ -5,7 +5,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
         addafter("Buy-from Vendor Name")
         {
-            field("Your Reference"; Rec."Your Reference") { ApplicationArea = All; QuickEntry = true; }
+            field("Your Reference"; Rec."Your Reference") { ApplicationArea = All; QuickEntry = true; InstructionalText = 'What the order is for...'; }
         }
         addafter("Buy-from")
         {
@@ -43,6 +43,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 QuickEntry = false;
                 Importance = Standard;
                 MultiLine = true;
+                InstructionalText = 'Notes about this order...';
             }
         }
         moveafter("Your Reference"; Status, "Vendor Invoice No.", "Payment Method Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")

@@ -11,6 +11,20 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 Importance = Standard;
                 ShowMandatory = true;
                 MultiLine = true;
+                InstructionalText = 'Notes about this order...';
+            }
+            field("Balance Due"; "Balance Due")
+            {
+                ApplicationArea = All;
+                Caption = 'Balance Due (LCY)';
+                Tooltip = 'The balance owed. Positive amounts mean customer owes US, whereas negative numbers mean we owe THEM.';
+                Editable = False;
+                Importance = Standard;
+                Visible = ShowBalance;
+                trigger OnDrillDown()
+                begin
+                    RecCustomer.OpenCustomerLedgerEntries(true);
+                end;
             }
         }
         moveafter("Sell-to Customer Name"; "Your Reference", Status, "Shipping Advice", "Payment Method Code", "Shortcut Dimension 1 Code")
@@ -57,7 +71,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Sell-to County") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Post Code") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code") { Importance = Standard; QuickEntry = false; }
-        modify("Your Reference") { Importance = Standard; QuickEntry = true; ShowMandatory = true; }
+        modify("Your Reference") { Importance = Standard; QuickEntry = true; ShowMandatory = true; InstructionalText = 'e.g. AC TEL CC'; }
         modify(WorkDescription) { Importance = Additional; Visible = true; QuickEntry = false; }
         modify("External Document No.") { Importance = Standard; Visible = true; QuickEntry = false; }
         modify("Document Date") { Visible = true; Importance = Standard; QuickEntry = false; }
@@ -223,11 +237,13 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     var
         RecCustomer: Record Customer;
         CustomerNotes: Text[2000];
+        "Balance Due": Decimal;
         //MobileNo: Text[30];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
         ShowMapLbl: Label 'Show on Map';
+        ShowBalance: Boolean;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
@@ -252,6 +268,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             CustomerNotes := RecCustomer."Customer Notes";
             //MobileNo := RecCustomer."Mobile Phone No.";
         end;
+        GetBalance();
+        ShowBalance := RecCustomer."Balance Due (LCY)" <> 0;
         // if Rec."Posting Date" <> Today then begin
         //     Rec.Validate(Rec."Posting Date", Today);
         //     Rec.Modify();
@@ -266,6 +284,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             CustomerNotes := RecCustomer."Customer Notes";
             //MobileNo := RecCustomer."Mobile Phone No.";
         end;
+
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -282,5 +301,11 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     begin
         ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
         ReopenControllerStatus := Rec.Status = Rec.Status::Released;
+    end;
+
+    local procedure GetBalance()
+    begin
+        RecCustomer.CalcFields("Balance Due (LCY)");
+        "Balance Due" := RecCustomer."Balance Due (LCY)";
     end;
 }

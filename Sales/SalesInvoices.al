@@ -38,7 +38,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         modify("Sell-to County") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Post Code") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code") { Importance = Standard; QuickEntry = false; }
-        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; }
+        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; InstructionalText = 'e.g. AC TEL CC'; }
         modify(WorkDescription) { Importance = Additional; Visible = true; QuickEntry = false; }
         modify("Document Date") { Visible = true; Importance = Standard; }
         modify("Due Date") { Visible = true; Importance = Standard; }
@@ -65,6 +65,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 Importance = Standard;
                 ShowMandatory = true;
                 MultiLine = true;
+                InstructionalText = 'Notes about this order...';
             }
             field("Sell-to Phone No."; Rec."Sell-to Phone No.") { ApplicationArea = All; Importance = Standard; }
             field("Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }

@@ -66,6 +66,28 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 Visible = true;
                 Image = People;
             }
+            field(ItemsOnShopify; Rec.ItemsOnShopify)
+            {
+                ApplicationArea = All;
+                ToolTip = 'Number of items listed on Shopify';
+                DrillDownPageId = ShopifyAllVariants;
+                Caption = 'Shopify Items';
+                Visible = false;
+            }
+            // field("No. of Items"; Rec."No. of Items")
+            // {
+            //     ApplicationArea = All;
+            //     ToolTip = 'The number of active items in the Item list, regardless of stock level';
+            //     Caption = 'No. of Items';
+            //     Visible = false;
+            // }
+            // field("No. of Items in Stock"; Rec."No. of Items in Stock")
+            // {
+            //     ApplicationArea = All;
+            //     ToolTip = 'The number of active items in the Item list that are stocked';
+            //     Caption = 'No. of Items in stock';
+            //     Visible = false;
+            // }
         }
         modify("Ongoing Purchase Invoices")
         { Caption = 'Purch. Invoices'; }

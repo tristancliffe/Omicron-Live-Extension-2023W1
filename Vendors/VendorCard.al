@@ -54,6 +54,7 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
         modify("Gen. Bus. Posting Group") { Importance = Standard; ShowMandatory = true; }
         modify("VAT Bus. Posting Group") { Importance = Standard; ShowMandatory = true; }
         modify("Vendor Posting Group") { Importance = Standard; ShowMandatory = true; }
+        modify("Registration Number") { Importance = Standard; }
         modify("Country/Region Code")
         {
             //ShowMandatory = true; //## This was used before I found out how to make Country appear by default in General Ledger Setup

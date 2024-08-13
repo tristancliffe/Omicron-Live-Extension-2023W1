@@ -4,26 +4,19 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
     AboutText = 'The colours on the list show if an employee is active (**standard**), inactive (**grey**) or terminated (**dark yellow**).';
     layout
     {
-        modify("No.")
-        { StyleExpr = BlockedStyle; }
-        modify("First Name")
-        { StyleExpr = BlockedStyle; }
-        modify("Last Name")
-        { StyleExpr = BlockedStyle; }
-        modify("Job Title")
-        { StyleExpr = BlockedStyle; }
-        modify("Phone No.")
-        { StyleExpr = BlockedStyle; CaptionML = ENG = 'Home Phone No.'; }
-        addafter("Phone No.")
-        {
-            field("Mobile Phone No.1"; Rec."Mobile Phone No.")
-            { ApplicationArea = All; StyleExpr = BlockedStyle; }
-        }
+        modify("No.") { StyleExpr = BlockedStyle; }
+        modify("First Name") { StyleExpr = BlockedStyle; }
+        modify("Last Name") { StyleExpr = BlockedStyle; }
+        modify("Job Title") { StyleExpr = BlockedStyle; }
+        modify("Phone No.") { Visible = true; StyleExpr = BlockedStyle; CaptionML = ENG = 'Home Phone No.'; }
+        modify("Mobile Phone No.") { Visible = true; StyleExpr = BlockedStyle; }
+        modify("E-Mail") { Visible = true; StyleExpr = BlockedStyle; }
+        moveafter("Phone No."; "Mobile Phone No.", "E-Mail")
         addafter("Search Name")
         {
-            field("Employee Notes"; Rec."Employee Notes")
-            { ApplicationArea = All; }
+            field("Employee Notes"; Rec."Employee Notes") { ApplicationArea = All; }
         }
+
     }
     views
     {
@@ -45,16 +38,12 @@ pageextension 50108 EmployeeListExtension extends "Employee List"
                 SharedLayout = false;
                 layout
                 {
-                    modify("Job Title")
-                    { Visible = false; }
-                    modify("E-Mail")
-                    { Visible = false; }
-                    modify("Search Name")
-                    { Visible = false; }
-                    modify(Comment)
-                    { Visible = false; }
-                    modify("Employee Notes")
-                    { Visible = false; }
+                    modify("Job Title") { Visible = false; }
+                    modify("E-Mail") { Visible = false; }
+                    modify("Search Name") { Visible = false; }
+                    modify(Comment) { Visible = false; }
+                    modify("Employee Notes") { Visible = false; }
+                    modify("Balance (LCY)") { Visible = false; }
                 }
             }
         }

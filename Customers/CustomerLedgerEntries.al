@@ -25,6 +25,8 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         modify(Reversed) { Visible = true; }
         modify("Document No.") { Visible = true; }
         modify(RunningBalanceLCY) { Visible = true; }
+        moveafter("Entry No."; "Message to Recipient")
+        modify("Message to Recipient") { Visible = true; }
     }
     actions
     {

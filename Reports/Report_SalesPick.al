@@ -23,6 +23,7 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
             // { }
             // column(InventoryQty_SalesLine; "Sales Line".InventoryQty_SalesLine)
             // { }
+
         }
         add("Assembly Line")
         {
@@ -35,6 +36,15 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
 
             // column(InventoryQty_AssemblyLine; "Assembly Line".InventoryQty_AssemblyLine)
             // { }
+        }
+
+        modify("Sales Line")
+        {
+            trigger OnAfterAfterGetRecord()
+            begin
+                if "Sales Line"."Qty. to Ship" = 0 then
+                    CurrReport.Skip();
+            end;
         }
         // modify("Sales Line")
         // {
@@ -49,9 +59,7 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
         //         end;
         //     end;
         // }
-
     }
-
     rendering
     {
         layout("./OmicronPickInstruction.rdlc")

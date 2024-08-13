@@ -3,23 +3,11 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
     layout
     {
         moveafter("Buy-from Vendor Name"; "Your Reference", Status, "Vendor Invoice No.", "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
-
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
-        modify("Your Reference")
-        {
-            ApplicationArea = All;
-            QuickEntry = true;
-            Importance = Standard;
-        }
+        modify("Your Reference") { ApplicationArea = All; QuickEntry = true; Importance = Standard; InstructionalText = 'What the order is for...'; }
         addafter("Vendor Invoice No.")
         {
-            field("Order Notes"; Rec."Order Notes")
-            {
-                ApplicationArea = All;
-                QuickEntry = false;
-                Importance = Standard;
-                MultiLine = true;
-            }
+            field("Order Notes"; Rec."Order Notes") { ApplicationArea = All; QuickEntry = false; Importance = Standard; MultiLine = true; InstructionalText = 'Notes about this order...'; }
         }
         addafter("Buy-from")
         {
@@ -39,73 +27,34 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                     RecVendor.Modify()
                 end;
             }
-            field("Preferred Payment Method"; PaymentMethod)
-            {
-                ApplicationArea = All;
-                Caption = 'Preferred Payment Method';
-                ToolTip = 'Pulled from Vendor card';
-                Editable = false;
-                Style = Strong;
-            }
+            field("Preferred Payment Method"; PaymentMethod) { ApplicationArea = All; Caption = 'Preferred Payment Method'; ToolTip = 'Pulled from Vendor card'; Editable = false; Style = Strong; }
         }
-        modify("Order Date")
-        { Visible = true; Importance = Standard; }
-        modify("Document Date")
-        { Visible = true; Importance = Standard; }
-        modify("Due Date")
-        { Visible = true; Importance = Standard; }
-        modify("Posting Date")
-        { Visible = true; Importance = Standard; }
-        modify("VAT Reporting Date")
-        { Visible = true; Importance = Standard; }
+        modify("Order Date") { Visible = true; Importance = Standard; }
+        modify("Document Date") { Visible = true; Importance = Standard; }
+        modify("Due Date") { Visible = true; Importance = Standard; }
+        modify("Posting Date") { Visible = true; Importance = Standard; }
+        modify("VAT Reporting Date") { Visible = true; Importance = Standard; }
         moveafter("VAT Reporting Date"; "Document Date")
-        modify("Purchaser Code")
-        { Visible = false; }
-        modify("Assigned User ID")
-        { Importance = Standard; }
-        modify("Vendor Order No.")
-        { Importance = Standard; }
-        modify("Buy-from Vendor No.")
-        { Importance = Standard; }
-        modify("Payment Method Code")
-        { Importance = Standard; ShowMandatory = true; }
-        modify(BuyFromContactPhoneNo)
-        { Importance = Standard; }
-        modify(BuyFromContactMobilePhoneNo)
-        { Importance = Standard; }
-        modify(BuyFromContactEmail)
-        { Importance = Standard; }
-        modify("Payment Reference")
-        { Importance = Standard; }
-        modify("Currency Code")
-        { Importance = Standard; }
-        modify("Expected Receipt Date")
-        { ShowMandatory = true; }
+        modify("Purchaser Code") { Visible = false; }
+        modify("Assigned User ID") { Importance = Standard; }
+        modify("Vendor Order No.") { Importance = Standard; }
+        modify("Buy-from Vendor No.") { Importance = Standard; }
+        modify("Payment Method Code") { Importance = Standard; ShowMandatory = true; }
+        modify(BuyFromContactPhoneNo) { Importance = Standard; }
+        modify(BuyFromContactMobilePhoneNo) { Importance = Standard; }
+        modify(BuyFromContactEmail) { Importance = Standard; }
+        modify("Payment Reference") { Importance = Standard; }
+        modify("Currency Code") { Importance = Standard; }
+        modify("Expected Receipt Date") { ShowMandatory = true; }
         addafter("Promised Receipt Date")
         {
-            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Assign to a document type...';
-                Importance = Additional;
-            }
-            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Choose a document/payment to assign this record against.';
-                Importance = Additional;
-            }
-            field("Applies-to ID"; Rec."Applies-to ID")
-            {
-                ApplicationArea = All;
-                ToolTip = 'ID or Code for the applies to fields.';
-                Importance = Additional;
-            }
+            field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type") { ApplicationArea = All; ToolTip = 'Assign to a document type...'; Importance = Additional; }
+            field("Applies-to Doc. No."; Rec."Applies-to Doc. No.") { ApplicationArea = All; ToolTip = 'Choose a document/payment to assign this record against.'; Importance = Additional; }
+            field("Applies-to ID"; Rec."Applies-to ID") { ApplicationArea = All; ToolTip = 'ID or Code for the applies to fields.'; Importance = Additional; }
         }
         movebefore("Document Date"; "Order Date")
         movebefore(Control1904651607; Control3)
-        modify(Control1903326807)
-        { Visible = true; }
+        modify(Control1903326807) { Visible = true; }
         addafter(Control1906949207)
         {
             part(VendorListFactbox; "Item Vendor List Factbox")
@@ -117,17 +66,13 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
                 SubPageView = sorting("Vendor No.", "Vendor Item No.");
             }
         }
-        modify("Foreign Trade")
-        { Visible = false; }
+        modify("Foreign Trade") { Visible = false; }
     }
     actions
     {
-        modify("Create &Whse. Receipt_Promoted")
-        { Visible = false; }
-        modify("Create Inventor&y Put-away/Pick_Promoted")
-        { Visible = false; }
-        modify("Send Intercompany Purchase Order_Promoted")
-        { Visible = false; }
+        modify("Create &Whse. Receipt_Promoted") { Visible = false; }
+        modify("Create Inventor&y Put-away/Pick_Promoted") { Visible = false; }
+        modify("Send Intercompany Purchase Order_Promoted") { Visible = false; }
         addlast("F&unctions")
         {
             action(ReqWorksheet)
@@ -180,31 +125,20 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         }
         addlast(Category_Process)
         {
-            actionref(RecurringLines; GetRecurringPurchaseLines)
-            { }
-            actionref(PostedReceipts_Promoted; Receipts)
-            { }
-            actionref(VendorCard; Vendor)
-            { }
-            actionref(ItemsFromVendor_Promoted; ItemsFromVendor)
-            { }
-            actionref(PostedInvoices_Promoted; PostedInvoices)
-            { }
-            actionref(VendorLedger_Promoted; VendorLedgerEntries)
-            { }
-            actionref(Statistics2; Statistics)
-            { }
-            actionref(RecWorksheet_Promoted; ReqWorksheet)
-            { }
+            actionref(RecurringLines; GetRecurringPurchaseLines) { }
+            actionref(PostedReceipts_Promoted; Receipts) { }
+            actionref(VendorCard; Vendor) { }
+            actionref(ItemsFromVendor_Promoted; ItemsFromVendor) { }
+            actionref(PostedInvoices_Promoted; PostedInvoices) { }
+            actionref(VendorLedger_Promoted; VendorLedgerEntries) { }
+            actionref(Statistics2; Statistics) { }
+            actionref(RecWorksheet_Promoted; ReqWorksheet) { }
         }
         addlast(Category_Category8)
         {
-            actionref(TestPrepayment; "Prepayment Test &Report")
-            { }
-            actionref(PostPrepayment; PostPrepaymentInvoice)
-            { }
-            actionref(PostAndPrintPrepayment; "Post and Print Prepmt. Invoic&e")
-            { }
+            actionref(TestPrepayment; "Prepayment Test &Report") { }
+            actionref(PostPrepayment; PostPrepaymentInvoice) { }
+            actionref(PostAndPrintPrepayment; "Post and Print Prepmt. Invoic&e") { }
         }
         modify(Post)
         {
@@ -246,10 +180,8 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         //         end;
         //     end;
         // }
-        modify(Release)
-        { Enabled = ReleaseControllerStatus; }
-        modify(Reopen)
-        { Enabled = ReopenControllerStatus; }
+        modify(Release) { Enabled = ReleaseControllerStatus; }
+        modify(Reopen) { Enabled = ReopenControllerStatus; }
         addlast(Print)
         {
             action("Purchase Checklist")
@@ -273,8 +205,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         }
         addlast(Category_Category10)
         {
-            actionref(PrintCheckList; "Purchase Checklist")
-            { }
+            actionref(PrintCheckList; "Purchase Checklist") { }
         }
     }
 

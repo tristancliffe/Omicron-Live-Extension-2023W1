@@ -79,162 +79,187 @@ tableextension 50105 JobNotes extends Job
                 DimensionDefault.Insert();
                 Message('Please check Dimension values for Department and Job Type, if not WORKSHOP.\ \Workshop J-Jobs should be Department = WORKSHOP and Project Type = WORKSHOP. \Bodyshop J-Jobs should be Department = BODYSHOP and Project Type = BODYSHOP. \Parts Department P-Jobs should be Department = WORKSHOP/BODYSHOP and Project Type = PARTSDEPT.');
 
-                DefaultTask.Init();
-                DefaultTask."Job No." := Rec."No.";
-                DefaultTask."Job Task No." := VarStock;
-                DefaultTask.Description := 'Stock used on project';
-                DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
-                DefaultTask."Job Posting Group" := JobPostingGroup;
-                DefaultTask.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarStock;
-                DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarStock;
-                DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
-                DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarStock;
-                DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
+                DefaultTask.Reset();
+                DefaultTask.SetRange("Job No.", Rec."No.");
+                DefaultTask.SetRange("Job Task No.", VarStock);
+                if not DefaultTask.FindFirst() then begin
+                    DefaultTask.Init();
+                    DefaultTask."Job No." := Rec."No.";
+                    DefaultTask."Job Task No." := VarStock;
+                    DefaultTask.Description := 'Stock used on project';
+                    DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
+                    DefaultTask."Job Posting Group" := JobPostingGroup;
+                    DefaultTask.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarStock;
+                    DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarStock;
+                    DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
+                    DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarStock;
+                    DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                end;
 
-                DefaultTask.Init();
-                DefaultTask."Job No." := Rec."No.";
-                DefaultTask."Job Task No." := VarPurch;
-                DefaultTask.Description := 'Purchases made for project';
-                DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
-                DefaultTask."Job Posting Group" := JobPostingGroup;
-                DefaultTask.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarPurch;
-                DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarPurch;
-                DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
-                DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarPurch;
-                DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
+                DefaultTask.Reset();
+                DefaultTask.SetRange("Job No.", Rec."No.");
+                DefaultTask.SetRange("Job Task No.", VarPurch);
+                if not DefaultTask.FindFirst() then begin
+                    DefaultTask.Init();
+                    DefaultTask."Job No." := Rec."No.";
+                    DefaultTask."Job Task No." := VarPurch;
+                    DefaultTask.Description := 'Purchases made for project';
+                    DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
+                    DefaultTask."Job Posting Group" := JobPostingGroup;
+                    DefaultTask.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarPurch;
+                    DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarPurch;
+                    DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
+                    DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarPurch;
+                    DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                end;
 
-                DefaultTask.Init();
-                DefaultTask."Job No." := Rec."No.";
-                DefaultTask."Job Task No." := VarSubContr;
-                DefaultTask.Description := 'Subcontracted services used for project';
-                DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
-                DefaultTask."Job Posting Group" := JobPostingGroup;
-                DefaultTask.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarSubContr;
-                DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarSubContr;
-                DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
-                DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarSubContr;
-                DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
+                DefaultTask.Reset();
+                DefaultTask.SetRange("Job No.", Rec."No.");
+                DefaultTask.SetRange("Job Task No.", VarSubContr);
+                if not DefaultTask.FindFirst() then begin
+                    DefaultTask.Init();
+                    DefaultTask."Job No." := Rec."No.";
+                    DefaultTask."Job Task No." := VarSubContr;
+                    DefaultTask.Description := 'Subcontracted services used for project';
+                    DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
+                    DefaultTask."Job Posting Group" := JobPostingGroup;
+                    DefaultTask.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarSubContr;
+                    DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarSubContr;
+                    DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
+                    DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarSubContr;
+                    DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                end;
 
-                DefaultTask.Init();
-                DefaultTask."Job No." := Rec."No.";
-                DefaultTask."Job Task No." := VarTransp;
-                DefaultTask.Description := 'Transport mileage on our trailer';
-                DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
-                DefaultTask."Job Posting Group" := JobPostingGroup;
-                DefaultTask.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarTransp;
-                DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                DefaultTaskDimension.Validate("Dimension Value Code", 'TRANSPORT');
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarTransp;
-                DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
-                DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarTransp;
-                DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
+                DefaultTask.Reset();
+                DefaultTask.SetRange("Job No.", Rec."No.");
+                DefaultTask.SetRange("Job Task No.", VarTransp);
+                if not DefaultTask.FindFirst() then begin
+                    DefaultTask.Init();
+                    DefaultTask."Job No." := Rec."No.";
+                    DefaultTask."Job Task No." := VarTransp;
+                    DefaultTask.Description := 'Transport mileage on our trailer';
+                    DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
+                    DefaultTask."Job Posting Group" := JobPostingGroup;
+                    DefaultTask.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarTransp;
+                    DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
+                    DefaultTaskDimension.Validate("Dimension Value Code", 'TRANSPORT');
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarTransp;
+                    DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
+                    DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarTransp;
+                    DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                end;
 
-                DefaultTask.Init();
-                DefaultTask."Job No." := Rec."No.";
-                DefaultTask."Job Task No." := VarAdmin;
-                DefaultTask.Description := 'Admin and clerical time';
-                DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
-                DefaultTask."Job Posting Group" := JobPostingGroup;
-                DefaultTask.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarAdmin;
-                DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarAdmin;
-                DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
-                DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
-                DefaultTaskDimension.Insert();
-                DefaultTaskDimension.Init();
-                DefaultTaskDimension."Job No." := Rec."No.";
-                DefaultTaskDimension."Job Task No." := VarAdmin;
-                DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
-                if StrPos(rec."No.", 'P') = 1 then
-                    DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
-                else
-                    DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                DefaultTaskDimension.Insert();
+                DefaultTask.Reset();
+                DefaultTask.SetRange("Job No.", Rec."No.");
+                DefaultTask.SetRange("Job Task No.", VarAdmin);
+                if not DefaultTask.FindFirst() then begin
+                    DefaultTask.Init();
+                    DefaultTask."Job No." := Rec."No.";
+                    DefaultTask."Job Task No." := VarAdmin;
+                    DefaultTask.Description := 'Admin and clerical time';
+                    DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
+                    DefaultTask."Job Posting Group" := JobPostingGroup;
+                    DefaultTask.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarAdmin;
+                    DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarAdmin;
+                    DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
+                    DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
+                    DefaultTaskDimension.Insert();
+                    DefaultTaskDimension.Init();
+                    DefaultTaskDimension."Job No." := Rec."No.";
+                    DefaultTaskDimension."Job Task No." := VarAdmin;
+                    DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
+                    if StrPos(rec."No.", 'P') = 1 then
+                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                    else
+                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                    DefaultTaskDimension.Insert();
+                end;
 
                 Rec.Validate("Starting Date", Today);
                 Rec.Validate("Date of Arrival", Today);

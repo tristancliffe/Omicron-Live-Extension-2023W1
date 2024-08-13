@@ -19,13 +19,20 @@ pageextension 50179 PostedPurchInvoiceListExt extends "Posted Purchase Invoices"
         modify("Currency Code") { Visible = true; }
         addafter(Corrective)
         {
+            field(SystemCreatedAt; Rec.SystemCreatedAt) { ApplicationArea = All; Caption = 'Posted At'; Visible = true; }
             field("User ID"; GetFullName(Rec.SystemCreatedBy))
             {
                 ApplicationArea = All;
                 Caption = 'Posted by';
                 Tooltip = 'The user name of the account that posted the bank reconciliation.';
+                Visible = true;
                 Editable = false;
             }
+        }
+        addafter("Currency Code")
+        {
+            field("Your Reference"; Rec."Your Reference")
+            { ApplicationArea = All; Visible = true; }
         }
     }
 

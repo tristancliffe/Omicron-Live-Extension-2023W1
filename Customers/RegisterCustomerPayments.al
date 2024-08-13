@@ -4,6 +4,8 @@ pageextension 50191 RegisterCustomerPaymentsExt extends "Payment Registration"
     AboutText = 'The colours on the list show if an amount is negative [we owe them] (**red**) or positive [they owe us] (**black**).';
     layout
     {
+        moveafter(Description; "Document No.")
+        modify("Document No.") { Visible = true; }
         modify("Source No.") { Visible = true; Caption = 'Account No.'; }
         addafter("Amount Received")
         {

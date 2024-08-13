@@ -290,6 +290,14 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                                         Recurring = CONST(false));
                     ToolTip = 'Register received payments by manually applying them to the related customer, vendor, or bank ledger entries. Then, post the payments to G/L accounts and thereby close the related ledger entries.';
                 }
+                action("ActionJobJournalsRoleCentre")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Project Journals';
+                    Image = JobJournal;
+                    RunObject = Page "Job Journal";
+                    ToolTip = 'Project Journal view';
+                }
                 action(AssetJournals)
                 {
                     ApplicationArea = Basic, Suite;
