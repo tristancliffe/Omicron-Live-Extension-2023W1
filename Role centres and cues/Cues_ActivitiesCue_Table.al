@@ -8,12 +8,6 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             Caption = 'Ongoing Purchase Quotes';
             FieldClass = FlowField;
         }
-        // field(50101; OngoingJobs; Integer)
-        // {
-        //     CalcFormula = count(Job where(Status = filter(Open)));
-        //     Caption = 'Ongoing Jobs';
-        //     FieldClass = FlowField;
-        // }
         field(50101; CustomersOpen; Integer)
         {
             CalcFormula = count("Cust. Ledger Entry" where(Open = filter(true)));
@@ -53,57 +47,5 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             FieldClass = FlowField;
             CalcFormula = count("Shpfy Variant" where("Mapped By Item" = filter(true)));
         }
-        // field(50107; "No. of Items"; Integer)
-        // {
-        //     Caption = 'No. of Active Items';
-        //     FieldClass = FlowField;
-        //     CalcFormula = count(Item where(Blocked = filter(false)));
-        // }
-        // field(50108; "No. of Items in Stock"; Integer)
-        // {
-        //     Caption = 'No. of Stocked Active Items';
-        //     FieldClass = FlowField;
-        //     CalcFormula = count(Item where(Blocked = filter(false), Inventory = filter('>0')));
-        // }
     }
 }
-
-
-
-
-
-
-// page 50101 "Other Cues"
-// {
-//     Caption = 'Other Cues';
-//     PageType = CardPart;
-//     RefreshOnActivate = true;
-//     SourceTable = "Activities Cue";
-
-//     layout
-//     {
-//         area(Content)
-//         {
-//             cuegroup(OtherCues)
-//             {
-//                 Caption = 'Jobs';
-//                 field(OngoingJobsCue; Rec.OngoingJobs)
-//                 {
-//                     ApplicationArea = Basic, Suite;
-//                     DrillDownPageID = "Job List";
-//                     ToolTip = 'Specifies number of currently active (Open) jobs';
-//                     Caption = 'Active Jobs';
-//                     Visible = true;
-//                 }
-//                 field(OpenTimeSheetsCue; Rec.OpenTimeSheetsCue)
-//                 {
-//                     ApplicationArea = Basic, Suite;
-//                     DrillDownPageId = "Time Sheet List";
-//                     ToolTip = 'Number of active Time Sheets';
-//                     Caption = 'Time Sheets';
-//                     Visible = true;
-//                 }
-//             }
-//         }
-//     }
-// }

@@ -10,7 +10,7 @@ pageextension 50208 PostedPurchReceiptListExt extends "Posted Purchase Receipts"
         addbefore("Location Code")
         {
             field(SystemCreatedAt; Rec.SystemCreatedAt) { ApplicationArea = All; Visible = true; Caption = 'Posted At'; }
-            field("User ID"; GetFullName(Rec."User ID")) { ApplicationArea = All; Visible = true; Caption = 'Posted By'; }
+            field(SystemCreatedBy; GetFullName(Rec.SystemCreatedBy)) { ApplicationArea = All; Visible = true; Caption = 'Posted By'; }
         }
         moveafter("No."; "Posting Date")
         modify("Posting Date") { Visible = true; }

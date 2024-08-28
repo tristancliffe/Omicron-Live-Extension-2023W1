@@ -7,9 +7,8 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
         moveafter("Posting Date"; Reversed)
         modify(Reversed)
         { Visible = true; }
-        movelast(Control1; "User ID")
         modify("User ID")
-        { Visible = true; }
+        { Visible = false; }
         moveafter("External Document No."; "VAT Bus. Posting Group", "VAT Prod. Posting Group", "VAT Amount")
         modify("VAT Bus. Posting Group")
         { Visible = true; }
@@ -27,6 +26,11 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
         moveafter("Bal. Account No."; RunningBalance)
         modify(RunningBalance)
         { Visible = true; }
+        addlast(Control1)
+        {
+            field(SystemCreatedAt; Rec.SystemCreatedAt) { ApplicationArea = All; Visible = true; Caption = 'Posted At'; }
+            field(SystemCreatedBy; GetFullName(Rec.SystemCreatedBy)) { ApplicationArea = All; Visible = true; Caption = 'Posted By'; }
+        }
     }
 
     var
@@ -42,5 +46,14 @@ pageextension 50186 GenLedgerEntriesExt extends "General Ledger Entries"
     trigger OnAfterGetRecord()
     begin
         BalanceColour := SetBalanceColours();
+    end;
+
+    procedure GetFullName(userID: Guid): Text
+    var
+        UserInfo: Record User;
+    begin
+        if not UserInfo.Get(userID) then
+            exit('');
+        exit(UserInfo."Full Name");
     end;
 }

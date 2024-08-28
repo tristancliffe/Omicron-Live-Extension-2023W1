@@ -40,6 +40,16 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
                 ToolTip = 'Specifies the percentage of the task''s estimated resource usage that has been posted as used.';
                 DecimalPlaces = 0 : 0;
             }
+            field("Budget Delta"; BudgetDelta)
+            {
+                ApplicationArea = All;
+                Caption = 'Delta to Budget';
+                Editable = false;
+                StyleExpr = CompletedWarning;
+                BlankZero = true;
+                ToolTip = 'Specifies the amount above or below the task''s budget that has been posted';
+                DecimalPlaces = 0 : 0;
+            }
         }
     }
     // var
@@ -59,6 +69,7 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
         LossWarning: Text;
         CompletedWarning: Text;
         PercentCompleted: Decimal;
+        BudgetDelta: Decimal;
 
     trigger OnAfterGetRecord()
     var
@@ -93,12 +104,16 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
 
     procedure PercentCompletedCalc(): Text
     begin
-        if (Rec."Schedule (Total Price)" = 0) or (Rec."Usage (Total Price)" = 0) then
-            PercentCompleted := 0
-        else
+        if (Rec."Schedule (Total Price)" = 0) or (Rec."Usage (Total Price)" = 0) then begin
+            PercentCompleted := 0;
+            BudgetDelta := 0;
+        end
+        else begin
             PercentCompleted := 100 * Rec."Usage (Total Price)" / rec."Schedule (Total Price)";
-        if PercentCompleted > 95 then
-            exit('Unfavorable');
-        exit('');
+            BudgetDelta := Rec."Usage (Total Price)" - rec."Schedule (Total Price)";
+            if PercentCompleted > 95 then
+                exit('Unfavorable');
+            exit('');
+        end;
     end;
 }

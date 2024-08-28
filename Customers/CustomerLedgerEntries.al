@@ -27,6 +27,11 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         modify(RunningBalanceLCY) { Visible = true; }
         moveafter("Entry No."; "Message to Recipient")
         modify("Message to Recipient") { Visible = true; }
+        addlast(Control1)
+        {
+            field(SystemCreatedAt; Rec.SystemCreatedAt) { ApplicationArea = All; Visible = true; Caption = 'Posted At'; }
+            field(SystemCreatedBy; GetFullName(Rec.SystemCreatedBy)) { ApplicationArea = All; Visible = true; Caption = 'Posted By'; }
+        }
     }
     actions
     {
@@ -61,6 +66,15 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
         if Rec."Document Type" <> Rec."Document Type"::Invoice then
             exit('Ambiguous');
         exit('');
+    end;
+
+    procedure GetFullName(userID: Guid): Text
+    var
+        UserInfo: Record User;
+    begin
+        if not UserInfo.Get(userID) then
+            exit('');
+        exit(UserInfo."Full Name");
     end;
 
     // trigger OnOpenPage()

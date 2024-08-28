@@ -43,7 +43,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 ToolTip = 'Specifies the sum of sales invoices to be sent.';
                 DrillDownPageId = "Sales Invoice List";
                 Visible = true;
-                Image = Chart;
             }
         }
         addlast(Control54)
@@ -74,20 +73,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 Caption = 'Shopify Items';
                 Visible = false;
             }
-            // field("No. of Items"; Rec."No. of Items")
-            // {
-            //     ApplicationArea = All;
-            //     ToolTip = 'The number of active items in the Item list, regardless of stock level';
-            //     Caption = 'No. of Items';
-            //     Visible = false;
-            // }
-            // field("No. of Items in Stock"; Rec."No. of Items in Stock")
-            // {
-            //     ApplicationArea = All;
-            //     ToolTip = 'The number of active items in the Item list that are stocked';
-            //     Caption = 'No. of Items in stock';
-            //     Visible = false;
-            // }
         }
         modify("Ongoing Purchase Invoices")
         { Caption = 'Purch. Invoices'; }
@@ -100,7 +85,4 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         modify("S. Ord. - Reserved From Stock")
         { Visible = false; }
     }
-    var
-    // ActivitiesManagement: Codeunit "Activities Mgt.";
-    // ActivitiesMgt: Codeunit "Activities Mgt.";
 }
