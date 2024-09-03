@@ -47,5 +47,21 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             FieldClass = FlowField;
             CalcFormula = count("Shpfy Variant" where("Mapped By Item" = filter(true)));
         }
+        field(50107; "Due This Week Filter"; Date)
+        {
+            Caption = 'Due Next Week Filter';
+            FieldClass = FlowFilter;
+        }
+        field(50108; "Purch. Invoices Due This Week"; Integer)
+        {
+            CalcFormula = count("Vendor Ledger Entry" where("Document Type" = filter(Invoice | "Credit Memo"),
+                                                             "Due Date" = field("Due This Week Filter"),
+                                                             Open = const(true),
+                                                             "Payment Method Code" = filter('BACS|ANDREW|CASH|CHQ|PETTY')));
+            Caption = 'Purch. Invoices Due This Week';
+            Editable = false;
+            FieldClass = FlowField;
+            ToolTip = 'Specifies the number of payments to vendors that are due this week.';
+        }
     }
 }

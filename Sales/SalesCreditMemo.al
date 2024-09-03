@@ -80,24 +80,6 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
                 end;
             }
         }
-        addafter("Sell-to Country/Region Code")
-        {
-            field(ShowMap; ShowMapLbl)
-            {
-                ApplicationArea = Basic, Suite;
-                Editable = false;
-                ShowCaption = false;
-                Style = StrongAccent;
-                StyleExpr = TRUE;
-                ToolTip = 'Specifies the customer''s address on your preferred map website.';
-
-                trigger OnDrillDown()
-                begin
-                    CurrPage.Update(true);
-                    Rec.DisplayMap();
-                end;
-            }
-        }
         modify("Foreign Trade")
         { Visible = false; }
     }

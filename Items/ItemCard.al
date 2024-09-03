@@ -126,6 +126,16 @@ pageextension 50100 ItemCardExtension extends "Item Card"
         }
         addlast(Purchases)
         {
+            action(NewPurchOrder)
+            {
+                AccessByPermission = TableData "Purchase Header" = RIM;
+                ApplicationArea = Basic, Suite;
+                Caption = 'Create New Purchase Order';
+                Image = Order;
+                RunObject = Page "Purchase Order";
+                RunPageMode = Create;
+                ToolTip = 'Create a purchase order (but you''ll have to add the item manually after choosing the customer).';
+            }
             action(ItemsFromVendors)
             {
                 ApplicationArea = Planning;

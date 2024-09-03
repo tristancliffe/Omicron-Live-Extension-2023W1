@@ -45,6 +45,15 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 Visible = true;
             }
         }
+        addafter("Purch. Invoices Due Next Week")
+        {
+            field("Purch. Invoices Due This Week"; Rec."Purch. Invoices Due This Week")
+            {
+                ApplicationArea = Basic, Suite;
+                Visible = true;
+            }
+        }
+        modify("Purch. Invoices Due Next Week") { Visible = false; }
         addlast(Control54)
         {
             field(CustomersOpen; Rec.CustomersOpen)
@@ -85,4 +94,9 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         modify("S. Ord. - Reserved From Stock")
         { Visible = false; }
     }
+
+    trigger OnOpenPage()
+    begin
+        Rec.SetFilter("Due This Week Filter", '<%1', CalcDate('CW', WorkDate()));
+    end;
 }

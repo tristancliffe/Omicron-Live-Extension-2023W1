@@ -90,39 +90,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Assigned User ID") { Importance = Standard; QuickEntry = false; }
         modify("Shipping Advice") { Importance = Standard; }
         modify(ShpfyOrderNo) { Importance = Standard; }
-        addafter("Sell-to Country/Region Code")
-        {
-            field(ShowMap; ShowMapLbl)
-            {
-                ApplicationArea = Basic, Suite;
-                Editable = false;
-                ShowCaption = false;
-                Style = StrongAccent;
-                StyleExpr = TRUE;
-                ToolTip = 'Specifies the customer''s address on your preferred map website.';
-
-                trigger OnDrillDown()
-                begin
-                    CurrPage.Update(true);
-                    Rec.DisplayMap();
-                end;
-            }
-            //field("Sell-to Phone No.2"; Rec."Sell-to Phone No.") { ApplicationArea = All; CaptionML = ENU = 'Phone No.'; }
-            //field("Sell-to E-Mail2"; Rec."Sell-to E-Mail") { ApplicationArea = All; CaptionML = ENU = 'E-Mail Address'; }
-            // field("Mobile No."; MobileNo)
-            // {
-            //     ApplicationArea = All;
-            //     CaptionML = ENU = 'Mobile Phone No.';
-            //     ExtendedDatatype = PhoneNo;
-            //     Numeric = true;
-            //     QuickEntry = false;
-            //     trigger OnValidate()
-            //     begin
-            //         RecCustomer."Mobile Phone No." := MobileNo;
-            //         RecCustomer.Modify()
-            //     end;
-            // }
-        }
         addafter("Sell-to Phone No.")
         {
             field("Sell-to Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }
@@ -242,7 +209,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
-        ShowMapLbl: Label 'Show on Map';
         ShowBalance: Boolean;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

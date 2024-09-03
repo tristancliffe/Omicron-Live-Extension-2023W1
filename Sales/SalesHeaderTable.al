@@ -78,10 +78,4 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
         // field(50103; "Shopify Order Value"; Decimal)
         // { Caption = 'Shopify Order Value'; DataClassification = CustomerContent; DecimalPlaces = 2 : 2; }
     }
-    procedure DisplayMap()
-    var
-        OnlineMapManagement: Codeunit "Online Map Management";
-    begin
-        OnlineMapManagement.MakeSelectionIfMapEnabled(Database::Customer, GetPosition());
-    end;
 }
