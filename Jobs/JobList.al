@@ -3,6 +3,7 @@ pageextension 50112 JobListExtension extends "Job List"
     layout
     {
         modify(Control1) { FreezeColumn = Description; }
+        modify("No.") { StyleExpr = JobTypeStyle; }
         moveafter("Search Description"; "Status")
         modify("Search Description") { Visible = false; }
         modify("Status") { Visible = true; }
@@ -264,6 +265,7 @@ pageextension 50112 JobListExtension extends "Job List"
         InvoiceStyle: Text;
         ProfitStyle: Text;
         BalanceStyle: Text;
+        JobTypeStyle: Text;
 
     trigger OnOpenPage()
     begin
@@ -274,6 +276,7 @@ pageextension 50112 JobListExtension extends "Job List"
 
     trigger OnAfterGetRecord()
     begin
+        JobTypeStyle := SetJobTypeStyle();
         InvoiceStyle := SetInvoiceStyle();
         ProfitStyle := SetProfitStyle();
         BalanceStyle := SetBalanceStyle();
@@ -297,6 +300,13 @@ pageextension 50112 JobListExtension extends "Job List"
     begin
         if Rec."Customer Balance" > 0 then
             exit('Attention');
+        exit('');
+    end;
+
+    procedure SetJobTypeStyle(): Text
+    begin
+        if StrPos(rec."No.", 'J') = 1 then
+            exit('StrongAccent');
         exit('');
     end;
 

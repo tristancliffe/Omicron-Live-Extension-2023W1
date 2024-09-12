@@ -6,10 +6,11 @@ report 50101 "Job Billing Excel"
     Caption = 'Project Calculator';
     Description = 'Used to calculate handwritten invoices for projects';
     PreviewMode = PrintLayout;
+    ExcelLayoutMultipleDataSheets = true;
 
     dataset
     {
-        dataitem(Job; Job)
+        dataitem(Data; Job)
         {
             //PrintOnlyIfDetail = true;
             RequestFilterFields = "No.";
@@ -89,6 +90,21 @@ report 50101 "Job Billing Excel"
                 end;
             }
         }
+        dataitem(Job_info; Job)
+        {
+            RequestFilterFields = "No.";
+            column(Make_Model; "Car Make/Model") { }
+            column(Registration; "Vehicle Reg") { }
+            column(Chassis_No; ChassisNo) { }
+            column(Engine_No; EngineNo) { }
+            column(Mileage; Mileage) { }
+            column(Job_Number; "No.") { }
+
+            trigger OnAfterGetRecord()
+            begin
+                if "No." <> Data."No." then CurrReport.Skip();
+            end;
+        }
     }
     requestpage
     {
@@ -139,7 +155,7 @@ report 50101 "Job Billing Excel"
 
     trigger OnPreReport()
     begin
-        JobFilter := Job.GetFilters();
+        JobFilter := Data.GetFilters();
         JobTaskFilter := "Job Planning Line".GetFilters();
         // JobBillableFilter := "Job Planning Line"."Line Type";
         // QtyToTransfer := "Job Planning Line"."Qty. to Transfer to Invoice";

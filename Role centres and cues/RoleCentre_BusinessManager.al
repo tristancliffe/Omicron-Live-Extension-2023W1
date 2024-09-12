@@ -295,7 +295,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     ApplicationArea = Basic, Suite;
                     Caption = 'Project Journals';
                     Image = JobJournal;
-                    RunObject = Page "Job Journal";
+                    RunObject = Page "Job Journal Batches";
                     ToolTip = 'Project Journal view';
                 }
                 action(AssetJournals)
@@ -496,7 +496,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     ApplicationArea = Basic, Suite;
                     Caption = 'Project Journals';
                     Image = JobJournal;
-                    RunObject = Page "Job Journal";
+                    RunObject = Page "Job Journal Batches";
                     ToolTip = 'Project Journal view';
                 }
                 action("ActionResources")
