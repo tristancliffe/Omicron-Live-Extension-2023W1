@@ -51,6 +51,11 @@ page 50113 "Stock Card List"
             }
         }
     }
+    views
+    {
+        view(NotEntered) { Caption = 'Not Yet Entered'; Filters = where(Entered = const(false)); }
+        view(BeenEntered) { Caption = 'Entered'; Filters = where(Entered = const(true)); }
+    }
     var
         Device: Boolean;
         Posted: Boolean;
