@@ -71,6 +71,17 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
     {
         addlast(Processing)
         {
+            action(StockCard)
+            {
+                Caption = 'Stock Card';
+                Image = ItemLines;
+                ApplicationArea = All;
+                RunObject = Page "Stock Card Page";
+                RunPageLink = "No." = field("Job No.");
+                ToolTip = 'Takes the user to the Stock Card of the selected line as filled in by staff';
+                Visible = true;
+                Scope = Repeater;
+            }
             action(JobPlanningLines)
             {
                 ApplicationArea = All;

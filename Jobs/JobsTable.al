@@ -1,5 +1,6 @@
 tableextension 50105 JobNotes extends Job
 {
+    DataCaptionFields = "No.", Description, "Vehicle Reg";
     fields
     {
         // modify("No.")

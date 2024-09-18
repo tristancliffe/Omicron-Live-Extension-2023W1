@@ -34,5 +34,9 @@ permissionset 50100 OmicronPermissions
         page "Job Journal Factbox" = X,
         codeunit "Shpfy Order Line Dim" = X,
         page PurchaseOrderLineSummary = X,
-        page SalesOrderLineSummary = X;
+        page SalesOrderLineSummary = X,
+        tabledata "Stock Used" = RIMD,
+        table "Stock Used" = X,
+        page "Stock Used Subform" = X,
+        page "Stock Card Page" = X;
 }

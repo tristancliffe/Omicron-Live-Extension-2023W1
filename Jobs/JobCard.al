@@ -82,6 +82,16 @@ pageextension 50111 JobCardExt extends "Job Card"
                     Clear(JobInvoice);
                 end;
             }
+            action(StockCard)
+            {
+                Caption = 'Stock Card';
+                Image = ItemLines;
+                ApplicationArea = All;
+                RunObject = Page "Stock Card Page";
+                RunPageLink = "No." = field("No.");
+                ToolTip = 'Takes the user to the Stock Card of the selected line as filled in by staff';
+                Visible = true;
+            }
             action(JobJournal)
             {
                 Caption = 'Project Journal';
@@ -192,6 +202,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         }
         addlast(Category_Process)
         {
+            actionref(StockCard_Promoted; StockCard) { }
             actionref(JobJournal_Promoted; JobJournal) { }
             actionref(JobPlanningLinesLink; JobPlanningLines) { }
             group(Invoicing)
