@@ -6,6 +6,7 @@ tableextension 50123 CompanyInfoTableExt extends "Company Information"
         {
             Caption = 'Notes';
             DataClassification = CustomerContent;
+            ToolTip = 'Notes about the company';
         }
     }
 }
@@ -19,7 +20,6 @@ pageextension 50207 CompanyInfoPageExt extends "Company Information"
             field(CompanyNotes; Rec.CompanyNotes)
             {
                 ApplicationArea = All;
-                ToolTip = 'Notes about the company';
                 MultiLine = true;
             }
         }

@@ -59,7 +59,6 @@ page 50104 "Job Planning Lines All"
                 field("Work Done"; Rec."Work Done")
                 {
                     ApplicationArea = Jobs;
-                    ToolTip = 'Specifies information in addition to the description.';
                 }
                 field("Location Code"; Rec."Location Code")
                 {

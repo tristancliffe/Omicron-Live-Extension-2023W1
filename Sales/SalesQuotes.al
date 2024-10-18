@@ -104,7 +104,8 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         modify("Salesperson Code") { QuickEntry = false; }
         modify("Responsibility Center") { QuickEntry = false; }
         modify(Control72) { Visible = true; }
-        movebefore("Attached Documents"; Control1906127307)
+        //movebefore("Attached Documents"; Control1906127307)
+        movebefore("Attached Documents List"; Control1906127307)
     }
     actions
     {

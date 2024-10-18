@@ -16,6 +16,7 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
             FieldClass = FlowField;
             Editable = false;
             CalcFormula = lookup(Item."Shelf No." where("No." = field("Item No.")));
+            ToolTip = 'Shelf Location';
         }
         field(50101; Instock_ItemJournalLine; Decimal)
         {
@@ -23,6 +24,7 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
             DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
+            ToolTip = 'This column shows the quantity currently known to be in stock.';
         }
     }
 }

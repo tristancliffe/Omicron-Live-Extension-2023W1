@@ -20,41 +20,42 @@ page 50112 "Stock Used Subform"
                 { Editable = false; Visible = false; }
                 field(Entered; Rec.Entered)
                 {
-                    ToolTip = 'Specifies the value of the Entered to Project field.', Comment = '%';
                     Visible = Device;
                 }
                 field("Date"; Rec."Date")
                 {
-                    ToolTip = 'Specifies the value of the Date field.', Comment = '%';
                     Editable = Posted;
                 }
-                field(Quantity; Rec.Quantity)
+                field(StockQty; Rec.StockQty)
                 {
-                    ToolTip = 'Quantity used', Comment = '%';
                     Editable = Posted;
                 }
                 field("Item No."; Rec."Item No.")
                 {
-                    ToolTip = 'Item part number, if known', Comment = '%';
                     Editable = Posted;
 
-                    trigger OnValidate()
-                    var
-                        Item: Record Item;
-                    begin
-                        if Item.Get(Rec."Item No.") then begin
-                            Rec.Validate(Description, Item.Description);
-                        end;
-                    end;
+                    // trigger OnValidate()
+                    // var
+                    //     Item: Record Item;
+                    // begin
+                    //     if Item.Get(Rec."Item No.") then begin
+                    //         Rec.Validate(Description, Item.Description);
+                    //     end;
+                    // end;
+                }
+                field("Stock Name"; Rec."Stock Name")
+                {
+                    Editable = Posted;
+                    InstructionalText = 'Description of parts used';
                 }
                 field(Description; Rec.Description)
                 {
-                    ToolTip = 'Part description - can be changed by the user.', Comment = '%';
                     Editable = Posted;
+                    InstructionalText = 'Description of parts used';
+                    Style = Subordinate;
                 }
                 field("Resource No."; Rec."Resource No.")
                 {
-                    ToolTip = 'Will auto populate when a line is entered.', Comment = '%';
                     Editable = false;
                 }
             }

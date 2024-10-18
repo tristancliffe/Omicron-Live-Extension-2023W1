@@ -28,7 +28,6 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
                 Caption = 'To Invoice';
                 Editable = False;
                 BlankZero = true;
-                ToolTip = 'Shows the amount to be invoiced at the current time';
             }
             field("% Completed"; PercentCompleted)
             {

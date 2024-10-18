@@ -18,7 +18,6 @@ page 50105 "Job Cues"
                 {
                     ApplicationArea = All;
                     Image = Cash;
-                    ToolTip = 'The amount that can be currently be invoiced from all Active projects - check stock and time sheets are up to date before doing so.';
                 }
             }
         }

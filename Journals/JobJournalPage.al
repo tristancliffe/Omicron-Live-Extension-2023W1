@@ -25,7 +25,6 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             {
                 ApplicationArea = all;
                 Caption = 'Work Done';
-                ToolTip = 'Description of work carried out. Maximum of 700 characters';
                 AssistEdit = true;
 
                 trigger OnAssistEdit()
@@ -65,7 +64,6 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             {
                 Editable = false;
                 Caption = 'Qty Avail.';
-                ToolTip = 'The known quantity in stock at the moment';
                 ApplicationArea = All;
                 Visible = true;
                 BlankZero = false;

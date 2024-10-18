@@ -71,6 +71,7 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
                                                        Type = filter(<> " "),
                                                        "Location Code" = field("Location Filter"),
                                                        "Attached Doc Count" = filter(<> 0)));
+            ToolTip = 'This order has line(s) with attachments.';
         }
 
 

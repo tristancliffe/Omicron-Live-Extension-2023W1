@@ -84,12 +84,12 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         addafter("Payment Method Code")
         {
             field("Has Job Lines"; Rec."Has Job Lines")
-            { ApplicationArea = All; Caption = 'Job'; ToolTip = 'This order has lines linked to a project'; Visible = true; Editable = false; DrillDown = false; }
+            { ApplicationArea = All; Caption = 'Job'; Visible = true; Editable = false; DrillDown = false; }
         }
         addafter(Status)
         {
             field("Attachments Exist"; Rec."Attachments Exist")
-            { ApplicationArea = All; Tooltip = 'This order has line(s) with attachments.'; Width = 2; DrillDown = false; Editable = false; }
+            { ApplicationArea = All; Width = 2; DrillDown = false; Editable = false; }
         }
     }
     actions

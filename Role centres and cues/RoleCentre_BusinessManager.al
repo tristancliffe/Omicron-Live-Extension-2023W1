@@ -34,6 +34,9 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Visible = false;
             }
         }
+        modify(SubBillingActivities)
+        { Visible = false; }
+        movelast(rolecenter; "Job Queue Tasks Activities", ApprovalsActivities)
     }
     actions
     {
@@ -77,8 +80,8 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Ellipsis = true;
             }
         }
-        modify(Items)
-        { Visible = false; }
+        // modify(Items)
+        // { Visible = false; }
         modify("Bank Accounts")
         { Visible = false; }
         modify("Chart of Accounts")
@@ -94,15 +97,6 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 ToolTip = 'Show a list of active projects and their details.';
             }
         }
-        //     action(ShipmentPlanning)
-        //     {
-        //         ApplicationArea = All;
-        //         Caption = 'Shipment Planning';
-        //         Image = ShipmentLines;
-        //         RunObject = Page WSB_ShipmentPlanningAI;
-        //         ToolTip = 'View the Shipment Planning app page to see what can be shipped and what can''t.';
-        //     }
-        // }
         addafter(Action131)
         {
             action("Req. Worksheet")

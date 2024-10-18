@@ -355,7 +355,6 @@ page 50109 SalesOrderLineSummary
                 {
                     Editable = false;
                     Caption = 'Qty in Stock';
-                    ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
                     ApplicationArea = All;
                     Visible = true;
                     BlankZero = true;
@@ -1351,7 +1350,8 @@ page 50109 SalesOrderLineSummary
 
                         trigger OnAction()
                         begin
-                            ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByEvent())
+                            //ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByEvent())
+                            SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::"Event");
                         end;
                     }
                     action(ItemAvailabilityByPeriod)
@@ -1363,7 +1363,8 @@ page 50109 SalesOrderLineSummary
 
                         trigger OnAction()
                         begin
-                            ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByPeriod())
+                            //ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByPeriod())
+                            SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::Period);
                         end;
                     }
                     action(ItemAvailabilityByVariant)
@@ -1375,7 +1376,8 @@ page 50109 SalesOrderLineSummary
 
                         trigger OnAction()
                         begin
-                            ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByVariant())
+                            //ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByVariant())
+                            SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::Variant);
                         end;
                     }
                     action(ItemAvailabilityByLocation)
@@ -1388,7 +1390,8 @@ page 50109 SalesOrderLineSummary
 
                         trigger OnAction()
                         begin
-                            ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByLocation())
+                            //ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByLocation())
+                            SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::Location);
                         end;
                     }
                     action(Lot)
@@ -1412,7 +1415,8 @@ page 50109 SalesOrderLineSummary
 
                         trigger OnAction()
                         begin
-                            ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByBOM())
+                            //ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByBOM())
+                            SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::BOM);
                         end;
                     }
                     action(ItemAvailabilityByUnitOfMeasure)
@@ -1424,7 +1428,8 @@ page 50109 SalesOrderLineSummary
 
                         trigger OnAction()
                         begin
-                            ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByUOM());
+                            //ItemAvailFormsMgt2.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt2.ByUOM());
+                            SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::UOM);
                         end;
                     }
                 }
@@ -1741,8 +1746,8 @@ page 50109 SalesOrderLineSummary
                         EditinExcel: Codeunit "Edit in Excel";
                         EditinExcelFilters: Codeunit "Edit in Excel Filters";
                     begin
-                        EditinExcelFilters.AddField('Document_No', Enum::"Edit in Excel Filter Type"::Equal, Rec."Document No.", Enum::"Edit in Excel Edm Type"::"Edm.String");
-
+                        //EditinExcelFilters.AddField('Document_No', Enum::"Edit in Excel Filter Type"::Equal, Rec."Document No.", Enum::"Edit in Excel Edm Type"::"Edm.String");
+                        EditinExcelFilters.AddFieldV2('Document_No', Enum::"Edit in Excel Filter Type"::Equal, Rec."Document No.", Enum::"Edit in Excel Edm Type"::"Edm.String");
                         EditinExcel.EditPageInExcel(
                             'Sales_Order_Line',
                             page::"Sales Order Subform",
@@ -1854,7 +1859,8 @@ page 50109 SalesOrderLineSummary
         SalesSetup: Record "Sales & Receivables Setup";
         TempOptionLookupBuffer: Record "Option Lookup Buffer" temporary;
         TransferExtendedText: Codeunit "Transfer Extended Text";
-        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        //ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        SalesAvailabilityMgt: Codeunit "Sales Availability Mgt.";
         SalesCalcDiscountByType: Codeunit "Sales - Calc Discount By Type";
         AmountWithDiscountAllowed: Decimal;
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the sales order has been invoiced.';
@@ -2028,11 +2034,12 @@ page 50109 SalesOrderLineSummary
     end;
 
     procedure ShowTracking()
-    var
-        TrackingForm: Page "Order Tracking";
+    //var
+    //TrackingForm: Page "Order Tracking";
     begin
-        TrackingForm.SetSalesLine(Rec);
-        TrackingForm.RunModal();
+        //TrackingForm.SetSalesLine(Rec);
+        //TrackingForm.RunModal();
+        Rec.ShowOrderTracking();
     end;
 
     procedure ItemChargeAssgnt()

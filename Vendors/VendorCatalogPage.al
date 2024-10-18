@@ -10,7 +10,6 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
             {
                 Description = 'Item description';
                 Caption = 'Item description';
-                ToolTip = 'Item description from the item card record';
                 ApplicationArea = All;
                 Editable = false;
             }

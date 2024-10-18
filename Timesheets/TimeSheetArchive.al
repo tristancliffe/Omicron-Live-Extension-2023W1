@@ -3,6 +3,6 @@ tableextension 50204 "Time Sheet Line Archive Ext" extends "Time Sheet Line Arch
     fields
     {
         field(50100; "Work Done"; Text[700])
-        { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; }
+        { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; } //!OptimizeForTextSearch = true; }
     }
 }

@@ -15,17 +15,14 @@ page 50113 "Stock Card List"
             {
                 field(Entered; Rec.Entered)
                 {
-                    ToolTip = 'Specifies the value of the Entered to Project field.', Comment = '%';
-                    Visible = Device;
+                    Editable = Device;
                 }
                 field("Job No."; Rec."Job No.")
                 {
-                    ToolTip = 'Specifies the value of the Project No. field.', Comment = '%';
                     Editable = false;
                 }
                 field("Date"; Rec."Date")
                 {
-                    ToolTip = 'Specifies the value of the Date field.', Comment = '%';
                     Editable = Posted;
                 }
                 field("Item No."; Rec."Item No.")
@@ -33,12 +30,17 @@ page 50113 "Stock Card List"
                     ToolTip = 'Specifies the value of the Part No. field.', Comment = '%';
                     Editable = Posted;
                 }
+                field("Stock Name"; Rec."Stock Name")
+                {
+                    ToolTip = 'Technicians name for the item.';
+                    Editable = Posted;
+                }
                 field(Description; Rec.Description)
                 {
                     ToolTip = 'Specifies the value of the Description field.', Comment = '%';
                     Editable = Posted;
                 }
-                field(Quantity; Rec.Quantity)
+                field(StockQty; Rec.StockQty)
                 {
                     ToolTip = 'Specifies the value of the Qty field.', Comment = '%';
                     Editable = Posted;

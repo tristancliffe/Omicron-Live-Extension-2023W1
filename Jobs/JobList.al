@@ -284,29 +284,26 @@ pageextension 50112 JobListExtension extends "Job List"
 
     procedure SetInvoiceStyle(): Text
     begin
-        If Rec.ToInvoice > 3000 then
-            exit('Attention');
+        if Rec.ToInvoice > 5000 then exit('Unfavorable');
+        If Rec.ToInvoice > 3000 then exit('Attention');
         exit('');
     end;
 
     procedure SetProfitStyle(): Text
     begin
-        if -(Rec.TotalValue + Rec.InvoicedValue) < 0 then
-            exit('Attention');
+        if -(Rec.TotalValue + Rec.InvoicedValue) < 0 then exit('Attention');
         exit('');
     end;
 
     procedure SetBalanceStyle(): Text
     begin
-        if Rec."Customer Balance" > 0 then
-            exit('Attention');
+        if Rec."Customer Balance" > 0 then exit('Attention');
         exit('');
     end;
 
     procedure SetJobTypeStyle(): Text
     begin
-        if StrPos(rec."No.", 'J') = 1 then
-            exit('StrongAccent');
+        if StrPos(rec."No.", 'J') = 1 then exit('StrongAccent');
         exit('');
     end;
 

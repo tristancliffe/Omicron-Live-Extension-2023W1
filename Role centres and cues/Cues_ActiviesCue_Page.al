@@ -8,7 +8,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             {
                 ApplicationArea = Suite;
                 DrillDownPageID = "Sales Credit Memos";
-                ToolTip = 'Specifies sales credit memos that are active';
                 Caption = 'Sales Credit Memos';
                 Image = Cash;
             }
@@ -19,7 +18,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             {
                 ApplicationArea = Suite;
                 DrillDownPageID = "Purchase Quotes";
-                ToolTip = 'Specifies purchases quotes that are active';
                 Caption = 'Purchase Quotes';
                 Image = Receipt;
             }
@@ -30,7 +28,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             {
                 ApplicationArea = Suite;
                 DrillDownPageID = "Purchase Credit Memos";
-                ToolTip = 'Specifies purchases credit memos that are active';
                 Caption = 'Purchase Credit Memos';
                 Image = Diagnostic;
             }
@@ -40,7 +37,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             field("Pending Sales Invoice Amount"; Rec."Pending Sales Invoice Amount")
             {
                 ApplicationArea = Basic, Suite;
-                ToolTip = 'Specifies the sum of sales invoices to be sent.';
                 DrillDownPageId = "Sales Invoice List";
                 Visible = true;
             }
@@ -60,7 +56,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageID = "Customer Ledger Entries";
-                ToolTip = 'Specifies number of ''Open'' customer ledger entries';
                 Caption = 'Open Customer Entries';
                 Visible = true;
                 Image = Person;
@@ -69,7 +64,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageID = "Vendor Ledger Entries";
-                ToolTip = 'Specifies number of ''Open'' vendor ledger entries';
                 Caption = 'Open Vendor Entries';
                 Visible = true;
                 Image = People;
@@ -77,7 +71,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
             field(ItemsOnShopify; Rec.ItemsOnShopify)
             {
                 ApplicationArea = All;
-                ToolTip = 'Number of items listed on Shopify';
                 DrillDownPageId = ShopifyAllVariants;
                 Caption = 'Shopify Items';
                 Visible = false;
@@ -97,6 +90,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
 
     trigger OnOpenPage()
     begin
-        Rec.SetFilter("Due This Week Filter", '<%1', CalcDate('CW', WorkDate()));
+        Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW', WorkDate()));
     end;
 }

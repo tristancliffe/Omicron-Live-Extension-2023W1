@@ -21,8 +21,14 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
         moveafter("Fax No."; "Home Page")
         addlast(General) //! User Control for the large notes field...
         {
-            field("Supply Type"; Rec."Supply Type") { ApplicationArea = All; ToolTip = 'Supply type shortname (Access Dimensions SortKey)'; }
-            field("Preferred Payment Method"; Rec."Preferred Payment Method") { ApplicationArea = All; ToolTip = 'Note about their preferred method of payment'; }
+            field("Supply Type"; Rec."Supply Type")
+            {
+                ApplicationArea = All;
+            }
+            field("Preferred Payment Method"; Rec."Preferred Payment Method")
+            {
+                ApplicationArea = All;
+            }
             // field("Vendor Notes"; Rec."Vendor Notes")
             // {
             //     MultiLine = true;

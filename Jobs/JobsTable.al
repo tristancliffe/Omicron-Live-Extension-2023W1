@@ -306,7 +306,11 @@ tableextension 50105 JobNotes extends Job
             end;
         }
         field(50100; "Parts Location"; Text[100])
-        { CaptionML = ENU = 'Parts Location'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Parts Location';
+            DataClassification = CustomerContent;
+            ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc';
+        }
         field(50101; "Vehicle Reg"; Text[20])
         {
             CaptionML = ENU = 'Vehicle Reg';
@@ -330,6 +334,7 @@ tableextension 50105 JobNotes extends Job
             CaptionML = ENU = 'Car Make/Model/Series';
             DataClassification = CustomerContent;
             ToolTip = 'Make & model of car in for work';
+            //! OptimizeForTextSearch = true;
         }
         field(50105; "Work Required"; Text[500])
         { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
@@ -356,11 +361,23 @@ tableextension 50105 JobNotes extends Job
             ToolTip = 'The total number of INVOICED HOURS entered against the project';
         }
         field(50109; ChassisNo; Code[30])
-        { CaptionML = ENU = 'Chassis No.'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Chassis No.';
+            DataClassification = CustomerContent;
+            ToolTip = 'Chassis number, if known';
+        }
         field(50110; EngineNo; Code[30])
-        { CaptionML = ENU = 'Engine No.'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Engine No.';
+            DataClassification = CustomerContent;
+            ToolTip = 'Engine number, if known';
+        }
         field(50111; Mileage; Code[30])
-        { CaptionML = ENU = 'Recorded mileage'; DataClassification = CustomerContent; }
+        {
+            CaptionML = ENU = 'Recorded mileage';
+            DataClassification = CustomerContent;
+            ToolTip = 'Recording mileage on arrival';
+        }
         field(50112; TotalValue; Decimal)
         {
             Caption = 'Committed Value';
@@ -391,6 +408,7 @@ tableextension 50105 JobNotes extends Job
             CalcFormula = sum("Job Planning Line".InvoicePrice where("Job No." = field("No."),
                                                                     "Line Type" = filter("Billable" | "Both Budget and Billable"),
                                                                     "Qty. Transferred to Invoice" = filter('0')));
+            ToolTip = 'This is the value due to be invoiced, calculated from Project Planning Lines.';
         }
         field(50115; "Customer Balance"; Decimal)
         {

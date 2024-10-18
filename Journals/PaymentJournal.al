@@ -29,7 +29,7 @@ pageextension 50199 PaymentJournalExt extends "Payment Journal"
             {
                 Caption = 'Sum of Lines';
                 field(SumOfLines; Rec.SumOfLines)
-                { ApplicationArea = All; Visible = true; ShowCaption = false; Editable = false; ToolTip = 'Total Amount (LCY) of the lines in the current journal batch.'; AutoFormatType = 1; }
+                { ApplicationArea = All; Visible = true; ShowCaption = false; Editable = false; AutoFormatType = 1; }
             }
 
         }

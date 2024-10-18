@@ -7,12 +7,14 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
             FieldClass = FlowField;
             Caption = 'All Time Sheets';
             CalcFormula = Count("Time Sheet Header" where("Owner User ID" = field("User ID Filter")));
+            ToolTip = 'This will show all the un-archived timesheets for a given user, including those fully submitted and approved.';
         }
         field(50101; ArchivedTimeSheets; Integer)
         {
             FieldClass = FlowField;
             Caption = 'Archived Time Sheets';
             CalcFormula = count("Time Sheet Header Archive" where("Owner User ID" = field("User ID Filter")));
+            ToolTip = 'This will show the archived timesheets for a given user. It will eventually be a very long list!';
         }
         field(50102; LastMonth; Date)
         {

@@ -20,6 +20,7 @@ tableextension 50100 ItemTableExt extends Item
             CaptionML = ENU = 'Item Notes';
             DataClassification = CustomerContent;
             ToolTip = 'Item notes...';
+            //!OptimizeForTextSearch = true;
         }
         field(50102; "Supplier"; Text[50])
         {
@@ -34,7 +35,7 @@ tableextension 50100 ItemTableExt extends Item
             DataClassification = CustomerContent;
             ToolTip = 'Only to be used when the Shelf No. field is not shown (e.g. on Non-Inventory items). Otherwise leave blank.';
         }
-        field(50399; Search_Column; Text[1000])
+        field(50399; Search_Column; Text[2000])
         {
             CaptionML = ENU = 'Search field';
             DataClassification = CustomerContent;
@@ -46,6 +47,7 @@ tableextension 50100 ItemTableExt extends Item
             FieldClass = FlowField;
             CalcFormula = count("Document Attachment" where("Table ID" = const(27),
                                                             "No." = field("No.")));
+            ToolTip = 'Number of attachments to this record. These can simply exist, or be transferred to sales/purchase documents for processing/printing/emails with orders.';
         }
     }
     fieldgroups
@@ -61,7 +63,7 @@ tableextension 50100 ItemTableExt extends Item
 
     trigger OnModify()
     begin
-        Search_Column := "No." + ' ' + Description + ' ' + "Search Description" + ' ' + "Item Category Code" + ' ' + Model + ' ' + Supplier + ' ' + Rec."Vendor No." + ' ' + Rec."Vendor Item No.";
+        Search_Column := "No." + ' ' + Description + ' ' + "Search Description" + ' ' + "Item Category Code" + ' ' + Model + ' ' + Supplier + ' ' + Rec."Vendor No." + ' ' + Rec."Vendor Item No." + ' ' + Rec."Item Notes";
     end;
 
     trigger OnBeforeDelete()

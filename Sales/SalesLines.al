@@ -24,6 +24,7 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
+            ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
         }
         field(50104; ItemNotes_SalesLine; Text[1000])
         {
@@ -106,6 +107,7 @@ tableextension 50141 AssemblyLineExt extends "Assembly Line"
             DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
+            ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
         }
         field(50102; ItemNotes_AssemblyLine; Text[1000])
         {

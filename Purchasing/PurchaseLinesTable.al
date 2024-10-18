@@ -29,6 +29,7 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
             DecimalPlaces = 0 : 2;
             Editable = false;
             DataClassification = CustomerContent;
+            ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
         }
         field(50104; QtyOnSalesOrder_PurchLine; Decimal)
         {

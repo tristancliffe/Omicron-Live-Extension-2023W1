@@ -110,7 +110,6 @@ pageextension 50101 ItemListExtension extends "Item List"
                 ApplicationArea = all;
                 Width = 2;
                 BlankZero = true;
-                ToolTip = 'Number of attachments to this record. These can simply exist, or be transferred to sales/purchase documents for processing/printing/emails with orders.';
                 trigger OnDrillDown()
                 var
                     DocumentAttachmentDetails: Page "Document Attachment Details";

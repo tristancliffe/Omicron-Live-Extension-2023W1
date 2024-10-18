@@ -35,7 +35,6 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
             {
                 Editable = false;
                 Caption = 'Qty in Stock';
-                ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
                 ApplicationArea = All;
                 Visible = true;
                 BlankZero = true;

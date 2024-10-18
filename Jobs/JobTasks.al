@@ -26,6 +26,7 @@ tableextension 50126 "Job Task Extension" extends "Job Task"
                                                                     "Job Task No." = field("Job Task No."),
                                                                     "Line Type" = filter("Billable" | "Both Budget and Billable"),
                                                                     "Qty. Transferred to Invoice" = filter('0')));
+            ToolTip = 'Shows the amount to be invoiced at the current time';
         }
     }
 }

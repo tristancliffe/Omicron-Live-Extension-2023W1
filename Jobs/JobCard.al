@@ -20,12 +20,12 @@ pageextension 50111 JobCardExt extends "Job Card"
         }
         addlast(General)
         {
-            field("Parts Location"; Rec."Parts Location") { ApplicationArea = All; ToolTip = 'Where at Omicron have the parts been stored - area, shelf number etc'; InstructionalText = 'Shelf Code'; }
+            field("Parts Location"; Rec."Parts Location") { ApplicationArea = All; InstructionalText = 'Shelf Code'; }
             field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; ToolTip = 'Vehicle registration number, where known'; ShowMandatory = true; InstructionalText = 'Reg. No.'; }
-            field("Chassis No."; Rec.ChassisNo) { ApplicationArea = All; ToolTip = 'Chassis number, if known'; ShowMandatory = true; InstructionalText = 'Chassis No.'; }
-            field("Engine No."; Rec.EngineNo) { ApplicationArea = All; ToolTip = 'Engine number, if known'; ShowMandatory = true; InstructionalText = 'Engine No.'; }
-            field(Mileage; Rec.Mileage) { ApplicationArea = All; ToolTip = 'Recording mileage on arrival'; ShowMandatory = true; InstructionalText = 'Mileage with units'; }
-            field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; ToolTip = 'Date of arrival at Omicron'; ShowMandatory = true; }
+            field("Chassis No."; Rec.ChassisNo) { ApplicationArea = All; ShowMandatory = true; InstructionalText = 'Chassis No.'; }
+            field("Engine No."; Rec.EngineNo) { ApplicationArea = All; ShowMandatory = true; InstructionalText = 'Engine No.'; }
+            field(Mileage; Rec.Mileage) { ApplicationArea = All; ShowMandatory = true; InstructionalText = 'Mileage with units'; }
+            field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; ShowMandatory = true; }
             field("Customer Balance"; Rec."Customer Balance") { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
         }
         moveafter("No."; Status)

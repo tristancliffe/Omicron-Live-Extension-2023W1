@@ -9,7 +9,6 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageID = "Job List";
-                ToolTip = 'Specifies number of currently active (Open) projects';
                 Caption = 'Active Projects';
                 Visible = true;
                 Image = Calendar;
@@ -18,7 +17,6 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageId = "Time Sheet List";
-                Tooltip = 'Number of timesheets not submitted';
                 Caption = 'Open Time Sheets';
                 Visible = true;
                 Image = Time;
@@ -27,7 +25,6 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageId = "Time Sheet List";
-                ToolTip = 'Number of active Time Sheets';
                 Caption = 'Time Sheets';
                 Visible = true;
                 Image = Library;
@@ -37,7 +34,6 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Hours This Month';
                 AutoFormatExpression = '<precision, 0:0><standard format, 0>';
-                ToolTip = 'Number of approved/journalled hours in the last 30 days, including Admin.';
                 AutoFormatType = 11;
                 Image = Funnel;
             }
@@ -45,7 +41,6 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Chargeable This Month';
-                ToolTip = 'Number of approved/journalled hours that can be charged from the last 30 days, excluding Admin.';
                 AutoFormatExpression = '<precision, 0:0><standard format, 0>';
                 AutoFormatType = 11;
                 Image = Cash;
@@ -54,7 +49,6 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
             {
                 ApplicationArea = Basic, Suite;
                 DrillDownPageId = "Time Sheet Lines Subform";
-                Tooltip = 'Number of ''Open'' or ''Submitted'' hours in timesheets, not approved';
                 Caption = 'Open Time Sheet Hours';
                 Visible = true;
                 Image = Message;

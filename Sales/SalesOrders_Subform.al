@@ -27,7 +27,6 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
             {
                 Editable = false;
                 Caption = 'Qty in Stock';
-                ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
                 ApplicationArea = All;
                 Visible = true;
                 BlankZero = true;
@@ -204,7 +203,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
 
                 trigger OnAction()
                 begin
-                    ItemAvailFormsMgt.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt.ByBOM())
+                    //ItemAvailFormsMgt.ShowItemAvailFromSalesLine(Rec, ItemAvailFormsMgt.ByBOM())
+                    SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::BOM);
                 end;
             }
             action(DocAttach2)
@@ -228,7 +228,8 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     }
 
     var
-        ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        //ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
+        SalesAvailabilityMgt: Codeunit "Sales Availability Mgt.";
         IsOpenOrder: Boolean;
         CommentStyle: Text;
         LineStatusStyle: Text;

@@ -49,7 +49,6 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
             {
                 Editable = false;
                 Caption = 'In Stock';
-                ToolTip = 'This column shows the quantity currently known to be in stock.';
                 ApplicationArea = All;
                 Visible = true;
                 BlankZero = false;

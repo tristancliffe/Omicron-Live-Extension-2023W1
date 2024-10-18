@@ -22,7 +22,10 @@ page 50107 "Completed Job List"
                 field("Bill-to Customer No."; Rec."Bill-to Customer No.") { ApplicationArea = Jobs; ToolTip = 'Specifies the number of the customer who pays for the project.'; }
                 field(Status; Rec.Status) { ApplicationArea = Jobs; ToolTip = 'Specifies a status for the current project. You can change the status for the project as it progresses. Final calculations can be made on completed projects.'; }
                 field("Car Make/Model"; Rec."Car Make/Model") { ApplicationArea = All; ToolTip = 'Car make/model'; }
-                field("Vehicle Reg"; Rec."Vehicle Reg") { ApplicationArea = All; ToolTip = 'Registration No.'; }
+                field("Vehicle Reg"; Rec."Vehicle Reg")
+                {
+                    ApplicationArea = All;
+                }
                 field("Job Notes"; Rec."Job Notes") { ApplicationArea = All; ToolTip = 'Project notes'; }
             }
         }

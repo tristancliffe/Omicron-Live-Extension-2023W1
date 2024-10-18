@@ -9,7 +9,6 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
                 ApplicationArea = All;
                 Visible = true;
                 Caption = 'Shelf Location';
-                ToolTip = 'Shelf Location';
             }
         }
         modify("Salespers./Purch. Code") { Visible = false; }

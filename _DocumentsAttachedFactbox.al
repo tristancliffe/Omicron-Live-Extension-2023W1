@@ -1,27 +1,24 @@
-pageextension 50215 DocumentAttachmentFactboxExt extends "Document Attachment Factbox"
+pageextension 50215 DocumentAttachmentFactboxExt extends "Doc. Attachment List Factbox"
 {
     layout
     {
-        addlast(Control2)
+        addlast(Group)
         {
-            repeater(Attachments)
+            field("File Name"; Rec."File Name")
             {
-                field("File Name"; Rec."File Name")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Attachment';
+                ApplicationArea = All;
+                Caption = 'Attachment';
 
-                    trigger OnDrillDown()
-                    begin
-                        if Rec."File Name" <> '' then
-                            Rec.Export(true);
-                    end;
-                }
-                field("File Type"; Rec."File Type")
-                {
-                    ApplicationArea = All;
-                    Caption = 'File Type';
-                }
+                trigger OnDrillDown()
+                begin
+                    if Rec."File Name" <> '' then
+                        Rec.Export(true);
+                end;
+            }
+            field("File Type"; Rec."File Type")
+            {
+                ApplicationArea = All;
+                Caption = 'File Type';
             }
         }
     }

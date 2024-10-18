@@ -2,6 +2,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
 {
     AboutTitle = 'Timesheets';
     AboutText = 'Use this page to enter timesheets to record hours on projects & administration/clerical duties, and absenses from work.';
+
     layout
     {
         modify(Description)

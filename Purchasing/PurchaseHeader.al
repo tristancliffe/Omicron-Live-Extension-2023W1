@@ -61,6 +61,7 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
                                                        Type = filter(<> " "),
                                                        "Location Code" = field("Location Filter"),
                                                        "Job No." = filter(<> '')));
+            ToolTip = 'This order has lines linked to a project';
         }
         field(50105; "Attachments Exist"; Boolean)
         {
@@ -71,6 +72,7 @@ tableextension 50114 PurchaseHeaderExt extends "Purchase Header"
                                                        Type = filter(<> " "),
                                                        "Location Code" = field("Location Filter"),
                                                        "Attached Doc Count" = filter(<> 0)));
+            ToolTip = 'This order has line(s) with attachments.';
         }
     }
 }

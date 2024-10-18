@@ -22,7 +22,6 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 ApplicationArea = all;
                 Caption = 'Inventory';
                 Description = 'Quantity in stock';
-                ToolTip = 'This column shows the quantity currently known to be in stock. Non-inventory and Service items show as 999';
                 Editable = false;
                 Style = StandardAccent;
                 Width = 5;
