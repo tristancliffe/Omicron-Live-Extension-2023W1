@@ -70,6 +70,11 @@ table 50100 "Stock Used"
             //!OptimizeForTextSearch = true;
             ToolTip = 'Technican''s description of the item.';
         }
+        field(11; LastOne; Boolean)
+        {
+            Caption = 'Last';
+            ToolTip = 'Last one in stock - message for parts department to order more';
+        }
     }
 
     keys

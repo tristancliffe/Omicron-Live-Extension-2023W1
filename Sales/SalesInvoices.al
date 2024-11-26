@@ -31,6 +31,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 end;
             }
         }
+
         modify("Sell-to Customer No.") { Importance = Standard; }
         modify("Sell-to Address") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Address 2") { Importance = Standard; QuickEntry = false; }
@@ -66,6 +67,19 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 ShowMandatory = true;
                 MultiLine = true;
                 InstructionalText = 'Notes about this order...';
+            }
+            field("Balance Due"; "Balance Due")
+            {
+                ApplicationArea = All;
+                Caption = 'Balance Due (LCY)';
+                Tooltip = 'The balance owed. Positive amounts mean customer owes US, whereas negative numbers mean we owe THEM.';
+                Editable = False;
+                Importance = Standard;
+                Visible = ShowBalance;
+                trigger OnDrillDown()
+                begin
+                    RecCustomer.OpenCustomerLedgerEntries(true);
+                end;
             }
             field("Sell-to Phone No."; Rec."Sell-to Phone No.") { ApplicationArea = All; Importance = Standard; }
             field("Mobile No."; Rec."Mobile No.") { ApplicationArea = All; Importance = Standard; }
@@ -226,6 +240,8 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         MobileNo: Text[30];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
+        "Balance Due": Decimal;
+        ShowBalance: Boolean;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
@@ -250,6 +266,8 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             CustomerNotes := RecCustomer."Customer Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
+        GetBalance();
+        ShowBalance := RecCustomer."Balance Due (LCY)" <> 0;
         // if Rec."Posting Date" <> Today then begin
         //     Rec.Validate(Rec."Posting Date", Today);
         //     Rec.Modify();
@@ -280,5 +298,11 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
     begin
         ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
         ReopenControllerStatus := Rec.Status = Rec.Status::Released;
+    end;
+
+    local procedure GetBalance()
+    begin
+        RecCustomer.CalcFields("Balance Due (LCY)");
+        "Balance Due" := RecCustomer."Balance Due (LCY)";
     end;
 }

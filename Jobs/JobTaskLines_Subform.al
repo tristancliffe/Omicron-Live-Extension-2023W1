@@ -50,6 +50,8 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
                 DecimalPlaces = 0 : 0;
             }
         }
+        modify("Job Task Type") { Visible = false; }
+        modify("Start Date") { Visible = false; }
     }
     // var
     //     TaskDimension: Record "Job Task Dimension";

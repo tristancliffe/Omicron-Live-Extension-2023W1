@@ -52,4 +52,3 @@ page 50100 "Logged-In Users"
             until ActiveSession.Next() = 0;
     end;
 }
-//?billable

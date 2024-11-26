@@ -129,12 +129,26 @@ pageextension 50114 JobJournalExt extends "Job Journal"
             }
             action(StockUsed)
             {
+                Caption = 'Job Stock';
+                Image = ItemLines;
+                ApplicationArea = All;
+                RunObject = Page "Stock Card List";
+                RunPageView = where(Entered = const(false));
+                RunPageLink = "Job No." = field("Job No.");
+                ToolTip = 'Opens the stock used list for the selected job';
+                Visible = true;
+                Promoted = true;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+            }
+            action(StockUsedList)
+            {
                 Caption = 'Stock Used';
                 Image = ItemLines;
                 ApplicationArea = All;
                 RunObject = Page "Stock Card List";
                 RunPageView = where(Entered = const(false));
-                ToolTip = 'Opens the stock used list';
+                ToolTip = 'Opens the stock used list for all jobs';
                 Visible = true;
                 Promoted = true;
                 PromotedOnly = true;

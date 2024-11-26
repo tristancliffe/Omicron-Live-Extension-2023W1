@@ -54,7 +54,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         modify("Qty. to Transfer to Journal")
         { Visible = true; BlankZero = true; }
         modify("Qty. to Transfer to Invoice")
-        { BlankZero = true; Style = Strong; Visible = true; }
+        { BlankZero = true; StyleExpr = ToInvoiceStyle; Visible = true; }
         modify("Invoiced Amount (LCY)")
         { BlankZero = true; }
         modify("Unit Price")
@@ -190,6 +190,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
 
     var
         SellingPriceStyle: Text;
+        ToInvoiceStyle: Text;
         TypeStyle: Text;
         MandatoryLocation: Boolean;
         InvoicedStyle: Text;
@@ -199,6 +200,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
     trigger OnAfterGetRecord()
     begin
         SellingPriceStyle := SetSellingPriceStyle();
+        ToInvoiceStyle := SetToInvoiceStyle();
         TypeStyle := SetTypeStyle();
         InvoicedStyle := SetInvoicedStyle();
         SetLocationMandatory();
@@ -251,6 +253,14 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         if (Rec."Qty. Invoiced" > 0) or (Rec."Qty. to Transfer to Invoice" = 0) then
             exit('Subordinate');
         exit('');
+    end;
+
+    local procedure SetToInvoiceStyle(): Text
+    begin
+        if rec."Qty. to Transfer to Invoice" < rec.Quantity then
+            exit('StrongAccent')
+        else
+            exit('Strong');
     end;
 
     local procedure SetLocationMandatory()

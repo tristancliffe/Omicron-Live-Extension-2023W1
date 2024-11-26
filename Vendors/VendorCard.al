@@ -66,10 +66,17 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
             //ShowMandatory = true; //## This was used before I found out how to make Country appear by default in General Ledger Setup
             trigger OnAfterValidate()
             begin
-                if Rec."Country/Region Code" = 'GB' then begin
-                    Rec."Gen. Bus. Posting Group" := 'UK';
-                    Rec."VAT Bus. Posting Group" := 'UK';
-                    Rec."Vendor Posting Group" := 'UK';
+                case rec."Country/Region Code" of
+                    'GB':
+                        SetPostingGroupsUK();
+                    'US':
+                        SetPostingGroupsNONEU();
+                    'FR':
+                        SetPostingGroupsEU();
+                    'DE':
+                        SetPostingGroupsEU();
+                    'AU':
+                        SetPostingGroupsNONEU();
                 end;
             end;
         }
@@ -120,4 +127,25 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
     begin
         CurrPage.UserControlDesc.SetContent(StrSubstNo('<textarea Id="TextArea" maxlength="%2" style="width:100%;height:50%;resize: none; font-family: &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Segoe, device-segoe, Tahoma, Helvetica, Arial, sans-serif !important; font-size: 11pt !important;" OnChange="window.parent.WebPageViewerHelper.TriggerCallback(document.getElementById(''TextArea'').value)">%1</textarea>', Rec."Vendor Notes", MaxStrLen(Rec."Vendor Notes")));
     end; //! end of large notes field code...
+
+    local procedure SetPostingGroupsUK()
+    begin
+        Rec."Gen. Bus. Posting Group" := 'UK';
+        Rec."VAT Bus. Posting Group" := 'UK';
+        Rec."Vendor Posting Group" := 'UK';
+    end;
+
+    local procedure SetPostingGroupsEU()
+    begin
+        Rec."Gen. Bus. Posting Group" := 'EU';
+        Rec."VAT Bus. Posting Group" := 'EU';
+        Rec."Vendor Posting Group" := 'EU';
+    end;
+
+    local procedure SetPostingGroupsNONEU()
+    begin
+        Rec."Gen. Bus. Posting Group" := 'NON-EU';
+        Rec."VAT Bus. Posting Group" := 'NON-EU';
+        Rec."Vendor Posting Group" := 'NON-EU';
+    end;
 }

@@ -53,6 +53,12 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 Visible = true;
                 Image = Message;
             }
+            field("Job Stock Outstanding"; Rec."Job Stock Outstanding")
+            {
+                DrillDownPageId = "Stock Card List";
+                ApplicationArea = All;
+                Image = Diagnostic;
+            }
         }
         modify("Completed - WIP Not Calculated")
         { Visible = false; }

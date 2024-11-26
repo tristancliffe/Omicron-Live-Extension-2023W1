@@ -39,6 +39,7 @@ tableextension 50100 ItemTableExt extends Item
         {
             CaptionML = ENU = 'Search field';
             DataClassification = CustomerContent;
+            //!OptimizeForTextSearch = true;
         }
         field(50104; NumberOfAttachments; Integer)
         {

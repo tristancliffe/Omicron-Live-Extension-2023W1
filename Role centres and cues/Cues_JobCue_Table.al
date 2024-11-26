@@ -4,7 +4,8 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
     {
         field(50100; OngoingJobs; Integer)
         {
-            CalcFormula = count(Job where(Status = filter(Open)));
+            CalcFormula = count(Job where(Status = filter(Quote | Planning | Open | Paused)));
+            // Rec.SetFilter("Status", 'Planning|Quote|Open|Paused');
             Caption = 'Ongoing Projects';
             FieldClass = FlowField;
             ToolTip = 'Specifies number of currently active (Open) projects';
@@ -60,6 +61,13 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
             CalcFormula = sum("Time Sheet Detail".Quantity where(Status = filter(Open | Submitted)));
             DecimalPlaces = 0 : 2;
             ToolTip = 'Number of ''Open'' or ''Submitted'' hours in timesheets, not approved';
+        }
+        field(50107; "Job Stock Outstanding"; Integer)
+        {
+            FieldClass = FlowField;
+            Caption = 'Job Stock Used';
+            ToolTip = 'Stock used on job that hasn''t been entered.';
+            CalcFormula = count("Stock Used" where(Entered = const(false)));
         }
     }
 }

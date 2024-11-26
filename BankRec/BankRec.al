@@ -23,7 +23,7 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
                 Image = BankAccountStatement;
                 RunObject = Page "Bank Account Statement List";
                 RunPageLink = "Bank Account No." = field("Bank Account No.");
-                RunPageView = sorting("Statement Date") order(descending);
+                RunPageView = sorting("Statement Date") order(ascending);
                 ToolTip = 'View statements for selected bank accounts. For each bank transaction, the report shows a description, an applied amount, a statement amount, and other information.';
             }
         }
@@ -44,6 +44,7 @@ pageextension 50144 BankRecPageExt extends "Bank Acc. Reconciliation"
             actionref(UnMatch_Promoted; RemoveMatch) { }
             actionref(HideMatched_Promoted; NotMatched) { }
             actionref(ShowMatched_Promoted; All) { }
+            actionref(CreateJournalLines; "Transfer to General Journal") { }
             actionref(BankStatements; "Bank Acc. Statements") { }
             actionref(TestReport; "&Test Report") { }
         }

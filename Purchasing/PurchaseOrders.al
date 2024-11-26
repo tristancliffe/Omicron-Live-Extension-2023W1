@@ -4,7 +4,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
     {
         moveafter("Buy-from Vendor Name"; "Your Reference", Status, "Vendor Invoice No.", "Payment Method Code", "Expected Receipt Date", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
-        modify("Your Reference") { ApplicationArea = All; QuickEntry = true; Importance = Standard; InstructionalText = 'What the order is for...'; }
+        modify("Your Reference") { ApplicationArea = All; QuickEntry = true; Importance = Standard; InstructionalText = 'What the order is for...'; ShowMandatory = true; }
         addafter("Vendor Invoice No.")
         {
             field("Order Notes"; Rec."Order Notes") { ApplicationArea = All; QuickEntry = false; Importance = Standard; MultiLine = true; InstructionalText = 'Notes about this order...'; }

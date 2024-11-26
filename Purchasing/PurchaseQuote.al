@@ -6,7 +6,7 @@ pageextension 50134 PurchQuoteExt extends "Purchase Quote"
         movebefore("Buy-from Contact"; "Buy-from Contact No.")
         addafter("Buy-from Vendor Name")
         {
-            field("Your Reference"; Rec."Your Reference") { ApplicationArea = All; QuickEntry = true; InstructionalText = 'What the order is for...'; }
+            field("Your Reference"; Rec."Your Reference") { ApplicationArea = All; QuickEntry = true; InstructionalText = 'What the order is for...'; ShowMandatory = true; }
         }
         addafter(Status)
         {

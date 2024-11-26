@@ -29,7 +29,6 @@ permissionset 50100 OmicronPermissions
         page "Job Planning Lines All" = X,
         report "Timesheet Instructions" = X,
         page "Job Cues" = X,
-        report "Item Prices" = X,
         page "Item Vendor List Factbox" = X,
         page "Job Journal Factbox" = X,
         codeunit "Shpfy Order Line Dim" = X,
@@ -38,5 +37,7 @@ permissionset 50100 OmicronPermissions
         tabledata "Stock Used" = RIMD,
         table "Stock Used" = X,
         page "Stock Used Subform" = X,
-        page "Stock Card Page" = X;
+        page "Stock Card Page" = X,
+        page "Stock Card List" = X,
+        page "API Job Planning Lines" = X;
 }

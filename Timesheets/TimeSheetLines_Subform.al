@@ -117,6 +117,41 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 RunPageLink = "No." = field("Job No.");
             }
         }
+        addlast(Line)
+        {
+            //     action(Approve2)
+            //     {
+            //         ApplicationArea = Jobs;
+            //         Caption = 'Approve2';
+            //         Ellipsis = true;
+            //         Image = ReleaseDoc;
+            //         ToolTip = 'Approve the lines on the time sheet. Each line must have a Type defined.';
+            //         Scope = Repeater;
+            //         Enabled = ApproveLineEnabled;
+            //         Visible = Device;
+
+            //         trigger OnAction()
+            //         begin
+            //             ApproveLines();
+            //         end;
+            //     }
+            //     action(ReopenApproved2)
+            //     {
+            //         ApplicationArea = Jobs;
+            //         Caption = '&Reopen2';
+            //         Image = ReOpen;
+            //         Scope = Repeater;
+            //         Gesture = LeftSwipe;
+            //         ToolTip = 'Reopen the approved or rejected time sheet line. Line must have a Type defined.';
+            //         Enabled = ReopenApprovedLineEnabled;
+            //         Visible = Device;
+
+            //         trigger OnAction()
+            //         begin
+            //             ReopenApprovedLines();
+            //         end;
+            //     }
+        }
     }
 
     trigger OnAfterGetRecord()
@@ -131,6 +166,9 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         Device: Boolean;
         WorkDoneStyle: Boolean;
         AbsenceStyle: Boolean;
+    // RefActionType: Option Submit,ReopenSubmitted,Approve,ReopenApproved,Reject;
+    // TimeSheetMgt: Codeunit "Time Sheet Management";
+    // TimeSheetApprovalMgt: Codeunit "Time Sheet Approval Management";
 
     trigger OnOpenPage()
     begin
@@ -154,4 +192,67 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
         ELSE
             CanEdit := FALSE;
     end;
+
+    // local procedure ApproveLines()
+    // var
+    //     IsHandled: Boolean;
+    // begin
+    //     IsHandled := false;
+    //     OnBeforeApproveLines2(Rec, IsHandled);
+    //     if IsHandled then
+    //         exit;
+
+    //     case ShowDialog2(RefActionType::Approve) of
+    //         1:
+    //             Process(RefActionType::Approve, true);
+    //         2:
+    //             Process(RefActionType::Approve, false);
+    //     end;
+    // end;
+
+    // local procedure ReopenApprovedLines()
+    // var
+    //     IsHandled: Boolean;
+    // begin
+    //     IsHandled := false;
+    //     OnBeforeReopenApprovedLines2(Rec, IsHandled);
+    //     if IsHandled then
+    //         exit;
+
+    //     case ShowDialog2(RefActionType::ReopenApproved) of
+    //         1:
+    //             Process(RefActionType::ReopenApproved, true);
+    //         2:
+    //             Process(RefActionType::ReopenApproved, false);
+    //     end;
+    // end;
+
+    // local procedure ShowDialog2(ActionType: Option Submit,ReopenSubmitted,Approve,ReopenApproved,Reject): Integer
+    // begin
+    //     exit(StrMenu(GetDialogText2(ActionType), 2, TimeSheetApprovalMgt.GetCommonTimeSheetDialogInstruction(ActionType)));
+    // end;
+
+    // [IntegrationEvent(false, false)]
+    // local procedure OnBeforeApproveLines2(var TimeSheetLine: Record "Time Sheet Line"; var IsHandled: Boolean);
+    // begin
+    // end;
+
+    // [IntegrationEvent(false, false)]
+    // local procedure OnBeforeReopenApprovedLines2(var TimeSheetLine: Record "Time Sheet Line"; var IsHandled: Boolean);
+    // begin
+    // end;
+
+    // local procedure GetDialogText2(ActionType: Option Submit,ReopenSubmitted,Approve,ReopenApproved,Reject): Text
+    // var
+    //     TimeSheetLine: Record "Time Sheet Line";
+    // begin
+    //     FilterAllLines(TimeSheetLine, ActionType);
+    //     exit(TimeSheetApprovalMgt.GetCommonTimeSheetActionDialogText(ActionType, TimeSheetLine.Count()));
+    // end;
+
+    // local procedure FilterAllLines(var TimeSheetLine: Record "Time Sheet Line"; ActionType: Option Submit,ReopenSubmitted,Approve,ReopenApproved,Reject)
+    // begin
+    //     TimeSheetLine.CopyFilters(Rec);
+    //     TimeSheetMgt.FilterAllTimeSheetLines(TimeSheetLine, ActionType);
+    // end;
 }

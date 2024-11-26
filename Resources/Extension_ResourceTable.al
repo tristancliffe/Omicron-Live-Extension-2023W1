@@ -7,6 +7,7 @@ tableextension 50106 ResourceTable extends Resource
             CaptionML = ENU = 'Resource Notes';
             DataClassification = CustomerContent;
             ToolTip = 'Resource notes';
+            //! OptimizeForTextSearch = true;
         }
     }
     fieldgroups

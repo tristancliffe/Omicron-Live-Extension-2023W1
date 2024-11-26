@@ -32,6 +32,8 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 DecimalPlaces = 0 : 2;
             }
         }
+        movebefore("Qty. to Assign"; "VAT Prod. Posting Group")
+        modify("VAT Prod. Posting Group") { Visible = true; Style = AttentionAccent; }
         addafter("Qty. Assigned")
         {
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")

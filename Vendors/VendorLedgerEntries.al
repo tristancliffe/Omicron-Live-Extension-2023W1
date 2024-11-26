@@ -49,21 +49,20 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
                 PromotedOnly = true;
                 Scope = Repeater;
             }
-            // action(VendorLedger)
-            // {
-            //     ApplicationArea = All;
-            //     Image = VendorLedger;
-            //     Caption = 'Vendor Ledger';
-            //     RunObject = page "Vendor Ledger Entries";
-            //     RunPageLink = "Vendor No." = field("Vendor No.");
-            //     Description = 'Open the vendor list.';
-            //     ToolTip = 'Opens the vendor ledger entries for this vendor.';
-            //     Visible = true;
-            //     Enabled = true;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     PromotedOnly = true;
-            // }
+            action(PostedInvoices)
+            {
+                ApplicationArea = All;
+                Caption = 'Posted Invoices';
+                Image = PurchaseInvoice;
+                RunObject = Page "Posted Purchase Invoices";
+                RunPageLink = "Buy-from Vendor No." = field("Vendor No.");
+                RunPageView = sorting("Buy-from Vendor No.", "Order No.");
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+                Scope = Repeater;
+                ToolTip = 'View all posted invoices for this vendor.';
+            }
         }
     }
 

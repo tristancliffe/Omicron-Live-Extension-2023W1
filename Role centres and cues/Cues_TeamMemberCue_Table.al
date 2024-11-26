@@ -48,10 +48,7 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
             DecimalPlaces = 0 : 2;
         }
         field(50106; TwoLastMonth; Date)
-        {
-            Editable = false;
-            FieldClass = FlowFilter;
-        }
+        { Editable = false; FieldClass = FlowFilter; }
 
         field(50107; HoursWorkedTwoLastMonth; Decimal)
         {

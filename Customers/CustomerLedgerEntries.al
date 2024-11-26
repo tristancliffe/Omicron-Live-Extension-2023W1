@@ -48,6 +48,7 @@ pageextension 50155 CustLedgerEntriesExt extends "Customer Ledger Entries"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
+                Scope = Repeater;
                 ToolTip = 'View all posted invoices for this customer.';
             }
         }

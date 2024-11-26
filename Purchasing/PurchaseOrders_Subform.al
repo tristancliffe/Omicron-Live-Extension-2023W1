@@ -47,7 +47,8 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         modify("Item Reference No.")
         { Visible = false; }
         modify("Promised Receipt Date") { Visible = false; }
-        moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group", "VAT Prod. Posting Group", "Job No.", "Job Task No.", "Job Line Type", "Job Unit Price", "Job Line Amount", "Job Line Amount (LCY)")
+        movebefore("Qty. to Receive"; "VAT Prod. Posting Group")
+        moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group", "Job No.", "Job Task No.", "Job Line Type", "Job Unit Price", "Job Line Amount", "Job Line Amount (LCY)")
         modify("VAT Prod. Posting Group") { Visible = true; Style = AttentionAccent; }
         modify("Job No.")
         {
@@ -202,6 +203,19 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 Scope = Repeater;
                 Visible = true;
                 Enabled = Rec.Type = Rec.Type::Item;
+            }
+            action(GLLedgerLink)
+            {
+                ApplicationArea = All;
+                Image = GLJournal;
+                Caption = 'G/L Ledger';
+                RunObject = page "General Ledger Entries";
+                RunPageLink = "G/L Account No." = field("No.");
+                Description = 'See the G/L Ledger for this line';
+                ToolTip = 'Opens the G/L Ledger for this line';
+                Scope = Repeater;
+                Visible = true;
+                Enabled = Rec.Type = Rec.Type::"G/L Account";
             }
             action(DocAttach2)
             {

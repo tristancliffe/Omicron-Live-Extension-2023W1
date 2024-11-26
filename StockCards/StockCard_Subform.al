@@ -1,7 +1,7 @@
 page 50112 "Stock Used Subform"
 {
     ApplicationArea = All;
-    Caption = 'Stock Used Subform';
+    Caption = 'Stock Used';
     PageType = ListPart;
     SourceTable = "Stock Used";
     DelayedInsert = true;
@@ -20,39 +20,60 @@ page 50112 "Stock Used Subform"
                 { Editable = false; Visible = false; }
                 field(Entered; Rec.Entered)
                 {
-                    Visible = Device;
+                    Visible = true;
+                    Editable = false;
                 }
                 field("Date"; Rec."Date")
                 {
                     Editable = Posted;
+                    Width = 12;
                 }
                 field(StockQty; Rec.StockQty)
                 {
                     Editable = Posted;
+                    ShowMandatory = true;
+                    Width = 10;
+
+                    trigger OnValidate()
+                    begin
+                        if format(rec.Date) = '' then
+                            rec.date := Today();
+                    end;
                 }
                 field("Item No."; Rec."Item No.")
                 {
                     Editable = Posted;
+                    Width = 12;
 
-                    // trigger OnValidate()
-                    // var
-                    //     Item: Record Item;
-                    // begin
-                    //     if Item.Get(Rec."Item No.") then begin
-                    //         Rec.Validate(Description, Item.Description);
-                    //     end;
-                    // end;
+                    trigger OnValidate()
+                    begin
+                        if format(rec.Date) = '' then
+                            rec.date := Today();
+                    end;
                 }
                 field("Stock Name"; Rec."Stock Name")
                 {
+                    Caption = 'Description of parts';
                     Editable = Posted;
-                    InstructionalText = 'Description of parts used';
+                    InstructionalText = 'Description of part(s) used';
+                    ShowMandatory = true;
+                    Width = 70;
+
+                    trigger OnValidate()
+                    begin
+                        if format(rec.Date) = '' then
+                            rec.date := Today();
+                    end;
                 }
                 field(Description; Rec.Description)
                 {
                     Editable = Posted;
-                    InstructionalText = 'Description of parts used';
                     Style = Subordinate;
+                    Visible = false;
+                }
+                field(LastOne; Rec.LastOne)
+                {
+                    Editable = Posted;
                 }
                 field("Resource No."; Rec."Resource No.")
                 {
@@ -64,6 +85,7 @@ page 50112 "Stock Used Subform"
     var
         Device: Boolean;
         Posted: Boolean;
+        ManagerTimeSheet: Boolean;
 
     trigger OnOpenPage()
     begin
@@ -84,5 +106,10 @@ page 50112 "Stock Used Subform"
     begin
         Posted := true;
         if Rec.Entered = true then Posted := false;
+    end;
+
+    procedure SetManagerTimeSheetMode()
+    begin
+        ManagerTimeSheet := true;
     end;
 }

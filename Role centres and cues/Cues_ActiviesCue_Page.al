@@ -32,7 +32,7 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 Image = Diagnostic;
             }
         }
-        addafter("Overdue Purch. Invoice Amount")
+        addbefore("Overdue Purch. Invoice Amount")
         {
             field("Pending Sales Invoice Amount"; Rec."Pending Sales Invoice Amount")
             {
@@ -90,6 +90,6 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
 
     trigger OnOpenPage()
     begin
-        Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW', WorkDate()));
+        Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW+2D', WorkDate()));
     end;
 }

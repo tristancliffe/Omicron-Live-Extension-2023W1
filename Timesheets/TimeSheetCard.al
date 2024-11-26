@@ -58,6 +58,42 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
     {
         addlast("F&unctions")
         {
+            // action(Approve2)
+            // {
+            //     ApplicationArea = Jobs;
+            //     Caption = 'Approve2';
+            //     Image = ReleaseDoc;
+            //     Enabled = true;
+            //     Visible = Device;
+            //     ToolTip = 'Approve all submitted time sheet lines. Each line must have a Type defined. For dedicated line approval select the Approve action on the lines section.';
+            //     Promoted = true;
+            //     PromotedOnly = true;
+            //     PromotedCategory = Process;
+            //     Scope = Repeater;
+
+            //     trigger OnAction()
+            //     begin
+            //         ApproveLines2();
+            //     end;
+            // }
+            // action(ReopenApproved2)
+            // {
+            //     ApplicationArea = Jobs;
+            //     Caption = 'Reopen2';
+            //     Image = ReOpen;
+            //     Enabled = true;
+            //     Visible = Device;
+            //     ToolTip = 'Reopen all approved or rejected time sheet lines. Each line must have a Type defined. For dedicated line reopen select the Reopen action on the lines section.';
+            //     Promoted = true;
+            //     PromotedOnly = true;
+            //     PromotedCategory = Process;
+            //     Scope = Repeater;
+
+            //     trigger OnAction()
+            //     begin
+            //         ReopenApprovedLines2();
+            //     end;
+            // }
             action(ManagerTimeSheet)
             {
                 Caption = 'Manager Time Sheets';
@@ -161,12 +197,12 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
         if IsHandled then
             exit;
 
-        if not CheckResourceEmployment(RefActionType::Submit, Rec."Resource No.") then
+        if not CheckResourceEmployment2(RefActionType::Submit, Rec."Resource No.") then
             if TimeSheetApprovalMgt.ConfirmAction(RefActionType::Submit) then
                 Process(RefActionType::Submit);
     end;
 
-    local procedure CheckResourceEmployment(ActionType: Option Submit,Reopen,Approve,ReopenApproved,Reject; ResourceNo: Code[20]): Boolean
+    local procedure CheckResourceEmployment2(ActionType: Option Submit,Reopen,Approve,ReopenApproved,Reject; ResourceNo: Code[20]): Boolean
     var
         Resource: Record Resource;
     begin
@@ -184,4 +220,35 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
     local procedure OnBeforeSubmitLines2(var TimeSheetHeader: Record "Time Sheet Header"; var IsHandled: Boolean);
     begin
     end;
+
+    // local procedure OnBeforeReopenLines2(var TimeSheetHeader: Record "Time Sheet Header"; var IsHandled: Boolean);
+    // begin
+    // end;
+
+    // local procedure ApproveLines2()
+    // var
+    //     IsHandled: Boolean;
+    // begin
+    //     IsHandled := false;
+    //     OnBeforeSubmitLines2(Rec, IsHandled);
+    //     if IsHandled then
+    //         exit;
+
+    //     if not CheckResourceEmployment2(RefActionType::Approve, Rec."Resource No.") then
+    //         if TimeSheetApprovalMgt.ConfirmAction(RefActionType::Approve) then
+    //             Process(RefActionType::Approve);
+    // end;
+
+    // local procedure ReopenApprovedLines2()
+    // var
+    //     IsHandled: Boolean;
+    // begin
+    //     IsHandled := false;
+    //     OnBeforeReopenLines2(Rec, IsHandled);
+    //     if IsHandled then
+    //         exit;
+
+    //     if TimeSheetApprovalMgt.ConfirmAction(RefActionType::ReopenApproved) then
+    //         Process(RefActionType::ReopenApproved);
+    // end;
 }

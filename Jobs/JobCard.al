@@ -6,7 +6,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         addafter(Description)
         {
             field("Car Make/Model"; Rec."Car Make/Model") { MultiLine = false; ApplicationArea = All; ShowMandatory = true; }
-            field("Project Notes"; Rec."Job Notes") { MultiLine = true; ApplicationArea = All; QuickEntry = false; InstructionalText = 'Summary of job tasks required...'; }
+            field("Project Notes"; Rec."Job Notes") { MultiLine = true; ApplicationArea = All; ShowCaption = false; QuickEntry = false; InstructionalText = 'Summary of job tasks required...'; }
         }
         modify(Status)
         {
@@ -27,6 +27,24 @@ pageextension 50111 JobCardExt extends "Job Card"
             field(Mileage; Rec.Mileage) { ApplicationArea = All; ShowMandatory = true; InstructionalText = 'Mileage with units'; }
             field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; ShowMandatory = true; }
             field("Customer Balance"; Rec."Customer Balance") { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
+            field("Job Customer Notes"; CustomerNotes)
+            {
+                MultiLine = true;
+                Caption = 'Customer Notes';
+                ShowCaption = false;
+                InstructionalText = 'Customer Notes';
+                ApplicationArea = All;
+                Importance = Standard;
+                ToolTip = 'This SHOULD be the customer notes brought across to the job';
+                QuickEntry = false;
+                Editable = true;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer Notes" := CustomerNotes;
+                    RecCustomer.Modify()
+                end;
+            }
         }
         moveafter("No."; Status)
         modify("Bill-to County") { Importance = Additional; }
@@ -87,9 +105,10 @@ pageextension 50111 JobCardExt extends "Job Card"
                 Caption = 'Stock Card';
                 Image = ItemLines;
                 ApplicationArea = All;
-                RunObject = Page "Stock Card Page";
-                RunPageLink = "No." = field("No.");
-                ToolTip = 'Takes the user to the Stock Card of the selected line as filled in by staff';
+                RunObject = Page "Stock Card List";
+                RunPageView = where(Entered = const(false));
+                RunPageLink = "Job No." = field("No.");
+                ToolTip = 'Opens the stock used list for the selected job';
                 Visible = true;
             }
             action(JobJournal)
@@ -104,7 +123,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             action(CustomerCard)
             {
                 ApplicationArea = All;
-                Image = Item;
+                Image = Customer;
                 Caption = 'Customer Card';
                 RunObject = page "Customer Card";
                 RunPageLink = "No." = field("Sell-to Customer No.");
@@ -225,6 +244,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 actionref(ExcelJobInvoicing; "Report Job Invoicing Excel") { }
                 actionref(PreviewQuote_Promoted; "Report Job Quote") { }
                 actionref(SuggestedBilling_Promoted; "Job - Suggested Billing") { }
+                actionref("Stock Card"; StockCard) { }
                 actionref(JobCard; "Job Card") { }
                 actionref(WorkshopRequest; "Workshop Request") { }
                 actionref(JobInvoiceTemplate; "Job Invoice") { }
@@ -244,10 +264,49 @@ pageextension 50111 JobCardExt extends "Job Card"
         TimesheetReport: Report "Timesheet Entries";
         JobInvoice: Report "Job Create Sales Invoice";
         ShowMapLbl: Label 'Show address on map';
+        CustomerNotes: Text[2000];
+        RecCustomer: Record Customer;
 
     procedure RunTimesheetReport()
     begin
         Job.SetFilter("No.", Rec."No.");
         TimesheetReport.SetTableView(Job);
+    end;
+
+    trigger OnInsertRecord(BelowXRec: Boolean): Boolean
+    begin
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            //MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+    end;
+
+    trigger OnOpenPage()
+    begin
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            //MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            //MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            CustomerNotes := RecCustomer."Customer Notes";
+            //MobileNo := RecCustomer."Mobile Phone No.";
+        end;
     end;
 }

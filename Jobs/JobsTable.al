@@ -24,7 +24,6 @@ tableextension 50105 JobNotes extends Job
                 VarStock: Code[10];
                 VarSubContr: Code[11];
                 VarTransp: Code[10];
-                VarAdmin: Code[5];
                 Workshop: Code[10];
                 PartsDept: Code[10];
                 JobPostingGroup: Code[3];
@@ -34,7 +33,6 @@ tableextension 50105 JobNotes extends Job
                 VarStock := 'STOCK';
                 VarSubContr := 'SUBCONTRACT';
                 VarTransp := 'TRANSPORT';
-                VarAdmin := 'ADMIN';
                 Workshop := 'WORKSHOP';
                 PartsDept := 'PARTSDEPT';
                 JobPostingGroup := 'JOB';
@@ -229,40 +227,6 @@ tableextension 50105 JobNotes extends Job
                     end;
                 end;
 
-                //CREATE DEFAULT TASK FOR ADMIN
-                if StrPos(rec."No.", 'J') = 1 then begin
-                    DefaultTask.Reset();
-                    DefaultTask.SetRange("Job No.", Rec."No.");
-                    DefaultTask.SetRange("Job Task No.", VarAdmin);
-                    if not DefaultTask.FindFirst() then begin
-                        DefaultTask.Init();
-                        DefaultTask."Job No." := Rec."No.";
-                        DefaultTask."Job Task No." := VarAdmin;
-                        DefaultTask.Description := 'Admin and clerical time';
-                        DefaultTask."Job Task Type" := DefaultTask."Job Task Type"::Posting;
-                        DefaultTask."Job Posting Group" := JobPostingGroup;
-                        DefaultTask.Insert();
-                        DefaultTaskDimension.Init();
-                        DefaultTaskDimension."Job No." := Rec."No.";
-                        DefaultTaskDimension."Job Task No." := VarAdmin;
-                        DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
-                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                        DefaultTaskDimension.Insert();
-                        DefaultTaskDimension.Init();
-                        DefaultTaskDimension."Job No." := Rec."No.";
-                        DefaultTaskDimension."Job Task No." := VarAdmin;
-                        DefaultTaskDimension.Validate("Dimension Code", 'JOB NO');
-                        DefaultTaskDimension.Validate("Dimension Value Code", Rec."No.");
-                        DefaultTaskDimension.Insert();
-                        DefaultTaskDimension.Init();
-                        DefaultTaskDimension."Job No." := Rec."No.";
-                        DefaultTaskDimension."Job Task No." := VarAdmin;
-                        DefaultTaskDimension.Validate("Dimension Code", 'PROJECTTYPE');
-                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
-                        DefaultTaskDimension.Insert();
-                    end;
-                end;
-
                 //CREATE DEFAULT TASK FOR PARTS JOB LABOUR
                 if StrPos(rec."No.", 'P') = 1 then begin
                     DefaultTask.Reset();
@@ -337,7 +301,7 @@ tableextension 50105 JobNotes extends Job
             //! OptimizeForTextSearch = true;
         }
         field(50105; "Work Required"; Text[500])
-        { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; }
+        { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; } //! OptimizeForTextSearch = true; }
         field(50106; "Sell-to Mobile Number"; Text[30])
         { Caption = 'Mobile No.'; DataClassification = CustomerContent; ExtendedDatatype = PhoneNo; }
         field(50107; TotalHours; Decimal)
