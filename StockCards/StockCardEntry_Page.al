@@ -1,9 +1,10 @@
-page 50112 "Stock Used Subform"
+page 50115 "Stock Entry List"
 {
+    PageType = List;
     ApplicationArea = All;
-    Caption = 'Stock Used';
-    PageType = ListPart;
+    UsageCategory = Lists;
     SourceTable = "Stock Used";
+    Caption = 'Your Stock Card';
     DelayedInsert = true;
     AutoSplitKey = true;
     SourceTableView = sorting("Date", "Line No.") order(ascending);
@@ -16,7 +17,7 @@ page 50112 "Stock Used Subform"
             repeater(General)
             {
                 field("Line No."; Rec."Line No.") { Editable = false; Visible = false; }
-                field("Job No."; Rec."Job No.") { Editable = false; Visible = false; }
+                field("Job No."; Rec."Job No.") { Editable = Posted; }
                 field(Entered; Rec.Entered) { Visible = true; Editable = false; }
                 field("Date"; Rec."Date") { Editable = Posted; Width = 12; }
                 field(StockQty; Rec.StockQty)
@@ -62,6 +63,26 @@ page 50112 "Stock Used Subform"
                 field(Description; Rec.Description) { Editable = Posted; Style = Subordinate; Visible = false; }
                 //field(LastOne; Rec.LastOne) { Editable = Posted; }
                 field("Resource No."; Rec."Resource No.") { Editable = false; }
+            }
+        }
+    }
+    actions
+    {
+        area(Navigation)
+        {
+            action(StockCard)
+            {
+                Caption = 'Job Stock Card';
+                Image = ItemLines;
+                ApplicationArea = All;
+                RunObject = Page "Stock Card Page";
+                RunPageLink = "No." = field("Job No.");
+                ToolTip = 'Takes the user to the Stock Card of the selected job as filled in by staff';
+                Visible = true;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+                Scope = Repeater;
             }
         }
     }

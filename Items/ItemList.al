@@ -174,6 +174,7 @@ pageextension 50101 ItemListExtension extends "Item List"
             view(Instock) { Caption = 'In Stock'; Filters = where("Inventory" = filter('>0')); }
             view(NonInventory) { Caption = 'Non-Inventory'; Filters = where(Type = const("Non-Inventory")); }
             view(Services) { Caption = 'Services'; Filters = where(Type = const(Service)); }
+            view(NotShopify) { Caption = 'Not on Shop'; Filters = where(OnShopify = const(false), QtySold = filter('>0'), "Unit Price" = filter('>0')); }
         }
     }
 

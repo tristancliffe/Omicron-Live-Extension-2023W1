@@ -6,6 +6,7 @@ page 50113 "Stock Card List"
     SourceTable = "Stock Used";
     UsageCategory = Lists;
     SourceTableView = sorting("Job No.", Date, "Line No.") order(ascending);
+    Editable = true;
 
     layout
     {
@@ -13,49 +14,15 @@ page 50113 "Stock Card List"
         {
             repeater(General)
             {
-                field(Entered; Rec.Entered)
-                {
-                    Editable = Device;
-                }
-                field("Job No."; Rec."Job No.")
-                {
-                    Editable = Posted;
-                }
-                field("Date"; Rec."Date")
-                {
-                    Editable = Posted;
-                }
-                field("Item No."; Rec."Item No.")
-                {
-                    ToolTip = 'Specifies the value of the Part No. field.', Comment = '%';
-                    Editable = Posted;
-                }
-                field("Stock Name"; Rec."Stock Name")
-                {
-                    Caption = 'Staff''s Description';
-                    ToolTip = 'Technicians name for the item.';
-                    Editable = Posted;
-                }
-                field(Description; Rec.Description)
-                {
-                    Caption = 'System''s Description';
-                    ToolTip = 'Specifies the value of the Description field.', Comment = '%';
-                    Editable = Posted;
-                }
-                field(StockQty; Rec.StockQty)
-                {
-                    ToolTip = 'Specifies the value of the Qty field.', Comment = '%';
-                    Editable = Posted;
-                }
-                field(LastOne; Rec.LastOne)
-                {
-                    Editable = Posted;
-                }
-                field("Resource No."; Rec."Resource No.")
-                {
-                    ToolTip = 'Specifies the value of the Resource No. field.', Comment = '%';
-                    Editable = false;
-                }
+                field(Entered; Rec.Entered) { Editable = Device; }
+                field("Job No."; Rec."Job No.") { Editable = Posted; }
+                field("Date"; Rec."Date") { Editable = Posted; }
+                field("Item No."; Rec."Item No.") { ToolTip = 'Specifies the value of the Part No. field.', Comment = '%'; Editable = Posted; }
+                field("Stock Name"; Rec."Stock Name") { Caption = 'Staff''s Description'; ToolTip = 'Technicians name for the item.'; Editable = Posted; }
+                field(Description; Rec.Description) { Caption = 'System''s Description'; ToolTip = 'Specifies the value of the Description field.', Comment = '%'; Editable = Posted; }
+                field(StockQty; Rec.StockQty) { ToolTip = 'Specifies the value of the Qty field.', Comment = '%'; Editable = Posted; }
+                //field(LastOne; Rec.LastOne) { Editable = Posted; }
+                field("Resource No."; Rec."Resource No.") { ToolTip = 'Specifies the value of the Resource No. field.', Comment = '%'; Editable = false; }
             }
         }
     }

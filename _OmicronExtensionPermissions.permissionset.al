@@ -39,5 +39,6 @@ permissionset 50100 OmicronPermissions
         page "Stock Used Subform" = X,
         page "Stock Card Page" = X,
         page "Stock Card List" = X,
-        page "API Job Planning Lines" = X;
+        page "API Job Planning Lines" = X,
+        page "Stock Entry List" = X;
 }

@@ -34,8 +34,6 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Visible = false;
             }
         }
-        modify(SubBillingActivities)
-        { Visible = false; }
         movelast(rolecenter; "Job Queue Tasks Activities", ApprovalsActivities)
     }
     actions

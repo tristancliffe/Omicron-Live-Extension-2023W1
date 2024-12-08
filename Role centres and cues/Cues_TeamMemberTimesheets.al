@@ -31,6 +31,25 @@ pageextension 50161 TeamMemberTimeSheetCues extends "Team Member Activities"
                     Visible = true;
                     Image = Checklist;
                 }
+                field(StockList; Rec.StockList)
+                {
+                    ApplicationArea = Basic, Suite;
+                    //DrillDownPageID = "Stock Entry List";
+                    DrillDown = true;
+                    Caption = 'Stock Used';
+                    Visible = true;
+                    Image = Checklist;
+
+                    trigger OnDrillDown()
+                    var
+                        StockList: Record "Stock Used";
+                    begin
+                        StockList.Reset();
+                        StockList.SetRange("Resource No.", UserId);
+                        if not StockList.IsEmpty then
+                            Page.Run(Page::"Stock Entry List", StockList);
+                    end;
+                }
             }
         }
         addafter("Open Time Sheets")

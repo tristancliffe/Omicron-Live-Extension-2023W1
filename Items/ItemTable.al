@@ -50,6 +50,20 @@ tableextension 50100 ItemTableExt extends Item
                                                             "No." = field("No.")));
             ToolTip = 'Number of attachments to this record. These can simply exist, or be transferred to sales/purchase documents for processing/printing/emails with orders.';
         }
+        field(50105; OnShopify; Boolean)
+        {
+            FieldClass = FlowField;
+            CalcFormula = exist("Shpfy Variant" where("Item No." = field("No.")));
+            ToolTip = 'True if this is listed on Shopify';
+            Caption = 'On Shopify';
+        }
+        field(50106; QtySold; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = sum("Sales Invoice Line".Quantity where(Type = filter('Item'), "No." = field("No.")));
+            Caption = 'Qty. Sold';
+            ToolTip = 'Sum of quantity of this part number appearing on posted sales invoice lines.';
+        }
     }
     fieldgroups
     {

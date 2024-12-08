@@ -13,8 +13,15 @@ table 50100 "Stock Used"
         field(2; "Job No."; Code[20])
         {
             Caption = 'Project No.';
-            TableRelation = Job."No.";//where(Status = filter(Open));
             ToolTip = 'Specifies the value of the Project No. field.', Comment = '%';
+            TableRelation = Job where(Status = filter(Open));
+
+            trigger OnValidate()
+            begin
+                if "Job No." <> '' then begin
+                    Job.Get("Job No.");
+                end;
+            end;
         }
         field(3; "Entered"; Boolean)
         {
@@ -74,14 +81,21 @@ table 50100 "Stock Used"
         {
             Caption = 'Last';
             ToolTip = 'Last one in stock - message for parts department to order more';
+            ObsoleteState = Pending;
+            ObsoleteReason = 'No longer used - staff recommended to tell management in person.';
         }
     }
+
 
     keys
     {
         key(Line; "Job No.", "Line No.") { Clustered = true; }
         key(Date; Date) { }
     }
+
+    var
+        Job: Record Job;
+
     trigger OnDelete()
     begin
         if Rec.Entered = true then begin

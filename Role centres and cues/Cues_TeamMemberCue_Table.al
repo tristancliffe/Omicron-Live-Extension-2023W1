@@ -67,5 +67,12 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
             FieldClass = FlowField;
             ToolTip = 'Specifies number of currently active (Open) projects';
         }
+        field(50109; StockList; Integer)
+        {
+            Caption = 'Stock Used List';
+            ToolTip = 'Number of stock entries made';
+            FieldClass = FlowField;
+            CalcFormula = count("Stock Used" where("Resource No." = filter('%USER'), Entered = const(false)));
+        }
     }
 }

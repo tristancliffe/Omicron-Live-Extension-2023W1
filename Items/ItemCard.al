@@ -44,6 +44,7 @@ pageextension 50100 ItemCardExtension extends "Item Card"
             // }
             field("Model"; Rec."Model") { ApplicationArea = All; Caption = 'Car Make/Model'; ShowMandatory = true; }
             field("Supplier"; Rec."Supplier") { ApplicationArea = All; Caption = 'Old Supplier Ref'; }
+            field(OnShopify; Rec.OnShopify) { ApplicationArea = All; Editable = false; }
             group("NonStockGroup")
             {
                 visible = NonStockShelfVisible;
@@ -51,6 +52,10 @@ pageextension 50100 ItemCardExtension extends "Item Card"
 
                 field("NonStockShelf"; Rec.NonStockShelf) { ApplicationArea = All; Caption = 'Shelf No.'; }
             }
+        }
+        addbefore(StockoutWarningDefaultYes)
+        {
+            field(QtySold; Rec.QtySold) { ApplicationArea = All; Editable = false; }
         }
         movelast(Item; "Tariff No.")
         moveafter(Blocked; "Unit Cost", "Unit Price")
