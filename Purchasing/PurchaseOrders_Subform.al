@@ -4,8 +4,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
     {
         addbefore(Type)
         {
-            field(IsJobLine; IsJobLine)
-            { ApplicationArea = all; Caption = 'Job Line'; Editable = false; QuickEntry = false; }
+            field(IsJobLine; IsJobLine) { ApplicationArea = all; Caption = 'Job Line'; Editable = false; QuickEntry = false; }
         }
         modify("No.")
         {
@@ -19,16 +18,33 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                         message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
             end;
         }
-        modify(Description)
-        { StyleExpr = CommentStyle; }
-        modify(Quantity)
-        { style = Strong; }
-        modify("Bin Code")
-        { Visible = false; }
+        modify(Description) { StyleExpr = CommentStyle; }
+        modify(Quantity) { style = Strong; }
+        modify("Bin Code") { Visible = false; }
+        addafter("Location Code")
+        {
+            field(ShelfNo_PurchLine; Rec.ShelfNo_PurchLine)
+            {
+                ApplicationArea = All;
+                Caption = 'Shelf';
+                Editable = false;
+                ToolTip = 'Shelf location in our stores';
+
+                trigger OnDrillDown()
+                var
+                    Items: Record Item;
+                begin
+                    Items.Reset();
+                    Items.SetFilter("Shelf No.", Rec.ShelfNo_PurchLine);
+                    if not Items.IsEmpty then
+                        Page.Run(Page::"Item List", Items);
+                end;
+            }
+        }
+        modify("Location Code") { Visible = false; }
         addafter(Description)
         {
-            field("Vendor Item No.40789"; Rec."Vendor Item No.")
-            { ApplicationArea = All; }
+            field("Vendor Item No.40789"; Rec."Vendor Item No.") { ApplicationArea = All; }
         }
         addafter("Unit of Measure Code")
         {
@@ -44,8 +60,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 DecimalPlaces = 0 : 2;
             }
         }
-        modify("Item Reference No.")
-        { Visible = false; }
+        modify("Item Reference No.") { Visible = false; }
         modify("Promised Receipt Date") { Visible = false; }
         movebefore("Qty. to Receive"; "VAT Prod. Posting Group")
         moveafter("Expected Receipt Date"; "Gen. Prod. Posting Group", "Job No.", "Job Task No.", "Job Line Type", "Job Unit Price", "Job Line Amount", "Job Line Amount (LCY)")

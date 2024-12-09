@@ -22,7 +22,16 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                     ApplicationArea = All;
                     Caption = 'Shelf';
                     Visible = true;
-                    DrillDown = false;
+
+                    trigger OnDrillDown()
+                    var
+                        Items: Record Item;
+                    begin
+                        Items.Reset();
+                        Items.SetFilter("Shelf No.", Rec."Shelf No.");
+                        if not Items.IsEmpty then
+                            Page.Run(Page::"Item List", Items);
+                    end;
                 }
                 field(ItemCost; Rec."Unit Cost")
                 {

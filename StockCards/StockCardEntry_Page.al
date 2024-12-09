@@ -9,6 +9,7 @@ page 50115 "Stock Entry List"
     AutoSplitKey = true;
     SourceTableView = sorting("Date", "Line No.") order(ascending);
     Editable = true;
+    AnalysisModeEnabled = false;
 
     layout
     {
@@ -17,7 +18,22 @@ page 50115 "Stock Entry List"
             repeater(General)
             {
                 field("Line No."; Rec."Line No.") { Editable = false; Visible = false; }
-                field("Job No."; Rec."Job No.") { Editable = Posted; }
+                field("Job No."; Rec."Job No.")
+                {
+                    Editable = Posted;
+
+                    trigger OnDrillDown()
+                    var
+                        Job: Record Job;
+                    begin
+                        Job.Reset();
+                        Job.SetFilter("No.", Rec."Job No.");
+                        if Job.FindFirst() then
+                            Message('%1 - %2 \ Reg. No.: %3 \ Chassis No.: %4 \ Engine No.: %5 \ Date Arrived: %6 \\ Notes: %7', Job."No.", Job.Description, Job."Vehicle Reg", Job.ChassisNo, Job.EngineNo, Job."Date of Arrival", Job."Job Notes")
+                        else
+                            Message('No job found for Job No. %1.', Rec."Job No.");
+                    end;
+                }
                 field(Entered; Rec.Entered) { Visible = true; Editable = false; }
                 field("Date"; Rec."Date") { Editable = Posted; Width = 12; }
                 field(StockQty; Rec.StockQty)
@@ -79,11 +95,21 @@ page 50115 "Stock Entry List"
                 RunPageLink = "No." = field("Job No.");
                 ToolTip = 'Takes the user to the Stock Card of the selected job as filled in by staff';
                 Visible = true;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
+                // Promoted = true;
+                // PromotedCategory = Process;
+                // PromotedOnly = true;
                 Scope = Repeater;
             }
+            // action(JobCard)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'View Job Card';
+            //     Image = Job;
+            //     ToolTip = 'Go to the main job card for the project.';
+            //     Scope = Repeater;
+            //     RunObject = Page "Job Card";
+            //     RunPageLink = "No." = field("Job No.");
+            // }
         }
     }
     var
