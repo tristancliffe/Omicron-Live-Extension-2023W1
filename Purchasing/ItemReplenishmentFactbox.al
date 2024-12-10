@@ -27,10 +27,14 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                     var
                         Items: Record Item;
                     begin
-                        Items.Reset();
-                        Items.SetFilter("Shelf No.", Rec."Shelf No.");
-                        if not Items.IsEmpty then
-                            Page.Run(Page::"Item List", Items);
+                        if Rec."Shelf No." = '' then
+                            exit
+                        else begin
+                            Items.Reset();
+                            Items.SetFilter("Shelf No.", Rec."Shelf No.");
+                            if not Items.IsEmpty then
+                                Page.Run(Page::"Item List", Items)
+                        end;
                     end;
                 }
                 field(ItemCost; Rec."Unit Cost")

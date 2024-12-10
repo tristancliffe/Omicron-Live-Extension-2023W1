@@ -10,7 +10,24 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
                 Visible = TypeExists;
 
                 field(ShelfNo_SalesLine; Rec.ShelfNo_SalesLine)
-                { ApplicationArea = All; Caption = 'Shelf'; Visible = true; DrillDown = false; }
+                {
+                    ApplicationArea = All;
+                    Caption = 'Shelf';
+                    Visible = true;
+                    trigger OnDrillDown()
+                    var
+                        Items: Record Item;
+                    begin
+                        if Rec.ShelfNo_SalesLine = '' then
+                            exit
+                        else begin
+                            Items.Reset();
+                            Items.SetFilter("Shelf No.", Rec.ShelfNo_SalesLine);
+                            if not Items.IsEmpty then
+                                Page.Run(Page::"Item List", Items)
+                        end;
+                    end;
+                }
                 field(ItemType; Rec.ItemType_SalesLine) //ShowType())
                 { ApplicationArea = All; Caption = 'Item Type'; Visible = true; DrillDown = false; }
                 field(ItemVendor; Rec.Itemvendor_SalesLine)

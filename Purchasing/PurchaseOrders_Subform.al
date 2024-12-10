@@ -34,10 +34,14 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 var
                     Items: Record Item;
                 begin
-                    Items.Reset();
-                    Items.SetFilter("Shelf No.", Rec.ShelfNo_PurchLine);
-                    if not Items.IsEmpty then
-                        Page.Run(Page::"Item List", Items);
+                    if Rec.ShelfNo_PurchLine = '' then
+                        exit
+                    else begin
+                        Items.Reset();
+                        Items.SetFilter("Shelf No.", Rec.ShelfNo_PurchLine);
+                        if not Items.IsEmpty then
+                            Page.Run(Page::"Item List", Items)
+                    end;
                 end;
             }
         }

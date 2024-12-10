@@ -22,7 +22,26 @@ page 50108 "Job Journal Factbox"
                     Caption = 'Unit of Measure Code';
                     ToolTip = 'Specifies the unit of measure that is used to determine the value in the Unit Price field on the sales line.';
                 }
-                field(ShelfNo; Rec."Shelf No.") { ApplicationArea = All; Caption = 'Shelf'; Visible = true; DrillDown = false; }
+                field(ShelfNo; Rec."Shelf No.")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Shelf';
+                    Visible = true;
+
+                    trigger OnDrillDown()
+                    var
+                        Items: Record Item;
+                    begin
+                        if Rec."Shelf No." = '' then
+                            exit
+                        else begin
+                            Items.Reset();
+                            Items.SetFilter("Shelf No.", Rec."Shelf No.");
+                            if not Items.IsEmpty then
+                                Page.Run(Page::"Item List", Items)
+                        end;
+                    end;
+                }
                 field(NonStockShelfNo; Rec.NonStockShelf) { ApplicationArea = All; Caption = 'Non-Stock Shelf'; Visible = true; DrillDown = false; }
                 field(ItemType; Rec.Type) { ApplicationArea = All; Caption = 'Item Type'; Visible = true; DrillDown = false; }
                 field(ItemReplenishment; Rec."Replenishment System") { ApplicationArea = All; Caption = 'Replenishment'; Visible = true; DrillDown = false; }

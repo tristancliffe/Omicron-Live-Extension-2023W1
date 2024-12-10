@@ -37,7 +37,20 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 Caption = 'Shelf No.';
                 Description = 'Shelf code in stores';
                 Editable = false;
-                DrillDown = false;
+
+                trigger OnDrillDown()
+                var
+                    Items: Record Item;
+                begin
+                    if Rec.ShelfNo_AssemblyLine = '' then
+                        exit
+                    else begin
+                        Items.Reset();
+                        Items.SetFilter("Shelf No.", Rec.ShelfNo_AssemblyLine);
+                        if not Items.IsEmpty then
+                            Page.Run(Page::"Item List", Items)
+                    end;
+                end;
             }
         }
     }

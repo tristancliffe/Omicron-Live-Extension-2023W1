@@ -67,7 +67,25 @@ pageextension 50101 ItemListExtension extends "Item List"
         modify("Default Deferral Template Code") { Visible = false; }
         addafter(InventoryField)
         {
-            field("Shelf No.1"; Rec."Shelf No.") { ApplicationArea = All; ToolTip = 'The shelf location in the stores'; Style = Strong; }
+            field("Shelf No.1"; Rec."Shelf No.")
+            {
+                ApplicationArea = All;
+                ToolTip = 'The shelf location in the stores';
+                Style = Strong;
+                trigger OnDrillDown()
+                var
+                    Items: Record Item;
+                begin
+                    if Rec."Shelf No." = '' then
+                        exit
+                    else begin
+                        Items.Reset();
+                        Items.SetFilter("Shelf No.", Rec."Shelf No.");
+                        if not Items.IsEmpty then
+                            Page.Run(Page::"Item List", Items)
+                    end;
+                end;
+            }
             field("Stockout Warning"; Rec."Stockout Warning") { ApplicationArea = All; Visible = false; }
         }
         addafter(Description)

@@ -13,10 +13,14 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
                 var
                     Items: Record Item;
                 begin
-                    Items.Reset();
-                    Items.SetFilter("Shelf No.", Rec.ShelfNo_ItemJournalLine);
-                    if not Items.IsEmpty then
-                        Page.Run(Page::"Item List", Items);
+                    if Rec.ShelfNo_ItemJournalLine = '' then
+                        exit
+                    else begin
+                        Items.Reset();
+                        Items.SetFilter("Shelf No.", Rec.ShelfNo_ItemJournalLine);
+                        if not Items.IsEmpty then
+                            Page.Run(Page::"Item List", Items)
+                    end;
                 end;
             }
         }
@@ -26,5 +30,23 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
         modify(ShortcutDimCode3) { Visible = false; }
         modify("Shortcut Dimension 2 Code") { Visible = false; }
         modify("Shortcut Dimension 1 Code") { Visible = false; }
+    }
+    actions
+    {
+        addafter("Bin Contents")
+        {
+            action(ItemCardLink)
+            {
+                ApplicationArea = All;
+                Image = Item;
+                Caption = 'Item Card';
+                RunObject = page "Item Card";
+                RunPageLink = "No." = field("No.");
+                Description = 'Go to the Item Card';
+                ToolTip = 'Opens the item card for this line';
+                Scope = Repeater;
+                Visible = true;
+            }
+        }
     }
 }

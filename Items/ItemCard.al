@@ -61,7 +61,24 @@ pageextension 50100 ItemCardExtension extends "Item Card"
         moveafter(Blocked; "Unit Cost", "Unit Price")
         modify("Blocked") { Visible = true; }
         modify("Automatic Ext. Texts") { Importance = Standard; }
-        modify("Shelf No.") { Importance = Promoted; ShowMandatory = true; }
+        modify("Shelf No.")
+        {
+            Importance = Promoted;
+            ShowMandatory = true;
+            trigger OnDrillDown()
+            var
+                Items: Record Item;
+            begin
+                if Rec."Shelf No." = '' then
+                    exit
+                else begin
+                    Items.Reset();
+                    Items.SetFilter("Shelf No.", Rec."Shelf No.");
+                    if not Items.IsEmpty then
+                        Page.Run(Page::"Item List", Items)
+                end;
+            end;
+        }
         modify("Search Description") { Importance = Standard; }
         modify("Costing Method") { Importance = Standard; }
         modify("VAT Prod. Posting Group") { Importance = Standard; }

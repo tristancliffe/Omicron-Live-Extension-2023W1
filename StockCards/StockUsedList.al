@@ -90,6 +90,19 @@ page 50113 "Stock Card List"
                 PromotedCategory = Process;
                 PromotedOnly = true;
             }
+            action(ItemJournalLink)
+            {
+                ApplicationArea = All;
+                Image = ItemWorksheet;
+                Caption = 'Item Journal';
+                RunObject = page "Item Journal";
+                Description = 'Go to the Item Journal';
+                ToolTip = 'Opens the item journal for entering second-hand stock';
+                Promoted = true;
+                PromotedCategory = Process;
+                Visible = true;
+                Enabled = true;
+            }
         }
     }
     views
