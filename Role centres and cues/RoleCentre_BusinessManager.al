@@ -475,14 +475,6 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Time Sheet List";
                     ToolTip = 'View current time sheets';
                 }
-                action("ActionManagerTimeSheets")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Manager Time Sheets';
-                    Image = Timesheet;
-                    RunObject = Page "Manager Time Sheet List";
-                    ToolTip = 'Manager Time Sheets view';
-                }
                 action("ActionJobJournals")
                 {
                     ApplicationArea = Basic, Suite;
@@ -514,6 +506,14 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     Image = ResourceLedger;
                     RunObject = Page "Resource Ledger Entries";
                     ToolTip = 'Resource Ledger Entries list';
+                }
+                action("JobPlanningAll")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Planning Lines';
+                    Image = Planning;
+                    ToolTip = 'All job planning lines';
+                    RunObject = Page "Job Planning Lines All";
                 }
                 action("Absences")
                 {

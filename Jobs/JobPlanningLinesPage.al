@@ -20,57 +20,37 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 end;
             }
         }
-        modify("Document No.")
-        { Visible = Device; }
-        modify("Job Task No.")
-        { StyleExpr = InvoicedStyle; }
-        modify(Description)
-        { StyleExpr = InvoicedStyle; }
-        modify(Type)
-        { StyleExpr = TypeStyle; }
-        modify("No.")
-        { StyleExpr = TypeStyle; }
+        modify("Document No.") { Visible = Device; }
+        modify("Job Task No.") { StyleExpr = InvoicedStyle; }
+        modify(Description) { StyleExpr = InvoicedStyle; }
+        modify(Type) { StyleExpr = TypeStyle; }
+        modify("No.") { StyleExpr = TypeStyle; }
         moveafter(Quantity; "Unit of Measure Code", "Location Code", "Qty. to Transfer to Journal", "Qty. to Transfer to Invoice")
         // addafter("Unit of Measure Code")
         // {
         //     field("Location Code1"; Rec."Location Code")
         //     { ShowMandatory = MandatoryLocation; ApplicationArea = All; Caption = 'blah'; }
         // }
-        modify("Unit of Measure Code")
-        { Visible = true; }
-        modify("Location Code")
-        { Visible = true; ShowMandatory = MandatoryLocation; }
+        modify("Unit of Measure Code") { Visible = true; }
+        modify("Location Code") { Visible = true; ShowMandatory = MandatoryLocation; }
         moveafter("Line Amount"; "Line Discount %")
-        modify("Line Amount")
-        { BlankZero = true; }
-        modify("Line Discount %")
-        { Visible = true; }
-        modify("Planned Delivery Date")
-        { Visible = false; }
-        modify("Price Calculation Method")
-        { Visible = false; }
-        modify("Cost Calculation Method")
-        { visible = false; }
-        modify("Qty. to Transfer to Journal")
-        { Visible = true; BlankZero = true; }
-        modify("Qty. to Transfer to Invoice")
-        { BlankZero = true; StyleExpr = ToInvoiceStyle; Visible = true; }
-        modify("Invoiced Amount (LCY)")
-        { BlankZero = true; }
-        modify("Unit Price")
-        { StyleExpr = SellingPriceStyle; }
+        modify("Line Amount") { BlankZero = true; }
+        modify("Line Discount %") { Visible = true; }
+        modify("Planned Delivery Date") { Visible = false; }
+        modify("Price Calculation Method") { Visible = false; }
+        modify("Cost Calculation Method") { visible = false; }
+        modify("Qty. to Transfer to Journal") { Visible = true; BlankZero = true; }
+        modify("Qty. to Transfer to Invoice") { BlankZero = true; StyleExpr = ToInvoiceStyle; Visible = true; }
+        modify("Invoiced Amount (LCY)") { BlankZero = true; }
+        modify("Unit Price") { StyleExpr = SellingPriceStyle; }
         movebefore("Invoiced Amount (LCY)"; "Qty. Invoiced")
-        modify("Qty. Invoiced")
-        { Visible = true; Style = Favorable; BlankZero = true; }
+        modify("Qty. Invoiced") { Visible = true; Style = Favorable; BlankZero = true; }
         movelast(Control1; "User ID")
-        modify("User ID")
-        { Visible = true; }
-        modify("Qty. Transferred to Invoice")
-        { Visible = true; Editable = false; ApplicationArea = All; }
+        modify("User ID") { Visible = true; }
+        modify("Qty. Transferred to Invoice") { Visible = true; Editable = false; ApplicationArea = All; }
         addafter("User ID")
         {
-            field(InvoicePrice; Rec.InvoicePrice)
-            { ApplicationArea = All; BlankZero = true; }
+            field(InvoicePrice; Rec.InvoicePrice) { ApplicationArea = All; BlankZero = true; }
         }
     }
     actions

@@ -8,14 +8,10 @@ tableextension 50107 JobPlanningLinesExt extends "Job Planning Line"
             DataClassification = CustomerContent;
             ToolTip = 'Specifies information in addition to the description.';
         } //!OptimizeForTextSearch = true; }
-        field(50101; "InvoicePrice"; Decimal)
-        { Caption = 'Price to Invoice'; DataClassification = CustomerContent; }
-        field(50102; "InvoiceCost"; Decimal)
-        { Caption = 'Cost for Invoice'; DataClassification = CustomerContent; }
-        field(50103; "VAT"; Decimal)
-        { Caption = 'VAT at 20%'; DataClassification = CustomerContent; }
-        field(50104; "InvoicePriceInclVAT"; Decimal)
-        { Caption = 'Invoice Price Incl. VAT'; DataClassification = CustomerContent; }
+        field(50101; "InvoicePrice"; Decimal) { Caption = 'Price to Invoice'; DataClassification = CustomerContent; }
+        field(50102; "InvoiceCost"; Decimal) { Caption = 'Cost for Invoice'; DataClassification = CustomerContent; }
+        field(50103; "VAT"; Decimal) { Caption = 'VAT at 20%'; DataClassification = CustomerContent; }
+        field(50104; "InvoicePriceInclVAT"; Decimal) { Caption = 'Invoice Price Incl. VAT'; DataClassification = CustomerContent; }
     }
 
     trigger OnModify()
