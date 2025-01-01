@@ -52,3 +52,14 @@ codeunit 50104 "Shpfy Order Line Dim"
         SalesLine.Modify();
     end;
 }
+
+codeunit 50106 "Shpfy Product Export Omicron"
+{
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Product Events", OnAfterFillInShopifyProductFields, '', false, false)]
+    procedure OnAfterFillInShopifyProductFields(Item: Record Item; var ShopifyProduct: Record "Shpfy Product")
+    begin
+        ShopifyProduct.Vendor := 'Omicron Engineering Ltd';
+        if not ShopifyProduct.IsTemporary() then
+            ShopifyProduct.Modify();
+    end;
+}

@@ -55,6 +55,11 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
             field("Attachments Exist"; Rec."Attachments Exist")
             { ApplicationArea = All; Width = 2; DrillDown = false; Editable = false; }
         }
+        addbefore(Control1902018507)
+        {
+            part(SalesOrderDetailFactbox; "Sales Order Detail Factbox") { ApplicationArea = Basic, Suite; SubPageLink = "No." = field("No."); }
+            part(SalesOrderLinesFactbox; "Sales Order Lines Factbox") { ApplicationArea = All; Visible = true; SubPageLink = "Document No." = FIELD("No."); }
+        }
     }
     actions
     {

@@ -116,11 +116,11 @@ page 50113 "Stock Card List"
 
     trigger OnOpenPage()
     begin
-        Rec.FindLast();
         if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
             Device := false
         else
             Device := true;
+        Rec.Find('-');
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

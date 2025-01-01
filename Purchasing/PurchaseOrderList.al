@@ -91,6 +91,10 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
             field("Attachments Exist"; Rec."Attachments Exist")
             { ApplicationArea = All; Width = 2; DrillDown = false; Editable = false; }
         }
+        addbefore(Control1901138007)
+        {
+            part(PurchaseOrderDetailFactbox; "Purchase Order Detail Factbox") { ApplicationArea = Basic, Suite; SubPageLink = "No." = field("No."); }
+        }
     }
     actions
     {

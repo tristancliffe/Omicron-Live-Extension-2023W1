@@ -70,13 +70,11 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             action(CopyPurchaseLinestoSalesLines)
             {
                 Caption = 'Changes Purchases to Sales';
-                Visible = true;
+                Visible = false;
                 ApplicationArea = All;
                 Description = 'Changes Purchase G/L accounts to Sales G/L accounts';
                 Tooltip = 'Changes Purchase G/L accounts to Sales G/L accounts';
                 Image = SwitchCompanies;
-                Promoted = true;
-                PromotedCategory = Process;
                 // trigger OnAction()
                 // begin
                 //     message('%1', Rec."Job No.")
@@ -115,8 +113,6 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 RunPageLink = "No." = field("No.");
                 Description = 'Go to the Item Card';
                 ToolTip = 'Opens the item card for this line';
-                Promoted = true;
-                PromotedCategory = Process;
                 Scope = Repeater;
                 Visible = true;
                 Enabled = Rec.Type = Rec.Type::Item;
@@ -129,9 +125,6 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 //RunObject = Report "Job Create Sales Invoice";
                 ToolTip = 'Create job sales invoices report';
                 Visible = true;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
 
                 trigger OnAction()
                 var
@@ -150,9 +143,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 Caption = 'Excel Invoice Planner';
                 Image = "Report";
                 ToolTip = 'Open the Excel worksheet for invoicing';
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
+                Visible = true;
 
                 trigger OnAction()
                 var
@@ -164,6 +155,19 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                     TimesheetReport.RunModal();
                     Clear(TimesheetReport);
                 end;
+            }
+        }
+        addlast(Category_Process)
+        {
+            actionref(ItemCardLink_promoted; ItemCardLink) { Visible = true; }
+            group(ProjectActions)
+            {
+                ShowAs = SplitButton;
+                Visible = true;
+                actionref(ExcelInvoicing_promoted; "Report Job Invoicing Excel") { Visible = true; }
+                actionref(CreateSalesInvoice_promoted; CreateSalesInvoice) { Visible = true; }
+                actionref(ChangePurhaseLines_promoted; CopyPurchaseLinestoSalesLines) { Visible = true; }
+                actionref(JobJournal_promoted; JobJournal) { }
             }
         }
     }

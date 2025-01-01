@@ -165,6 +165,10 @@ pageextension 50101 ItemListExtension extends "Item List"
             //     end;
             // }
         }
+        addbefore(Control1901314507)
+        {
+            part(ItemListFactbox; "Item Info FactBox") { ApplicationArea = Basic, Suite; SubPageLink = "No." = field("No."); }
+        }
     }
     actions
     {

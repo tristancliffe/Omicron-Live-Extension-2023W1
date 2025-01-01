@@ -119,11 +119,11 @@ page 50115 "Stock Entry List"
 
     trigger OnOpenPage()
     begin
-        Rec.FindLast();
         if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
             Device := false
         else
             Device := true;
+        Rec.Find('-');
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
