@@ -28,7 +28,8 @@ pageextension 50100 ItemCardExtension extends "Item Card"
         addbefore("Qty. on Purch. Order")
         {
             field("Reserved Qty. on Inventory"; Rec."Reserved Qty. on Inventory") { ApplicationArea = All; Style = StrongAccent; }
-            field("Available Stock"; Rec.Inventory - Rec."Reserved Qty. on Inventory") { ApplicationArea = All; Style = Unfavorable; Caption = 'Non-reserved stock'; DecimalPlaces = 0 : 5; }
+            field("Available Stock"; Rec.Inventory - Rec."Reserved Qty. on Inventory") { ApplicationArea = All; Style = Unfavorable; Caption = 'Non-reserved stock'; DecimalPlaces = 0 : 2; }
+            //field(BOMAvailableToMake; CalculatedBOMQuantity(Rec."No.")) { ApplicationArea = All; Caption = 'Qty. available to assemble'; DecimalPlaces = 0 : 2; ToolTip = 'Shows how many could be assembled from the available stock in the BOM.'; }
         }
         modify("Item Category Code") { ShowMandatory = true; }
         addafter("Item Category Code")
@@ -211,6 +212,36 @@ pageextension 50100 ItemCardExtension extends "Item Card"
     begin
         NonStockShelfVisible := NewNonStockShelfVisible;
     end;
+
+    // local procedure CalculatedBOMQuantity(ItemNo: Code[20]): Decimal
+    // var
+    //     CalcBOMTree: Codeunit "Calculate BOM Tree";
+    //     BOMBuffer: Record "BOM Buffer" temporary;
+    //     Item: Record Item;
+    //     AvailableQuantity: Decimal;
+    // begin
+    //     if Rec."Replenishment System" = Rec."Replenishment System"::Assembly then begin
+    //         // Initialize the available quantity to a large number
+    //         AvailableQuantity := 99999;
+    //         // Set the item filter
+    //         Item.SetRange("No.", ItemNo);
+    //         // Generate the BOM tree for the item
+    //         CalcBOMTree.GenerateTreeForItems(Item, BOMBuffer, 1);
+    //         // Loop through the BOM buffer to calculate the available quantity
+    //         if BOMBuffer.FindSet() then
+    //             repeat
+    //                 // Calculate the available quantity based on the stock levels of the components
+    //                 if BOMBuffer."Able to Make Parent" < AvailableQuantity then
+    //                     AvailableQuantity := BOMBuffer."Able to Make Parent";
+    //             until BOMBuffer.Next() = 0;
+    //         if AvailableQuantity = 99999 then
+    //             exit(0)
+    //         else
+    //             exit(AvailableQuantity);
+    //     end
+    //     else
+    //         exit(0);
+    // end;
 
     var  //!To do with large notes field...
         IsReady: Boolean;

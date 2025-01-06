@@ -31,6 +31,12 @@ enumextension 50101 "Extended Stock Calculations" extends "Shpfy Stock Calculati
         Implementation = "Shpfy Stock Calculation" = "Shpfy Stock Calc. Inventory",
                          "Shpfy IStock Available" = "Shpfy Can Have Stock";
     }
+    value(50102; "Omicron Non-Reserved and Assemblies")
+    {
+        Caption = 'Omicron - Unreserved Inventory and Assemblies';
+        Implementation = "Shpfy Stock Calculation" = "Shpfy Stock Calc. Invtry & BOM",
+                         "Shpfy IStock Available" = "Shpfy Can Have Stock";
+    }
 }
 codeunit 50103 "Shpfy Stock Calc. Inventory" implements "Shpfy Stock Calculation"
 {
@@ -42,6 +48,36 @@ codeunit 50103 "Shpfy Stock Calc. Inventory" implements "Shpfy Stock Calculation
     end;
 }
 
+codeunit 50105 "Shpfy Stock Calc. Invtry & BOM" implements "Shpfy Stock Calculation"
+{
+    // Calulates the current 'on-hand' stock level of items in conjunction with the enumextension 50101 above
+    procedure GetStock(var Item: Record Item): decimal;
+    var
+        AvailableBOMQty: Decimal;
+        CalcBOMTree: Codeunit "Calculate BOM Tree";
+        BOMBuffer: Record "BOM Buffer" temporary;
+        AvailableQuantity: Decimal;
+    begin
+        Item.Calcfields(Inventory, "Reserved Qty. on Inventory");
+        if Item."Replenishment System" = Item."Replenishment System"::Assembly then begin
+            AvailableQuantity := 99999;
+            Item.SetRange("No.", Item."No.");
+            CalcBOMTree.GenerateTreeForItems(Item, BOMBuffer, 1);
+            if BOMBuffer.FindSet() then
+                repeat
+                    if BOMBuffer."Able to Make Parent" < AvailableQuantity then
+                        AvailableQuantity := BOMBuffer."Able to Make Parent";
+                until BOMBuffer.Next() = 0;
+            if AvailableQuantity = 99999 then
+                AvailableBOMQty := 0
+            else
+                AvailableBOMQty := AvailableQuantity;
+        end
+        else
+            AvailableBOMQty := 0;
+        exit(Item.Inventory + AvailableBOMQty - Item."Reserved Qty. on Inventory");
+    end;
+}
 codeunit 50104 "Shpfy Order Line Dim"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Shpfy Order Events", 'OnAfterCreateItemSalesLine', '', false, false)]

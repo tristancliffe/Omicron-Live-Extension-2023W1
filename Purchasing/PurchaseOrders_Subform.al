@@ -236,6 +236,17 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 Visible = true;
                 Enabled = Rec.Type = Rec.Type::"G/L Account";
             }
+            action(ItemJournal)
+            {
+                Caption = 'Item Journal';
+                Image = ItemRegisters;
+                ApplicationArea = All;
+                RunObject = Page "Item Journal";
+                ToolTip = 'Takes the user to the item journal to add [secondhand] stock';
+                Visible = true;
+                Scope = Repeater;
+                Enabled = Rec.Type = Rec.Type::Item;
+            }
             action(DocAttach2)
             {
                 ApplicationArea = All;

@@ -11,16 +11,12 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 AssemblyWarning();
             end;
         }
-        modify("Substitution Available")
-        { Visible = true; }
-        modify(Description)
-        { QuickEntry = true; StyleExpr = CommentStyle; }
-        modify(Quantity)
-        { style = Strong; }
-        Modify("Qty. to Assemble to Order")
-        { BlankZero = true; }
-        Modify("Qty. to Assign")
-        { QuickEntry = true; }
+        modify("Substitution Available") { Visible = true; }
+        modify(Description) { QuickEntry = true; StyleExpr = CommentStyle; }
+        modify(Quantity) { style = Strong; }
+        Modify("Qty. to Assemble to Order") { BlankZero = true; }
+        Modify("Qty. to Assign") { QuickEntry = true; }
+        moveafter(Description; "Unit Price", Quantity, "Unit of Measure Code")
         addafter("Unit of Measure Code")
         {
             field(ItemType; Rec.ItemType_SalesLine)
@@ -42,27 +38,13 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 DecimalPlaces = 0 : 2;
             }
         }
-        modify("Item Reference No.")
-        { Visible = false; }
+        modify("Item Reference No.") { Visible = false; }
         addafter("Qty. Assigned")
         {
             field("Gen. Prod. Posting Group2"; Rec."Gen. Prod. Posting Group")
             { ApplicationArea = All; style = Ambiguous; }
             field("VAT Prod. Posting Group1"; Rec."VAT Prod. Posting Group")
             { ApplicationArea = All; style = AttentionAccent; }
-            // field("Job No.1"; Rec."Job No.")
-            // {
-            //     ApplicationArea = All;
-            //     Width = 8;
-            //     trigger OnValidate()
-            //     begin
-            //         Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-            //         Rec.Modify();
-            //         //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
-            //     end;
-            // }
-            // field("Job Task No.1"; Rec."Job Task No.")
-            // { ApplicationArea = All; }
         }
         addafter("Line Amount")
         {
@@ -73,20 +55,14 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 Editable = false;
             }
         }
-        modify("Unit Cost (LCY)")
-        {
-            Visible = true;
-            Style = Ambiguous;
-            Editable = false;
-            BlankZero = true;
-        }
+        modify("Unit Cost (LCY)") { Visible = true; Style = Ambiguous; Editable = false; BlankZero = true; }
         moveafter("Qty. Assigned"; "Unit Cost (LCY)")
         addafter("Unit Cost (LCY)")
         {
             field("Line Profit"; Rec."Line Amount" - (Rec.Quantity * Rec."Unit Cost (LCY)"))
             { ApplicationArea = all; Editable = false; Caption = 'Line Profit'; ToolTip = 'The amount of profit, including customer discount but not invoice discount, on this line compared to the displayed cost'; }
         }
-        moveafter("Qty. to Assemble to Order"; WSB_AvailabilityIndicator)
+        moveafter("Qty. to Assemble to Order"; WSB_AvailabilityIndicator, "Location Code")
     }
     actions
     {
@@ -127,16 +103,12 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
         else
             if (Item.Get(Rec."No.")) and (Item.Type = Item.Type::Inventory) then begin
                 Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
-                // Rec.Instock_SalesLine := Item.Inventory;
-                // Rec.Modify();
                 Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory");
                 Rec.Modify();
                 Commit();
             end
             else
                 if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
-                    // Rec.Instock_SalesLine := 999;
-                    // Rec.Modify()
                     Rec.Validate(Rec.Instock_SalesLine, 999);
                     Rec.Modify();
                     Commit();
