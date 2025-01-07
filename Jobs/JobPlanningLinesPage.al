@@ -156,6 +156,16 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                     Clear(TimesheetReport);
                 end;
             }
+            action(StockCard)
+            {
+                Caption = 'Stock Card';
+                Image = ItemLines;
+                ApplicationArea = All;
+                RunObject = Page "Stock Card List";
+                RunPageLink = "Job No." = field("Job No.");
+                ToolTip = 'Opens the stock used list for the selected job';
+                Visible = true;
+            }
         }
         addlast(Category_Process)
         {
@@ -167,7 +177,8 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 actionref(ExcelInvoicing_promoted; "Report Job Invoicing Excel") { Visible = true; }
                 actionref(CreateSalesInvoice_promoted; CreateSalesInvoice) { Visible = true; }
                 actionref(ChangePurhaseLines_promoted; CopyPurchaseLinestoSalesLines) { Visible = true; }
-                actionref(JobJournal_promoted; JobJournal) { }
+                actionref(JobJournal_promoted; JobJournal) { Visible = true; }
+                actionref(StockCard_promoted; StockCard) { Visible = true; }
             }
         }
     }

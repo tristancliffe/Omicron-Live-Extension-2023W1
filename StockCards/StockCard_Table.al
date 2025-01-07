@@ -14,7 +14,7 @@ table 50100 "Stock Used"
         {
             Caption = 'Project No.';
             ToolTip = 'Specifies the value of the Project No. field.', Comment = '%';
-            TableRelation = Job where(Status = filter(Open));
+            TableRelation = Job."No." where(Status = filter(Open | Completed | Paused));
 
             trigger OnValidate()
             begin

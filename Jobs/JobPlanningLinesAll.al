@@ -8,6 +8,7 @@ page 50104 "Job Planning Lines All"
     SourceTable = "Job Planning Line";
     Editable = false;
     ApplicationArea = All;
+    SourceTableView = sorting("Planning Date", "No.", "Job No.");
 
     layout
     {
@@ -16,7 +17,7 @@ page 50104 "Job Planning Lines All"
             repeater(Control1)
             {
                 ShowCaption = false;
-                field("Project No."; Rec."Job No.") { ApplicationArea = All; ToolTip = 'Specifies the number of the related project.'; }
+                field("Project No."; Rec."Job No.") { ApplicationArea = All; ToolTip = 'Specifies the number of the related project.'; TableRelation = Job."No." where(Status = filter(Open | Completed | Paused)); }
                 field("Project Task No."; Rec."Job Task No.") { ApplicationArea = All; ToolTip = 'Specifies the number of the related project task.'; }
                 field("Line Type"; Rec."Line Type") { ApplicationArea = Jobs; ToolTip = 'Specifies the type of planning line.'; }
                 field("Planning Date"; Rec."Planning Date") { ApplicationArea = Jobs; ToolTip = 'Specifies the date of the planning line. You can use the planning date for filtering the totals of the project, for example, if you want to see the scheduled usage for a specific month of the year.'; }
@@ -48,6 +49,76 @@ page 50104 "Job Planning Lines All"
                 field("Qty. to Invoice"; Rec."Qty. to Invoice") { ApplicationArea = Jobs; ToolTip = 'Specifies the quantity that remains to be invoiced. It is calculated as Quantity - Qty. Invoiced.'; Visible = false; }
                 field(InvoicePrice; Rec.InvoicePrice) { ApplicationArea = All; BlankZero = true; }
                 field(Price_Invoiced; Rec."Qty. Invoiced" * Rec."Unit Price") { ApplicationArea = all; Caption = 'Invoiced Price'; }
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            group(Stock)
+            {
+                action(StockCard)
+                {
+                    Caption = 'Stock Card';
+                    Image = ItemLines;
+                    ApplicationArea = All;
+                    RunObject = Page "Stock Card List";
+                    RunPageLink = "Job No." = field("Job No.");
+                    ToolTip = 'Opens the stock used list for the selected job';
+                    Visible = true;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    Scope = Repeater;
+                }
+                action(ItemCardLink)
+                {
+                    ApplicationArea = All;
+                    Image = Item;
+                    Caption = 'Item Card';
+                    RunObject = page "Item Card";
+                    RunPageLink = "No." = field("No.");
+                    Description = 'Go to the Item Card';
+                    ToolTip = 'Opens the item card for this line';
+                    Visible = true;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    Scope = Repeater;
+                    Enabled = Rec.Type = Rec.Type::Item;
+                }
+                action(ResourceCardLink)
+                {
+                    ApplicationArea = All;
+                    Image = Resource;
+                    Caption = 'Resource Card';
+                    RunObject = page "Resource Card";
+                    RunPageLink = "No." = field("No.");
+                    Description = 'Go to the Resource Card';
+                    ToolTip = 'Opens the resource card for this line';
+                    Visible = true;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    Scope = Repeater;
+                    Enabled = Rec.Type = Rec.Type::Resource;
+                }
+                action(JobCardLink)
+                {
+                    ApplicationArea = All;
+                    Image = Job;
+                    Caption = 'Job Card';
+                    RunObject = page "Job Card";
+                    RunPageLink = "No." = field("Job No.");
+                    Description = 'Go to the Job Card';
+                    ToolTip = 'Opens the job card for this line';
+                    Visible = true;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    Scope = Repeater;
+                }
             }
         }
     }

@@ -106,7 +106,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 Image = ItemLines;
                 ApplicationArea = All;
                 RunObject = Page "Stock Card List";
-                RunPageView = where(Entered = const(false));
+                //RunPageView = where(Entered = const(false));
                 RunPageLink = "Job No." = field("No.");
                 ToolTip = 'Opens the stock used list for the selected job';
                 Visible = true;

@@ -75,27 +75,13 @@ pageextension 50107 EmployeeCardExt extends "Employee Card"
             EmploymentDuration := CalculateTimeBetweenTwoDate(Rec."Employment Date", Rec."Inactive Date")
     end;
 
-    // local procedure CalculateTimeBetweenTwoDate(StartDate: Date; EndDate: Date): Text
-    // var
-    //     NoOfYears: Integer;
-    //     NoOfMonths: Integer;
-    //     NoOfDays: Integer;
-    // begin
-    //     //if Rec."Termination Date" <> 0D then EndDate := Today;
-    //     NoOfYears := DATE2DMY(EndDate, 3) - DATE2DMY(StartDate, 3);
-    //     NoOfMonths := DATE2DMY(EndDate, 2) - DATE2DMY(StartDate, 2);
-    //     NoOfDays := DATE2DMY(EndDate, 1) - DATE2DMY(StartDate, 1);
-    //     exit(format(NoOfYears+(NoOfMonths/12)+(NoOfDays/365)) + 'Y ');
-    //     //exit((12 * NoOfYears) + NoOfMonths + (NoOfDays / 30));
-    //     // exit(format(12 * NoOfYears) + ' years ' + format(NoOfMonths) + ' months ' + format(NoOfDays) + ' days');
-    // end;
-
     local procedure CalculateTimeBetweenTwoDate(StartDate: Date; EndDate: Date): Text
     var
         NoOfYears: Integer;
         NoOfMonths: Integer;
         NoOfDays: Integer;
         DaysInMonth: Integer;
+        AdjustedMonth: Integer;
     begin
         if EndDate < StartDate then exit;
 
@@ -109,7 +95,10 @@ pageextension 50107 EmployeeCardExt extends "Employee Card"
         // Adjust for negative days
         if NoOfDays < 0 then begin
             // Get the number of days in the previous month
-            DaysInMonth := CALCDATE('<+1M>', DMY2DATE(1, DATE2DMY(EndDate, 2) - 1, DATE2DMY(EndDate, 3))) - DMY2DATE(1, DATE2DMY(EndDate, 2) - 1, DATE2DMY(EndDate, 3));
+            AdjustedMonth := DATE2DMY(EndDate, 2) - 1;
+            if AdjustedMonth = 0 then
+                AdjustedMonth := 12;
+            DaysInMonth := CALCDATE('<+1M>', DMY2DATE(1, AdjustedMonth, DATE2DMY(EndDate, 3))) - DMY2DATE(1, AdjustedMonth, DATE2DMY(EndDate, 3));
             NoOfDays := NoOfDays + DaysInMonth;
             NoOfMonths := NoOfMonths - 1;
         end;
