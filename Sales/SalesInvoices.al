@@ -268,10 +268,6 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         end;
         GetBalance();
         ShowBalance := RecCustomer."Balance Due (LCY)" <> 0;
-        // if Rec."Posting Date" <> Today then begin
-        //     Rec.Validate(Rec."Posting Date", Today);
-        //     Rec.Modify();
-        // end;
     end;
 
     trigger OnAfterGetRecord()

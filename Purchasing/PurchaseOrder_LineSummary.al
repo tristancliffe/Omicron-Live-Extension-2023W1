@@ -1686,7 +1686,6 @@ page 50110 PurchaseOrderLineSummary
         InventorySetup: Record "Inventory Setup";
         TempOptionLookupBuffer: Record "Option Lookup Buffer" temporary;
         TransferExtendedText: Codeunit "Transfer Extended Text";
-        //ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
         PurchAvailabilityMgt: Codeunit "Purch. Availability Mgt.";
         Text001: Label 'You cannot use the Explode BOM function because a prepayment of the purchase order has been invoiced.';
         PurchCalcDiscByType: Codeunit "Purch - Calc Disc. By Type";
@@ -1740,7 +1739,6 @@ page 50110 PurchaseOrderLineSummary
         NonDeductibleVAT: Codeunit "Non-Deductible VAT";
     begin
         OnBeforeSetOpenPage();
-
         IsSaaSExcelAddinEnabled := ServerSetting.GetIsSaasExcelAddinEnabled();
         SuppressTotals := CurrentClientType() = ClientType::ODataV4;
         BackgroundErrorCheck := DocumentErrorsMgt.BackgroundValidationEnabled();
@@ -1816,11 +1814,7 @@ page 50110 PurchaseOrderLineSummary
     end;
 
     procedure ShowTracking()
-    //var
-    //TrackingForm: Page "Order Tracking";
     begin
-        //TrackingForm.SetPurchLine(Rec);
-        //TrackingForm.RunModal();
         Rec.ShowOrderTracking();
     end;
 

@@ -67,6 +67,10 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             }
         }
         modify("Foreign Trade") { Visible = false; }
+        addafter("Currency Code")
+        {
+            field(TotalAmountLCY; TotalAmountLCY) { ApplicationArea = all; Caption = 'Total (LCY)'; Editable = false; ToolTip = 'Total amount in local currency'; AutoFormatExpression = Currency.Code; AutoFormatType = 1; }
+        }
     }
     actions
     {
@@ -215,6 +219,7 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
         ReopenControllerStatus: Boolean;
         PaymentMethod: Text[50];
         VendorNotes: Text[1000];
+        Currency: Record Currency;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
@@ -273,5 +278,13 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
     begin
         ReleaseControllerStatus := Rec.Status = Rec.Status::Open;
         ReopenControllerStatus := Rec.Status = Rec.Status::Released;
+    end;
+
+    local procedure TotalAmountLCY(): Decimal
+    begin
+        if Rec."Currency Factor" <> 0 then
+            exit(Rec."Amount Including VAT" / Rec."Currency Factor")
+        else
+            exit(Rec."Amount Including VAT")
     end;
 }

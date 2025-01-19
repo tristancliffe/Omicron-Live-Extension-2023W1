@@ -5,6 +5,7 @@ page 50113 "Stock Card List"
     PageType = List;
     SourceTable = "Stock Used";
     UsageCategory = Lists;
+    AdditionalSearchTerms = 'Stock Card List, Job Stock List, Job Stock Used, Project Parts List';
     SourceTableView = sorting("Job No.", Date, "Line No.") order(ascending);
     Editable = true;
 

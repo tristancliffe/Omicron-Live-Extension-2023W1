@@ -9,7 +9,6 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                 Caption = 'Item Info.';
                 Visible = TypeExists;
 
-                //field(ItemType; Rec.ItemType_ReqLine) //ShowType())
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
@@ -91,41 +90,24 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
         // ImageExists: Boolean;
         // NotesExist: Boolean;
         TypeExists: Boolean;
-        QtyToOrder: Decimal;
 
-    trigger OnAfterGetCurrRecord()
+    local procedure QtytoOrder(): Decimal
     var
         Item: Record Item;
     begin
-        // ImageExists := true;
-        // NotesExist := true;
         TypeExists := true;
         if (Rec.Type <> Rec.Type::Inventory) and (Rec.Type <> Rec.Type::"Non-Inventory") then
             TypeExists := false;
-        //message('%1', strlen(Rec.ItemNotes_PurchLine));
-        // if Rec.Picture.Count = 0 then
-        //     ImageExists := false;
-        // // if Rec.Type <> Rec.Type::Item then
-        // //     TypeExists := false;
-        // If strlen(Rec."Item Notes") = 0 then
-        //     NotesExist := false;
         if Item.Get(Rec."No.") then begin
             if item."Reordering Policy" = item."Reordering Policy"::"Fixed Reorder Qty." then
-                QtyToOrder := item."Reorder Quantity"
+                exit(item."Reorder Quantity")
             else
                 if item."Reordering Policy" = item."Reordering Policy"::"Maximum Qty." then begin
                     Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
-                    QtyToOrder := item."Reorder Quantity" - item.Inventory + item."Reserved Qty. on Inventory"
+                    exit(item."Reorder Quantity" - item.Inventory + item."Reserved Qty. on Inventory")
                 end
                 else
-                    QtyToOrder := 0
+                    exit(0)
         end;
     end;
-
-    // local procedure ShowType(): Enum "Item Type"
-    // begin
-    //     if Rec.Type <> Rec.Type::Item then
-    //         exit(Rec.ItemType_PurchLine::"Non-Inventory");
-    //     exit(Rec.ItemType_PurchLine);
-    // end;
 }

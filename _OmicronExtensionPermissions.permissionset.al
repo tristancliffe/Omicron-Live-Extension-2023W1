@@ -40,5 +40,11 @@ permissionset 50100 OmicronPermissions
         page "Stock Card Page" = X,
         page "Stock Card List" = X,
         page "API Job Planning Lines" = X,
-        page "Stock Entry List" = X;
+        page "Stock Entry List" = X,
+        codeunit "Shpfy Product Export Omicron" = X,
+        codeunit "Shpfy Stock Calc. Invtry & BOM" = X,
+        page "Item Info FactBox" = X,
+        page "Purchase Order Detail Factbox" = X,
+        page "Sales Order Detail Factbox" = X,
+        page "Sales Order Lines Factbox" = X;
 }

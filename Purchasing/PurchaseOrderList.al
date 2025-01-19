@@ -154,7 +154,6 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         ReceivedStyle := SetReceivedStyle();
         PartiallyInvoicedStyle := SetPartiallyInvoicedStyle();
         OverdueStyle := SetOverdueStyle();
-        UpdateTotalLCY();
     end;
 
     procedure SetReceivedStyle(): Text
@@ -204,29 +203,19 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         exit('');
     end;
 
-    // procedure SetPartiallyReceived()
-    // begin
-    //     if Rec."Last Receiving No." = '' then
-    //         Rec."Partially Received" := false
-    //     else
-    //         if Rec."Completely Received" = false then
-    //             Rec."Partially Received" := true;
-    // end;
-
     var
         StatusStyle: Text;
         OverdueStyle: Text;
         ReceivedStyle: Text;
         PartiallyReceivedStyle: Text;
         PartiallyInvoicedStyle: Text;
-        TotalAmountLCY: Decimal;
         Currency: Record Currency;
 
-    local procedure UpdateTotalLCY()
+    local procedure TotalAmountLCY(): Decimal
     begin
         if Rec."Currency Factor" <> 0 then
-            TotalAmountLCY := Rec."Amount Including VAT" / Rec."Currency Factor"
+            exit(Rec."Amount Including VAT" / Rec."Currency Factor")
         else
-            TotalAmountLCY := Rec."Amount Including VAT";
+            exit(Rec."Amount Including VAT")
     end;
 }

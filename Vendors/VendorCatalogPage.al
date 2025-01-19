@@ -79,22 +79,11 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
         }
     }
     views
-    {
-        // addfirst
-        // {
-        //     view(ItemsFromVendor)
-        //     {
-        //         Caption = 'Items from Vendor';
-        //         OrderBy = ascending("Vendor No.", "Item No.");
-        //         Filters = where("Vendor No." = field("No."))
-        //     }
-        // }
-    }
+    { }
 
     var
         QtyInStock: Decimal;
         LowStockThreshold: Decimal;
-        OrderQty: Decimal;
         ReorderStatus: Text;
 
     // trigger OnOpenPage()
@@ -105,11 +94,10 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
     //     QtyInStock := Item.Inventory;
     // end;
 
-    trigger OnAfterGetRecord()
+    local procedure OrderQty(): Decimal
     var
         Item: Record Item;
     begin
-        OrderQty := 0;
         if Item.Get(Rec."Item No.") then begin
             Rec.ItemDescription := Item.Description;
             Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
@@ -117,12 +105,12 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
             LowStockThreshold := Item."Reorder Point";
             if Item."Replenishment System" = Item."Replenishment System"::Purchase then begin
                 if Item."Reordering Policy" = Item."Reordering Policy"::"Fixed Reorder Qty." then
-                    OrderQty := Item."Reorder Quantity"
+                    exit(Item."Reorder Quantity")
                 else
                     if Item."Reordering Policy" = Item."Reordering Policy"::"Maximum Qty." then
-                        OrderQty := Item."Maximum Inventory"
+                        exit(Item."Maximum Inventory")
                     else
-                        OrderQty := 0;
+                        exit(0);
             end;
             ReorderStatus := SetReorderStatus();
 

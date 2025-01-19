@@ -17,7 +17,22 @@ page 50104 "Job Planning Lines All"
             repeater(Control1)
             {
                 ShowCaption = false;
-                field("Project No."; Rec."Job No.") { ApplicationArea = All; ToolTip = 'Specifies the number of the related project.'; TableRelation = Job."No." where(Status = filter(Open | Completed | Paused)); }
+                field("Project No."; Rec."Job No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the number of the related project.';
+                    //TableRelation = Job."No." where(Status = filter(Open | Completed | Paused | Planning | Quote));
+                    trigger OnDrillDown()
+                    var
+                        JobCard: Page "Job Card";
+                        JobTable: Record Job;
+                    begin
+                        JobTable.SETRANGE(JobTable."No.", Rec."Job No.");
+                        JobTable.FINDFIRST;
+                        JobCard.SETRECORD(JobTable);
+                        JobCard.RUN;
+                    end;
+                }
                 field("Project Task No."; Rec."Job Task No.") { ApplicationArea = All; ToolTip = 'Specifies the number of the related project task.'; }
                 field("Line Type"; Rec."Line Type") { ApplicationArea = Jobs; ToolTip = 'Specifies the type of planning line.'; }
                 field("Planning Date"; Rec."Planning Date") { ApplicationArea = Jobs; ToolTip = 'Specifies the date of the planning line. You can use the planning date for filtering the totals of the project, for example, if you want to see the scheduled usage for a specific month of the year.'; }

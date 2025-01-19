@@ -28,13 +28,9 @@ page 50114 "API Job Planning Lines"
                 field("No"; Rec."No.") { }
                 field("UnitOfMeasure"; Rec."Unit of Measure Code") { }
                 field(Quantity; Rec.Quantity) { }
-                //field("QtyToInvoice";Rec."Qty. to Invoice"){}
-                //field("QtyTransferredToInv";Rec."Qty. Transferred to Invoice"){}
-                //field("QtyInvoiced";Rec."Qty. Invoiced"){}
                 field("TotalCost"; Rec.InvoiceCost) { }
                 field("TotalInvoice"; Rec.InvoicePrice) { }
                 field(TotalInvoiced; Rec."Invoiced Amount (LCY)") { }
-                //field(Profit; Invoiced(Rec."Invoiced Amount (LCY)", Rec.InvoicePrice) - Rec.InvoiceCost) { }
             }
         }
     }
@@ -52,12 +48,4 @@ page 50114 "API Job Planning Lines"
                 LineType := 'Budget';
         end;
     end;
-
-    // local procedure Invoiced(Value1: Decimal; Value2: Decimal): Decimal
-    // begin
-    //     if Value1 > 0 then
-    //         exit(Value1)
-    //     else
-    //         exit(Value2);
-    // end;
 }

@@ -64,7 +64,7 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
             CalcFormula = count("Vendor Ledger Entry" where("Document Type" = filter(Invoice | "Credit Memo"),
                                                              "Due Date" = field("Due This Week Filter"),
                                                              Open = const(true),
-                                                             "Payment Method Code" = filter('BACS|ANDREW|CASH|CHQ|PETTY')));
+                                                             "Payment Method Code" = filter('BACS|CASH|CHQ|PETTY')));
             Caption = 'Purch. Invoices Due This Week';
             Editable = false;
             FieldClass = FlowField;

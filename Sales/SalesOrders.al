@@ -187,16 +187,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 end;
             end;
         }
-        // modify(PreviewPosting)
-        // {
-        //     trigger OnBeforeAction()
-        //     begin
-        //         if rec."Posting Date" = 0D then begin
-        //             Rec.Validate(Rec."Posting Date", Today);
-        //             Rec.Modify();
-        //         end;
-        //     end;
-        // }
         modify(Release) { Enabled = ReleaseControllerStatus; }
         modify(Reopen) { Enabled = ReopenControllerStatus; }
     }
@@ -204,8 +194,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     var
         RecCustomer: Record Customer;
         CustomerNotes: Text[2000];
-        "Balance Due": Decimal;
-        //MobileNo: Text[30];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
@@ -217,7 +205,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
 
@@ -232,14 +219,8 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
-        GetBalance();
         ShowBalance := RecCustomer."Balance Due (LCY)" <> 0;
-        // if Rec."Posting Date" <> Today then begin
-        //     Rec.Validate(Rec."Posting Date", Today);
-        //     Rec.Modify();
-        // end;
     end;
 
     trigger OnAfterGetRecord()
@@ -248,7 +229,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
 
     end;
@@ -259,7 +239,6 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
-            //MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
 
@@ -269,9 +248,9 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 
-    local procedure GetBalance()
+    local procedure "Balance Due"(): Decimal
     begin
         RecCustomer.CalcFields("Balance Due (LCY)");
-        "Balance Due" := RecCustomer."Balance Due (LCY)";
+        exit(RecCustomer."Balance Due (LCY)");
     end;
 }
