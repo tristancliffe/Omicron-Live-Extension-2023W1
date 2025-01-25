@@ -71,7 +71,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         modify("Sell-to County") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Post Code") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code") { Importance = Standard; QuickEntry = false; }
-        modify("Your Reference") { Importance = Standard; QuickEntry = true; ShowMandatory = true; InstructionalText = 'e.g. AC TEL CC'; }
+        modify("Your Reference") { Importance = Standard; QuickEntry = true; ShowMandatory = true; }
         modify(WorkDescription) { Importance = Additional; Visible = true; QuickEntry = false; }
         modify("External Document No.") { Importance = Standard; Visible = true; QuickEntry = false; }
         modify("Document Date") { Visible = true; Importance = Standard; QuickEntry = false; }

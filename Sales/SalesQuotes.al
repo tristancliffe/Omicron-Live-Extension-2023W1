@@ -49,7 +49,7 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         modify("Sell-to Contact") { QuickEntry = false; }
         modify("External Document No.") { QuickEntry = false; }
         modify("Sell-to Customer No.") { Importance = Standard; }
-        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; InstructionalText = 'e.g. AC TEL CC'; }
+        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; }
         modify("Sell-to Address") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Address 2") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to City") { Importance = Standard; QuickEntry = false; }

@@ -25,18 +25,18 @@ table 50100 "Stock Used"
         }
         field(3; "Entered"; Boolean)
         {
-            Caption = 'Entered to Project';
-            ToolTip = 'Specifies the value of the Entered to Project field.', Comment = '%';
+            Caption = 'Entered';
+            ToolTip = 'If ticked this line is marked as having been entered to the job. The line can no longer be edited or deleted.', Comment = '%';
         }
         field(4; "Date"; Date)
         {
             Caption = 'Date';
-            ToolTip = 'Specifies the value of the Date field.', Comment = '%';
+            ToolTip = 'Date the line was used.', Comment = '%';
         }
         field(5; "Resource No."; code[20])
         {
             Caption = 'Resource No.';
-            ToolTip = 'Will auto populate when a line is entered.', Comment = '%';
+            ToolTip = 'Staff member who wrote the line.', Comment = '%';
         }
         field(6; "Quantity"; Decimal)
         {

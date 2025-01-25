@@ -63,6 +63,17 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
                 Scope = Repeater;
                 ToolTip = 'View all posted invoices for this vendor.';
             }
+            action(PurchaseOrders)
+            {
+                ApplicationArea = All;
+                Caption = 'Purchase Orders';
+                Image = Purchase;
+                RunObject = Page "Purchase Order List";
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
+                ToolTip = 'Go to list of current purchase orders';
+            }
         }
     }
 

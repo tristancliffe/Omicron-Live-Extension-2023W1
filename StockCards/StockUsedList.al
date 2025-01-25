@@ -6,7 +6,7 @@ page 50113 "Stock Card List"
     SourceTable = "Stock Used";
     UsageCategory = Lists;
     AdditionalSearchTerms = 'Stock Card List, Job Stock List, Job Stock Used, Project Parts List';
-    SourceTableView = sorting("Job No.", Date, "Line No.") order(ascending);
+    SourceTableView = sorting(Date, "Job No.", "Line No.") order(ascending);
     Editable = true;
 
     layout
@@ -121,7 +121,7 @@ page 50113 "Stock Card List"
             Device := false
         else
             Device := true;
-        Rec.Find('-');
+        Rec.FindLast();
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

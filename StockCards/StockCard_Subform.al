@@ -76,7 +76,7 @@ page 50112 "Stock Used Subform"
             Device := false
         else
             Device := true;
-        Rec.Find('-');
+        Rec.FindLast();
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

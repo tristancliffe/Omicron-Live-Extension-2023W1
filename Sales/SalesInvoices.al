@@ -39,7 +39,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         modify("Sell-to County") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Post Code") { Importance = Standard; QuickEntry = false; }
         modify("Sell-to Country/Region Code") { Importance = Standard; QuickEntry = false; }
-        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; InstructionalText = 'e.g. AC TEL CC'; }
+        modify("Your Reference") { Importance = Standard; ShowMandatory = true; QuickEntry = true; }
         modify(WorkDescription) { Importance = Additional; Visible = true; QuickEntry = false; }
         modify("Document Date") { Visible = true; Importance = Standard; }
         modify("Due Date") { Visible = true; Importance = Standard; }

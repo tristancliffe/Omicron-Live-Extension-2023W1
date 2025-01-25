@@ -85,7 +85,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             action(JobPlanningLines)
             {
                 ApplicationArea = All;
-                Caption = 'Project Timesheet History';
+                Caption = 'Project History';
                 Image = History;
                 ToolTip = 'Shows the entries made for the project so far that have been approved and posted';
                 Scope = Repeater;
@@ -97,7 +97,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             action(JobTaskLines)
             {
                 ApplicationArea = All;
-                Caption = 'Task Timesheet History';
+                Caption = 'Task History';
                 Image = History;
                 ToolTip = 'Shows the entries made for the selected task so far that have been approved and posted';
                 Scope = Repeater;
@@ -109,7 +109,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             action(JobCard)
             {
                 ApplicationArea = All;
-                Caption = 'View Project Card';
+                Caption = 'Project Card';
                 Image = Job;
                 ToolTip = 'Go to the main project card for the project.';
                 Scope = Repeater;
