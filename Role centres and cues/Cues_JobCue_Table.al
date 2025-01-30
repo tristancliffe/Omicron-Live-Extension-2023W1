@@ -31,7 +31,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
             CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'),
                                                                 "Planning Date" = filter('-1M..Today')));
             Caption = 'Hours Last Month';
-            ToolTip = 'Number of approved/journalled hours in the last 30 days, including Admin.';
+            ToolTip = 'Number of approved/journalled hours in the last 30 days, including Admin. For 6 people one might expect 920 hours or more.';
         }
         field(50104; ChargeableThisMonth; Decimal)
         {
@@ -40,7 +40,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
                                                                 "Planning Date" = filter('-1M..Today'),
                                                                 "Line Type" = filter(Billable)));
             Caption = 'Chargeable Hours Last Month';
-            ToolTip = 'Number of approved/journalled hours that can be charged from the last 30 days, excluding Admin.';
+            ToolTip = 'Number of approved/journalled hours that can be charged from the last 30 days, excluding Admin. For 6 people one might expect 644 or more.';
         }
         field(50105; "Invoiceable"; Decimal)
         {

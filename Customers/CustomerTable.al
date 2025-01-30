@@ -10,8 +10,8 @@ tableextension 50101 CustomerTableExtCue extends Customer
 {
     fields
     {
-        field(50100; "Customer Notes"; text[2000]) { CaptionML = ENU = 'Customer Notes'; DataClassification = CustomerContent; } //!OptimizeForTextSearch = true; }
-        field(50101; "Vehicle Model"; text[100]) { CaptionML = ENU = 'Customer Vehicle Model'; DataClassification = CustomerContent; } //!OptimizeForTextSearch = true; }
+        field(50100; "Customer Notes"; text[2000]) { CaptionML = ENU = 'Customer Notes'; DataClassification = CustomerContent; OptimizeForTextSearch = true; }
+        field(50101; "Vehicle Model"; text[100]) { CaptionML = ENU = 'Customer Vehicle Model'; DataClassification = CustomerContent; OptimizeForTextSearch = true; }
         field(50200; "No. of Jobs"; Integer)
         {
             FieldClass = FlowField;

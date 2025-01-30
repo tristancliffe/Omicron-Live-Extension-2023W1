@@ -7,7 +7,7 @@ tableextension 50201 "Job Journal Line Ext" extends "Job Journal Line"
             CaptionML = ENG = 'Work Done', ENU = 'Work Done';
             DataClassification = CustomerContent;
             ToolTip = 'Description of work carried out. Maximum of 700 characters';
-            //!OptimizeForTextSearch = true;
+            OptimizeForTextSearch = true;
         }
         field(50101; Instock_JobJournalLine; Decimal)
         {

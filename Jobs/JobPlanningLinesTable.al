@@ -7,7 +7,8 @@ tableextension 50107 JobPlanningLinesExt extends "Job Planning Line"
             Caption = 'Work Done';
             DataClassification = CustomerContent;
             ToolTip = 'Specifies information in addition to the description.';
-        } //!OptimizeForTextSearch = true; }
+            OptimizeForTextSearch = true;
+        }
         field(50101; "InvoicePrice"; Decimal) { Caption = 'Price to Invoice'; DataClassification = CustomerContent; }
         field(50102; "InvoiceCost"; Decimal) { Caption = 'Cost for Invoice'; DataClassification = CustomerContent; }
         field(50103; "VAT"; Decimal) { Caption = 'VAT at 20%'; DataClassification = CustomerContent; }

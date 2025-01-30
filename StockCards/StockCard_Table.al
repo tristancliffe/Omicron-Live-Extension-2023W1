@@ -64,7 +64,7 @@ table 50100 "Stock Used"
         {
             Caption = 'Description';
             ToolTip = 'Part description - can be changed by the user.', Comment = '%';
-            //!OptimizeForTextSearch = true;
+            OptimizeForTextSearch = true;
         }
         field(9; StockQty; Code[10])
         {
@@ -74,7 +74,7 @@ table 50100 "Stock Used"
         field(10; "Stock Name"; Text[100])
         {
             Caption = 'Stock Name';
-            //!OptimizeForTextSearch = true;
+            OptimizeForTextSearch = true;
             ToolTip = 'Technican''s description of the item.';
         }
         field(11; LastOne; Boolean)

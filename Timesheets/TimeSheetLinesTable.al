@@ -46,7 +46,7 @@ tableextension 50200 "Time Sheet Line Ext" extends "Time Sheet Line"
         modify("Job Task No.")
         { Caption = 'Project Task'; }
         field(50100; "Work Done"; Text[700])
-        { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; } //! OptimizeForTextSearch = true; }
+        { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; OptimizeForTextSearch = true; }
         field(50101; "Resource No."; Code[20])
         {
             Caption = 'Resource Name';

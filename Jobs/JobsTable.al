@@ -280,6 +280,7 @@ tableextension 50105 JobNotes extends Job
             CaptionML = ENU = 'Vehicle Reg';
             DataClassification = CustomerContent;
             ToolTip = 'Registration No.';
+            OptimizeForTextSearch = true;
         }
         field(50102; "Date of Arrival"; Date)
         {
@@ -292,16 +293,17 @@ tableextension 50105 JobNotes extends Job
             CaptionML = ENU = 'Project Notes';
             DataClassification = CustomerContent;
             ToolTip = 'Notes about the project - up to 1000 characters.';
+            OptimizeForTextSearch = true;
         }
         field(50104; "Car Make/Model"; Text[100])
         {
             CaptionML = ENU = 'Car Make/Model/Series';
             DataClassification = CustomerContent;
             ToolTip = 'Make & model of car in for work';
-            //! OptimizeForTextSearch = true;
+            OptimizeForTextSearch = true;
         }
         field(50105; "Work Required"; Text[500])
-        { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; } //! OptimizeForTextSearch = true; }
+        { CaptionML = ENU = 'Work Required'; DataClassification = CustomerContent; OptimizeForTextSearch = true; }
         field(50106; "Sell-to Mobile Number"; Text[30])
         { Caption = 'Mobile No.'; DataClassification = CustomerContent; ExtendedDatatype = PhoneNo; }
         field(50107; TotalHours; Decimal)
