@@ -54,10 +54,14 @@ pageextension 50165 SalesLineFactBoxExt extends "Sales Line FactBox"
                     DrillDown = false;
                 }
             }
+        }
+        addbefore(ItemNo)
+        {
             group(Image)
             {
                 Visible = ImageExists;
                 Caption = 'Item Image';
+                ShowCaption = false;
 
                 field(Image_SalesLine; Rec.Image_SalesLine)
                 {
