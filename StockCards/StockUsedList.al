@@ -25,6 +25,18 @@ page 50113 "Stock Card List"
                 //field(LastOne; Rec.LastOne) { Editable = Posted; }
                 field("Resource No."; Rec."Resource No.") { ToolTip = 'Specifies the value of the Resource No. field.', Comment = '%'; Editable = false; }
             }
+            group(PlanningLines)
+            {
+                Caption = 'Project Planning Lines';
+                Visible = Device;
+                part(ProjectPlanningLines; "Job Planning Lines Part")
+                {
+                    SubPageLink = "Job No." = field("Job No.");
+                    SubPageView = where("Unit of Measure Code" = const('<>HOUR'));
+                    Editable = false;
+                    Caption = 'Posted non-Labour Planning Lines';
+                }
+            }
         }
     }
     actions

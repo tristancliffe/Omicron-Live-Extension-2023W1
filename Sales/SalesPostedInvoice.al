@@ -3,11 +3,6 @@ pageextension 50140 PostedSalesInvoiceExt extends "Posted Sales Invoice"
     layout
     {
         moveafter("Sell-to Customer Name"; "Your Reference")
-        addbefore("Sell-to Customer Name")
-        {
-            field("Sell-to Customer No."; Rec."Sell-to Customer No.")
-            { ApplicationArea = All; }
-        }
         modify("External Document No.")
         { Importance = Standard; Visible = true; }
         modify("Document Date")
