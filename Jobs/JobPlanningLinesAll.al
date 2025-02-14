@@ -21,7 +21,7 @@ page 50104 "Job Planning Lines All"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the number of the related project.';
-                    //TableRelation = Job."No." where(Status = filter(Open | Completed | Paused | Planning | Quote));
+                    //TableRelation = Job."No." where(Status = filter(Open | Completed | Paused | Finished | Planning | Quote));
                     trigger OnDrillDown()
                     var
                         JobCard: Page "Job Card";

@@ -13,14 +13,14 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 MultiLine = true;
                 InstructionalText = 'Notes about this order...';
             }
-            field("Balance Due"; "Balance Due")
+            field("Customer Balance"; CustBalance)
             {
                 ApplicationArea = All;
-                Caption = 'Balance Due (LCY)';
+                Caption = 'Customer Balance (LCY)';
                 Tooltip = 'The balance owed. Positive amounts mean customer owes US, whereas negative numbers mean we owe THEM.';
                 Editable = False;
                 Importance = Standard;
-                Visible = ShowBalance;
+                Visible = true;
                 trigger OnDrillDown()
                 begin
                     RecCustomer.OpenCustomerLedgerEntries(true);
@@ -161,6 +161,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         {
             trigger OnBeforeAction()
             begin
+                BlankReference();
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
                     Rec.Modify();
@@ -171,6 +172,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         {
             trigger OnBeforeAction()
             begin
+                BlankReference();
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
                     Rec.Modify();
@@ -181,6 +183,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         {
             trigger OnBeforeAction()
             begin
+                BlankReference();
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
                     Rec.Modify();
@@ -220,7 +223,11 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
         end;
-        ShowBalance := RecCustomer."Balance Due (LCY)" <> 0;
+    end;
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    begin
+        BlankReference();
     end;
 
     trigger OnAfterGetRecord()
@@ -248,9 +255,14 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         ReopenControllerStatus := Rec.Status = Rec.Status::Released;
     end;
 
-    local procedure "Balance Due"(): Decimal
+    local procedure CustBalance(): Decimal
     begin
-        RecCustomer.CalcFields("Balance Due (LCY)");
-        exit(RecCustomer."Balance Due (LCY)");
+        RecCustomer.CalcFields("Balance (LCY)");
+        exit(RecCustomer."Balance (LCY)");
+    end;
+
+    local procedure BlankReference()
+    begin
+        if rec."Your Reference" = '' then Error('You must enter "Your Reference" for this order.');
     end;
 }

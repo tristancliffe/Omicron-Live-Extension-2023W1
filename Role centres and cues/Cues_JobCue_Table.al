@@ -4,8 +4,8 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
     {
         field(50100; OngoingJobs; Integer)
         {
-            CalcFormula = count(Job where(Status = filter(Quote | Planning | Open | Paused)));
-            // Rec.SetFilter("Status", 'Planning|Quote|Open|Paused');
+            CalcFormula = count(Job where(Status = filter(Quote | Planning | Open | Paused | Finished)));
+            // Rec.SetFilter("Status", 'Planning|Quote|Open|Paused|Finished');
             Caption = 'Ongoing Projects';
             FieldClass = FlowField;
             ToolTip = 'Specifies number of currently active (Open) projects';

@@ -17,7 +17,7 @@ tableextension 50101 CustomerTableExtCue extends Customer
             FieldClass = FlowField;
             Caption = 'Number of projects with the customer';
             Editable = false;
-            CalcFormula = count(Job where(Status = filter('Open|Paused'), "Sell-to Customer No." = FIELD("No.")));
+            CalcFormula = count(Job where(Status = filter('Open|Paused|Finished'), "Sell-to Customer No." = FIELD("No.")));
             ToolTip = 'Specifies the number of projects ongoing for the customer.';
         }
         field(50201; "No. of Completed Jobs"; Integer)

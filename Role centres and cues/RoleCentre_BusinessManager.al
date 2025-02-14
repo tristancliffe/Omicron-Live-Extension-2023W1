@@ -71,7 +71,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             {
                 ApplicationArea = All;
                 RunObject = page "Job List";
-                RunPageView = where(Status = filter(Open | Quote | Planning | Paused));
+                RunPageView = where(Status = filter(Open | Quote | Planning | Paused | Finished));
                 Caption = 'Projects';
                 Image = ViewJob;
                 Tooltip = 'Show the list of current projects';
