@@ -252,12 +252,12 @@ pageextension 50112 JobListExtension extends "Job List"
     {
         addfirst
         {
-            view(CurrentJobs) { Caption = 'Current Projects'; Filters = where("Status" = filter('Planning|Quote|Open|Paused')); }
-            view(AllJobs) { Caption = 'All Projects'; Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused')); }
-            view(JJobs) { Caption = 'Current J Jobs'; Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open|Paused')); }
-            view(PJobs) { Caption = 'Current P Jobs'; Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open|Paused')); }
-            view(CompletedJobs) { Caption = 'Completed Projects'; Filters = where("Status" = filter('Completed')); }
-            view("WIP to Post") { Caption = 'WIP entries'; Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused'), "WIP Entries Exist" = const(true)); }
+            view(CurrentJobs) { Caption = 'Current Projects'; Filters = where("Status" = filter('Planning|Quote|Open|Paused|Finished')); }
+            view(AllJobs) { Caption = 'All Projects'; Filters = where("Status" = filter('Planning|Completed|Quote|Open|Paused|Finished')); }
+            view(JJobs) { Caption = 'Current J Jobs'; Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open|Paused|Finished')); }
+            view(PJobs) { Caption = 'Current P Jobs'; Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open|Paused|Finished')); }
+            view(CompletedJobs) { Caption = 'Completed Projects'; Filters = where("Status" = filter('Completed|Finished')); }
+            view("WIP to Post") { Caption = 'WIP entries'; Filters = where("WIP Entries Exist" = const(true)); }
             view(RecentJobs) { Caption = 'Recent Projects'; Filters = where("Starting Date" = filter('Today-364D..')); }
         }
     }
@@ -272,7 +272,7 @@ pageextension 50112 JobListExtension extends "Job List"
     begin
         Rec.SetCurrentKey("No.");
         Rec.Ascending(true);
-        Rec.SetFilter("Status", 'Planning|Quote|Open|Paused');
+        Rec.SetFilter("Status", 'Planning|Quote|Open|Paused|Finished');
     end;
 
     trigger OnAfterGetRecord()
