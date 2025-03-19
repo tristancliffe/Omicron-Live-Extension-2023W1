@@ -6,6 +6,14 @@ pagecustomization "Teams Job Card" customizes "Job Card"
         modify("Search Description") { Visible = false; }
         modify("External Document No.") { Visible = false; }
         modify("Your Reference") { Visible = false; }
+        modify("Sell-to Address") { Visible = false; }
+        modify("Sell-to Address 2") { Visible = false; }
+        modify("Sell-to City") { Visible = false; }
+        modify("Sell-to County") { Visible = false; }
+        modify("Sell-to Country/Region Code") { Visible = false; }
+        modify("Sell-to Post Code") { Visible = false; }
+        modify("Sell-to Contact") { Visible = false; }
+        modify("No. of Archived Versions") { Visible = false; }
         modify("Person Responsible") { Visible = false; }
         modify(Blocked) { Visible = false; }
         modify("Last Date Modified") { Visible = false; }
@@ -25,5 +33,16 @@ pagecustomization "Teams Job Card" customizes "Job Card"
         modify(Prices) { Visible = false; }
         modify("&Copy") { Visible = false; }
         modify(Action26) { Visible = false; }
+    }
+}
+
+pagecustomization "Teams Project Tasks" customizes "Job Task Lines Subform"
+{
+    layout
+    {
+        modify("Global Dimension 1 Code") { Visible = false; }
+        modify("Global Dimension 2 Code") { Visible = false; }
+        modify("End Date") { Visible = false; }
+        modify("Usage (Total Cost)") { Visible = false; }
     }
 }

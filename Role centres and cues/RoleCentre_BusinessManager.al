@@ -842,7 +842,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 action(AgedDebtors)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Aged Debtors/Payables/Customers Report';
+                    Caption = 'Aged Debtors/Receivable/Customers Report';
                     Image = CustomerCode;
                     RunObject = Report "Aged Accounts Receivable";
                     ToolTip = 'View aged (i.e. due) account receivables (customers owing)';
@@ -850,7 +850,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 action(AgedCreditors)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Aged Creditors/Receivables/Vendors Report';
+                    Caption = 'Aged Creditors/Payable/Vendors Report';
                     Image = VendorCode;
                     RunObject = Report "Aged Accounts Payable";
                     ToolTip = 'View aged (i.e. due) account payables (suppliers owed)';

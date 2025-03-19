@@ -4,33 +4,27 @@ reportextension 50103 OmicronSalesInvoiceExt extends "Standard Sales - Invoice"
     {
         add(Line)
         {
-            column(WorkDone_Line; "Work Done")
-            { }
+            column(WorkDone_Line; "Work Done") { }
         }
-        modify(Line)
-        {
-            trigger OnAfterAfterGetRecord()
-            begin
-                if (Line.Type = Line.Type::Item) and (Line.Quantity = 0) and (PrintZeroQtyLines = false) then
-                    CurrReport.Skip();
-            end;
-        }
-
+        // modify(Line)
+        // {
+        //     trigger OnAfterAfterGetRecord()
+        //     begin
+        //         if (Line.Type = Line.Type::Item) and (Line.Quantity = 0) and (PrintZeroQtyLines = false) then CurrReport.Skip();
+        //     end;
+        // }
     }
-    requestpage
-    {
-        layout
-        {
-            addafter(DisplayAdditionalFeeNote)
-            {
-                field(PrintZeroQtyLines; PrintZeroQtyLines)
-                {
-                    ApplicationArea = All;
-                }
-            }
-        }
-    }
-
+    // requestpage
+    // {
+    //     layout
+    //     {
+    //         addafter(DisplayAdditionalFeeNote)
+    //         {
+    //             field(PrintZeroQtyLines; PrintZeroQtyLines)
+    //             { ApplicationArea = All; }
+    //         }
+    //     }
+    // }
     rendering
     {
         layout("./OmicronSalesInvoice.docx")
@@ -48,7 +42,6 @@ reportextension 50103 OmicronSalesInvoiceExt extends "Standard Sales - Invoice"
             Summary = 'Omicron Job Sales Invoice';
         }
     }
-
-    var
-        PrintZeroQtyLines: Boolean;
+    // var
+    //     PrintZeroQtyLines: Boolean;
 }

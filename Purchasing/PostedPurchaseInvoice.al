@@ -38,6 +38,14 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
         }
         addafter(IncomingDocAttachFactBox)
         {
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Provider = PurchInvLines;
+                SubPageLink = "Item No." = FIELD("No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
             part(ItemReplenishmentFactbox; "Item Replenishment FactBox")
             {
                 ApplicationArea = All;

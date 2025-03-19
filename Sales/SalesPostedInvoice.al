@@ -55,5 +55,21 @@ pageextension 50140 PostedSalesInvoiceExt extends "Posted Sales Invoice"
             field(OrderNotes; Rec."Order Notes")
             { ApplicationArea = All; }
         }
+        addafter(IncomingDocAttachFactBox)
+        {
+            part(Control1903720907; "Sales Hist. Sell-to FactBox")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "No." = field("Sell-to Customer No.");
+            }
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Provider = SalesInvLines;
+                SubPageLink = "Item No." = FIELD("No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
+        }
     }
 }

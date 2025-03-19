@@ -55,7 +55,18 @@ tableextension 50116 PurchaseLineTableExt extends "Purchase Line"
             // DataClassification = CustomerContent;
             FieldClass = FlowField;
             CalcFormula = sum("Sales Line"."Qty. to Ship" where("No." = field("No."),
-                                                                "Document Type" = field("Document Type"),
+                                                                "Document Type" = filter("Order"),
+                                                                "Location Code" = field("Location Code")));
+        }
+        field(50107; CalcQtyOnSalesQuote_PurchLine; Decimal)
+        {
+            Caption = 'Qty. on Sales Quotes';
+            DecimalPlaces = 0 : 2;
+            Editable = false;
+            // DataClassification = CustomerContent;
+            FieldClass = FlowField;
+            CalcFormula = sum("Sales Line"."Qty. to Ship" where("No." = field("No."),
+                                                                "Document Type" = filter("Quote"),
                                                                 "Location Code" = field("Location Code")));
         }
     }

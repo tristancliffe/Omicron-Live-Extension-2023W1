@@ -29,7 +29,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
         {
             FieldClass = FlowField;
             CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'),
-                                                                "Planning Date" = filter('-1M..Today')));
+                                                                "Planning Date" = filter('-30D..Today')));
             Caption = 'Hours Last Month';
             ToolTip = 'Number of approved/journalled hours in the last 30 days, including Admin. For 6 people one might expect 920 hours or more.';
         }
@@ -37,7 +37,7 @@ tableextension 50112 ProjectManagerCueExt extends "Job Cue"
         {
             FieldClass = FlowField;
             CalcFormula = sum("Job Planning Line".Quantity where("Unit of Measure Code" = const('HOUR'),
-                                                                "Planning Date" = filter('-1M..Today'),
+                                                                "Planning Date" = filter('-30D..Today'),
                                                                 "Line Type" = filter(Billable)));
             Caption = 'Chargeable Hours Last Month';
             ToolTip = 'Number of approved/journalled hours that can be charged from the last 30 days, excluding Admin. For 6 people one might expect 644 or more.';

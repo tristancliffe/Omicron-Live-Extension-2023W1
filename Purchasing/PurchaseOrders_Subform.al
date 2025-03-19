@@ -247,6 +247,16 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 Scope = Repeater;
                 Enabled = Rec.Type = Rec.Type::Item;
             }
+            action(ItemsFromVendors)
+            {
+                ApplicationArea = Planning;
+                Caption = 'Vendor List';
+                Image = Vendor;
+                RunObject = Page "Item Vendor Catalog";
+                RunPageLink = "Item No." = FIELD("No.");
+                RunPageView = SORTING("Item No.");
+                ToolTip = 'View the list of vendors who can supply the item, and at which lead time.';
+            }
             action(DocAttach2)
             {
                 ApplicationArea = All;

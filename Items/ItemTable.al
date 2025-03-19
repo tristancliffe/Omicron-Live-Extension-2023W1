@@ -1,5 +1,5 @@
 // The extension extends the base "Item" table with additional fields and triggers.
-// The fields include "Model," "Item Notes," "Supplier," "NonStockShelf," and "Search_Column."
+// The fields include "Model," "Item Notes," "Supplier," "NonStockShelf," "Search_Column," and "NeedsReorder."
 // The triggers include "OnAfterModify," "OnModify," and "OnBeforeDelete."
 // The "OnAfterModify" trigger converts the values of "Model," "Supplier," and "NonStockShelf" to uppercase.
 // The "OnModify" trigger sets the value of "Search_Column" by concatenating various fields and strings.
@@ -14,21 +14,21 @@ tableextension 50100 ItemTableExt extends Item
             CaptionML = ENU = 'Vehicle Model';
             DataClassification = CustomerContent;
             ToolTip = 'Known/intended application by model. For more specifics consider the Notes field';
-            OptimizeForTextSearch = true;
+            //OptimizeForTextSearch = true;
         }
         field(50101; "Item Notes"; Text[1000])
         {
             CaptionML = ENU = 'Item Notes';
             DataClassification = CustomerContent;
             ToolTip = 'Item notes...';
-            OptimizeForTextSearch = true;
+            //OptimizeForTextSearch = true;
         }
         field(50102; "Supplier"; Text[50])
         {
             CaptionML = ENU = 'Supplier';
             DataClassification = CustomerContent;
             ToolTip = 'Brief summary of main supplier and/or part number. No longed editable. Use the Vendor Catalogue to record suppliers, their part numbers and lead times, and use the Vendor No. and Vendor Item No. below to define the default vendor used for purchasing.';
-            OptimizeForTextSearch = true;
+            //OptimizeForTextSearch = true;
         }
 
         field(50103; "NonStockShelf"; Text[20])

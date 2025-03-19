@@ -4,6 +4,8 @@ pageextension 50166 PurchaseFactboxExt extends "Purchase Line FactBox"
     {
         addafter(Availability)
         {
+            field(QtyOnSalesQuote_PurchLine; Rec.CalcQtyOnSalesQuote_PurchLine)
+            { ApplicationArea = All; Visible = true; DrillDown = true; }
             field(QtyOnSalesOrder_PurchLine; Rec.CalcQtyOnSalesOrder_PurchLine)
             { ApplicationArea = All; Visible = true; DrillDown = true; }
         }

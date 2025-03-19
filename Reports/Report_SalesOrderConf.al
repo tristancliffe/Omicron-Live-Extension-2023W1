@@ -13,33 +13,31 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             column(ShelfNo_SalesLine; Line.ShelfNo_SalesLine) { }
             column(CommodityCode_SalesLine; Line.CommodityCode_SalesLine) { }
             column(Instock_SalesLine; Line.Instock_SalesLine) { }
-
-            // column(Image_SalesLine; Line.Image_SalesLine)
-            // { }
         }
-        // addlast(Line)
-        // {
-        //     dataitem(Item; Item)
-        //     {
-        //         Description = 'Image';
-        //     }
-        // }
-        // modify(Line)
-        // {
-        //     trigger OnAfterAfterGetRecord()
-        //     var
-        //         Item: record Item;
-        //     begin
-        //         Item.get("No.");
-        //         if Item.Picture.Count > 0 then begin
-        //             TenantMedia.Get(Item.Picture.Item(1));
-        //             TenantMedia.CalcFields(Content);
-        //         end;
-        //     end;
-        // }
-
+        modify(Line)
+        {
+            trigger OnAfterAfterGetRecord()
+            begin
+                if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
+                FormattedQuantity := format("Qty. to Ship");
+            end;
+        }
     }
-
+    requestpage
+    {
+        layout
+        {
+            addafter(ArchiveDocument)
+            {
+                field(HideLinesWithZeroQuantityControl; HideLinesWithZeroQuantity)
+                {
+                    ApplicationArea = Basic, Suite;
+                    ToolTip = 'Specifies if the lines with nothing to ship are printed.';
+                    Caption = 'Hide lines that are not to be shipped';
+                }
+            }
+        }
+    }
     rendering
     {
         layout("./OmicronSalesOrderConf.docx")
@@ -50,6 +48,6 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             Summary = 'Omicron Sales Order Confirmation';
         }
     }
-    // var
-    //     TenantMedia: Record "Tenant Media";
+    var
+        HideLinesWithZeroQuantity: Boolean;
 }

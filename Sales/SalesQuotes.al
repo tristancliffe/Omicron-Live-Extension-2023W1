@@ -150,6 +150,9 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         CustomerNotes: Text[2000];
         MobileNo: Text[30];
 
+    protected var
+        CallNotificationCheck: Boolean;
+
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
         Rec."Assigned User ID" := USERID;
@@ -175,6 +178,11 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
             MobileNo := RecCustomer."Mobile Phone No.";
             //rec.modify()
         end;
+    end;
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    begin
+        BlankReference();
     end;
 
     trigger OnAfterGetRecord()
@@ -208,6 +216,8 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
         CallNotificationCheck := true;
     end;
 
-    protected var
-        CallNotificationCheck: Boolean;
+    local procedure BlankReference()
+    begin
+        if rec."Your Reference" = '' then Error('You must enter "Your Reference" for this order.');
+    end;
 }
