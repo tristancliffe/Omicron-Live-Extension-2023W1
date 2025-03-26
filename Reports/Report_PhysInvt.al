@@ -6,6 +6,8 @@ reportextension 50101 PhysInvtReportExt extends "Phys. Inventory List"
         {
             column(ShelfNo_ItemJournalLine; ShelfNo_ItemJournalLine) { }
             column(AssemblyBOM; AssemblyBOM) { }
+            column(Unit_of_Measure_Code; "Unit of Measure Code") { }
+            column(LastPhysicalInventory; LastPhysicalInventory) { }
         }
         modify("Item Journal Line")
         {

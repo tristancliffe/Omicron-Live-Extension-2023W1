@@ -29,6 +29,12 @@ pageextension 50136 PhysicalInventJournalExt extends "Phys. Inventory Journal"
                 Visible = true;
                 Caption = 'Assembly';
             }
+            field("Last Physical Inventory"; Rec.LastPhysicalInventory)
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Caption = 'Last Phys. Invt.';
+            }
         }
         modify("Salespers./Purch. Code") { Visible = false; }
         modify(ShortcutDimCode4) { Visible = false; }

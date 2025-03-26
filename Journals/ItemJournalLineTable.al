@@ -13,8 +13,8 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
         field(50100; ShelfNo_ItemJournalLine; Code[10])
         {
             Caption = 'Shelf No.';
-            FieldClass = FlowField;
             Editable = false;
+            FieldClass = FlowField;
             CalcFormula = lookup(Item."Shelf No." where("No." = field("Item No.")));
             ToolTip = 'Shelf Location';
         }
@@ -31,6 +31,15 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
             Caption = 'Assembly';
             Editable = false;
             ToolTip = 'This field indicates whether the item is an assembly.';
+        }
+        field(50103; LastPhysicalInventory; Date)
+        {
+            Caption = 'Last Physical Inventory';
+            Editable = false;
+            ToolTip = 'This field shows the date of the last physical inventory.';
+            FieldClass = FlowField;
+            CalcFormula = max("Phys. Inventory Ledger Entry"."Posting Date" where("Item No." = field("Item No."),
+                                                                                   "Phys Invt Counting Period Type" = filter(" " | Item)));
         }
     }
 }
