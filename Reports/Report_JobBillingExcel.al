@@ -22,7 +22,7 @@ report 50101 "Job Billing Excel"
             {
                 DataItemLink = "Job No." = FIELD("No.");
                 DataItemTableView = SORTING("Job No.", "Planning Date", "Line No.");
-                RequestFilterFields = "Job Task No.", "Contract Line", "Qty. to Transfer to Invoice", "Planning Date";
+                RequestFilterFields = "Job Task No.", "Qty. to Transfer to Invoice", "Planning Date";
                 //PrintOnlyIfDetail = true;
                 column(JobPlanningLine_JobTaskNo; "Job Task No.") { }
                 column(Number; "No.") { }
@@ -46,15 +46,23 @@ report 50101 "Job Billing Excel"
                 trigger OnAfterGetRecord()
                 begin
                     PrintSection := true;
-                    if "Line Type" = "Line Type"::Budget then begin
-                        PrintSection := false;
-                        CurrReport.Skip();
+                    if not BudgetLinesOnly then begin
+                        if "Line Type" = "Line Type"::Budget then begin
+                            PrintSection := false;
+                            CurrReport.Skip();
+                        end;
+                    end
+                    else if BudgetLinesOnly then begin
+                        if "Line Type" <> "Line Type"::Budget then begin
+                            PrintSection := false;
+                            CurrReport.Skip();
+                        end;
                     end;
                     if "Work Done" = '' then
                         WorkDoneDescription := "Job Planning Line".Description
                     else
                         WorkDoneDescription := "Work Done";
-                    if AllLinesSelector = true then begin
+                    if AllLinesSelector then begin
                         if ("Qty. Invoiced" > 0) or ("Qty. Transferred to Invoice" > 0) then
                             "Qty. to Transfer to Invoice" := "Qty. Invoiced"
                         else
@@ -62,9 +70,9 @@ report 50101 "Job Billing Excel"
                         InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
                         VAT := round(InvoicePrice * 0.2, 0.01);
                         InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
-                    end;
-                    if AllLinesSelector = false then begin
-                        if (InvoicedSelector = true) then begin
+                    end
+                    else begin
+                        if InvoicedSelector then begin
                             if "Qty. to Transfer to Invoice" > 0 then
                                 CurrReport.Skip();
                             "Qty. to Transfer to Invoice" := "Qty. Invoiced";
@@ -72,7 +80,7 @@ report 50101 "Job Billing Excel"
                             VAT := round(InvoicePrice * 0.2, 0.01);
                             InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                         end
-                        else if AddedToInvoiceSelector = true then begin
+                        else if AddedToInvoiceSelector then begin
                             if "Qty. Invoiced" > 0 then
                                 CurrReport.Skip();
                             "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice";
@@ -80,10 +88,16 @@ report 50101 "Job Billing Excel"
                             VAT := round(InvoicePrice * 0.2, 0.01);
                             InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                         end
+                        else if BudgetLinesOnly then begin
+                            "Qty. to Transfer to Invoice" := Quantity;
+                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
+                            VAT := round(InvoicePrice * 0.2, 0.01);
+                            InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
+                        end
                         else begin
                             if ("Qty. Invoiced" <> 0) then
                                 CurrReport.Skip();
-                            if "Qty. to Transfer to Invoice" = 0 then
+                            if ("Qty. to Transfer to Invoice" = 0) then
                                 CurrReport.Skip();
                         end;
                     end;
@@ -131,6 +145,12 @@ report 50101 "Job Billing Excel"
                     ApplicationArea = All;
                     Caption = 'Only include lines added to current invoice';
                     ToolTip = 'If this is selected, then only lines and quantities added to a current invoice will be exported.';
+                }
+                field(BudgetLinesOnly; BudgetLinesOnly)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Only include budget lines';
+                    ToolTip = 'If this is selected, then only budget lines will be included in the report.';
                 }
             }
         }
@@ -189,4 +209,5 @@ report 50101 "Job Billing Excel"
         InvoicedSelector: Boolean;
         AddedToInvoiceSelector: Boolean;
         AllLinesSelector: Boolean;
+        BudgetLinesOnly: Boolean;
 }

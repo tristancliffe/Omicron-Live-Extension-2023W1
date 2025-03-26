@@ -26,5 +26,11 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
             DataClassification = CustomerContent;
             ToolTip = 'This column shows the quantity currently known to be in stock.';
         }
+        field(50102; AssemblyBOM; Boolean)
+        {
+            Caption = 'Assembly';
+            Editable = false;
+            ToolTip = 'This field indicates whether the item is an assembly.';
+        }
     }
 }

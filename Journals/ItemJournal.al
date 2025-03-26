@@ -63,6 +63,7 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
         modify("Bin Code")
         { Visible = false; }
 
+
     }
     actions
     {

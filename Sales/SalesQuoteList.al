@@ -104,7 +104,7 @@ pageextension 50117 SalesQuoteList extends "Sales Quotes"
 
     trigger OnOpenPage()
     begin
-        Rec.SetCurrentKey("No.");
+        Rec.SetCurrentKey("Order Date", "No.");
         Rec.Ascending(false);
     end;
 

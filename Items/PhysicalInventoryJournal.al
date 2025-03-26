@@ -1,4 +1,4 @@
-pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
+pageextension 50136 PhysicalInventJournalExt extends "Phys. Inventory Journal"
 {
     layout
     {
@@ -8,7 +8,7 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
             {
                 ApplicationArea = All;
                 Visible = true;
-                Caption = 'Shelf Location';
+                Caption = 'Shelf';
                 trigger OnDrillDown()
                 var
                     Items: Record Item;
@@ -23,13 +23,20 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
                     end;
                 end;
             }
+            field(AssemblyBOM; Rec.AssemblyBOM)
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Caption = 'Assembly';
+            }
         }
         modify("Salespers./Purch. Code") { Visible = false; }
         modify(ShortcutDimCode4) { Visible = false; }
         modify(ShortcutDimCode5) { Visible = false; }
         modify(ShortcutDimCode3) { Visible = false; }
-        modify("Shortcut Dimension 2 Code") { Visible = false; }
-        modify("Shortcut Dimension 1 Code") { Visible = false; }
+        modify("Shortcut Dimension 2 Code") { Visible = true; }
+        modify("Shortcut Dimension 1 Code") { Visible = true; }
+        modify("Applies-to Entry") { Visible = false; }
     }
     actions
     {
@@ -41,7 +48,7 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
                 Image = Item;
                 Caption = 'Item Card';
                 RunObject = page "Item Card";
-                RunPageLink = "No." = field("No.");
+                RunPageLink = "No." = field("Item No.");
                 Description = 'Go to the Item Card';
                 ToolTip = 'Opens the item card for this line';
                 Scope = Repeater;
@@ -49,4 +56,17 @@ pageextension 50136 ItemJournalShelfExt extends "Phys. Inventory Journal"
             }
         }
     }
+    trigger OnAfterGetRecord()
+    var
+        Item: Record "Item";
+    begin
+        if Rec."Item No." <> '' then begin
+            if Item.Get(Rec."Item No.") then begin
+                if Item."Replenishment System" = Item."Replenishment System"::Assembly then
+                    Rec.AssemblyBOM := true
+                else
+                    Rec.AssemblyBOM := false;
+            end
+        end;
+    end;
 }
