@@ -134,15 +134,12 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         movefirst(Category_Category5; PostAndSend_Promoted)
         addlast(Category_Process)
         {
-            actionref(ItemJournal_Promoted; ItemJournal)
-            { }
-            actionref(ItemList_Promoted; ItemList)
-            { }
-            actionref(CustomerCard_promoted; Function_CustomerCard)
-            { }
-            actionref(Statistics2; Statistics)
-            { }
+            actionref(ItemJournal_Promoted; ItemJournal) { }
+            actionref(ItemList_Promoted; ItemList) { }
+            actionref(CustomerCard_promoted; Function_CustomerCard) { }
+            actionref(Statistics3; SalesStatistics) { Visible = true; }
         }
+        modify(SalesStatistics) { Visible = true; }
         addlast("F&unctions")
         {
             action(ItemJournal)
@@ -217,8 +214,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         }
         addlast(Category_PrintSend)
         {
-            actionref(EmailDraft_Promoted; SendEmailDraftInvoice)
-            { }
+            actionref(EmailDraft_Promoted; SendEmailDraftInvoice) { }
         }
         // modify(Preview)
         // {

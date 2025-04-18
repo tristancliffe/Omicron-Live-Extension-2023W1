@@ -97,6 +97,19 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 end;
             }
         }
+        // modify("Total VAT Amount")
+        // {
+
+        //     trigger OnDrillDown()
+        //     var
+        //         SalesHeader: Record "Sales Header";
+        //     begin
+        //         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then
+        //             Page.Run(Page::"Sales Order Statistics", SalesHeader)
+        //         else
+        //             Error('The related Sales Header could not be found.');
+        //     end;
+        // }
     }
     actions
     {

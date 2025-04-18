@@ -124,7 +124,6 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
         { Visible = false; }
         modify("VAT Statements")
         { Visible = false; }
-
         addlast(Action39)
         {
             group(VAT)
@@ -549,13 +548,13 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     ToolTip = 'Open the Time Sheet report.';
                     RunObject = Report "Timesheet Entries";
                 }
-                action("Report Job Invoicing Excel")
+                action("Resource Admin Proportions")
                 {
                     ApplicationArea = Suite;
-                    Caption = 'Excel Invoicing Report';
+                    Caption = 'Admin Proportions';
                     Image = "Report";
-                    ToolTip = 'Open the Excel worksheet for invoicing';
-                    RunObject = Report "Job Billing Excel";
+                    ToolTip = 'Open the report for budget vs billable proportions.';
+                    RunObject = Report "Resource Admin Hours";
                 }
             }
             group(Stock)

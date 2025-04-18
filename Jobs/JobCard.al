@@ -6,6 +6,7 @@ pageextension 50111 JobCardExt extends "Job Card"
         addafter(Description)
         {
             field("Car Make/Model"; Rec."Car Make/Model") { MultiLine = false; ApplicationArea = All; ShowMandatory = true; }
+            field(PercentCompleted; Rec.PercentCompleted) { ApplicationArea = All; BlankZero = true; Caption = '% Complete'; Editable = false; DecimalPlaces = 0; }
             field("Project Notes"; Rec."Job Notes") { MultiLine = true; ApplicationArea = All; ShowCaption = false; QuickEntry = false; InstructionalText = 'Summary of job tasks required...'; }
         }
         modify(Status)

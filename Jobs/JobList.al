@@ -20,7 +20,7 @@ pageextension 50112 JobListExtension extends "Job List"
             field(TotalValue; Rec.TotalValue) { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; }
             field(InvoicedValue; Rec.InvoicedValue) { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; }
             field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue)) { ApplicationArea = All; StyleExpr = ProfitStyle; BlankZero = true; Visible = false; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; }
-            field(PercentCompleted; Rec.PercentCompleted) { ApplicationArea = All; BlankZero = true; Caption = '% Complete'; }
+            field(PercentCompleted; Rec.PercentCompleted) { ApplicationArea = All; BlankZero = true; Caption = '% Complete'; DecimalPlaces = 0; }
         }
         moveafter("Date of Arrival"; "Person Responsible")
         modify("Person Responsible") { Visible = false; ToolTip = 'Whom is ''doing'' the project, or whom is responsible for it.'; }

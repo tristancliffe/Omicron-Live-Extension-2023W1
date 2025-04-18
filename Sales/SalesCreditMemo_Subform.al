@@ -22,6 +22,18 @@ pageextension 50175 SalesCreditMemoSubformExt extends "Sales Cr. Memo Subform"
             field("Amount Including VAT"; Rec."Amount Including VAT")
             { ApplicationArea = All; Visible = true; Editable = false; }
         }
+        // modify("Total VAT Amount")
+        // {
+        //     trigger OnDrillDown()
+        //     var
+        //         SalesHeader: Record "Sales Header";
+        //     begin
+        //         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then
+        //             Page.Run(Page::"Sales Statistics", SalesHeader)
+        //         else
+        //             Error('The related Sales Header could not be found.');
+        //     end;
+        // }
     }
     actions
     {

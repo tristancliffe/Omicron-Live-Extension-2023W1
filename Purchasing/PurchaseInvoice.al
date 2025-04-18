@@ -115,14 +115,19 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 Enabled = true;
             }
         }
+        addafter(Category_Category10)
+        {
+            actionref(CopyDocument2; CopyDocument) { }
+        }
         addlast(Category_Process)
         {
             actionref(RecurringLines; GetRecurringPurchaseLines) { }
             actionref(VendorCard; Vendor) { }
             actionref(PostedInvoices_Promoted; PostedInvoices) { }
             actionref(VendorLedger_Promoted; VendorLedgerEntries) { }
-            actionref(Statistics2; Statistics) { }
+            actionref(Statistics3; PurchaseStatistics) { Visible = true; }
         }
+        modify(PurchaseStatistics) { Visible = true; }
         modify(Post)
         {
             trigger OnBeforeAction()

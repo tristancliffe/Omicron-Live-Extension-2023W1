@@ -130,8 +130,9 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
             actionref(ItemJournal_Promoted; ItemJournal) { }
             actionref(ItemList_Promoted; ItemList) { }
             actionref(CustomerCard; Customer) { }
-            actionref(Statistics2; Statistics) { }
+            actionref(Statistics3; SalesOrderStatistics) { }
         }
+        modify(SalesOrderStatistics) { Visible = true; }
         modify("Create &Warehouse Shipment") { Visible = false; }
         modify("Create Inventor&y Put-away/Pick") { Visible = false; }
         addlast("F&unctions")

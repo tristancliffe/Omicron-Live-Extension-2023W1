@@ -43,6 +43,29 @@ pageextension 50136 PhysicalInventJournalExt extends "Phys. Inventory Journal"
         modify("Shortcut Dimension 2 Code") { Visible = true; }
         modify("Shortcut Dimension 1 Code") { Visible = true; }
         modify("Applies-to Entry") { Visible = false; }
+        addafter(JournalErrorsFactBox)
+        {
+            part(ItemPicture; "Item Picture")
+            {
+                ApplicationArea = All;
+                Caption = 'Picture';
+                SubPageLink = "No." = field("Item No.");
+            }
+            part(JobJournalFactbox; "Job Journal Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                SubPageLink = "No." = field("Item No.");
+            }
+            part(VendorListFactbox; "Item Vendor List Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                //Provider = PurchLines;
+                SubPageLink = "Item No." = FIELD("Item No.");
+                SubPageView = sorting("Vendor No.", "Vendor Item No.");
+            }
+        }
     }
     actions
     {

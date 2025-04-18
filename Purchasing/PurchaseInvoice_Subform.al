@@ -56,6 +56,18 @@ pageextension 50130 PurchInvSubformExt extends "Purch. Invoice Subform"
         {
             field(LineAmountInclVAT; Rec."Amount Including VAT") { ApplicationArea = All; Visible = true; Caption = 'Line Amount incl. VAT'; }
         }
+        // modify("Total VAT Amount")
+        // {
+        //     trigger OnDrillDown()
+        //     var
+        //         PurchHeader: Record "Purchase Header";
+        //     begin
+        //         if PurchHeader.Get(Rec."Document Type", Rec."Document No.") then
+        //             Page.Run(Page::"Purchase Statistics", PurchHeader)
+        //         else
+        //             Error('The related Purchase Header could not be found.');
+        //     end;
+        // }
     }
     actions
     {

@@ -35,7 +35,7 @@ page 50107 "Completed Job List"
             part(Control1907234507; "Sales Hist. Bill-to FactBox") { ApplicationArea = Jobs; SubPageLink = "No." = field("Bill-to Customer No."); }
             part(Control1902018507; "Customer Statistics FactBox") { ApplicationArea = Jobs; SubPageLink = "No." = field("Bill-to Customer No."); }
 
-            part("Attached Documents"; "Document Attachment Factbox") { ApplicationArea = All; Caption = 'Attachments'; SubPageLink = "Table ID" = const(Database::Job), "No." = field("No."); }
+            part("Attached Documents"; "Doc. Attachment List Factbox") { ApplicationArea = All; Caption = 'Attachments'; SubPageLink = "Table ID" = const(Database::Job), "No." = field("No."); }
             systempart(Control1900383207; Links) { ApplicationArea = RecordLinks; Visible = false; }
             systempart(Control1905767507; Notes) { ApplicationArea = Notes; }
         }

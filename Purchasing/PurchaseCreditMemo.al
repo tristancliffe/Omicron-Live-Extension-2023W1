@@ -55,15 +55,12 @@ pageextension 50110 PurchaseCreditExt extends "Purchase Credit Memo"
         }
         addlast(Category_Process)
         {
-            actionref(VendorCard; Vendor)
-            { }
-            actionref(PostedInvoices_Promoted; PostedInvoices)
-            { }
-            actionref(VendorLedger_Promoted; VendorLedgerEntries)
-            { }
-            actionref(Statistics2; Statistics)
-            { }
+            actionref(VendorCard; Vendor) { }
+            actionref(PostedInvoices_Promoted; PostedInvoices) { }
+            actionref(VendorLedger_Promoted; VendorLedgerEntries) { }
+            actionref(Statistics3; PurchaseStatistics) { }
         }
+        modify(PurchaseStatistics) { Visible = true; }
         modify(Post)
         {
             trigger OnBeforeAction()

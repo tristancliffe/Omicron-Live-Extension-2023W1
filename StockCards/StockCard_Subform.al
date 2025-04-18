@@ -72,11 +72,11 @@ page 50112 "Stock Used Subform"
 
     trigger OnOpenPage()
     begin
+        Rec.FindLast();
         if (CurrentClientType = CurrentClientType::Phone) or (CurrentClientType = CurrentClientType::Tablet) then
             Device := false
         else
             Device := true;
-        Rec.FindLast();
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

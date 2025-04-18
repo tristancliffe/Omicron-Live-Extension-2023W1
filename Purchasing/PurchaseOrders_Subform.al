@@ -191,6 +191,18 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 end;
             }
         }
+        // modify("Total VAT Amount")
+        // {
+        //     trigger OnDrillDown()
+        //     var
+        //         PurchHeader: Record "Purchase Header";
+        //     begin
+        //         if PurchHeader.Get(Rec."Document Type", Rec."Document No.") then
+        //             Page.Run(Page::"Purchase Order Statistics", PurchHeader)
+        //         else
+        //             Error('The related Purchase Header could not be found.');
+        //     end;
+        // }
     }
     actions
     {

@@ -123,7 +123,8 @@ page 50115 "Stock Entry List"
             Device := false
         else
             Device := true;
-        Rec.Find('-');
+        // Rec.Find('-');
+        Rec.FindLast();
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

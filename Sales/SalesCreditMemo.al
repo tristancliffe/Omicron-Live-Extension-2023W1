@@ -88,13 +88,11 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         movefirst(Category_Category6; PostAndSend_Promoted)
         addlast(Category_Process)
         {
-            actionref(ItemList_Promoted; ItemList)
-            { }
-            actionref(CustomerCard; Customer)
-            { }
-            actionref(Statistics2; Statistics)
-            { }
+            actionref(ItemList_Promoted; ItemList) { }
+            actionref(CustomerCard; Customer) { }
+            actionref(Statistics3; SalesStatistics) { Visible = true; }
         }
+        modify(SalesStatistics) { Visible = true; }
         addlast("F&unctions")
         {
             action(ItemJournal)

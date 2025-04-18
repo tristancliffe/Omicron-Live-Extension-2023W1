@@ -47,6 +47,7 @@ page 50108 "Job Journal Factbox"
                 field(ItemReplenishment; Rec."Replenishment System") { ApplicationArea = All; Caption = 'Replenishment'; Visible = true; DrillDown = false; }
                 field(ItemVendor; Rec."Vendor No.") { ApplicationArea = All; Visible = true; Drilldown = true; }
                 field(ItemVendorNo; Rec."Vendor Item No.") { ApplicationArea = All; Visible = true; DrillDown = false; }
+                field(ItemQtyOnSalesOrder; Rec."Qty. on Sales Order") { ApplicationArea = All; Visible = true; DrillDown = true; }
                 field(ItemQtyOnOrder; Rec."Qty. on Purch. Order") { ApplicationArea = All; Visible = true; DrillDown = true; }
                 field(ItemReorderPolicy; Rec."Reordering Policy") { ApplicationArea = All; Caption = 'Reorder Policy'; Visible = true; DrillDown = false; }
                 field(ItemReorderPoint; Rec."Reorder Point") { ApplicationArea = All; Caption = 'Reorder Qty'; Visible = true; DrillDown = false; }

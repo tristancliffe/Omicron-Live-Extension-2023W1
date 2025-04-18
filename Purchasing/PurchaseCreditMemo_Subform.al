@@ -40,6 +40,18 @@ pageextension 50147 PurchaseCreditSubformExt extends "Purch. Cr. Memo Subform"
             field("Vendor Item No."; Rec."Vendor Item No.")
             { ApplicationArea = All; Visible = true; }
         }
+        // modify("Total VAT Amount")
+        // {
+        //     trigger OnDrillDown()
+        //     var
+        //         PurchHeader: Record "Purchase Header";
+        //     begin
+        //         if PurchHeader.Get(Rec."Document Type", Rec."Document No.") then
+        //             Page.Run(Page::"Purchase Statistics", PurchHeader)
+        //         else
+        //             Error('The related Purchase Header could not be found.');
+        //     end;
+        // }
     }
     var
         IsJobLine: Boolean;

@@ -135,9 +135,10 @@ pageextension 50133 PurchOrderExt extends "Purchase Order"
             actionref(ItemsFromVendor_Promoted; ItemsFromVendor) { }
             actionref(PostedInvoices_Promoted; PostedInvoices) { }
             actionref(VendorLedger_Promoted; VendorLedgerEntries) { }
-            actionref(Statistics2; Statistics) { }
             actionref(RecWorksheet_Promoted; ReqWorksheet) { }
+            actionref(Statistics3; PurchaseOrderStatistics) { Visible = true; }
         }
+        modify(PurchaseOrderStatistics) { Visible = true; }
         addlast(Category_Category8)
         {
             actionref(TestPrepayment; "Prepayment Test &Report") { }
