@@ -46,5 +46,6 @@ permissionset 50100 OmicronPermissions
         page "Item Info FactBox" = X,
         page "Purchase Order Detail Factbox" = X,
         page "Sales Order Detail Factbox" = X,
-        page "Sales Order Lines Factbox" = X;
+        page "Sales Order Lines Factbox" = X,
+        report "Resource Admin Hours" = X;
 }

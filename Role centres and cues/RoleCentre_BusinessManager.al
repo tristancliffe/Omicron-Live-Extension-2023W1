@@ -78,8 +78,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Ellipsis = true;
             }
         }
-        // modify(Items)
-        // { Visible = false; }
+        modify(WSB_RecommendedApps) { Visible = false; }
         modify("Bank Accounts")
         { Visible = false; }
         modify("Chart of Accounts")
