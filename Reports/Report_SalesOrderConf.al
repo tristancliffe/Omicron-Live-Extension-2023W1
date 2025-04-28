@@ -7,6 +7,7 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             column(Sell_to_Phone_No_; "Sell-to Phone No.") { }
             column(Mobile_No_; Header."Mobile No.") { }
             column(Sell_to_E_Mail; "Sell-to E-Mail") { }
+            column(CustomerBalance; CustBalance) { AutoCalcField = true; AutoFormatType = 10; AutoFormatExpression = '1,GBP'; }
         }
         add(Line)
         {
@@ -50,4 +51,15 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
     }
     var
         HideLinesWithZeroQuantity: Boolean;
+
+    local procedure CustBalance(): Decimal
+    var
+        RecCustomer: Record Customer;
+    begin
+        RecCustomer.SetRange("No.", Header."Sell-to Customer No.");
+        if RecCustomer.FindSet() then begin
+            RecCustomer.CalcFields("Balance (LCY)");
+            exit(RecCustomer."Balance (LCY)");
+        end;
+    end;
 }

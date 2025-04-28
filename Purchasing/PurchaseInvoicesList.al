@@ -54,6 +54,19 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
             ApplicationArea = All;
             Visible = true;
         }
+        addbefore(Control1901138007)
+        {
+            part(PurchaseOrderDetailFactbox; "Purchase Order Detail Factbox") { ApplicationArea = Basic, Suite; SubPageLink = "No." = field("No."); }
+        }
+        addafter(Control1901138007)
+        {
+            part(VendorHistBuyFromFactBox; "Vendor Hist. Buy-from FactBox")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "No." = field("Buy-from Vendor No."),
+                              "Date Filter" = field("Date Filter");
+            }
+        }
     }
     actions
     {

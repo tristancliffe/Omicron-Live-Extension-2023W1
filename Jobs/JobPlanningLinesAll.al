@@ -6,7 +6,7 @@ page 50104 "Job Planning Lines All"
     PageType = List;
     UsageCategory = Lists;
     SourceTable = "Job Planning Line";
-    Editable = false;
+    //Editable = false;
     ApplicationArea = All;
     SourceTableView = sorting("Planning Date", "No.", "Job No.");
 
@@ -55,7 +55,7 @@ page 50104 "Job Planning Lines All"
                 {
                     ApplicationArea = Jobs;
                     ToolTip = 'Specifies the quantity that been posted through a sales invoice.';
-                    Visible = false;
+                    Visible = true;
                     trigger OnDrillDown()
                     begin
                         Rec.DrillDownJobInvoices();
@@ -135,6 +135,25 @@ page 50104 "Job Planning Lines All"
                     Scope = Repeater;
                 }
             }
+        }
+    }
+    views
+    {
+        view(BudgetLines)
+        {
+            Caption = 'Budget Lines';
+            Filters = where("Line Type" = filter(Budget | "Both Budget and Billable"));
+        }
+        view(BillableLines)
+        {
+            Caption = 'Billable Lines';
+            Filters = where("Line Type" = filter(Billable | "Both Budget and Billable"));
+        }
+        view(InvoicedLines)
+        {
+            Caption = 'Leftover Invoiced Lines';
+            Filters = where("Qty. Invoiced" = filter(> 0),
+                            "Qty. to Transfer to Invoice" = filter(> 0));
         }
     }
     trigger OnAfterGetRecord()

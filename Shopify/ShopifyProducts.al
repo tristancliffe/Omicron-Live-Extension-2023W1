@@ -1,7 +1,17 @@
 pageextension 50177 ShopifyProductsExt extends "Shpfy Products"
 {
     layout
-    { }
+    {
+        addbefore(ItemInvoicing)
+        {
+            part(ShopifyProductImage; "Shopify Product Image Factbox")
+            {
+                ApplicationArea = All;
+                Provider = ItemInvoicing;
+                SubPageLink = "No." = field("No.");
+            }
+        }
+    }
     actions
     {
         addlast(Processing)

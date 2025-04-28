@@ -73,7 +73,7 @@ report 50101 "Job Billing Excel"
                     end
                     else begin
                         if InvoicedSelector then begin
-                            if "Qty. to Transfer to Invoice" > 0 then
+                            if ("Qty. Invoiced" = 0) and ("Qty. Transferred to Invoice" = 0) then
                                 CurrReport.Skip();
                             "Qty. to Transfer to Invoice" := "Qty. Invoiced";
                             InvoicePrice := round(("Unit Price (LCY)" * "Qty. Invoiced") - "Line Discount Amount (LCY)", 0.01);

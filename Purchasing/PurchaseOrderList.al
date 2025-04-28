@@ -95,6 +95,15 @@ pageextension 50109 PurchaseOrderListExt extends "Purchase Order List"
         {
             part(PurchaseOrderDetailFactbox; "Purchase Order Detail Factbox") { ApplicationArea = Basic, Suite; SubPageLink = "No." = field("No."); }
         }
+        addafter(Control1901138007)
+        {
+            part(VendorHistBuyFromFactBox; "Vendor Hist. Buy-from FactBox")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "No." = field("Buy-from Vendor No."),
+                              "Date Filter" = field("Date Filter");
+            }
+        }
     }
     actions
     {

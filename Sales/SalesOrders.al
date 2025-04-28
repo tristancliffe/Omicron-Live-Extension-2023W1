@@ -21,6 +21,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                 Editable = False;
                 Importance = Standard;
                 Visible = true;
+                StyleExpr = BalanceStyle;
                 trigger OnDrillDown()
                 begin
                     RecCustomer.OpenCustomerLedgerEntries(true);
@@ -201,7 +202,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
-        ShowBalance: Boolean;
+        BalanceStyle: Text;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean
     begin
@@ -248,6 +249,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
         end;
+        BalanceStyle := SetBalanceStyle();
     end;
 
     local procedure InitPageControllers()
@@ -260,6 +262,14 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     begin
         RecCustomer.CalcFields("Balance (LCY)");
         exit(RecCustomer."Balance (LCY)");
+    end;
+
+    local procedure SetBalanceStyle(): Text
+    begin
+        if CustBalance > 0 then
+            exit('unfavorable')
+        else if CustBalance < 0 then exit('favorable');
+        exit('standard');
     end;
 
     local procedure BlankReference()
