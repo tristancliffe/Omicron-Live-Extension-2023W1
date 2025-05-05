@@ -5,7 +5,6 @@ pageextension 50232 PostedSalesInvoiceLineExt extends "Posted Sales Invoice Line
         addbefore("Document No.")
         {
             field("Posting Date"; Rec."Posting Date") { ApplicationArea = All; }
-            field("Order No."; Rec."Order No.") { ApplicationArea = All; }
         }
         addafter("Line Discount %")
         {
