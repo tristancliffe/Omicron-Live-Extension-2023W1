@@ -12,5 +12,7 @@ pageextension 50104 ShipToCardExt extends "Ship-to Address"
             field("Address Notes"; Rec."Address Notes") { MultiLine = true; ApplicationArea = All; }
         }
         modify(GLN) { Visible = false; }
+        modify("Phone No.") { Importance = Standard; }
+        modify("E-Mail") { Importance = Standard; }
     }
 }

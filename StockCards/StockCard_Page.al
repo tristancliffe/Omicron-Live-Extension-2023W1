@@ -25,7 +25,7 @@ page 50111 "Stock Card Page"
             part(StockUsedForm; "Stock Used Subform")
             {
                 ApplicationArea = Basic, Suite;
-                SubPageLink = "Job No." = field("No.");
+                SubPageLink = "Job No." = field("No."); //, Entered = filter(False);
                 UpdatePropagation = Both;
             }
         }

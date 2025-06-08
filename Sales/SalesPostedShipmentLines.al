@@ -1,14 +1,11 @@
-pageextension 50232 PostedSalesInvoiceLineExt extends "Posted Sales Invoice Lines"
+pageextension 50240 PostedSalesShipmentLinesExt extends "Posted Sales Shipment Lines"
 {
     layout
     {
         addafter("Document No.")
         {
-            field("Posting Date"; Rec."Posting Date") { ApplicationArea = All; }
-        }
-        addafter("Line Discount %")
-        {
-            field("Unit Cost"; Rec."Unit Cost") { ApplicationArea = All; }
+            field("Posting Date"; Rec."Posting Date")
+            { ApplicationArea = All; }
         }
         addfirst(factboxes)
         {

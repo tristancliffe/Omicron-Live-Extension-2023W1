@@ -53,12 +53,13 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             AboutText = 'Please use **appropriate* tasks. If work is carried out on two unrelated aspects then they should be recorded on separate lines. Removing a gearbox to get to a clutch can still be recorded under **Clutch** for example, but sorted the brake lights out at the same time needs a new line.';
             Caption = 'Project Task';
             Visible = true;
-            // trigger OnAfterValidate()
-            // begin
-            //     if Rec."Work Done" = '' then
-            //         Rec."Work Done" := Rec.Description;
-            //     Rec.Modify();
-            // end;
+
+            trigger OnAfterValidate()
+            begin
+                if rec."Job Task No." = 'DIARY' then
+                    rec.Validate("Work Done", 'Diary');
+                //Rec.Modify();
+            end;
         }
         moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
         modify("Work Type Code") { Visible = false; }
@@ -82,6 +83,18 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 Visible = true;
                 Scope = Repeater;
             }
+            action(StockCard2)
+            {
+                Caption = 'Stock Card TEST';
+                Image = ItemLines;
+                ApplicationArea = All;
+                RunObject = Page "Stock Used Job Form";
+                RunPageLink = "Job No." = field("Job No.");
+                ToolTip = 'Takes the user to the Stock Card of the selected line as filled in by staff';
+                Visible = true;
+                Scope = Repeater;
+            }
+
             action(JobPlanningLines)
             {
                 ApplicationArea = All;

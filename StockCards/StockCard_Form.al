@@ -1,8 +1,8 @@
-page 50112 "Stock Used Subform"
+page 50122 "Stock Used Job Form"
 {
     ApplicationArea = All;
     Caption = 'Stock Used';
-    PageType = ListPart;
+    PageType = List;
     SourceTable = "Stock Used";
     DelayedInsert = true;
     AutoSplitKey = true;
@@ -62,6 +62,25 @@ page 50112 "Stock Used Subform"
                 field(Description; Rec.Description) { Editable = Posted; Style = Subordinate; Visible = false; }
                 //field(LastOne; Rec.LastOne) { Editable = Posted; }
                 field("Resource No."; Rec."Resource No.") { Editable = false; }
+            }
+        }
+    }
+    actions
+    {
+        area(Navigation)
+        {
+            action(YourStockCard)
+            {
+                Caption = 'Your Stock Card';
+                Image = ItemLedger;
+                ApplicationArea = All;
+                RunObject = Page "Stock Entry List";
+                RunPageLink = "Resource No." = filter('%USER');
+                ToolTip = 'Opens your stock card (for all projects)';
+                Visible = true;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedOnly = true;
             }
         }
     }

@@ -2,7 +2,7 @@ pageextension 50222 PostedPurchaseReceiptLines extends "Posted Purchase Receipt 
 {
     layout
     {
-        addfirst(Control1)
+        addafter("Document No.")
         {
             field("Posting Date"; Rec."Posting Date")
             { ApplicationArea = All; }
@@ -18,4 +18,10 @@ pageextension 50222 PostedPurchaseReceiptLines extends "Posted Purchase Receipt 
         modify("Job No.")
         { Visible = true; }
     }
+    trigger OnOpenPage()
+    begin
+        Rec.SetCurrentKey("Document No.");
+        Rec.Ascending := false;
+        Rec.FindFirst;
+    end;
 }

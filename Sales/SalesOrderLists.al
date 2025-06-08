@@ -106,7 +106,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
     }
     trigger OnOpenPage()
     begin
-        Rec.SetCurrentKey("No.");
+        Rec.SetCurrentKey("Document Date", "No.");
         Rec.Ascending(false);
     end;
 

@@ -178,6 +178,16 @@ pageextension 50101 ItemListExtension extends "Item List"
             actionref("E&xtended Texts_Promoted1"; "E&xtended Texts") { }
             actionref("Ven&dors_Promoted64734"; "Ven&dors") { }
         }
+        addafter("Item Price List")
+        {
+            action("LowProfitItems")
+            {
+                ApplicationArea = All;
+                Caption = 'Low Profit Items';
+                ToolTip = 'Shows items with low profit margins.';
+                RunObject = Page "Low Profit Items";
+            }
+        }
         addlast(Promoted)
         {
             actionref(Action37_Promoted1; Action37) { }
