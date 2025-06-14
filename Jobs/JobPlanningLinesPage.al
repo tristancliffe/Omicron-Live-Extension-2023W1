@@ -51,6 +51,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         addafter("User ID")
         {
             field(InvoicePrice; Rec.InvoicePrice) { ApplicationArea = All; BlankZero = true; }
+            field(ProfitLoss; ProfitLossValue) { ApplicationArea = All; BlankZero = true; Editable = false; StyleExpr = ProfitLossStyle; Caption = 'Profit/Loss'; }
         }
     }
     actions
@@ -187,9 +188,11 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         SellingPriceStyle: Text;
         ToInvoiceStyle: Text;
         TypeStyle: Text;
+        ProfitLossStyle: Text;
         MandatoryLocation: Boolean;
         InvoicedStyle: Text;
         Device: Boolean;
+        ProfitLossValue: Decimal;
     //UpdateJobPlanningLines: Codeunit UpdateJobPlanningLines;
 
     trigger OnAfterGetRecord()
@@ -198,9 +201,18 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         ToInvoiceStyle := SetToInvoiceStyle();
         TypeStyle := SetTypeStyle();
         InvoicedStyle := SetInvoicedStyle();
+        ProfitLossStyle := SetProfitLossStyle();
         SetLocationMandatory();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
             Rec.Validate("Work Done", Rec.Description);
+        if Rec."Line Type" = Rec."Line Type"::Budget then
+            ProfitLossValue := 0
+        else
+            if Rec.InvoicePrice > 0 then
+                ProfitLossValue := Rec.InvoicePrice - Rec."Total Cost"
+            else
+                if Rec."Invoiced Amount (LCY)" > 0 then
+                    ProfitLossValue := Rec."Invoiced Amount (LCY)" - Rec."Total Cost";
 
         //rec.Modify() - THIS BREAKS STUFF
         // Rec.InvoicePrice := round((Rec."Unit Price (LCY)") * Rec."Qty. to Transfer to Invoice", 0.01);
@@ -256,6 +268,16 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             exit('StrongAccent')
         else
             exit('Strong');
+    end;
+
+    local procedure SetProfitLossStyle(): Text
+    begin
+        if rec."Line Type" = rec."Line Type"::Budget then
+            exit('Subordinate');
+        if (Rec.InvoicePrice - Rec."Total Cost") < 0 then
+            exit('Attention')
+        else
+            exit('Favorable');
     end;
 
     local procedure SetLocationMandatory()

@@ -218,6 +218,9 @@ pageextension 50123 QuoteExtension extends "Sales Quote"
 
     local procedure BlankReference()
     begin
-        if rec."Your Reference" = '' then Error('You must enter "Your Reference" for this order.');
+        if rec."Your Reference" = '' then begin
+            if Rec."No." <> '' then
+                Error('You must enter "Your Reference" for this order.');
+        end
     end;
 }

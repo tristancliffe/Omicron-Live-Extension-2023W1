@@ -274,6 +274,9 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
 
     local procedure BlankReference()
     begin
-        if rec."Your Reference" = '' then Error('You must enter "Your Reference" for this order.');
+        if rec."Your Reference" = '' then begin
+            if Rec."No." <> '' then
+                if rec."Your Reference" = '' then Error('You must enter "Your Reference" for this order.');
+        end;
     end;
 }

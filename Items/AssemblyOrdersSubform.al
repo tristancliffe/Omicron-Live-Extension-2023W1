@@ -26,6 +26,16 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 Style = StandardAccent;
                 Width = 5;
                 DecimalPlaces = 0 : 2;
+
+                trigger OnDrillDown()
+                var
+                    ItemLedgerEntryRec: Record "Item Ledger Entry";
+                    ItemLedgerEntryPageID: Integer;
+                begin
+                    ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                    ItemLedgerEntryRec.SetRange("Item No.", Rec."No.");
+                    PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                end;
             }
         }
         moveafter("Unit of Measure Code"; "Location Code")

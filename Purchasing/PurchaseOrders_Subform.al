@@ -62,6 +62,16 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 Style = StandardAccent;
                 Width = 5;
                 DecimalPlaces = 0 : 2;
+
+                trigger OnDrillDown()
+                var
+                    ItemLedgerEntryRec: Record "Item Ledger Entry";
+                    ItemLedgerEntryPageID: Integer;
+                begin
+                    ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                    ItemLedgerEntryRec.SetRange("Item No.", Rec."No.");
+                    PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                end;
             }
         }
         modify("Item Reference No.") { Visible = false; }
@@ -91,7 +101,11 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
             end;
         }
         modify("Job Line Type") { ShowMandatory = true; Visible = True; }
-        modify("Job Unit Price") { Visible = True; }
+        modify("Job Unit Price")
+        {
+            Visible = True;
+
+        }
         modify("Job Line Amount (LCY)") { Width = 8; ShowMandatory = JobPriceMandatory; Visible = True; }
         // addafter("Expected Receipt Date")
         // {
@@ -138,16 +152,33 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
                 if (rec."Unit Price (LCY)" < rec."Unit Cost (LCY)") and ((Rec.Type = Rec.Type::Item) or (Rec.Type = Rec.Type::Resource)) then
                     if ((rec."No." = 'JOB-PURCHASES') or (rec."No." = 'TEXT') or (rec."No." = 'SUBCONTRACT')) then
                         exit
-                    else
-                        message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.")
+                    else begin
+                        message('Selling price of %1 is less than cost price. Be sure to update selling price and any relevant sales orders', Rec."No.");
+                        SetUnitPriceStyle();
+                    end
+
             end;
         }
         modify("Unit Price (LCY)")
         {
             Visible = true;
-            Style = Ambiguous;
-            Editable = false;
+            StyleExpr = UnitPriceStyle;
+            Editable = true;
             BlankZero = true;
+            trigger OnAfterValidate()
+            var
+                ItemRec: Record Item;
+            begin
+                if confirm('Are you sure you want to change the Unit Price?') then begin
+                    if Rec.Type = Rec.Type::Item then begin
+                        if ItemRec.Get(Rec."No.") then begin
+                            ItemRec."Unit Price" := Rec."Unit Price (LCY)";
+                            ItemRec.Modify();
+                        end;
+                    end;
+                end else
+                    exit;
+            end;
         }
         modify("Unit Cost (LCY)")
         {
@@ -293,10 +324,12 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         JobPriceMandatory: Boolean;
         CommentStyle: Text;
         IsJobLine: Boolean;
+        UnitPriceStyle: Text;
 
     trigger OnAfterGetRecord()
     begin
         GetInventory();
+        UnitPriceStyle := SetUnitPriceStyle();
         CommentStyle := SetCommentStyle();
         JobPriceMandatory := false;
         IsJobLineCheck();
@@ -328,6 +361,13 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         If Rec.Type = Rec.Type::" " then
             exit('Strong');
         exit('');
+    end;
+
+    procedure SetUnitPriceStyle(): Text
+    begin
+        If Rec."Unit Price (LCY)" < Rec."Unit Cost (LCY)" then
+            exit('Unfavorable');
+        exit('Ambiguous');
     end;
 
     local procedure IsJobLineCheck()

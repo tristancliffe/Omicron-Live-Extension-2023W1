@@ -30,6 +30,16 @@ pageextension 50126 PurchQuoteSubformExt extends "Purchase Quote Subform"
                 Style = StandardAccent;
                 Width = 5;
                 DecimalPlaces = 0 : 2;
+
+                trigger OnDrillDown()
+                var
+                    ItemLedgerEntryRec: Record "Item Ledger Entry";
+                    ItemLedgerEntryPageID: Integer;
+                begin
+                    ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                    ItemLedgerEntryRec.SetRange("Item No.", Rec."No.");
+                    PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                end;
             }
         }
         movebefore("Qty. to Assign"; "VAT Prod. Posting Group")

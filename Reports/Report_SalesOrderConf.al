@@ -11,6 +11,7 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
         }
         add(Line)
         {
+            column(ItemPicture; ItemTenantMedia.Content) { }
             column(ShelfNo_SalesLine; Line.ShelfNo_SalesLine) { }
             column(CommodityCode_SalesLine; Line.CommodityCode_SalesLine) { }
             column(Instock_SalesLine; Line.Instock_SalesLine) { }
@@ -18,9 +19,23 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
         modify(Line)
         {
             trigger OnAfterAfterGetRecord()
+            var
+                Item: Record Item;
             begin
                 if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
                 FormattedQuantity := format("Qty. to Ship");
+                if Type = Type::Item then
+                    if Item.Get("No.") then
+                        if Item.Picture.Count > 0 then begin
+                            ItemTenantMedia.Get(Item.Picture.Item(1));
+                            ItemTenantMedia.CalcFields(Content);
+                        end
+                        else
+                            Clear(ItemTenantMedia)
+                    else
+                        Clear(ItemTenantMedia)
+                else
+                    Clear(ItemTenantMedia)
             end;
         }
     }
@@ -48,9 +63,17 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             Caption = 'Omicron Sales Order Confirmation';
             Summary = 'Omicron Sales Order Confirmation';
         }
+        layout("./OmicronSalesOrderConfPictures.docx")
+        {
+            Type = Word;
+            LayoutFile = './OmicronSalesOrderConfPics.docx';
+            Caption = 'Omicron Sales Order Confirmation with Pictures';
+            Summary = 'Omicron Sales Order Confirmation with Pictures';
+        }
     }
     var
         HideLinesWithZeroQuantity: Boolean;
+        ItemTenantMedia: Record "Tenant Media";
 
     local procedure CustBalance(): Decimal
     var

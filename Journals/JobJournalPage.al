@@ -70,6 +70,16 @@ pageextension 50114 JobJournalExt extends "Job Journal"
                 StyleExpr = OutOfStockStyle;
                 Width = 5;
                 QuickEntry = false;
+
+                trigger OnDrillDown()
+                var
+                    ItemLedgerEntryRec: Record "Item Ledger Entry";
+                    ItemLedgerEntryPageID: Integer;
+                begin
+                    ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                    ItemLedgerEntryRec.SetRange("Item No.", Rec."No.");
+                    PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                end;
             }
         }
         modify("Unit Cost")

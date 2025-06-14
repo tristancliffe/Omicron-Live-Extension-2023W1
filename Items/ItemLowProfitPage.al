@@ -21,8 +21,28 @@ page 50121 "Low Profit Items"
             {
                 field("No."; Rec."No.") { }
                 field(Description; Rec.Description) { }
-                field("Unit Cost"; Rec."Unit Cost") { }
-                field("Unit Price"; Rec."Unit Price") { }
+                field("Unit Cost"; Rec."Unit Cost")
+                {
+                    DrillDownPageId = "Item Card";
+                    trigger OnDrillDown()
+                    var
+                        ItemRec: Record Item;
+                    begin
+                        if ItemRec.Get(Rec."No.") then
+                            PAGE.Run(PAGE::"Item Card", ItemRec);
+                    end;
+                }
+                field("Unit Price"; Rec."Unit Price")
+                {
+                    DrillDownPageId = "Item Card";
+                    trigger OnDrillDown()
+                    var
+                        ItemRec: Record Item;
+                    begin
+                        if ItemRec.Get(Rec."No.") then
+                            PAGE.Run(PAGE::"Item Card", ItemRec);
+                    end;
+                }
                 field("Profit £"; Rec."Unit Price" - Rec."Unit Cost") { }
                 // field("Profit %"; CalcProfitPercent()) { }
                 field("Profit %"; Rec."Profit %") { DecimalPlaces = 2 : 2; }
@@ -38,6 +58,12 @@ page 50121 "Low Profit Items"
                     //AccessByPermission = TableData "BOM Component" = R;
                     ApplicationArea = Assembly;
                     ToolTip = 'Specifies if the item is an assembly BOM.';
+                    DrillDown = false;
+                }
+                field("Substitutes Exist"; Rec."Substitutes Exist")
+                {
+                    ApplicationArea = Invoicing, Basic, Suite;
+                    ToolTip = 'Specifies if there are substitutes for this item.';
                     DrillDown = false;
                 }
             }
@@ -95,6 +121,7 @@ page 50121 "Low Profit Items"
         Item.Reset();
         if Item.FindSet() then
             repeat
+                If Item.Blocked or Item."Sales Blocked" or item."Purchasing Blocked" then continue;
                 UnitCost := Item."Unit Cost";
                 UnitPrice := Item."Unit Price";
                 ProfitPercent := Item."Profit %";
@@ -104,7 +131,7 @@ page 50121 "Low Profit Items"
                     // if UnitCost <> 0 then
                     //     ProfitPercent := UnitProfit / UnitCost;
                     // if (UnitProfit < 10) or ((UnitProfit < 10) and (ProfitPercent < 0.15)) then begin
-                    if ((UnitProfit < 10) and (ProfitPercent < 15)) or (ProfitPercent < 15) then begin
+                    if ((UnitProfit < 8) and (ProfitPercent < 12)) or (ProfitPercent < 12) or ((ProfitPercent > 80) and (UnitPrice > 1)) then begin
                         Rec := Item;
                         Rec.Insert();
                     end;

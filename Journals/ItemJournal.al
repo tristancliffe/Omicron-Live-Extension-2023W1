@@ -56,6 +56,16 @@ pageextension 50149 ItemJournalExt extends "Item Journal"
                 Width = 5;
                 QuickEntry = false;
                 DecimalPlaces = 0 : 2;
+
+                trigger OnDrillDown()
+                var
+                    ItemLedgerEntryRec: Record "Item Ledger Entry";
+                    ItemLedgerEntryPageID: Integer;
+                begin
+                    ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                    ItemLedgerEntryRec.SetRange("Item No.", Rec."Item No.");
+                    PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                end;
             }
         }
         modify("Price Calculation Method")

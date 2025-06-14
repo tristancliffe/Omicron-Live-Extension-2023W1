@@ -39,6 +39,16 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 Style = StandardAccent;
                 Width = 5;
                 DecimalPlaces = 0 : 2;
+
+                trigger OnDrillDown()
+                var
+                    ItemLedgerEntryRec: Record "Item Ledger Entry";
+                    ItemLedgerEntryPageID: Integer;
+                begin
+                    ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                    ItemLedgerEntryRec.SetRange("Item No.", Rec."No.");
+                    PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                end;
             }
         }
         modify("Item Reference No.") { Visible = false; }
