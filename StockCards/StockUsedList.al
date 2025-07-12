@@ -32,7 +32,7 @@ page 50113 "Stock Card List"
                 part(ProjectPlanningLines; "Job Planning Lines Part")
                 {
                     SubPageLink = "Job No." = field("Job No.");
-                    SubPageView = where("Unit of Measure Code" = const('<>HOUR'));
+                    SubPageView = sorting("Planning Date") order(Ascending) where("Unit of Measure Code" = const('<>HOUR'));
                     Editable = false;
                     Caption = 'Posted non-Labour Planning Lines';
                 }
@@ -133,7 +133,8 @@ page 50113 "Stock Card List"
             Device := false
         else
             Device := true;
-        Rec.FindLast();
+        if not Rec.IsEmpty then
+            Rec.FindLast();
     end;
 
     trigger OnInsertRecord(BelowXRec: Boolean): Boolean

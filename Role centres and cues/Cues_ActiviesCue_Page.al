@@ -91,8 +91,8 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
     trigger OnOpenPage()
     begin
         if Date2DWY(WorkDate(), 1) >= 5 then // Check if today is Friday
-            Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW+9D', WorkDate())) // Show up to the end of next week and a bit of the week after
+            Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW+8D', WorkDate())) // Show up to the end of next week and a bit of the week after
         else
-            Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW+2D', WorkDate())); // Show up to the end of the current week and a bit of the next week
+            Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW+1D', WorkDate())); // Show up to the end of the current week and a bit of the next week
     end;
 }

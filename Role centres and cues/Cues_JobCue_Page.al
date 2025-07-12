@@ -59,6 +59,12 @@ pageextension 50150 ProjectCues extends "Project Manager Activities"
                 ApplicationArea = All;
                 Image = Diagnostic;
             }
+            field(Invoiceable; Rec.Invoiceable)
+            {
+                ApplicationArea = All;
+                Image = Cash;
+                DrillDownPageId = "Job Planning Lines";
+            }
         }
         modify("Completed - WIP Not Calculated")
         { Visible = false; }

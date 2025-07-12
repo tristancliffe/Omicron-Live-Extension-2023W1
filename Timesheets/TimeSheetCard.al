@@ -59,42 +59,6 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
     {
         addlast("F&unctions")
         {
-            // action(Approve2)
-            // {
-            //     ApplicationArea = Jobs;
-            //     Caption = 'Approve2';
-            //     Image = ReleaseDoc;
-            //     Enabled = true;
-            //     Visible = Device;
-            //     ToolTip = 'Approve all submitted time sheet lines. Each line must have a Type defined. For dedicated line approval select the Approve action on the lines section.';
-            //     Promoted = true;
-            //     PromotedOnly = true;
-            //     PromotedCategory = Process;
-            //     Scope = Repeater;
-
-            //     trigger OnAction()
-            //     begin
-            //         ApproveLines2();
-            //     end;
-            // }
-            // action(ReopenApproved2)
-            // {
-            //     ApplicationArea = Jobs;
-            //     Caption = 'Reopen2';
-            //     Image = ReOpen;
-            //     Enabled = true;
-            //     Visible = Device;
-            //     ToolTip = 'Reopen all approved or rejected time sheet lines. Each line must have a Type defined. For dedicated line reopen select the Reopen action on the lines section.';
-            //     Promoted = true;
-            //     PromotedOnly = true;
-            //     PromotedCategory = Process;
-            //     Scope = Repeater;
-
-            //     trigger OnAction()
-            //     begin
-            //         ReopenApprovedLines2();
-            //     end;
-            // }
             action(ManagerTimeSheet)
             {
                 Caption = 'Manager Time Sheets';

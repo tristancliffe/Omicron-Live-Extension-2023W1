@@ -26,7 +26,7 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
         {
             FieldClass = FlowField;
             Caption = 'Hours Last Month';
-            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger SO FAR THIS MONTH.';
+            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger LAST MONTH.';
             CalcFormula = sum("Res. Ledger Entry".Quantity where("Resource No." = field("User ID Filter"),
                                                                  "Posting Date" = field(LastMonth),
                                                                  "Entry Type" = filter(Usage)));
@@ -41,7 +41,7 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
         {
             FieldClass = FlowField;
             Caption = 'Hours This Month';
-            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger LAST MONTH.';
+            ToolTip = 'The number of hours submitted, approved and posted to the Resource Ledger SO FAR THIS MONTH.';
             CalcFormula = sum("Res. Ledger Entry".Quantity where("Resource No." = field("User ID Filter"),
                                                                  "Posting Date" = field(ThisMonth),
                                                                  "Entry Type" = filter(Usage)));

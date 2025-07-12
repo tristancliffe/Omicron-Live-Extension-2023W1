@@ -1,5 +1,6 @@
 pageextension 50112 JobListExtension extends "Job List"
 {
+
     layout
     {
         modify(Control1) { FreezeColumn = Description; }
@@ -17,10 +18,10 @@ pageextension 50112 JobListExtension extends "Job List"
             field(TotalHours; Rec.TotalHours) { ApplicationArea = All; BlankZero = true; Width = 8; }
             field(InvoicedHours; Rec.InvoicedHours) { ApplicationArea = All; BlankZero = true; Width = 8; }
             field(ToInvoice; Rec.ToInvoice) { ApplicationArea = All; StyleExpr = InvoiceStyle; BlankZero = true; }
-            field(TotalValue; Rec.TotalValue) { ApplicationArea = All; Visible = false; Caption = 'Total Cost, £'; }
-            field(InvoicedValue; Rec.InvoicedValue) { ApplicationArea = All; Visible = false; Caption = 'Total Invoiced, £'; }
             field(ProfitToDate; -(Rec.TotalValue + Rec.InvoicedValue)) { ApplicationArea = All; StyleExpr = ProfitStyle; BlankZero = true; Visible = false; Caption = 'Profit to date, £'; ToolTip = 'The profit made so far'; }
             field(PercentCompleted; Rec.PercentCompleted) { ApplicationArea = All; BlankZero = true; Caption = '% Complete'; DecimalPlaces = 0; }
+            field(TotalValue; Rec.TotalValue) { ApplicationArea = All; Visible = true; Caption = 'Total Cost, £'; width = 10; }
+            field(InvoicedValue; Rec.InvoicedValue) { ApplicationArea = All; Visible = true; Caption = 'Total Invoiced, £'; width = 10; }
         }
         moveafter("Date of Arrival"; "Person Responsible")
         modify("Person Responsible") { Visible = false; ToolTip = 'Whom is ''doing'' the project, or whom is responsible for it.'; }

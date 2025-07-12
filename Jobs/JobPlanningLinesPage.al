@@ -201,18 +201,11 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         ToInvoiceStyle := SetToInvoiceStyle();
         TypeStyle := SetTypeStyle();
         InvoicedStyle := SetInvoicedStyle();
-        ProfitLossStyle := SetProfitLossStyle();
         SetLocationMandatory();
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
             Rec.Validate("Work Done", Rec.Description);
-        if Rec."Line Type" = Rec."Line Type"::Budget then
-            ProfitLossValue := 0
-        else
-            if Rec.InvoicePrice > 0 then
-                ProfitLossValue := Rec.InvoicePrice - Rec."Total Cost"
-            else
-                if Rec."Invoiced Amount (LCY)" > 0 then
-                    ProfitLossValue := Rec."Invoiced Amount (LCY)" - Rec."Total Cost";
+        SetProfitLoss();
+        ProfitLossStyle := SetProfitLossStyle();
 
         //rec.Modify() - THIS BREAKS STUFF
         // Rec.InvoicePrice := round((Rec."Unit Price (LCY)") * Rec."Qty. to Transfer to Invoice", 0.01);
@@ -236,6 +229,20 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             Device := true;
         Rec.SetCurrentKey("Job No.", "Planning Date", "Line No.");
         Rec.Ascending(true);
+    end;
+
+    local procedure SetProfitLoss(): Decimal
+    begin
+        if Rec."Line Type" = Rec."Line Type"::Budget then
+            ProfitLossValue := 0
+        else
+            if Rec.InvoicePrice > 0 then
+                ProfitLossValue := Rec.InvoicePrice - Rec."Total Cost"
+            else
+                if Rec."Invoiced Amount (LCY)" > 0 then
+                    ProfitLossValue := Rec."Invoiced Amount (LCY)" - Rec."Total Cost"
+                else
+                    ProfitLossValue := 0;
     end;
 
     local procedure SetSellingPriceStyle(): Text

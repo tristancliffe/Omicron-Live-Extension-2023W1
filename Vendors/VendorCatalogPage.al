@@ -103,8 +103,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
     //     Items.CalcFields(Inventory);
     //     QtyInStock := Item.Inventory;
     // end;
-
-    local procedure OrderQty(): Decimal
+    trigger OnAfterGetRecord()
     var
         Item: Record Item;
     begin
@@ -113,6 +112,14 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
             Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
             QtyInStock := Item.Inventory - Item."Reserved Qty. on Inventory";
             LowStockThreshold := Item."Reorder Point";
+        end;
+    end;
+
+    local procedure OrderQty(): Decimal
+    var
+        Item: Record Item;
+    begin
+        if Item.Get(Rec."Item No.") then begin
             if Item."Replenishment System" = Item."Replenishment System"::Purchase then begin
                 if Item."Reordering Policy" = Item."Reordering Policy"::"Fixed Reorder Qty." then
                     exit(Item."Reorder Quantity")

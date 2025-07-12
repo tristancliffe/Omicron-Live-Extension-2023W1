@@ -80,12 +80,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 RunObject = Page "Stock Card Page";
                 RunPageLink = "No." = field("Job No.");
                 ToolTip = 'Takes the user to the Stock Card of the selected line as filled in by staff';
-                Visible = true;
+                Visible = false;
                 Scope = Repeater;
             }
             action(StockCard2)
             {
-                Caption = 'Stock Card TEST';
+                Caption = 'Stock Card';
                 Image = ItemLines;
                 ApplicationArea = All;
                 RunObject = Page "Stock Used Job Form";
@@ -129,41 +129,6 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                 RunObject = Page "Job Card";
                 RunPageLink = "No." = field("Job No.");
             }
-        }
-        addlast(Line)
-        {
-            //     action(Approve2)
-            //     {
-            //         ApplicationArea = Jobs;
-            //         Caption = 'Approve2';
-            //         Ellipsis = true;
-            //         Image = ReleaseDoc;
-            //         ToolTip = 'Approve the lines on the time sheet. Each line must have a Type defined.';
-            //         Scope = Repeater;
-            //         Enabled = ApproveLineEnabled;
-            //         Visible = Device;
-
-            //         trigger OnAction()
-            //         begin
-            //             ApproveLines();
-            //         end;
-            //     }
-            //     action(ReopenApproved2)
-            //     {
-            //         ApplicationArea = Jobs;
-            //         Caption = '&Reopen2';
-            //         Image = ReOpen;
-            //         Scope = Repeater;
-            //         Gesture = LeftSwipe;
-            //         ToolTip = 'Reopen the approved or rejected time sheet line. Line must have a Type defined.';
-            //         Enabled = ReopenApprovedLineEnabled;
-            //         Visible = Device;
-
-            //         trigger OnAction()
-            //         begin
-            //             ReopenApprovedLines();
-            //         end;
-            //     }
         }
     }
 

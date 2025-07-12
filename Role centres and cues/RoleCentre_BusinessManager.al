@@ -420,27 +420,21 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Posted General Journal";
                     ToolTip = 'Open the list of posted general journal lines.';
                 }
-                action("Posted Bank Deposits")
+                action(PostedSalesInvoiceLines)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Posted Bank Deposits';
-                    Image = PostedDeposit;
-                    RunObject = codeunit "Open P. Bank Deposits L. Page";
-                    ToolTip = 'View the posted deposit header, deposit header lines, deposit comments, and deposit dimensions.';
+                    Caption = 'Posted Sales Invoice Lines';
+                    Image = PostedOrder;
+                    RunObject = Page "Posted Sales Invoice Lines";
+                    ToolTip = 'Open the list of posted sales invoice lines.';
                 }
-                action("Cost Accounting Registers")
+                action(PostedPurchaseInvoiceLines)
                 {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Cost Accounting Registers';
-                    RunObject = Page "Cost Registers";
-                    ToolTip = 'View auditing details for all cost accounting entries. Every time an entry is posted, a register is created in which you can see the first and last number of its entries in order to document when entries were posted.';
-                }
-                action("Cost Accounting Budget Registers")
-                {
-                    ApplicationArea = CostAccounting;
-                    Caption = 'Cost Accounting Budget Registers';
-                    RunObject = Page "Cost Budget Registers";
-                    ToolTip = 'View auditing details for all cost accounting budget entries. Every time an entry is posted, a register is created in which you can see the first and last number of its entries in order to document when entries were posted.';
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Purchase Invoice Lines';
+                    Image = PostedOrder;
+                    RunObject = Page "Posted Purchase Invoice Lines";
+                    ToolTip = 'Open the list of posted purchase invoice lines.';
                 }
                 action(SalesOrderArchives)
                 {
