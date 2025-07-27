@@ -24,14 +24,16 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             begin
                 if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
                 FormattedQuantity := format("Qty. to Ship");
-                if Type = Type::Item then
-                    if Item.Get("No.") then
+                if Line.Type = Line.Type::Item then
+                    if Item.Get("No.") then begin
+                        // Message('Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
                         if Item.Picture.Count > 0 then begin
                             ItemTenantMedia.Get(Item.Picture.Item(1));
                             ItemTenantMedia.CalcFields(Content);
                         end
                         else
-                            Clear(ItemTenantMedia)
+                            Clear(ItemTenantMedia);
+                    end
                     else
                         Clear(ItemTenantMedia)
                 else

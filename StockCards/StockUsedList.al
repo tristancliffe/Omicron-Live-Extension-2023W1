@@ -28,6 +28,7 @@ page 50113 "Stock Card List"
             group(PlanningLines)
             {
                 Caption = 'Project Planning Lines';
+                ShowCaption = false;
                 Visible = Device;
                 part(ProjectPlanningLines; "Job Planning Lines Part")
                 {

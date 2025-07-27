@@ -56,9 +56,12 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
 
             trigger OnAfterValidate()
             begin
-                if rec."Job Task No." = 'DIARY' then
-                    rec.Validate("Work Done", 'Diary');
-                //Rec.Modify();
+                case Rec."Job Task No." of
+                    'DIARY':
+                        rec.Validate("Work Done", 'Diary');
+                    'MOVECARS':
+                        rec.Validate("Work Done", 'Move cars');
+                end;
             end;
         }
         moveafter("Total Quantity"; "Cause of Absence Code", Chargeable)
