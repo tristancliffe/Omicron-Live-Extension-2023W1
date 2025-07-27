@@ -47,5 +47,8 @@ permissionset 50100 OmicronPermissions
         page "Purchase Order Detail Factbox" = X,
         page "Sales Order Detail Factbox" = X,
         page "Sales Order Lines Factbox" = X,
-        report "Resource Admin Hours" = X;
+        report "Resource Admin Hours" = X,
+        page "Low Profit Items" = X,
+        page "Shopify Product Image Factbox" = X,
+        page "Stock Used Job Form" = X;
 }

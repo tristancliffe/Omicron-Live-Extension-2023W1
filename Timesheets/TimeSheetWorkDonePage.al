@@ -38,8 +38,8 @@ Page 50101 "Work Done Dialog"
         CharacterCount: Integer;
         Instructions1: Label 'Type your text below. To save it click OK.';
         Instructions2: Label 'For long entries, consider clicking OK occasionally then editing again to save progress.';
-        Reminder1: Label 'Don''t forget to SUBMIT your timesheets regularly (daily) when finished.';
-        Reminder2: Label 'Don''t forget to take and upload pictures/videos of progress.';
+        Reminder1: Label 'DON''T FORGET TO SUBMIT YOUR TIMESHEETS REGULARLY (DAILY) WHEN FINISHED.';
+        Reminder2: Label 'DON''T FORGET TO TAKE AND UPLOAD PICTURES/VIDEOS OF PROGRESS.';
 
     procedure GetText(_text: text[700])
     begin

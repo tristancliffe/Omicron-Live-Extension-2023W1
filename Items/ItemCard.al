@@ -131,6 +131,41 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 SubPageView = sorting("Vendor No.", "Vendor Item No.");
             }
         }
+        addlast(content)
+        {
+            group(CardHistory)
+            {
+                Caption = 'Record History';
+                field(CreatedBy; GetFullName(Rec.SystemCreatedBy))
+                {
+                    ApplicationArea = All;
+                    Caption = 'Created By';
+                    ToolTip = 'The user who created the record.';
+                    Importance = Standard;
+                }
+                field(CreatedAt; Rec.SystemCreatedAt)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Created At';
+                    ToolTip = 'The date and time when the record was created.';
+                    Importance = Standard;
+                }
+                field(ModifiedBy; GetFullName(Rec.SystemModifiedBy))
+                {
+                    ApplicationArea = All;
+                    Caption = 'Modified By';
+                    ToolTip = 'The user who last modified the record.';
+                    Importance = Standard;
+                }
+                field(ModifiedAt; Rec.SystemModifiedAt)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Modified At';
+                    ToolTip = 'The date and time when the record was last modified.';
+                    Importance = Standard;
+                }
+            }
+        }
     }
     actions
     {
@@ -256,4 +291,13 @@ pageextension 50100 ItemCardExtension extends "Item Card"
     begin
         CurrPage.UserControlDesc.SetContent(StrSubstNo('<textarea Id="TextArea" maxlength="%2" style="width:100%;height:100%;resize: none; font-family: &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Segoe, device-segoe, Tahoma, Helvetica, Arial, sans-serif !important; font-size: 11pt !important;" OnChange="window.parent.WebPageViewerHelper.TriggerCallback(document.getElementById(''TextArea'').value)">%1</textarea>', Rec."Item Notes", MaxStrLen(Rec."Item Notes")));
     end; //! end of large notes field code...
+
+    procedure GetFullName(userID: Guid): Text
+    var
+        UserInfo: Record User;
+    begin
+        if not UserInfo.Get(userID) then
+            exit('');
+        exit(UserInfo."Full Name");
+    end;
 }
