@@ -9,6 +9,13 @@ reportextension 50104 OmicronPurchaseOrder extends "Order"
             { }
         }
     }
+    requestpage
+    {
+        trigger OnOpenPage()
+        begin
+            ShowInternalInfo := true;
+        end;
+    }
 
     rendering
     {

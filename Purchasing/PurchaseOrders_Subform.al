@@ -48,7 +48,7 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
         modify("Location Code") { Visible = false; }
         addafter(Description)
         {
-            field("Vendor Item No.40789"; Rec."Vendor Item No.") { ApplicationArea = All; }
+            field("Vendor Item No."; Rec."Vendor Item No.") { ApplicationArea = All; }
         }
         addafter("Unit of Measure Code")
         {
