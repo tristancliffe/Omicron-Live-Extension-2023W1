@@ -12,7 +12,7 @@ pageextension 50164 AssemblyBOMExt extends "Assembly BOM"
             action(Edit)
             {
                 ApplicationArea = Assembly;
-                Caption = 'Edit Card';
+                Caption = 'Item Card';
                 Image = Item;
                 ToolTip = 'View and modify the selected component.';
                 Scope = Repeater;
@@ -36,14 +36,6 @@ pageextension 50164 AssemblyBOMExt extends "Assembly BOM"
                                 PAGE.Run(PAGE::"Resource Card", Resource);
                             end;
                     end;
-                    // if rec.Type = rec.Type::Item then begin
-                    //     Item.Get(Rec."No.");
-                    //     PAGE.Run(PAGE::"Item Card", Item)
-                    // end else
-                    //     if Rec.Type = Rec.Type::Resource then begin
-                    //         Resource.Get(rec."No.");
-                    //         PAGE.Run(PAGE::"Resource Card", Resource);
-                    //     end
                 end;
             }
         }

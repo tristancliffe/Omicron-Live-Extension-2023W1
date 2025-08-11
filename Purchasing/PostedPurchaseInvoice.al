@@ -53,6 +53,26 @@ pageextension 50170 PostedPurchInvoiceExt extends "Posted Purchase Invoice"
                 SubPageLink = "No." = field("No.");
             }
         }
+        modify("Quote No.")
+        {
+            trigger OnDrillDown()
+            var
+                PurchHeaderArchive: Record "Purchase Header Archive";
+            begin
+                PurchHeaderArchive.SetRange("No.", Rec."Quote No.");
+                PAGE.RunModal(PAGE::"Purchase Quote Archives", PurchHeaderArchive);
+            end;
+        }
+        modify("Order No.")
+        {
+            trigger OnDrillDown()
+            var
+                PurchOrderArchive: Record "Purchase Header Archive";
+            begin
+                PurchOrderArchive.SetRange("No.", Rec."Order No.");
+                PAGE.RunModal(PAGE::"Purchase Order Archives", PurchOrderArchive);
+            end;
+        }
     }
 
     trigger OnAfterGetRecord()

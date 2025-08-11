@@ -2,7 +2,7 @@ pageextension 50239 "Shopify Order Page" extends "Shpfy Order"
 {
     actions
     {
-        addlast("F&unctions")
+        addafter(CreateSalesDocument)
         {
             action(CustomerCard)
             {

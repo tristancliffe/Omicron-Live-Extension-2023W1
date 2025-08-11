@@ -131,7 +131,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
             exit('Unfavorable')
         else
             if (Rec.InvoicedLineExists = true) or (Rec."Partially Shipped" = true) then
-                exit('Favorable')
+                exit('Unfavorable')
             else
                 if rec.Ship = true then
                     exit('StrongAccent')
@@ -140,7 +140,7 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
                         exit('Strong')
                     else
                         if Rec.Status = Rec.Status::Released then
-                            exit('Attention')
+                            exit('Favorable')
                         else
                             if Rec.Status = Rec.Status::"Pending Prepayment" then
                                 exit('Ambiguous');
