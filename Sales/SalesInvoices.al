@@ -18,6 +18,8 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
             {
                 MultiLine = true;
                 Caption = 'Customer Notes';
+                ShowCaption = false;
+                InstructionalText = 'Customer Notes';
                 ApplicationArea = All;
                 Importance = Standard;
                 ToolTip = 'This SHOULD be the customer notes brought across to the orders';
@@ -27,6 +29,24 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
                 trigger OnValidate()
                 begin
                     RecCustomer."Customer Notes" := CustomerNotes;
+                    RecCustomer.Modify()
+                end;
+            }
+            field("Customer CC Notes"; CustomerCCNotes)
+            {
+                MultiLine = true;
+                Caption = 'CC Notes';
+                ShowCaption = false;
+                InstructionalText = 'CC Info';
+                ApplicationArea = All;
+                Importance = Standard;
+                ToolTip = 'This SHOULD be the CC notes brought across to the orders';
+                QuickEntry = false;
+                Editable = true;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer CC Notes" := CustomerCCNotes;
                     RecCustomer.Modify()
                 end;
             }
@@ -233,6 +253,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
     var
         RecCustomer: Record Customer;
         CustomerNotes: Text[2000];
+        CustomerCCNotes: Text[150];
         MobileNo: Text[30];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
@@ -245,6 +266,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
@@ -260,6 +282,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
         GetBalance();
@@ -272,6 +295,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;
@@ -282,6 +306,7 @@ pageextension 50124 SalesInvoiceExtension extends "Sales Invoice"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
             MobileNo := RecCustomer."Mobile Phone No.";
         end;
     end;

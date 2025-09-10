@@ -79,6 +79,28 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
                     RecCustomer.Modify()
                 end;
             }
+            field("Customer CC Notes"; CustomerCCNotes)
+            {
+                MultiLine = true;
+                Caption = 'CC Notes';
+                ShowCaption = false;
+                InstructionalText = 'CC Info';
+                ApplicationArea = All;
+                Importance = Standard;
+                ToolTip = 'This SHOULD be the CC notes brought across to the orders';
+                QuickEntry = false;
+                Editable = true;
+                trigger OnAssistEdit()
+                begin
+                    message(Rec."Customer CC Notes");
+                end;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer CC Notes" := CustomerCCNotes;
+                    RecCustomer.Modify()
+                end;
+            }
         }
         modify("Foreign Trade")
         { Visible = false; }
@@ -125,6 +147,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
     var
         RecCustomer: Record Customer;
         CustomerNotes: Text[2000];
+        CustomerCCNotes: Text[150];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         ShowMapLbl: Label 'Show on Map';
@@ -135,6 +158,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
     end;
 
@@ -149,6 +173,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
     end;
 
@@ -158,6 +183,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
     end;
 
@@ -167,6 +193,7 @@ pageextension 50174 SalesCreditMemoExt extends "Sales Credit Memo"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
     end;
 

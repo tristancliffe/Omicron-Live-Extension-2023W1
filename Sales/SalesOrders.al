@@ -61,6 +61,28 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
                     RecCustomer.Modify()
                 end;
             }
+            field("Customer CC Notes"; CustomerCCNotes)
+            {
+                MultiLine = true;
+                Caption = 'CC Info';
+                ShowCaption = false;
+                InstructionalText = 'CC Info';
+                ApplicationArea = All;
+                Importance = Standard;
+                ToolTip = 'This SHOULD be the CC notes brought across to the orders';
+                QuickEntry = false;
+                Editable = true;
+                trigger OnAssistEdit()
+                begin
+                    message(Rec."Customer CC Notes");
+                end;
+
+                trigger OnValidate()
+                begin
+                    RecCustomer."Customer CC Notes" := CustomerCCNotes;
+                    RecCustomer.Modify()
+                end;
+            }
         }
         modify("Sell-to Customer No.") { Importance = Standard; }
         modify("Sell-to Phone No.") { QuickEntry = false; Importance = Standard; }
@@ -199,6 +221,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     var
         RecCustomer: Record Customer;
         CustomerNotes: Text[2000];
+        CustomerCCNotes: Text[150];
         ReleaseControllerStatus: Boolean;
         ReopenControllerStatus: Boolean;
         IsCustomerOrContactNotEmpty: Boolean;
@@ -210,6 +233,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
     end;
 
@@ -224,6 +248,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
     end;
 
@@ -238,6 +263,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
 
     end;
@@ -248,6 +274,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
+            CustomerCCNotes := RecCustomer."Customer CC Notes";
         end;
         BalanceStyle := SetBalanceStyle();
     end;

@@ -52,6 +52,7 @@ report 50101 "Job Billing Excel"
 
                     // Always include budget lines if IncludeBudgetSelector is true
                     if IncludeBudgetSelector and ("Line Type" = "Line Type"::Budget) then begin
+                        BudgetQty := Quantity;
                         InvoicePrice := 0;
                         Quantity := 0;
                         // WorkDoneDescription assignment for budget lines

@@ -76,6 +76,15 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
             }
         }
     }
+    views
+    {
+        addfirst
+        {
+            view(BACS) { Caption = 'BACS'; Filters = where("Document Type" = filter(Invoice | "Credit Memo"), Open = const(true), "Payment Method Code" = filter('BACS|CASH|CHQ|PETTY')); ; }
+            view(CREDITCARD) { Caption = 'Creditcard'; Filters = where("Document Type" = filter(Invoice | "Credit Memo"), Open = const(true), "Payment Method Code" = filter('CREDITCARD')); ; }
+            view(ANDREW) { Caption = 'Andrew'; Filters = where("Document Type" = filter(Invoice | "Credit Memo"), Open = const(true), "Payment Method Code" = filter('ANDREW')); ; }
+        }
+    }
 
     var
         Priority: Integer;

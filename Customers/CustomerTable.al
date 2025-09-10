@@ -29,6 +29,7 @@ tableextension 50101 CustomerTableExtCue extends Customer
             ToolTip = 'Specifies the number of projects completed for the customer.';
         }
         field(50102; "Phone Numbers Exist"; Boolean) { Caption = 'Phone Numbers Exist'; DataClassification = CustomerContent; }
+        field(50103; "Customer CC Notes"; text[150]) { CaptionML = ENU = 'CC Notes'; DataClassification = CustomerContent; }
     }
     fieldgroups
     {

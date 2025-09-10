@@ -63,7 +63,8 @@ pageextension 50101 ItemListExtension extends "Item List"
             }
         }
         modify("Cost is Adjusted") { Visible = false; }
-        modify("Reverse Charge Applies") { Visible = false; }
+        //modify("Reverse Charge Applies") { Visible = false; } // prior to V27
+        //modify("Reverse Charge Applies GB") { Visible = false; } // V27 onwards
         modify("Default Deferral Template Code") { Visible = false; }
         addafter(InventoryField)
         {

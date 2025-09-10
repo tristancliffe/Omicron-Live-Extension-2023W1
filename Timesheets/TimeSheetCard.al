@@ -2,7 +2,7 @@ pageextension 50131 TimesheetCardExt extends "Time Sheet Card"
 {
     AboutTitle = 'Timesheets';
     AboutText = 'Use this page to enter timesheets to record hours on projects & administration/clerical duties, and absenses from work.';
-    DataCaptionExpression = Format(Rec."Starting Date", 0, 4) + ' - ' + Format(Rec."Ending Date", 0, 4) + ' (' + Rec.Description + ') - ' + Rec."Resource Name";
+    DataCaptionExpression = Rec."Resource Name" + ' - ' + Format(Rec."Starting Date", 0, 4) + ' - ' + Format(Rec."Ending Date", 0, 4) + ' (' + Rec.Description + ')';
 
     layout
     {

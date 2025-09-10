@@ -258,8 +258,8 @@ pageextension 50112 JobListExtension extends "Job List"
             view(JJobs) { Caption = 'Current J Jobs'; Filters = where("No." = filter('@j*'), "Status" = filter('Planning|Quote|Open|Paused|Finished')); }
             view(PJobs) { Caption = 'Current P Jobs'; Filters = where("No." = filter('@p*'), "Status" = filter('Planning|Quote|Open|Paused|Finished')); }
             view(CompletedJobs) { Caption = 'Completed Projects'; Filters = where("Status" = filter('Completed|Finished')); }
-            view("WIP to Post") { Caption = 'WIP entries'; Filters = where("WIP Entries Exist" = const(true)); }
-            view(RecentJobs) { Caption = 'Recent Projects'; Filters = where("Starting Date" = filter('Today-730D..')); }
+            view("WIP to Post") { Caption = 'WIP entries'; Filters = where("WIP Entries Exist" = const(true), "Status" = filter('Planning|Completed|Quote|Open|Paused|Finished')); }
+            view(RecentJobs) { Caption = 'Recent Projects'; Filters = where("Starting Date" = filter('Today-730D..'), "Status" = filter('Planning|Completed|Quote|Open|Paused|Finished')); }
         }
     }
 

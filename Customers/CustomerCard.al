@@ -69,6 +69,7 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
                     Rec."Customer Notes" := data;
                 end;
             }
+            field("Customer CC Notes"; Rec."Customer CC Notes") { ApplicationArea = All; ShowCaption = false; MultiLine = true; Importance = Standard; InstructionalText = 'CC info'; }
         }
         modify("Payment Terms Code") { ShowMandatory = true; }
         modify("Location Code") { ShowMandatory = true; }

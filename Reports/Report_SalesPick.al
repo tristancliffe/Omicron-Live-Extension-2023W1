@@ -54,19 +54,6 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
                         end
             end;
         }
-        // modify("Sales Line")
-        // {
-        //     trigger OnAfterAfterGetRecord()
-        //     var
-        //         Item: record Item;
-        //     begin
-        //         Item.get("No.");
-        //         if Item.Picture.Count > 0 then begin
-        //             TenantMedia.Get(Item.Picture.Item(1));
-        //             TenantMedia.CalcFields(Content);
-        //         end;
-        //     end;
-        // }
     }
     rendering
     {

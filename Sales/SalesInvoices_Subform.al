@@ -12,6 +12,7 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
         }
         modify(Quantity)
         { Style = Strong; }
+        modify(Description) { QuickEntry = true; StyleExpr = CommentStyle; }
         addafter(Description)
         {
             field("Work Done"; Rec."Work Done")
@@ -124,9 +125,13 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
             }
         }
     }
+    var
+        CommentStyle: Text;
+
     trigger OnAfterGetRecord()
     begin
         GetInventory;
+        SetStyles();
     end;
 
     local procedure GetInventory()
@@ -154,6 +159,11 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                 end
     end;
 
+    procedure SetStyles()
+    begin
+        CommentStyle := SetCommentStyle();
+    end;
+
     local procedure AssemblyWarning()
     var
         ItemRec: Record Item;
@@ -162,5 +172,15 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
             if ItemRec."Assembly Policy" = ItemRec."Assembly Policy"::"Assemble-to-Stock" then
                 message('This is an assemble-to-stock ASSEMBLY, and should be assembled manually via Assembly Orders.\ \Using this item journal will probably result in stock levels being incorrect afterwards.')
         end
+    end;
+
+    procedure SetCommentStyle(): Text
+    begin
+        If Rec.Type = Rec.Type::" " then
+            exit('Strong')
+        else if Rec."Qty. to Ship" = 0 then
+            exit('Subordinate')
+        else
+            exit('');
     end;
 }

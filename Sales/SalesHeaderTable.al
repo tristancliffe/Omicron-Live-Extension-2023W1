@@ -74,6 +74,23 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
             ToolTip = 'This order has line(s) with attachments.';
         }
 
+        field(50105; "Customer CC Notes"; text[150])
+        {
+            //CaptionML = ENU = 'Customer Notes';
+            Caption = 'CC Notes';
+            DataClassification = CustomerContent;
+            trigger OnValidate()
+            var
+                RecCustomer: Record Customer;
+            begin
+                RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
+                if RecCustomer.FindSet() then begin
+                    RecCustomer."Customer Notes" := Rec."Customer CC Notes";
+                    RecCustomer.Modify()
+                end;
+            end;
+        }
+
 
 
         // field(50103; "Shopify Order Value"; Decimal)
