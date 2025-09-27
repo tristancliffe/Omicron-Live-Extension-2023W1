@@ -125,20 +125,20 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     {
         addlast(processing)
         {
-            action(SummaryPage)
-            {
-                ApplicationArea = All;
-                Caption = 'Summary';
-                Image = CoupledSalesInvoice;
-                RunObject = page "SalesOrderLineSummary";
-                RunPageOnRec = true;
-                RunPageView = sorting("Document Type", "Document No.", "Line No.");
-                // RunPageLink = "No." = field("No.");
-                Description = 'View a summary of this line';
-                ToolTip = 'Opens the summary card for this line';
-                Scope = Repeater;
-                Visible = true;
-            }
+            // action(SummaryPage)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Summary';
+            //     Image = CoupledSalesInvoice;
+            //     RunObject = page "SalesOrderLineSummary";
+            //     RunPageOnRec = true;
+            //     RunPageView = sorting("Document Type", "Document No.", "Line No.");
+            //     // RunPageLink = "No." = field("No.");
+            //     Description = 'View a summary of this line';
+            //     ToolTip = 'Opens the summary card for this line';
+            //     Scope = Repeater;
+            //     Visible = true;
+            // }
             action(ItemCardLink)
             {
                 ApplicationArea = All;
@@ -229,6 +229,16 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                     DocumentAttachmentDetails.OpenForRecRef(RecRef);
                     DocumentAttachmentDetails.RunModal();
                 end;
+            }
+            action(ItemsFromVendors)
+            {
+                ApplicationArea = Planning;
+                Caption = 'Vendor List';
+                Image = Vendor;
+                RunObject = Page "Item Vendor Catalog";
+                RunPageLink = "Item No." = FIELD("No.");
+                RunPageView = SORTING("Item No.");
+                ToolTip = 'View the list of vendors who can supply the item, and at which lead time.';
             }
         }
     }

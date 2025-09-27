@@ -12,19 +12,22 @@ pageextension 50101 ItemListExtension extends "Item List"
     editable = true;
     layout
     {
+        moveafter(Description; "Unit Price", "Sales Unit of Measure", Type, InventoryField, "Shelf No.", "Substitutes Exist", "Assembly BOM", "Vendor No.", "Vendor Item No.", "Item Category Code", "Unit Cost", "Profit %")
         modify("No.") { StyleExpr = BlockedStyle; }
-        modify(Description)
-        {
-            StyleExpr = BlockedStyle;
-            AboutTitle = 'Item List Colours';
-            AboutText = 'Normal items are shown in **black**. Items that are blocked for sales are **red**, and for purchasing are shown in **yellow**. Items that are blocked for both sales AND purchasing are shown in **grey**.';
-        }
+        modify(Description) { StyleExpr = BlockedStyle; width = 75; AboutTitle = 'Item List Colours'; AboutText = 'Normal items are shown in **black**. Items that are blocked for sales are **red**, and for purchasing are shown in **yellow**. Items that are blocked for both sales AND purchasing are shown in **grey**.'; }
         modify(Control1) { Editable = false; FreezeColumn = Description; }
         modify("Unit Cost") { Visible = false; }
         modify("Sales Unit of Measure") { Visible = true; }
         modify("Base Unit of Measure") { Visible = false; }
-        moveafter("Base Unit of Measure"; "Sales Unit of Measure")
+        //moveafter("Base Unit of Measure"; "Sales Unit of Measure")
         modify("Unit Price") { Style = Strong; }
+        modify("Cost is Adjusted") { Visible = false; }
+        //modify("Reverse Charge Applies") { Visible = false; } // prior to V27
+        //modify("Reverse Charge Applies GB") { Visible = false; } // V27 onwards
+        modify("Default Deferral Template Code") { Visible = false; }
+        modify("Item Category Code") { Visible = true; StyleExpr = BlockedStyle; ToolTip = 'The Item Category Code field, called the SORTKEY or SHORTNAME in Access Dimensions.'; }
+        modify(Type) { StyleExpr = BlockedStyle; }
+        modify("Vendor Item No.") { ApplicationArea = All; Visible = true; }
         addbefore(Control1)
         {
             group(General)
@@ -62,10 +65,6 @@ pageextension 50101 ItemListExtension extends "Item List"
                 }
             }
         }
-        modify("Cost is Adjusted") { Visible = false; }
-        //modify("Reverse Charge Applies") { Visible = false; } // prior to V27
-        //modify("Reverse Charge Applies GB") { Visible = false; } // V27 onwards
-        modify("Default Deferral Template Code") { Visible = false; }
         addafter(InventoryField)
         {
             field("Shelf No.1"; Rec."Shelf No.")
@@ -89,19 +88,31 @@ pageextension 50101 ItemListExtension extends "Item List"
             }
             field("Stockout Warning"; Rec."Stockout Warning") { ApplicationArea = All; Visible = false; }
         }
-        addafter(Description)
-        {
-            field("Item Category Code1"; Rec."Item Category Code") { ApplicationArea = All; StyleExpr = BlockedStyle; ToolTip = 'The Item Category Code field, called the SORTKEY or SHORTNAME in Access Dimensions.'; }
-        }
-        modify(Type) { StyleExpr = BlockedStyle; }
-        addafter("Vendor No.")
+        addafter("Profit %")
         {
             field(Model; Rec.Model) { ApplicationArea = All; ToolTip = 'Vehicle model and detaisl. Use the Notes field for more information like chassis numbers et cetera.'; }
             field(Supplier; Rec.Supplier) { ApplicationArea = All; ToolTip = 'Short supplier notes. Ideally use the vendors functionality to record suppiers, prices and leadtimes.'; }
             field("Item Notes"; Rec."Item Notes") { ApplicationArea = All; }
         }
-        moveafter("Vendor No."; "Vendor Item No.")
-        modify("Vendor Item No.") { ApplicationArea = All; Visible = true; }
+
+        addafter("Assembly BOM")
+        {
+            field(NumberOfAttachments; Rec.NumberOfAttachments)
+            {
+                ApplicationArea = all;
+                Width = 2;
+                BlankZero = true;
+                trigger OnDrillDown()
+                var
+                    DocumentAttachmentDetails: Page "Document Attachment Details";
+                    RecRef: RecordRef;
+                begin
+                    RecRef.GetTable(Rec);
+                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
+                    DocumentAttachmentDetails.RunModal();
+                end;
+            }
+        }
         addfirst(factboxes)
         {
             part(ItemPicture; "Item Picture")
@@ -121,50 +132,6 @@ pageextension 50101 ItemListExtension extends "Item List"
                 SubPageLink = "Item No." = FIELD("No.");
                 SubPageView = sorting("Vendor No.", "Vendor Item No.");
             }
-        }
-        addafter("Assembly BOM")
-        {
-            field(NumberOfAttachments; Rec.NumberOfAttachments)
-            {
-                ApplicationArea = all;
-                Width = 2;
-                BlankZero = true;
-                trigger OnDrillDown()
-                var
-                    DocumentAttachmentDetails: Page "Document Attachment Details";
-                    RecRef: RecordRef;
-                begin
-                    RecRef.GetTable(Rec);
-                    DocumentAttachmentDetails.OpenForRecRef(RecRef);
-                    DocumentAttachmentDetails.RunModal();
-                end;
-            }
-            // field(Documents; NumberOfRecords)
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Documents';
-            //     StyleExpr = TRUE;
-            //     ToolTip = 'Specifies the number of attachments.';
-
-            //     trigger OnDrillDown()
-            //     var
-            //         DocAttachments: Record "Document Attachment";
-            //         Item: Record Item;
-            //         DocumentAttachmentDetails: Page "Document Attachment Details";
-            //         RecRef: RecordRef;
-            //     begin
-            //         case DocAttachments."Table ID" of
-            //             0:
-            //                 exit;
-            //             DATABASE::Item:
-            //                 begin
-            //                     RecRef.Open(DATABASE::Item);
-            //                     if Item.Get(Rec."No.") then
-            //                         RecRef.GetTable(Item);
-            //                 end;
-            //         end;
-            //     end;
-            // }
         }
         addbefore(Control1901314507)
         {

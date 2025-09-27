@@ -204,6 +204,16 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 RunPageView = SORTING("Item No.");
                 ToolTip = 'View the list of vendors who can supply the item, and at which lead time.';
             }
+            action(PurchaseHistory)
+            {
+                ApplicationArea = All;
+                Caption = 'Purchase History';
+                Image = PostedReceipt;
+                RunObject = Page "Posted Purchase Invoice Lines";
+                RunPageLink = "No." = FIELD("No.");
+                RunPageView = sorting("Document No.", "Line No.");
+                ToolTip = 'View the purchase history for this item.';
+            }
         }
         modify("BOM Level") { CaptionML = ENG = 'BOM Availability'; }
         addlast(Category_Process)
@@ -213,6 +223,8 @@ pageextension 50100 ItemCardExtension extends "Item Card"
             actionref(Substitutions; "Substituti&ons") { }
             actionref(ExtendedTexts; "E&xtended Texts") { }
             actionref(VendorCatalogue; ItemsFromVendors) { }
+            actionref(PurchaseHistoryRef; PurchaseHistory) { }
+            actionref(NewPurchOrderRef; NewPurchOrder) { }
             actionref(BOMAvailability; "BOM Level") { }
             actionref(WhereUsed; "Where-Used") { }
             actionref(NewSalesOrder_Promoted; NewSalesOrder) { }

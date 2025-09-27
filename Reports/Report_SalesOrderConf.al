@@ -22,12 +22,13 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             var
                 Item: Record Item;
             begin
-                if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
-                FormattedQuantity := format("Qty. to Ship");
+                //if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
                 Clear(ItemTenantMedia);
                 if Line.Type = Line.Type::Item then begin
                     if Item.Get("No.") then begin
-                        // Message('Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
+                        if (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then begin CurrReport.Skip(); end; //Message('SKIPPED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship"); 
+                        if (Line."Qty. to Ship" <> Line.Quantity) and (HideLinesWithZeroQuantity = true) then begin FormattedQuantity := format(Line."Qty. to Ship"); end; //Message('PARTIALLY SHIPPED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
+                        //Message('UNCHANGED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
                         if Item.Picture.Count >= 1 then begin
                             ItemTenantMedia.Get(Item.Picture.Item(1));
                             ItemTenantMedia.CalcFields(Content);

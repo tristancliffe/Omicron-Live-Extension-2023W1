@@ -9,6 +9,27 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                 Caption = 'Item Info.';
                 Visible = TypeExists;
 
+                field(QtyInStock; InStock)
+                {
+                    Editable = false;
+                    Caption = 'Qty in Stock';
+                    ApplicationArea = All;
+                    Visible = true;
+                    BlankZero = true;
+                    Style = StandardAccent;
+                    Width = 5;
+                    DecimalPlaces = 0 : 2;
+
+                    trigger OnDrillDown()
+                    var
+                        ItemLedgerEntryRec: Record "Item Ledger Entry";
+                        ItemLedgerEntryPageID: Integer;
+                    begin
+                        ItemLedgerEntryPageID := Page::"Item Ledger Entries";
+                        ItemLedgerEntryRec.SetRange("Item No.", Rec."No.");
+                        PAGE.Run(ItemLedgerEntryPageID, ItemLedgerEntryRec);
+                    end;
+                }
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
@@ -58,37 +79,10 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                     DrillDown = false;
                 }
             }
-            // group(Notes)
-            // {
-            //     Caption = 'Item Notes';
-            //     Visible = NotesExist;
-
-            //     field("Item Notes"; Rec."Item Notes") //ShowNotes())
-            //     {
-            //         ApplicationArea = All;
-            //         Caption = '';
-            //         MultiLine = true;
-            //         Visible = true;
-            //         DrillDown = false;
-            //     }
-            // }
-            // group(Image)
-            // {
-            //     Visible = ImageExists;
-            //     Caption = 'Item Image';
-
-            //     field(Picture; Rec.Picture)
-            //     {
-            //         ApplicationArea = All;
-            //         Caption = '';
-            //     }
-            // }
         }
     }
 
     var
-        // ImageExists: Boolean;
-        // NotesExist: Boolean;
         TypeExists: Boolean;
 
     local procedure QtytoOrder(): Decimal
@@ -109,5 +103,21 @@ pageextension 50167 ItemReplenishmentExt extends "Item Replenishment FactBox"
                 else
                     exit(0)
         end;
+    end;
+
+    local procedure InStock(): Decimal
+    var
+        Item: Record Item;
+    begin
+        if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
+            Item.CalcFields(Inventory);
+            Exit(Item.Inventory);
+        end
+        else
+            if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
+                Exit(999);
+            end
+            else
+                exit(0);
     end;
 }

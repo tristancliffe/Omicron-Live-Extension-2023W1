@@ -40,15 +40,6 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
     {
         addbefore(Navigate)
         {
-            action(ItemListView_Omicron)
-            {
-                ApplicationArea = All;
-                RunObject = page "Item List";
-                Caption = 'Item List';
-                Image = Item;
-                ToolTip = 'Opens the item list in an editable mode for quick "SuperSearch';
-                Ellipsis = true;
-            }
             action(CustomerList_Omicron)
             {
                 ApplicationArea = All;
@@ -65,6 +56,15 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Caption = 'Suppliers';
                 Image = Customer;
                 Tooltip = 'Go to the Vendor List';
+                Ellipsis = true;
+            }
+            action(ItemListView_Omicron)
+            {
+                ApplicationArea = All;
+                RunObject = page "Item List";
+                Caption = 'Item List';
+                Image = Item;
+                ToolTip = 'Opens the item list in an editable mode for quick "SuperSearch';
                 Ellipsis = true;
             }
             action(JobList_Omicron)

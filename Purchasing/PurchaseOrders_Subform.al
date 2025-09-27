@@ -239,20 +239,20 @@ pageextension 50128 PurchOrderSubformExt extends "Purchase Order Subform"
     {
         addlast(processing)
         {
-            action(SummaryPage)
-            {
-                ApplicationArea = All;
-                Caption = 'Summary';
-                Image = PurchaseCreditMemo;
-                RunObject = page "PurchaseOrderLineSummary";
-                RunPageOnRec = true;
-                RunPageView = sorting("Document Type", "Document No.", "Line No.");
-                // RunPageLink = "No." = field("No.");
-                Description = 'View a summary of this line';
-                ToolTip = 'Opens the summary card for this line';
-                Scope = Repeater;
-                Visible = true;
-            }
+            // action(SummaryPage)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Summary';
+            //     Image = PurchaseCreditMemo;
+            //     RunObject = page "PurchaseOrderLineSummary";
+            //     RunPageOnRec = true;
+            //     RunPageView = sorting("Document Type", "Document No.", "Line No.");
+            //     // RunPageLink = "No." = field("No.");
+            //     Description = 'View a summary of this line';
+            //     ToolTip = 'Opens the summary card for this line';
+            //     Scope = Repeater;
+            //     Visible = true;
+            // }
             action(ItemCardLink)
             {
                 ApplicationArea = All;

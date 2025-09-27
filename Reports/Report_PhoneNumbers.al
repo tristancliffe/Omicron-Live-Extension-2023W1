@@ -18,8 +18,7 @@ report 50107 "Phone Numbers"
             column(Customer_Fax_No_; ConvertStr(DelChr(DelChr("Fax No."), '=', '-().'), '++', '00').trim) { }
             trigger OnAfterGetRecord()
             begin
-                if not "Phone Numbers Exist" then
-                    CurrReport.Skip();
+                if not "Phone Numbers Exist" then CurrReport.Skip();
             end;
         }
         dataitem(Vendor; Vendor)
@@ -32,8 +31,8 @@ report 50107 "Phone Numbers"
             column(Vendor_Fax_No_; ConvertStr(DelChr(DelChr("Fax No."), '=', '-().'), '++', '00').trim) { }
             trigger OnAfterGetRecord()
             begin
-                if not "Phone Numbers Exist" then
-                    CurrReport.Skip();
+                if not "Phone Numbers Exist" then CurrReport.Skip();
+                if Blocked = Blocked::All then CurrReport.Skip();
             end;
         }
         dataitem(Employee; Employee)
@@ -46,8 +45,7 @@ report 50107 "Phone Numbers"
             column(Employee_Fax_No_; ConvertStr(DelChr(DelChr("Fax No."), '=', '-().'), '++', '00').trim) { }
             trigger OnAfterGetRecord()
             begin
-                if not "Phone Numbers Exist" then
-                    CurrReport.Skip();
+                if not "Phone Numbers Exist" then CurrReport.Skip();
             end;
         }
     }
@@ -62,4 +60,10 @@ report 50107 "Phone Numbers"
             Summary = 'Excel Export of Customer, Vendor and Employee phone numbers for VOIP systems';
         }
     }
+
+    local procedure FormatPhoneNumber(PhoneNumber: Text): Text
+    begin
+        // Remove '-', '(', ')', and '.' characters, then replace '++' with '00', and trim
+        exit(ConvertStr(DelChr(DelChr(PhoneNumber), '=', '-().'), '++', '00').Trim());
+    end;
 }
