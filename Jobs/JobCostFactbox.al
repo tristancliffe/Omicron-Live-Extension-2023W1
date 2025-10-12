@@ -47,6 +47,11 @@ pageextension 50196 JobCostFactboxExt extends "Job Cost Factbox"
             group("Budget Price")
             {
                 Caption = 'Budgeted Price';
+                field("Budgeted Hours"; Rec."Budgeted Hours")
+                {
+                    ApplicationArea = Jobs;
+                    Editable = false;
+                }
                 field("Budgeted Price"; Rec."Budgeted Price")
                 {
                     ApplicationArea = Jobs;

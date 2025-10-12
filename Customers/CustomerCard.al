@@ -43,7 +43,7 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
         modify("Primary Contact No.") { Importance = Standard; }
         modify(ContactName) { Importance = Standard; }
         movelast(General; Blocked)
-        addlast(General) //! User Control for the large notes field...
+        addlast(General) //## User Control for the large notes field...
         {
             // field("Customer Notes"; Rec."Customer Notes")
             // {
@@ -69,7 +69,7 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
                     Rec."Customer Notes" := data;
                 end;
             }
-            field("Customer CC Notes"; Rec."Customer CC Notes") { ApplicationArea = All; ShowCaption = false; MultiLine = true; Importance = Standard; InstructionalText = 'CC info'; }
+            field("Customer CC Notes"; Rec."Customer CC Notes") { ApplicationArea = All; ShowCaption = false; MultiLine = true; Importance = Standard; InstructionalText = 'CC info'; QuickEntry = false; }
         }
         modify("Payment Terms Code") { ShowMandatory = true; }
         modify("Location Code") { ShowMandatory = true; }
@@ -105,7 +105,7 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
             actionref(RequestPayment_Promoted; PaymentRegistration) { }
         }
     }
-    var  //!To do with large notes field...
+    var  //## To do with large notes field...
         IsReady: Boolean;
 
     trigger OnAfterGetCurrRecord()
@@ -117,7 +117,7 @@ pageextension 50102 CustomerCardExtension extends "Customer Card"
     local procedure FillAddIn()
     begin
         CurrPage.UserControlDesc.SetContent(StrSubstNo('<textarea Id="TextArea" maxlength="%2" style="width:100%;height:80%;resize: none; font-family: &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Segoe, device-segoe, Tahoma, Helvetica, Arial, sans-serif !important; font-size: 11pt !important;" OnChange="window.parent.WebPageViewerHelper.TriggerCallback(document.getElementById(''TextArea'').value)">%1</textarea>', Rec."Customer Notes", MaxStrLen(Rec."Customer Notes")));
-    end; //! end of large notes field code...
+    end; //## end of large notes field code...
 
     local procedure SetPostingGroupsUK()
     begin

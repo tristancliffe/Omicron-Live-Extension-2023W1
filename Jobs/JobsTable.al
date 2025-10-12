@@ -398,6 +398,15 @@ tableextension 50105 JobNotes extends Job
             CalcFormula = sum("Job Planning Line"."Line Amount" where("Job No." = field("No."),
                                                                     "Line Type" = filter("Budget" | "Both Budget and Billable")));
         }
+        field(50117; "Budgeted Hours"; Decimal)
+        {
+            Caption = 'Budgeted Hours';
+            ToolTip = 'The total hours budgeted for the project';
+            DecimalPlaces = 0 : 2;
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("Job No." = field("No."),
+                                                                "Line Type" = filter("Budget" | "Both Budget and Billable")));
+        }
     }
 
     fieldgroups

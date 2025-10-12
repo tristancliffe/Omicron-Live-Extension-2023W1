@@ -39,8 +39,13 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
                         message('%1', rec."Work Done") //exit
                     else begin
                         Dialog.GetText(rec."Work Done");
-                        if Dialog.RunModal() = Action::OK then
-                            rec.Validate(Rec."Work Done", Dialog.SaveText());
+                        Dialog.RunModal();
+                        //if Dialog.RunModal() = Action::OK then
+                        rec.Validate(Rec."Work Done", Dialog.SaveText())
+                        //else if Dialog.RunModal() = Action::Cancel then begin
+                        //   clear(Dialog);
+                        //   rec.Validate(Rec."Work Done", Dialog.SaveText());
+                        //end;
                     end;
                 end;
             }

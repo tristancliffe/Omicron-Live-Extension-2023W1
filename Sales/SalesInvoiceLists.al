@@ -29,13 +29,11 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
         { Visible = false; }
         addafter(Amount)
         {
-            field("Amount Including VAT"; Rec."Amount Including VAT")
-            {
-                ApplicationArea = All;
-                Caption = 'Amount incl. VAT';
-                Visible = true;
-            }
+            field("Amount Including VAT"; Rec."Amount Including VAT") { ApplicationArea = All; Caption = 'Amount incl. VAT'; Visible = true; }
         }
+        // modify("Amount Including VAT") { Visible = true; Caption = 'Amount incl. VAT'; }
+        // moveafter(Amount; "Amount Including VAT")
+
     }
     actions
     {

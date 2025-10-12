@@ -19,7 +19,7 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
         moveafter("Post Code"; "Country/Region Code")
         moveafter(ShowMap; "Language Code")
         moveafter("Fax No."; "Home Page")
-        addlast(General) //! User Control for the large notes field...
+        addlast(General) //## User Control for the large notes field...
         {
             field("Supply Type"; Rec."Supply Type")
             {
@@ -114,7 +114,7 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
             actionref(ItemsFromVendor_Promoted; ItemsFromVendor) { }
         }
     }
-    var  //!To do with large notes field...
+    var  //##To do with large notes field...
         IsReady: Boolean;
 
     trigger OnAfterGetCurrRecord()
@@ -126,7 +126,7 @@ pageextension 50105 VendorCardExtension extends "Vendor Card"
     local procedure FillAddIn()
     begin
         CurrPage.UserControlDesc.SetContent(StrSubstNo('<textarea Id="TextArea" maxlength="%2" style="width:100%;height:50%;resize: none; font-family: &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Segoe, device-segoe, Tahoma, Helvetica, Arial, sans-serif !important; font-size: 11pt !important;" OnChange="window.parent.WebPageViewerHelper.TriggerCallback(document.getElementById(''TextArea'').value)">%1</textarea>', Rec."Vendor Notes", MaxStrLen(Rec."Vendor Notes")));
-    end; //! end of large notes field code...
+    end; //## end of large notes field code...
 
     local procedure SetPostingGroupsUK()
     begin

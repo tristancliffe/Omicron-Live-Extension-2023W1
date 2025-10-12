@@ -93,7 +93,7 @@ pageextension 50100 ItemCardExtension extends "Item Card"
         modify("Reorder Point") { ShowMandatory = true; }
         modify("Reorder Quantity") { ShowMandatory = true; }
         modify("Lead Time Calculation") { ShowMandatory = true; }
-        addlast(Item) //! User Control for the large notes field...
+        addlast(Item) //## User Control for the large notes field...
         {
             // field("Item Notes"; Rec."Item Notes")
             // {
@@ -290,7 +290,7 @@ pageextension 50100 ItemCardExtension extends "Item Card"
     //         exit(0);
     // end;
 
-    var  //!To do with large notes field...
+    var //## To do with large notes field...
         IsReady: Boolean;
 
     trigger OnAfterGetCurrRecord()
@@ -302,7 +302,7 @@ pageextension 50100 ItemCardExtension extends "Item Card"
     local procedure FillAddIn()
     begin
         CurrPage.UserControlDesc.SetContent(StrSubstNo('<textarea Id="TextArea" maxlength="%2" style="width:100%;height:100%;resize: none; font-family: &quot;Segoe UI&quot;, &quot;Segoe WP&quot;, Segoe, device-segoe, Tahoma, Helvetica, Arial, sans-serif !important; font-size: 11pt !important;" OnChange="window.parent.WebPageViewerHelper.TriggerCallback(document.getElementById(''TextArea'').value)">%1</textarea>', Rec."Item Notes", MaxStrLen(Rec."Item Notes")));
-    end; //! end of large notes field code...
+    end; //## end of large notes field code...
 
     procedure GetFullName(userID: Guid): Text
     var

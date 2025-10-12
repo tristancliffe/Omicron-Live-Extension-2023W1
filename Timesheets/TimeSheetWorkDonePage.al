@@ -9,7 +9,7 @@ Page 50101 "Work Done Dialog"
         area(Content)
         {
             field(Instructions1; Instructions1) { ShowCaption = false; Style = StrongAccent; }
-            field(Instructions2; Instructions2) { ShowCaption = false; Style = StrongAccent; }
+            //field(Instructions2; Instructions2) { ShowCaption = false; Style = StrongAccent; }
             field(WorkDoneText; WorkDoneText)
             {
                 Caption = 'Work done';
@@ -36,8 +36,8 @@ Page 50101 "Work Done Dialog"
     var
         WorkDoneText: text[700];
         CharacterCount: Integer;
-        Instructions1: Label 'Type your text below. To save it click OK.';
-        Instructions2: Label 'For long entries, consider clicking OK occasionally then editing again to save progress.';
+        Instructions1: Label 'Type your text below. To save it click the tick OR cross!';
+        Instructions2: Label 'For long entries, consider clicking OK/TICK occasionally then editing again to save progress.';
         Reminder1: Label 'DON''T FORGET TO SUBMIT YOUR TIMESHEETS REGULARLY (DAILY) WHEN FINISHED.';
         Reminder2: Label 'DON''T FORGET TO TAKE AND UPLOAD PICTURES/VIDEOS OF PROGRESS.';
 
