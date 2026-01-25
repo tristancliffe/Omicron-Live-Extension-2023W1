@@ -26,7 +26,7 @@ tableextension 50104 EmployeeTableExt extends Employee
         else
             Rec."Phone Numbers Exist" := false;
         Rec.Modify();
-        Commit();
+        //Commit(); <-- this seems to break things?
     end;
 
     trigger OnBeforeDelete()

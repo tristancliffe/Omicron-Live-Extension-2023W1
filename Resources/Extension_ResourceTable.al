@@ -9,6 +9,35 @@ tableextension 50106 ResourceTable extends Resource
             ToolTip = 'Resource notes';
             OptimizeForTextSearch = true;
         }
+        field(50101; ChargeableHoursWorked30D; Decimal)
+        {
+            Caption = 'Chargeable Hours Worked in last 30 days';
+            ToolTip = 'Number of chargeable hours worked by the user in the last 30 days';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("No." = field("No."),
+                                                 "Unit of Measure Code" = const('HOUR'),
+                                                 "Planning Date" = filter('-30D..Today'),
+                                                 "Line Type" = filter(Billable)));
+        }
+        field(50102; TotalHoursWorked30D; Decimal)
+        {
+            Caption = 'Total Hours Worked in last 30 days';
+            ToolTip = 'Number of chargeable hours worked by the user in the last 30 days';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("No." = field("No."),
+                                                 "Unit of Measure Code" = const('HOUR'),
+                                                 "Planning Date" = filter('-30D..Today')));
+        }
+        field(50103; InvoiceableHours30D; Decimal)
+        {
+            Caption = 'Chargeable Hours Worked in last 30 days';
+            ToolTip = 'Number of chargeable hours worked by the user in the last 30 days';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line"."Invoicable Qty" where("No." = field("No."),
+                                                 "Unit of Measure Code" = const('HOUR'),
+                                                 "Planning Date" = filter('-30D..Today'),
+                                                 "Line Type" = filter(Billable)));
+        }
     }
     fieldgroups
     {

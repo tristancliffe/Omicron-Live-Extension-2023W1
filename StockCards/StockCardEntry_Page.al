@@ -67,6 +67,7 @@ page 50115 "Stock Entry List"
                     Editable = Posted;
                     InstructionalText = 'Description of part(s) used';
                     ShowMandatory = true;
+                    StyleExpr = UnpostedStockStyle;
                     Width = 70;
 
                     trigger OnValidate()
@@ -116,6 +117,7 @@ page 50115 "Stock Entry List"
         Device: Boolean;
         Posted: Boolean;
         ManagerTimeSheet: Boolean;
+        UnpostedStockStyle: Text;
 
     trigger OnOpenPage()
     begin
@@ -133,6 +135,11 @@ page 50115 "Stock Entry List"
         Rec."Resource No." := USERID;
     end;
 
+    trigger OnAfterGetRecord()
+    begin
+        UnpostedStockStyle := SetUnpostedStockStyle();
+    end;
+
     trigger OnAfterGetCurrRecord()
     begin
         Posted := true;
@@ -142,5 +149,12 @@ page 50115 "Stock Entry List"
     procedure SetManagerTimeSheetMode()
     begin
         ManagerTimeSheet := true;
+    end;
+
+    local procedure SetUnpostedStockStyle(): Text
+    begin
+        if (Rec.Entered = false) and (Rec.Date < WorkDate()) then
+            exit('Unfavorable');
+        exit('');
     end;
 }

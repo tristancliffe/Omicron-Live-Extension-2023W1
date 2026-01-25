@@ -41,5 +41,13 @@ tableextension 50108 ItemJournalTableExt extends "Item Journal Line"
             CalcFormula = max("Phys. Inventory Ledger Entry"."Posting Date" where("Item No." = field("Item No."),
                                                                                    "Phys Invt Counting Period Type" = filter(" " | Item)));
         }
+        field(50104; VendorItemNo; Text[50])
+        {
+            Caption = 'Vendor Item No.';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup(Item."Vendor Item No." where("No." = field("Item No.")));
+            ToolTip = 'This field shows the vendor item number for the item.';
+        }
     }
 }

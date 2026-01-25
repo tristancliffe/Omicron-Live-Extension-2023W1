@@ -185,6 +185,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         {
             trigger OnBeforeAction()
             begin
+                CurrPage.SaveRecord();
                 BlankReference();
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
@@ -196,6 +197,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         {
             trigger OnBeforeAction()
             begin
+                CurrPage.SaveRecord();
                 BlankReference();
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
@@ -207,6 +209,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         {
             trigger OnBeforeAction()
             begin
+                CurrPage.SaveRecord();
                 BlankReference();
                 if rec."Posting Date" = 0D then begin
                     Rec.Validate(Rec."Posting Date", Today);
@@ -216,6 +219,13 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
         }
         modify(Release) { Enabled = ReleaseControllerStatus; }
         modify(Reopen) { Enabled = ReopenControllerStatus; }
+        modify("Print Confirmation")
+        {
+            trigger OnBeforeAction()
+            begin
+                CurrPage.SaveRecord();
+            end;
+        }
     }
 
     var
@@ -260,6 +270,7 @@ pageextension 50122 SalesOrderExtension extends "Sales Order"
     trigger OnAfterGetRecord()
     begin
         InitPageControllers();
+        //Rec.CalcFields("Amount Including VAT");
         RecCustomer.SetRange("No.", Rec."Sell-to Customer No.");
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";

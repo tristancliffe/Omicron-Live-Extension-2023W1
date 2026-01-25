@@ -48,6 +48,20 @@ report 50107 "Phone Numbers"
                 if not "Phone Numbers Exist" then CurrReport.Skip();
             end;
         }
+        dataitem(Contact; Contact)
+        {
+            DataItemTableView = sorting("No.");
+            column(Contact_Name; ("First Name" + ' ' + "Surname")) { }
+            column(Contact_Company_Name; "Company Name") { }
+            column(Contact_Phone_No_; ConvertStr(DelChr(DelChr("Phone No."), '=', '-().'), '++', '00').trim) { }
+            column(Contact_Mobile_Phone_No_; ConvertStr(DelChr(DelChr("Mobile Phone No."), '=', '-().'), '++', '00').trim) { }
+            column(Contact_Fax_No_; ConvertStr(DelChr(DelChr("Fax No."), '=', '-().'), '++', '00').trim) { }
+            trigger OnAfterGetRecord()
+            begin
+                if Type = Type::Company then CurrReport.Skip();
+                if ("Phone No." = '') and ("Mobile Phone No." = '') then CurrReport.Skip();
+            end;
+        }
     }
 
     rendering

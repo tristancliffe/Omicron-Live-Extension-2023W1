@@ -69,6 +69,8 @@ pageextension 50107 EmployeeCardExt extends "Employee Card"
 
     trigger OnAfterGetRecord()
     begin
+        if Rec."Employment Date" = 0D then
+            exit;
         if Rec."Inactive Date" = 0D then
             EmploymentDuration := CalculateTimeBetweenTwoDate(Rec."Employment Date", Today)
         else

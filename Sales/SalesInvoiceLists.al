@@ -20,19 +20,15 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
             field("Order Notes1"; Rec."Order Notes")
             { ApplicationArea = All; }
         }
-        moveafter("Sell-to Customer Name"; Amount, Status) //"Amount Including VAT", Status)
+        moveafter("Sell-to Customer Name"; Amount, Status)
         modify(Status)
         { Visible = true; }
         modify("Posting Date")
         { Visible = false; }
         modify("Due Date")
         { Visible = false; }
-        addafter(Amount)
-        {
-            field("Amount Including VAT"; Rec."Amount Including VAT") { ApplicationArea = All; Caption = 'Amount incl. VAT'; Visible = true; }
-        }
-        // modify("Amount Including VAT") { Visible = true; Caption = 'Amount incl. VAT'; }
-        // moveafter(Amount; "Amount Including VAT")
+        modify("Amount Including VAT") { Visible = true; Caption = 'Amount incl. VAT'; }
+        moveafter(Amount; "Amount Including VAT")
 
     }
     actions
@@ -70,8 +66,7 @@ pageextension 50116 SalesInvoiceList extends "Sales Invoice List"
         }
         addlast(Promoted)
         {
-            actionref(PostedInvoices_Promoted; PostedInvoices)
-            { }
+            actionref(PostedInvoices_Promoted; PostedInvoices) { }
         }
     }
 

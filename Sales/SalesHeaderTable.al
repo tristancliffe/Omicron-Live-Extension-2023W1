@@ -1,5 +1,6 @@
 tableextension 50121 SalesHeaderExt extends "Sales Header"
 {
+    //DataCaptionFields = "Sell-to Customer No.", "No.", "Amount Including VAT";
     fields
     {
         modify("Sell-to Customer No.")
@@ -19,7 +20,6 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
         }
         field(50100; "Order Customer Notes"; text[2000])
         {
-            //CaptionML = ENU = 'Customer Notes';
             Caption = 'Customer Notes';
             DataClassification = CustomerContent;
             trigger OnValidate()
@@ -53,7 +53,6 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
 
         field(50103; "Partially Shipped"; Boolean)
         {
-            //DataClassification = CustomerContent;
             Caption = 'Partially Shipped';
             FieldClass = FlowField;
             CalcFormula = exist("Sales Line" where("Document Type" = field("Document Type"),
@@ -76,7 +75,6 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
 
         field(50105; "Customer CC Notes"; text[150])
         {
-            //CaptionML = ENU = 'Customer Notes';
             Caption = 'CC Notes';
             DataClassification = CustomerContent;
             trigger OnValidate()
@@ -90,10 +88,5 @@ tableextension 50121 SalesHeaderExt extends "Sales Header"
                 end;
             end;
         }
-
-
-
-        // field(50103; "Shopify Order Value"; Decimal)
-        // { Caption = 'Shopify Order Value'; DataClassification = CustomerContent; DecimalPlaces = 2 : 2; }
     }
 }

@@ -75,7 +75,6 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             Caption = 'Qty. on Purchase Orders';
             DecimalPlaces = 0 : 2;
             Editable = false;
-            // DataClassification = CustomerContent;
             FieldClass = FlowField;
             CalcFormula = sum("Purchase Line"."Qty. to Receive" where("No." = field("No."),
                                                                       "Document Type" = field("Document Type"),

@@ -1,5 +1,7 @@
 tableextension 50103 VendorTableExt extends Vendor
 {
+    DataCaptionFields = "No.", Name;
+    ;
     fields
     {
         field(50100; "Vendor Notes"; Text[1000])

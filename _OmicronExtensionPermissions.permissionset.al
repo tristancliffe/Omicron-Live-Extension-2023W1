@@ -50,5 +50,8 @@ permissionset 50100 OmicronPermissions
         report "Resource Admin Hours" = X,
         page "Low Profit Items" = X,
         page "Shopify Product Image Factbox" = X,
-        page "Stock Used Job Form" = X;
+        page "Stock Used Job Form" = X,
+        codeunit "Job Planning Line Events" = X,
+        codeunit "Update Invoicable JPLs" = X,
+        page "Item Vendor Mismatch" = X;
 }

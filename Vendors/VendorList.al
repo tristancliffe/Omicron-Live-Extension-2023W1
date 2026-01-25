@@ -12,13 +12,14 @@ pageextension 50106 VendorListExtension extends "Vendor List"
         { Visible = false; }
         addafter(Contact)
         {
-            field(City; Rec.City)
-            { ApplicationArea = All; }
+            // field(City; Rec.City)
+            // { ApplicationArea = All; }
             field("Post Code1"; Rec."Post Code")
             { ApplicationArea = All; }
             field("Country/Region Code1"; Rec."Country/Region Code")
             { ApplicationArea = All; }
         }
+        moveafter(Contact; City)
         modify("Phone No.")
         {
             ApplicationArea = All;

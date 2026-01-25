@@ -12,6 +12,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 GetInventory();
                 CheckProfit();
                 AssemblyWarning();
+                CurrPage.SaveRecord();
             end;
         }
         modify("Substitution Available") { Visible = true; }
@@ -107,38 +108,11 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 end;
             }
         }
-        // modify("Total VAT Amount")
-        // {
-
-        //     trigger OnDrillDown()
-        //     var
-        //         SalesHeader: Record "Sales Header";
-        //     begin
-        //         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then
-        //             Page.Run(Page::"Sales Order Statistics", SalesHeader)
-        //         else
-        //             Error('The related Sales Header could not be found.');
-        //     end;
-        // }
     }
     actions
     {
         addlast(processing)
         {
-            // action(SummaryPage)
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Summary';
-            //     Image = CoupledSalesInvoice;
-            //     RunObject = page "SalesOrderLineSummary";
-            //     RunPageOnRec = true;
-            //     RunPageView = sorting("Document Type", "Document No.", "Line No.");
-            //     // RunPageLink = "No." = field("No.");
-            //     Description = 'View a summary of this line';
-            //     ToolTip = 'Opens the summary card for this line';
-            //     Scope = Repeater;
-            //     Visible = true;
-            // }
             action(ItemCardLink)
             {
                 ApplicationArea = All;
@@ -176,6 +150,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 trigger OnAction()
                 begin
                     Rec.Find();
+                    Commit();
                     Rec.ShowReservation();
                 end;
             }
@@ -191,6 +166,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 trigger OnAction()
                 begin
                     CurrPage.SaveRecord();
+                    Commit();
                     Rec.ShowItemSub();
                     CurrPage.Update(true);
                     if (Rec.Reserve = Rec.Reserve::Always) and (Rec."No." <> xRec."No.") then begin
@@ -209,6 +185,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
 
                 trigger OnAction()
                 begin
+                    Commit();
                     SalesAvailabilityMgt.ShowItemAvailabilityFromSalesLine(Rec, "Item Availability Type"::BOM);
                 end;
             }
@@ -225,6 +202,7 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                     DocumentAttachmentDetails: Page "Document Attachment Details";
                     RecRef: RecordRef;
                 begin
+                    Commit();
                     RecRef.GetTable(Rec);
                     DocumentAttachmentDetails.OpenForRecRef(RecRef);
                     DocumentAttachmentDetails.RunModal();
@@ -244,7 +222,6 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
     }
 
     var
-        //ItemAvailFormsMgt: Codeunit "Item Availability Forms Mgt";
         SalesAvailabilityMgt: Codeunit "Sales Availability Mgt.";
         IsOpenOrder: Boolean;
         CommentStyle: Text;
@@ -257,55 +234,6 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
         SetStyles()
     end;
 
-    // local procedure GetInventory()
-    // var
-    //     Item: Record Item;
-    //     AvailableBOMQty: Decimal;
-    // begin
-    //     if Rec.Type <> Rec.Type::Item then
-    //         Rec.Instock_SalesLine := 0
-    //     else
-    //         if Item.Get(Rec."No.") then begin
-    //             if Item.Type = Item.Type::Inventory then begin
-    //                 Item.CalcFields(Inventory);
-    //                 if Item."Replenishment System" = Item."Replenishment System"::Assembly then
-    //                     AvailableBOMQty := CalculateAvailableBOMQuantity(Item."No.")
-    //                 else
-    //                     AvailableBOMQty := 0;
-    //                 Rec.Validate(Rec.Instock_SalesLine, Item.Inventory + AvailableBOMQty);
-    //             end else if (Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service) then
-    //                     Rec.Validate(Rec.Instock_SalesLine, 999);
-    //             Rec.Modify();
-    //             Commit();
-    //         end;
-    // end;
-
-    // local procedure CalculateAvailableBOMQuantity(ItemNo: Code[20]): Decimal
-    // var
-    //     CalcBOMTree: Codeunit "Calculate BOM Tree";
-    //     BOMBuffer: Record "BOM Buffer" temporary;
-    //     Item: Record Item;
-    //     AvailableQuantity: Decimal;
-    // begin
-    //     // Initialize the available quantity to a large number
-    //     AvailableQuantity := 99999;
-    //     // Set the item filter
-    //     Item.SetRange("No.", ItemNo);
-    //     // Generate the BOM tree for the item
-    //     CalcBOMTree.GenerateTreeForItems(Item, BOMBuffer, 1);
-    //     // Loop through the BOM buffer to calculate the available quantity
-    //     if BOMBuffer.FindSet() then
-    //         repeat
-    //             // Calculate the available quantity based on the stock levels of the components
-    //             if BOMBuffer."Able to Make Parent" < AvailableQuantity then
-    //                 AvailableQuantity := BOMBuffer."Able to Make Parent";
-    //         until BOMBuffer.Next() = 0;
-    //     if AvailableQuantity = 99999 then
-    //         exit(0)
-    //     else
-    //         exit(AvailableQuantity);
-    // end;
-
     local procedure GetInventory()
     var
         Item: Record Item;
@@ -317,13 +245,13 @@ pageextension 50127 SalesOrderFormExt extends "Sales Order Subform"
                 Item.CalcFields(Inventory);
                 Rec.Validate(Rec.Instock_SalesLine, Item.Inventory);
                 Rec.Modify();
-                Commit();
+                //Commit(); <-- this seems to break things?
             end
             else
                 if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
                     Rec.Validate(Rec.Instock_SalesLine, 999);
                     Rec.Modify();
-                    Commit();
+                    //Commit(); <-- this seems to break things?
                 end;
     end;
 

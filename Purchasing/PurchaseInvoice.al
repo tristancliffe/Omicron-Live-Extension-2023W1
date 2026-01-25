@@ -23,7 +23,7 @@ pageextension 50135 PurchInvoiceExt extends "Purchase Invoice"
                 begin
                     RecVendor."Vendor Notes" := VendorNotes;
                     RecVendor.Modify();
-                    Commit();
+                    //Commit(); <-- this seems to break things?
                 end;
             }
             field("Preferred Payment Method"; PaymentMethod)

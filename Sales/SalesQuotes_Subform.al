@@ -115,13 +115,13 @@ pageextension 50129 SalesQuoteFormExt extends "Sales Quote Subform"
                 Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
                 Rec.Validate(Rec.Instock_SalesLine, Item.Inventory - Item."Reserved Qty. on Inventory");
                 Rec.Modify();
-                Commit();
+                //Commit(); <-- this seems to break things?
             end
             else
                 if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
                     Rec.Validate(Rec.Instock_SalesLine, 999);
                     Rec.Modify();
-                    Commit();
+                    //Commit(); <-- this seems to break things?
                 end
     end;
 

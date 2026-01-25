@@ -1,6 +1,6 @@
 tableextension 50215 PostedPurchCreditMemoHeaderExt extends "Purch. Cr. Memo Hdr."
 {
-    DataCaptionFields = "No.", "Buy-from Vendor Name", "Amount Including VAT";
+    DataCaptionFields = "No.", "Buy-from Vendor Name";
 
     fields
     {

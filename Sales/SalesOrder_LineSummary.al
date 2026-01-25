@@ -1796,7 +1796,7 @@ page 50109 SalesOrderLineSummary
         SalesLineReserve: Codeunit "Sales Line-Reserve";
     begin
         if (Rec.Quantity <> 0) and Rec.ItemExists(Rec."No.") then begin
-            Commit();
+            //Commit(); <-- this seems to break things?
             if not SalesLineReserve.DeleteLineConfirm(Rec) then
                 exit(false);
 
@@ -2528,7 +2528,7 @@ page 50109 SalesOrderLineSummary
                 // Rec.Modify();
                 Rec.Validate(Rec.Instock_SalesLine, Item.Inventory);
                 Rec.Modify();
-                Commit();
+                //Commit(); <-- this seems to break things?
             end
             else
                 if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
@@ -2536,7 +2536,7 @@ page 50109 SalesOrderLineSummary
                     // Rec.Modify()
                     Rec.Validate(Rec.Instock_SalesLine, 999);
                     Rec.Modify();
-                    Commit();
+                    //Commit(); <-- this seems to break things?
                 end;
     end;
 

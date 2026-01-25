@@ -52,6 +52,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         {
             field(InvoicePrice; Rec.InvoicePrice) { ApplicationArea = All; BlankZero = true; }
             field(ProfitLoss; ProfitLossValue) { ApplicationArea = All; BlankZero = true; Editable = false; StyleExpr = ProfitLossStyle; Caption = 'Profit/Loss'; }
+            field("Invoicable Qty"; Rec."Invoicable Qty") { ApplicationArea = All; BlankZero = true; Editable = false; }
         }
     }
     actions
@@ -67,6 +68,18 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 RunObject = Page "Job Journal";
                 ToolTip = 'Opens the project journal';
                 Visible = true;
+            }
+            action(UpdateInvoicableQty)
+            {
+                Caption = 'Update Invoicable Qty';
+                Image = RefreshPlanningLine;
+                ApplicationArea = All;
+                trigger OnAction()
+                var
+                    Updater: Codeunit "Update Invoicable JPLs"; // uses the codeunit name above
+                begin
+                    Updater.Run();
+                end;
             }
             action(CopyPurchaseLinestoSalesLines)
             {
@@ -205,7 +218,6 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         if (Rec."Work Done" = '') and (Rec.Type = Rec.Type::Resource) then
             Rec.Validate("Work Done", Rec.Description);
         SetProfitLoss();
-        ProfitLossStyle := SetProfitLossStyle();
 
         //rec.Modify() - THIS BREAKS STUFF
         // Rec.InvoicePrice := round((Rec."Unit Price (LCY)") * Rec."Qty. to Transfer to Invoice", 0.01);
@@ -243,6 +255,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                     ProfitLossValue := Rec."Invoiced Amount (LCY)" - Rec."Total Cost"
                 else
                     ProfitLossValue := 0;
+        ProfitLossStyle := SetProfitLossStyle();
     end;
 
     local procedure SetSellingPriceStyle(): Text
@@ -281,7 +294,7 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
     begin
         if rec."Line Type" = rec."Line Type"::Budget then
             exit('Subordinate');
-        if (Rec.InvoicePrice - Rec."Total Cost") < 0 then
+        if (ProfitLossValue) < 0 then
             exit('Attention')
         else
             exit('Favorable');

@@ -80,17 +80,18 @@ pageextension 50100 ItemCardExtension extends "Item Card"
                 end;
             end;
         }
+        movebefore("Item Category Code"; "Shelf No.")
         modify("Search Description") { Importance = Standard; }
         modify("Costing Method") { Importance = Standard; }
-        modify("VAT Prod. Posting Group") { Importance = Standard; }
-        modify("Profit %") { Importance = Standard; }
-        modify("Sales Unit of Measure") { Importance = Standard; ShowMandatory = true; }
+        modify("VAT Prod. Posting Group") { Importance = Promoted; }
+        modify("Profit %") { Importance = Promoted; }
+        modify("Sales Unit of Measure") { Importance = Promoted; ShowMandatory = true; }
         modify("Vendor No.") { Importance = Promoted; }
-        modify("Vendor Item No.") { Importance = Standard; }
-        modify("Purch. Unit of Measure") { Importance = Standard; ShowMandatory = true; }
+        modify("Vendor Item No.") { Importance = Promoted; }
+        modify("Purch. Unit of Measure") { Importance = Promoted; ShowMandatory = true; }
         modify("Tariff No.") { ShowMandatory = true; }
-        modify("Reordering Policy") { ShowMandatory = true; }
-        modify("Reorder Point") { ShowMandatory = true; }
+        modify("Reordering Policy") { ShowMandatory = true; Importance = Promoted; }
+        modify("Reorder Point") { ShowMandatory = true; Importance = Promoted; }
         modify("Reorder Quantity") { ShowMandatory = true; }
         modify("Lead Time Calculation") { ShowMandatory = true; }
         addlast(Item) //## User Control for the large notes field...

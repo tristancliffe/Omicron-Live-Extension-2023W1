@@ -22,13 +22,13 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
             var
                 Item: Record Item;
             begin
-                //if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
+                //// if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
                 Clear(ItemTenantMedia);
                 if Line.Type = Line.Type::Item then begin
                     if Item.Get("No.") then begin
-                        if (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then begin CurrReport.Skip(); end; //Message('SKIPPED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship"); 
-                        if (Line."Qty. to Ship" <> Line.Quantity) and (HideLinesWithZeroQuantity = true) then begin FormattedQuantity := format(Line."Qty. to Ship"); end; //Message('PARTIALLY SHIPPED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
-                        //Message('UNCHANGED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
+                        // if (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then begin CurrReport.Skip(); end; //Message('SKIPPED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship"); 
+                        // if (Line."Qty. to Ship" <> Line.Quantity) and (HideLinesWithZeroQuantity = true) then begin FormattedQuantity := format(Line."Qty. to Ship"); end; //Message('PARTIALLY SHIPPED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
+                        // //Message('UNCHANGED: Item No.: %1, Picture Count: %2, Qty. to Ship: %3', Line."No.", Item.Picture.Count, Line."Qty. to Ship");
                         if Item.Picture.Count >= 1 then begin
                             ItemTenantMedia.Get(Item.Picture.Item(1));
                             ItemTenantMedia.CalcFields(Content);
@@ -42,15 +42,15 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
     {
         layout
         {
-            addafter(ArchiveDocument)
-            {
-                field(HideLinesWithZeroQuantityControl; HideLinesWithZeroQuantity)
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies if the lines with nothing to ship are printed.';
-                    Caption = 'Hide lines that are not to be shipped';
-                }
-            }
+            // addafter(ArchiveDocument)
+            // {
+            //     field(HideLinesWithZeroQuantityControl; HideLinesWithZeroQuantity)
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ToolTip = 'Specifies if the lines with nothing to ship are printed.';
+            //         Caption = 'Hide lines that are not to be shipped';
+            //     }
+            // }
         }
     }
     rendering
@@ -71,7 +71,7 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
         }
     }
     var
-        HideLinesWithZeroQuantity: Boolean;
+        //HideLinesWithZeroQuantity: Boolean;
         ItemTenantMedia: Record "Tenant Media";
 
     local procedure CustBalance(): Decimal

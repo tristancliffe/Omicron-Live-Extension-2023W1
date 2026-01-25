@@ -407,6 +407,12 @@ tableextension 50105 JobNotes extends Job
             CalcFormula = sum("Job Planning Line".Quantity where("Job No." = field("No."),
                                                                 "Line Type" = filter("Budget" | "Both Budget and Billable")));
         }
+        field(50118; "Next Invoice Due Date"; Date)
+        {
+            Caption = 'Next Invoice Due Date';
+            ToolTip = 'The next date an invoice should be issued based on the most recent large invoice (>£1000) or arrival date';
+            Editable = false;
+        }
     }
 
     fieldgroups
@@ -421,5 +427,36 @@ tableextension 50105 JobNotes extends Job
         Validate("Vehicle Reg", UpperCase("Vehicle Reg"));
         Validate("Car Make/Model", UpperCase("Car Make/Model"));
         Validate("Work Required", UpperCase("Work Required"));
+    end;
+
+    procedure CalculateNextInvoiceDueDate(): Date
+    var
+        SalesInvoiceHeader: Record "Sales Invoice Header";
+        NextDueDate: Date;
+        MostRecentInvoiceDate: Date;
+    begin
+        // Find the most recent posted sales invoice over £1000 for the bill-to customer
+        SalesInvoiceHeader.SetRange("Bill-to Customer No.", Rec."Bill-to Customer No.");
+        SalesInvoiceHeader.SetFilter("Amount Including VAT", '>1000');
+        SalesInvoiceHeader.SetCurrentKey("Posting Date");
+        SalesInvoiceHeader.Ascending(false); // Most recent first
+
+        if SalesInvoiceHeader.FindFirst() then begin
+            // Found a large invoice - next due date is 1 month after it
+            MostRecentInvoiceDate := SalesInvoiceHeader."Posting Date";
+            NextDueDate := CalcDate('<1M>', MostRecentInvoiceDate);
+
+            // If that calculated date is in the past, return today instead
+            if NextDueDate < Today() then
+                NextDueDate := Today();
+        end else begin
+            // No large invoice found - use 1 month from arrival date
+            if Rec."Date of Arrival" <> 0D then
+                NextDueDate := CalcDate('<1M>', Rec."Date of Arrival")
+            else
+                NextDueDate := CalcDate('<1M>', Today()); // Fallback if no arrival date
+        end;
+
+        exit(NextDueDate);
     end;
 }

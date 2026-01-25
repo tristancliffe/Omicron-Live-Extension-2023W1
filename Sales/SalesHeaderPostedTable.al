@@ -1,5 +1,6 @@
 tableextension 50119 PostedSalesHeaderExt extends "Sales Invoice Header"
 {
+    DataCaptionFields = "No.", "Sell-to Customer No.";
     fields
     {
         field(50100; "Customer Notes"; Text[2000])

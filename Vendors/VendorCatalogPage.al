@@ -16,6 +16,18 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
         }
         addafter("Lead Time Calculation")
         {
+            field(ReplenishmentSystem; ReplenishmentSystem)
+            {
+                ApplicationArea = All;
+                Caption = 'Replenishment System';
+                Editable = false;
+            }
+            field(ReorderingPolicy; ReorderingPolicy)
+            {
+                ApplicationArea = All;
+                Caption = 'Reordering Policy';
+                Editable = false;
+            }
             field(QtyInStock; QtyInStock)
             {
                 ApplicationArea = All;
@@ -95,6 +107,8 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
         QtyInStock: Decimal;
         LowStockThreshold: Decimal;
         ReorderStatus: Text;
+        ReplenishmentSystem: Enum "Replenishment System";
+        ReorderingPolicy: Enum "Reordering Policy";
 
     // trigger OnOpenPage()
     // var
@@ -109,9 +123,12 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
     begin
         if Item.Get(Rec."Item No.") then begin
             Rec.ItemDescription := Item.Description;
+            ReplenishmentSystem := Item."Replenishment System";
+            ReorderingPolicy := Item."Reordering Policy";
             Item.CalcFields(Inventory, "Reserved Qty. on Inventory");
             QtyInStock := Item.Inventory - Item."Reserved Qty. on Inventory";
             LowStockThreshold := Item."Reorder Point";
+            ReorderStatus := SetReorderStatus();
         end;
     end;
 
@@ -129,8 +146,6 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
                     else
                         exit(0);
             end;
-            ReorderStatus := SetReorderStatus();
-
         end;
     end;
 
@@ -139,7 +154,7 @@ pageextension 50146 ItemVendorListExt extends "Vendor Item Catalog"
         if QtyInStock <= LowStockThreshold then
             exit('Unfavorable')
         else
-            if (QtyInStock >= ((OrderQty + LowStockThreshold) / 2)) then
+            if (QtyInStock >= (LowStockThreshold / 2)) then
                 exit('StandardAccent')
             else
                 exit('Attention');

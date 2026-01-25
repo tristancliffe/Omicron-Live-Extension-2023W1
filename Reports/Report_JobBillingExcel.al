@@ -84,8 +84,10 @@ report 50101 "Job Billing Excel"
 
                     // Main logic for billable lines (non-budget)
                     if AllLinesSelector then begin
-                        if ("Qty. Invoiced" > 0) or ("Qty. Transferred to Invoice" > 0) then
+                        if ("Qty. Invoiced" > 0) then
                             "Qty. to Transfer to Invoice" := "Qty. Invoiced"
+                        else if ("Qty. Transferred to Invoice" > 0) then
+                            "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice"
                         else
                             "Qty. to Transfer to Invoice" := "Qty. to Transfer to Invoice";
                         InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);

@@ -74,5 +74,24 @@ tableextension 50115 TeamMemberCueExt extends "Team Member Cue"
             FieldClass = FlowField;
             CalcFormula = count("Stock Used" where("Resource No." = filter('%USER'), Entered = const(false)));
         }
+        field(50110; ChargeableHoursWorked30D; Decimal)
+        {
+            Caption = 'Chargeable Hours Worked in last 30 days';
+            ToolTip = 'Number of chargeable hours worked by the user in the last 30 days';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("No." = field("User ID Filter"),
+                                                 "Unit of Measure Code" = const('HOUR'),
+                                                 "Planning Date" = filter('-30D..Today'),
+                                                 "Line Type" = filter(Billable)));
+        }
+        field(50111; TotalHoursWorked30D; Decimal)
+        {
+            Caption = 'Total Hours Worked in last 30 days';
+            ToolTip = 'Number of chargeable hours worked by the user in the last 30 days';
+            FieldClass = FlowField;
+            CalcFormula = sum("Job Planning Line".Quantity where("No." = field("User ID Filter"),
+                                                 "Unit of Measure Code" = const('HOUR'),
+                                                 "Planning Date" = filter('-30D..Today')));
+        }
     }
 }

@@ -23,12 +23,12 @@ pageextension 50156 PurchaseInvoiceListExt extends "Purchase Invoices"
             Visible = true;
             Editable = true;
         }
-        addafter(Amount)
-        {
-            field("Amount Including VAT"; Rec."Amount Including VAT") { ApplicationArea = All; Caption = 'Amount incl. VAT'; Visible = true; }
-        }
-        // modify("Amount Including VAT") { Visible = true; Caption = 'Amount incl. VAT'; }
-        // moveafter(Amount; "Amount Including VAT")
+        // addafter(Amount)
+        // {
+        //     field("Amount Including VAT"; Rec."Amount Including VAT") { ApplicationArea = All; Caption = 'Amount incl. VAT'; Visible = true; }
+        // }
+        modify("Amount Including VAT") { Visible = true; Caption = 'Amount incl. VAT'; }
+        moveafter(Amount; "Amount Including VAT")
         modify("Vendor Authorization No.")
         { Visible = false; }
         modify("Assigned User ID")

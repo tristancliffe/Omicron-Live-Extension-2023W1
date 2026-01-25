@@ -128,7 +128,9 @@ pageextension 50115 SalesOrderList extends "Sales Order List"
     begin
         //ShippedStatusStyle := 'Standard';
         if (Rec."Completely Shipped" = true) then
-            exit('Unfavorable')
+            exit('Unfavorable');
+        if Rec."Applies-to Doc. No." <> '' then
+            exit('Favorable')
         else
             if (Rec.InvoicedLineExists = true) or (Rec."Partially Shipped" = true) then
                 exit('Unfavorable')

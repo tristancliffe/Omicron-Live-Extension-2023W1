@@ -27,6 +27,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             field("Engine No."; Rec.EngineNo) { ApplicationArea = All; ShowMandatory = true; InstructionalText = 'Engine No.'; }
             field(Mileage; Rec.Mileage) { ApplicationArea = All; ShowMandatory = true; InstructionalText = 'Mileage with units'; }
             field("Date of Arrival"; Rec."Date of Arrival") { ApplicationArea = All; ShowMandatory = true; }
+            field("Next Invoice Due Date"; Rec."Next Invoice Due Date") { ApplicationArea = All; Editable = false; Importance = Standard; }
             field("Customer Balance"; Rec."Customer Balance") { Caption = 'Customer Balance'; ApplicationArea = All; Editable = false; Importance = Standard; AutoFormatType = 1; BlankZero = true; }
             field("Job Customer Notes"; CustomerNotes)
             {
@@ -96,6 +97,7 @@ pageextension 50111 JobCardExt extends "Job Card"
                 trigger OnAction()
                 begin
                     JobTask.SetFilter("Job No.", Rec."No.");
+                    JobPlanningLine.SetFilter("Qty. Invoiced", '0');
                     JobInvoice.SetTableView(JobTask);
                     JobInvoice.RunModal();
                     Clear(JobInvoice);
@@ -258,6 +260,7 @@ pageextension 50111 JobCardExt extends "Job Card"
     var
         Job: Record Job;
         JobTask: Record "Job Task";
+        JobPlanningLine: Record "Job Planning Line";
         JobCard: Report "Service Instruction";
         JobInvoiceTemplate: Report "Job Invoice";
         WorkshopRequest: Report "Workshop Request";
@@ -290,6 +293,7 @@ pageextension 50111 JobCardExt extends "Job Card"
             CustomerNotes := RecCustomer."Customer Notes";
             //MobileNo := RecCustomer."Mobile Phone No.";
         end;
+        RefreshNextInvoiceDueDate();
     end;
 
     trigger OnAfterGetRecord()
@@ -308,6 +312,22 @@ pageextension 50111 JobCardExt extends "Job Card"
         if RecCustomer.FindSet() then begin
             CustomerNotes := RecCustomer."Customer Notes";
             //MobileNo := RecCustomer."Mobile Phone No.";
+        end;
+        RefreshNextInvoiceDueDate();
+    end;
+
+    procedure RefreshNextInvoiceDueDate()
+    var
+        CalculatedDate: Date;
+    begin
+        // Only calculate and save if the record has been created (has a No.)
+        if Rec."No." = '' then
+            exit;
+
+        CalculatedDate := Rec.CalculateNextInvoiceDueDate();
+        if CalculatedDate <> Rec."Next Invoice Due Date" then begin
+            Rec."Next Invoice Due Date" := CalculatedDate;
+            Rec.Modify(false);
         end;
     end;
 }

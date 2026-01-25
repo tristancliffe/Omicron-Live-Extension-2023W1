@@ -76,13 +76,13 @@ reportextension 50140 "Omicron Picking List" extends "Pick Instruction"
             Item.CalcFields(Inventory);
             "Assembly Line".Validate(Instock_AssemblyLine, Item.Inventory);
             "Assembly Line".Modify();
-            Commit();
+            //Commit(); <-- this seems to break things?
         end
         else
             if Item.Get("Assembly Line"."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
                 "Assembly Line".Validate(Instock_AssemblyLine, 999);
                 "Assembly Line".Modify();
-                Commit();
+                //Commit(); <-- this seems to break things?
             end;
     end;
 }

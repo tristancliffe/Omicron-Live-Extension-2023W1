@@ -98,7 +98,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
             // Rec.Modify();
             Rec.Validate(Rec.Instock_AssemblyLine, Item.Inventory - Item."Reserved Qty. on Inventory");
             Rec.Modify();
-            Commit();
+            //Commit(); <-- this seems to break things?
         end
         else
             if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
@@ -106,7 +106,7 @@ pageextension 50160 AssemblyOrderExt extends "Assembly Order Subform"
                 // Rec.Modify()
                 Rec.Validate(Instock_AssemblyLine, 999);
                 Rec.Modify();
-                Commit();
+                //Commit(); <-- this seems to break things?
             end;
     end;
 }

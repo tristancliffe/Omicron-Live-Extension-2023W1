@@ -8,6 +8,7 @@
 // If the user confirms the deletion, the record is deleted. If not, the trigger throws an error and cancels the deletion.
 tableextension 50101 CustomerTableExtCue extends Customer
 {
+    DataCaptionFields = "No.", Name, "Country/Region Code";
     fields
     {
         field(50100; "Customer Notes"; text[2000]) { CaptionML = ENU = 'Customer Notes'; DataClassification = CustomerContent; } //OptimizeForTextSearch = true; }

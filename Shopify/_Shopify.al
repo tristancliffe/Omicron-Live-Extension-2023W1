@@ -62,8 +62,8 @@ codeunit 50105 "Shpfy Stock Calc. Invtry & BOM" implements "Shpfy Stock Calculat
         if Item."Replenishment System" = Item."Replenishment System"::Assembly then begin
             AvailableQuantity := 99999;
             Item.SetRange("No.", Item."No.");
-            CalcBOMTree.GenerateTreeForItems(Item, BOMBuffer, 1);
-            // CalcBOMTree.GenerateTreeForManyItems(Item, BOMBuffer, "BOM Tree Type"::"Availability");
+            // CalcBOMTree.GenerateTreeForItems(Item, BOMBuffer, 1);
+            CalcBOMTree.GenerateTreeForManyItems(Item, BOMBuffer, "BOM Tree Type"::"Availability");
             if BOMBuffer.FindSet() then
                 repeat
                     if BOMBuffer."Able to Make Parent" < AvailableQuantity then

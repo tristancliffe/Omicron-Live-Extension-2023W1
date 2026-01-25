@@ -64,6 +64,7 @@ page 50104 "Job Planning Lines All"
                 field("Qty. to Invoice"; Rec."Qty. to Invoice") { ApplicationArea = Jobs; ToolTip = 'Specifies the quantity that remains to be invoiced. It is calculated as Quantity - Qty. Invoiced.'; Visible = false; }
                 field(InvoicePrice; Rec.InvoicePrice) { ApplicationArea = All; BlankZero = true; }
                 field(Price_Invoiced; Rec."Qty. Invoiced" * Rec."Unit Price") { ApplicationArea = all; Caption = 'Invoiced Price'; }
+                field("Invoicable Qty"; Rec."Invoicable Qty") { ApplicationArea = All; BlankZero = true; Editable = false; }
             }
         }
     }

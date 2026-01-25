@@ -69,8 +69,6 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                 trigger OnValidate()
                 begin
                     Rec.ValidateShortcutDimCode(3, Rec."Job No.");
-                    // Rec.Modify();
-                    //Rec."Shortcut Dimension 2 Code" := Rec."Job No.";
                 end;
             }
         }
@@ -93,18 +91,6 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
                 Editable = false;
             }
         }
-        // modify("Total VAT Amount")
-        // {
-        //     trigger OnDrillDown()
-        //     var
-        //         SalesHeader: Record "Sales Header";
-        //     begin
-        //         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then
-        //             Page.Run(Page::"Sales Statistics", SalesHeader)
-        //         else
-        //             Error('The related Sales Header could not be found.');
-        //     end;
-        // }
     }
     actions
     {
@@ -143,19 +129,15 @@ pageextension 50125 SalesInvSubformExt extends "Sales Invoice Subform"
         else
             if Item.Get(Rec."No.") and (Item.Type = Item.Type::Inventory) then begin
                 Item.CalcFields(Inventory);
-                // Rec.Instock_SalesLine := Item.Inventory;
-                // Rec.Modify();
                 Rec.Validate(Instock_SalesLine, Item.Inventory);
                 Rec.Modify();
-                Commit();
+                //Commit(); <-- this seems to break things?
             end
             else
                 if Item.Get(Rec."No.") and ((Item.Type = Item.Type::"Non-Inventory") or (Item.Type = Item.Type::Service)) then begin
-                    // Rec.Instock_SalesLine := 999;
-                    // Rec.Modify();
                     Rec.Validate(Instock_SalesLine, 999);
                     Rec.Modify();
-                    Commit();
+                    //Commit(); <-- this seems to break things?
                 end
     end;
 

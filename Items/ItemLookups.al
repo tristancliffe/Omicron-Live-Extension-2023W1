@@ -29,18 +29,4 @@ pageextension 50137 ItemLookupExt extends "Item Lookup"
         modify("Routing No.") { QuickEntry = false; Visible = false; }
         modify("Vendor Item No.") { Visible = false; }
     }
-    // trigger OnOpenPage()
-    // var
-    //     ItemList: Page "Item List";
-    // begin
-    //     ItemList.SetTableView(Rec);
-    //     ItemList.SetRecord(Rec);
-    //     ItemList.LookupMode := true;
-
-    //     Commit();
-    //     if ItemList.RunModal() = ACTION::LookupOK then begin
-    //         ItemList.GetRecord(Rec);
-    //         CurrPage.Close();
-    //     end;
-    // end;
 }
