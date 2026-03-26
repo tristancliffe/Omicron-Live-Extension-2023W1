@@ -172,9 +172,9 @@ tableextension 50105 JobNotes extends Job
                     DefaultTaskDimension."Job Task No." := VarSubContr;
                     DefaultTaskDimension.Validate("Dimension Code", 'DEPARTMENT');
                     if StrPos(rec."No.", 'P') = 1 then
-                        DefaultTaskDimension.Validate("Dimension Value Code", PartsDept)
+                        DefaultTaskDimension.Validate("Dimension Value Code", 'SUBCONTRACT')
                     else
-                        DefaultTaskDimension.Validate("Dimension Value Code", Workshop);
+                        DefaultTaskDimension.Validate("Dimension Value Code", 'SUBCONTRACT');
                     DefaultTaskDimension.Insert();
                     DefaultTaskDimension.Init();
                     DefaultTaskDimension."Job No." := Rec."No.";

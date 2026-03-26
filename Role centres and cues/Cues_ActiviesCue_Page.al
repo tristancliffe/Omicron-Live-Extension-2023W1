@@ -68,22 +68,22 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
                 Visible = true;
                 Image = People;
             }
-            field(ItemsOnShopify; NoOfItemsOnShopify)
-            {
-                ApplicationArea = All;
-                DrillDownPageId = ShopifyAllVariants;
-                DecimalPlaces = 0 : 0;
-                Caption = 'Shopify Items';
-                Visible = false;
-                trigger OnDrillDown()
-                var
-                    ShopifyVarients: Record "Shpfy Variant";
-                begin
-                    ShopifyVarients.Reset();
-                    ShopifyVarients.SetFilter("Mapped By Item", 'true');
-                    Page.Run(Page::ShopifyAllVariants, ShopifyVarients);
-                end;
-            }
+            // field(ItemsOnShopify; NoOfItemsOnShopify)
+            // {
+            //     ApplicationArea = All;
+            //     DrillDownPageId = ShopifyAllVariants;
+            //     DecimalPlaces = 0 : 0;
+            //     Caption = 'Shopify Items';
+            //     Visible = false;
+            //     trigger OnDrillDown()
+            //     var
+            //         ShopifyVarients: Record "Shpfy Variant";
+            //     begin
+            //         ShopifyVarients.Reset();
+            //         ShopifyVarients.SetFilter("Mapped By Item", 'true');
+            //         Page.Run(Page::ShopifyAllVariants, ShopifyVarients);
+            //     end;
+            // }
         }
         modify("Ongoing Purchase Invoices")
         { Caption = 'Purch. Invoices'; }
@@ -97,12 +97,12 @@ pageextension 50143 ActivityCuesExt extends "O365 Activities"
         { Visible = false; }
     }
     var
-        NoOfItemsOnShopify: Decimal;
+    // NoOfItemsOnShopify: Decimal;
 
     trigger OnOpenPage()
     begin
-        Rec.CalcFields(ItemsOnShopify);
-        NoOfItemsOnShopify := Rec.ItemsOnShopify;
+        // Rec.CalcFields(ItemsOnShopify);
+        // NoOfItemsOnShopify := Rec.ItemsOnShopify;
         if Date2DWY(WorkDate(), 1) >= 5 then // Check if today is Friday
             Rec.SetFilter("Due This Week Filter", '<=%1', CalcDate('CW+8D', WorkDate())) // Show up to the end of next week and a bit of the week after
         else

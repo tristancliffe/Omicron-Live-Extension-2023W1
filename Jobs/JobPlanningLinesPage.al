@@ -69,6 +69,31 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 ToolTip = 'Opens the project journal';
                 Visible = true;
             }
+            action(FilterToInvoice)
+            {
+                Caption = 'Lines to invoice';
+                Image = Filter;
+                ApplicationArea = All;
+                ToolTip = 'Filter to show only lines that have quantity to transfer to invoice';
+
+                trigger OnAction()
+                begin
+                    Rec.SetFilter("Qty. Invoiced", '0');
+                    Rec.SetFilter("Qty. to Transfer to Invoice", '>0');
+                end;
+            }
+            action(FilterToInvoiced)
+            {
+                Caption = 'Invoiced Lines';
+                Image = Filter;
+                ApplicationArea = All;
+                ToolTip = 'Filter to show only lines that have been invoiced';
+
+                trigger OnAction()
+                begin
+                    Rec.SetFilter("Qty. Invoiced", '>0');
+                end;
+            }
             action(UpdateInvoicableQty)
             {
                 Caption = 'Update Invoicable Qty';
@@ -194,6 +219,13 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
                 actionref(JobJournal_promoted; JobJournal) { Visible = true; }
                 actionref(StockCard_promoted; StockCard) { Visible = true; }
             }
+            group(Views)
+            {
+                ShowAs = SplitButton;
+                Visible = true;
+                actionref(ToInvoice_promoted; FilterToInvoice) { Visible = true; }
+                actionref(Invoiced_promoted; FilterToInvoiced) { Visible = true; }
+            }
         }
     }
 
@@ -287,7 +319,10 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
         if rec."Qty. to Transfer to Invoice" < rec.Quantity then
             exit('StrongAccent')
         else
-            exit('Strong');
+            if rec."Line Amount" < rec."Total Cost" then
+                exit('StrongAccent')
+            else
+                exit('Strong');
     end;
 
     local procedure SetProfitLossStyle(): Text

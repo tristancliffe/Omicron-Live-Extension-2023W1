@@ -53,5 +53,8 @@ permissionset 50100 OmicronPermissions
         page "Stock Used Job Form" = X,
         codeunit "Job Planning Line Events" = X,
         codeunit "Update Invoicable JPLs" = X,
-        page "Item Vendor Mismatch" = X;
+        page "Item Vendor Mismatch" = X,
+        tabledata "Project Enquiry" = RIMD,
+        table "Project Enquiry" = X,
+        page "Project Queue" = X;
 }

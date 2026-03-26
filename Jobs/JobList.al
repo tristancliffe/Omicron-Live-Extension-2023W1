@@ -247,6 +247,17 @@ pageextension 50112 JobListExtension extends "Job List"
                     JobPlanningLines.Run();
                 end;
             }
+            action(JobQueue)
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Project Queue';
+                Image = JobListSetup;
+                ToolTip = 'View the project queue.';
+                PromotedCategory = Process;
+                Promoted = true;
+                PromotedOnly = true;
+                RunObject = Page "Project Queue";
+            }
         }
     }
     views

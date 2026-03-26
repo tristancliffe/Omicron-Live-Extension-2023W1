@@ -61,7 +61,7 @@ tableextension 50110 ActivityCueTableExt extends "Activities Cue"
         }
         field(50108; "Purch. Invoices Due This Week"; Integer)
         {
-            CalcFormula = count("Vendor Ledger Entry" where("Document Type" = filter(Invoice | "Credit Memo"),
+            CalcFormula = count("Vendor Ledger Entry" where("Document Type" = filter(Invoice),
                                                              "Due Date" = field("Due This Week Filter"),
                                                              Open = const(true),
                                                              "Payment Method Code" = filter('BACS|CASH|CHQ|PETTY')));

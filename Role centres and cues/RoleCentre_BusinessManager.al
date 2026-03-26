@@ -450,6 +450,14 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 Image = Job;
                 ToolTip = 'Tools to manage projects, timesheets, resources etc';
                 //ShowAs = SplitButton;
+                action(ProjectQueue)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Project Queue';
+                    Image = Job;
+                    RunObject = Page "Project Queue";
+                    ToolTip = 'View the project queue - a list of potential projects and their details, to be converted into actual jobs when ready';
+                }
                 action("ActionJobs")
                 {
                     ApplicationArea = Basic, Suite;

@@ -56,22 +56,6 @@ page 50113 "Stock Card List"
                 PromotedCategory = Process;
                 PromotedOnly = true;
             }
-            action(JobLink)
-            {
-                ApplicationArea = All;
-                Image = Job;
-                Caption = 'Project Card';
-                RunObject = page "Job Card";
-                RunPageLink = "No." = field("Job No.");
-                Description = 'Go to the Project card';
-                ToolTip = 'Opens the Project Card for this line';
-                Scope = Repeater;
-                Visible = true;
-                Enabled = true;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
-            }
             action(JobPlanning)
             {
                 ApplicationArea = All;

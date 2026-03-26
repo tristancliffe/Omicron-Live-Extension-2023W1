@@ -23,6 +23,7 @@ reportextension 50102 OmicronSalesOrderConf extends "Standard Sales - Order Conf
                 Item: Record Item;
             begin
                 //// if (Line.Type = Line.Type::Item) and (Line."Qty. to Ship" = 0) and (HideLinesWithZeroQuantity = true) then CurrReport.Skip();
+                ////// Line.CalcFields(Instock_SalesLine, ShelfNo_SalesLine, CommodityCode_SalesLine);
                 Clear(ItemTenantMedia);
                 if Line.Type = Line.Type::Item then begin
                     if Item.Get("No.") then begin

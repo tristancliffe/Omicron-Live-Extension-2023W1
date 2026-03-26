@@ -76,6 +76,8 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
     var
         TaskDimensionRec: Record "Job Task Dimension";
     begin
+        // Ensure flowfields are calculated so variables based on them are correct
+        Rec.CalcFields("Usage (Total Price)", "Schedule (Total Price)", "Contract (Invoiced Price)");
         CompletedWarning := PercentCompletedCalc();
         InvoiceWarning := SetInvoiceWarning();
         LossWarning := SetLossWarning();
@@ -110,8 +112,8 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
             BudgetDelta := 0;
         end
         else begin
-            PercentCompleted := 100 * Rec."Usage (Total Price)" / rec."Schedule (Total Price)";
-            BudgetDelta := Rec."Usage (Total Price)" - rec."Schedule (Total Price)";
+            PercentCompleted := 100 * (Rec."Contract (Invoiced Price)" + Rec."ToInvoice") / rec."Schedule (Total Price)";
+            BudgetDelta := (Rec."Contract (Invoiced Price)" + Rec."ToInvoice") - rec."Schedule (Total Price)";
             if PercentCompleted > 95 then
                 exit('Unfavorable');
             exit('');
