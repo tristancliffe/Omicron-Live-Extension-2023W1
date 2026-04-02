@@ -142,31 +142,31 @@ page 50123 "Project Queue"
         {
             Caption = 'In Queue';
             Filters = where("In Progress" = const(false), Done = const(false), "Cancelled" = const(false), "Postponed" = const(false));
-            OrderBy = Descending("Date of Enquiry");
+            OrderBy = Ascending("Date of Enquiry");
         }
         view(IsInProgress)
         {
             Caption = 'In Progress';
             Filters = where("In Progress" = const(true));
-            OrderBy = Descending("Date of Enquiry");
+            OrderBy = Ascending("Date of Enquiry");
         }
         view(IsPostponed)
         {
             Caption = 'Postponed';
             Filters = where(Postponed = const(true));
-            OrderBy = Descending("Date of Enquiry");
+            OrderBy = Ascending("Date of Enquiry");
         }
         view(IsCancelled)
         {
             Caption = 'Cancelled';
             Filters = where("Cancelled" = const(true));
-            OrderBy = Descending("Date of Enquiry");
+            OrderBy = Ascending("Date of Enquiry");
         }
         view(Completed)
         {
             Caption = 'Completed';
             Filters = where(Done = const(true));
-            OrderBy = Descending("Date of Enquiry");
+            OrderBy = Ascending("Date of Enquiry");
         }
     }
 

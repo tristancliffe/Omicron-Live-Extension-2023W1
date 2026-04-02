@@ -25,7 +25,7 @@ Page 50101 "Work Done Dialog"
             }
             field(CharacterCount; CharacterCount)
             {
-                Caption = 'No. of characters (max 700):';
+                Caption = 'No. of characters (max 1000):';
                 Editable = false;
                 Importance = Promoted;
             }
@@ -34,19 +34,19 @@ Page 50101 "Work Done Dialog"
         }
     }
     var
-        WorkDoneText: text[700];
+        WorkDoneText: text[1000];
         CharacterCount: Integer;
         Instructions1: Label 'Type your text below. To save it click the tick OR cross!';
         Instructions2: Label 'For long entries, consider clicking OK/TICK occasionally then editing again to save progress.';
         Reminder1: Label 'DON''T FORGET TO SUBMIT YOUR TIMESHEETS REGULARLY (DAILY) WHEN FINISHED.';
         Reminder2: Label 'DON''T FORGET TO TAKE AND UPLOAD PICTURES/VIDEOS OF PROGRESS.';
 
-    procedure GetText(_text: text[700])
+    procedure GetText(_text: text[1000])
     begin
         WorkDoneText := _text
     end;
 
-    procedure SaveText(): Text[700]
+    procedure SaveText(): Text[1000]
     begin
         exit(WorkDoneText);
     end;

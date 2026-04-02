@@ -16,7 +16,7 @@ tableextension 50140 SalesLineExt extends "Sales Line"
             Editable = false;
             CalcFormula = lookup(Item."Tariff No." where("No." = field("No.")));
         }
-        field(50102; "Work Done"; Text[700])
+        field(50102; "Work Done"; Text[1000])
         { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; }
         field(50103; Instock_SalesLine; Decimal)
         {

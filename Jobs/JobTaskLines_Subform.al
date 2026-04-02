@@ -16,10 +16,21 @@ pageextension 50113 JobTasksLineSubformExt extends "Job Task Lines Subform"
         }
         modify("Contract (Total Price)") { StyleExpr = InvoiceWarning; }
         modify("Usage (Total Cost)") { StyleExpr = LossWarning; }
+        addbefore("Schedule (Total Cost)")
+        {
+            field("Schedule (Hours)"; Rec."Schedule (Hours)")
+            {
+                ApplicationArea = Jobs;
+                Caption = 'Budget (Hours)';
+                Editable = False;
+                BlankZero = true;
+            }
+        }
         addafter("Schedule (Total Cost)")
         {
             field("Usage (Total Hours)"; Rec."Usage (Total Hours)") { ApplicationArea = Jobs; }
         }
+        modify("Schedule (Total Cost)") { Visible = false; }
         addafter("Contract (Invoiced Price)")
         {
             field(ToInvoice; Rec.ToInvoice)

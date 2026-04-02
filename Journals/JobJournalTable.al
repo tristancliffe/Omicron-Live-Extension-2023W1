@@ -2,11 +2,11 @@ tableextension 50201 "Job Journal Line Ext" extends "Job Journal Line"
 {
     fields
     {
-        field(50100; "Work Done"; Text[700])
+        field(50100; "Work Done"; Text[1000])
         {
             CaptionML = ENG = 'Work Done', ENU = 'Work Done';
             DataClassification = CustomerContent;
-            ToolTip = 'Description of work carried out. Maximum of 700 characters';
+            ToolTip = 'Description of work carried out. Maximum of 1000 characters';
             OptimizeForTextSearch = true;
         }
         field(50101; Instock_JobJournalLine; Decimal)

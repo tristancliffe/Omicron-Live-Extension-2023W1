@@ -28,5 +28,18 @@ tableextension 50126 "Job Task Extension" extends "Job Task"
                                                                     "Qty. Transferred to Invoice" = filter('0')));
             ToolTip = 'Shows the amount to be invoiced at the current time';
         }
+        field(50102; "Schedule (Hours)"; Decimal)
+        {
+            AutoFormatType = 1;
+            BlankZero = true;
+            CalcFormula = sum("Job Planning Line".Quantity where("Job No." = field("Job No."),
+                                                                            "Job Task No." = field("Job Task No."),
+                                                                            "Job Task No." = field(filter(Totaling)),
+                                                                            "Schedule Line" = const(true),
+                                                                            "Planning Date" = field("Planning Date Filter")));
+            Caption = 'Budget (Hours)';
+            Editable = false;
+            FieldClass = FlowField;
+        }
     }
 }

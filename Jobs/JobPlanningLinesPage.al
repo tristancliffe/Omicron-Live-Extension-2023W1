@@ -54,6 +54,11 @@ pageextension 50138 JobPlanningLinePageExt extends "Job Planning Lines"
             field(ProfitLoss; ProfitLossValue) { ApplicationArea = All; BlankZero = true; Editable = false; StyleExpr = ProfitLossStyle; Caption = 'Profit/Loss'; }
             field("Invoicable Qty"; Rec."Invoicable Qty") { ApplicationArea = All; BlankZero = true; Editable = false; }
         }
+        addfirst(factboxes)
+        {
+            part("Planning Lines Factbox"; "Job Journal Factbox")
+            { ApplicationArea = All; SubPageLink = "No." = FIELD("No."); }
+        }
     }
     actions
     {

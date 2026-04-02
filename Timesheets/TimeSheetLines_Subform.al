@@ -22,7 +22,7 @@ pageextension 50132 TimesheetFormExt extends "Time Sheet Lines Subform"
             field("Work Done"; Rec."Work Done")
             {
                 AboutTitle = 'Work Done';
-                AboutText = 'This field can accept up to 700 characters of text, describing what work was carried out, measurements taken, tests performed etc. Try to write in a scientific manner, e.g. "a leak down test was carried out" rather than "I did a leak down test".';
+                AboutText = 'This field can accept up to 1000 characters of text, describing what work was carried out, measurements taken, tests performed etc. Try to write in a scientific manner, e.g. "a leak down test was carried out" rather than "I did a leak down test".';
                 Visible = true;
                 ApplicationArea = all;
                 ShowMandatory = WorkDoneStyle;

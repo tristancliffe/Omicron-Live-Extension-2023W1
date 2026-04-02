@@ -2,7 +2,7 @@ tableextension 50204 "Time Sheet Line Archive Ext" extends "Time Sheet Line Arch
 {
     fields
     {
-        field(50100; "Work Done"; Text[700])
+        field(50100; "Work Done"; Text[1000])
         { CaptionML = ENG = 'Work Done', ENU = 'Work Done'; OptimizeForTextSearch = true; }
     }
 }
