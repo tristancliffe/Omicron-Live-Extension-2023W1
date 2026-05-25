@@ -122,6 +122,23 @@ pageextension 50112 JobListExtension extends "Job List"
                     Clear(TimesheetReport);
                 end;
             }
+            action("Report Admin Proportions")
+            {
+                ApplicationArea = Suite;
+                Caption = 'Admin Proportions';
+                Image = "Report";
+                ToolTip = 'Open the report for budget vs billable proportions.';
+                trigger OnAction()
+                var
+                    Job: Record Job;
+                    AdminProportionsReport: Report "Resource Admin Hours";
+                begin
+                    Job.SetFilter("No.", Rec."No.");
+                    AdminProportionsReport.SetTableView(Job);
+                    AdminProportionsReport.RunModal();
+                    Clear(AdminProportionsReport);
+                end;
+            }
             action("Report Job Invoicing Excel")
             {
                 ApplicationArea = Suite;

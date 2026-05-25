@@ -112,7 +112,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             {
                 ApplicationArea = All;
                 CaptionML = ENG = 'Aged Creditors';
-                RunObject = report "Aged Accounts Payable";
+                RunObject = report "EXR Aged Acc Payable Excel";
                 Image = Payables;
                 ToolTip = 'Shows the Aged Creditors report';
             }
@@ -203,7 +203,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
             {
                 ApplicationArea = All;
                 CaptionML = ENG = 'Aged Debtors';
-                RunObject = report "Aged Accounts Receivable";
+                RunObject = report "EXR Aged Accounts Rec Excel";
                 Image = Receivables;
                 ToolTip = 'Shows the Aged Debtors report';
             }
@@ -491,6 +491,14 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Job Journal Batches";
                     ToolTip = 'Project Journal view';
                 }
+                action("ActionJobLedger")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Project Ledger';
+                    Image = JobLedger;
+                    RunObject = Page "Job Ledger Entries";
+                    ToolTip = 'Project Ledger Entries list';
+                }
                 action("ActionResources")
                 {
                     ApplicationArea = Basic, Suite;
@@ -541,22 +549,22 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     RunObject = Page "Employee List";
                     ToolTip = 'See list of employees';
                 }
-                action("Report Timesheet Entries")
-                {
-                    ApplicationArea = Suite;
-                    Caption = 'Time Sheet Report';
-                    Image = "Report";
-                    ToolTip = 'Open the Time Sheet report.';
-                    RunObject = Report "Timesheet Entries";
-                }
-                action("Resource Admin Proportions")
-                {
-                    ApplicationArea = Suite;
-                    Caption = 'Admin Proportions';
-                    Image = "Report";
-                    ToolTip = 'Open the report for budget vs billable proportions.';
-                    RunObject = Report "Resource Admin Hours";
-                }
+                // action("Report Timesheet Entries")
+                // {
+                //     ApplicationArea = Suite;
+                //     Caption = 'Time Sheet Report';
+                //     Image = "Report";
+                //     ToolTip = 'Open the Time Sheet report.';
+                //     RunObject = Report "Timesheet Entries";
+                // }
+                // action("Resource Admin Proportions")
+                // {
+                //     ApplicationArea = Suite;
+                //     Caption = 'Admin Proportions';
+                //     Image = "Report";
+                //     ToolTip = 'Open the report for budget vs billable proportions.';
+                //     RunObject = Report "Resource Admin Hours";
+                // }
             }
             group(Stock)
             {
@@ -773,7 +781,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                 ApplicationArea = Basic, Suite;
                 Caption = 'Trial Balance';
                 Image = "Report";
-                RunObject = Report "Trial Balance";
+                RunObject = Report "EXR Trial Balance Excel";
                 ToolTip = 'View your company''s trial balance (other trial balance reports are available)';
             }
         }
@@ -844,7 +852,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Debtors/Receivable/Customers Report';
                     Image = CustomerCode;
-                    RunObject = Report "Aged Accounts Receivable";
+                    RunObject = Report "EXR Aged Accounts Rec Excel";
                     ToolTip = 'View aged (i.e. due) account receivables (customers owing)';
                 }
                 action(AgedCreditors)
@@ -852,7 +860,7 @@ pageextension 50120 OmicronBusManagerRCExt extends "Business Manager Role Center
                     ApplicationArea = Basic, Suite;
                     Caption = 'Aged Creditors/Payable/Vendors Report';
                     Image = VendorCode;
-                    RunObject = Report "Aged Accounts Payable";
+                    RunObject = Report "EXR Aged Acc Payable Excel";
                     ToolTip = 'View aged (i.e. due) account payables (suppliers owed)';
                 }
             }

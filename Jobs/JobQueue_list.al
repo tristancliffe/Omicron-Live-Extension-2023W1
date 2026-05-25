@@ -7,7 +7,7 @@ page 50123 "Project Queue"
     //CardPageId = "Project Enquiry Card";
     Editable = true;
     AdditionalSearchTerms = 'Project Enquiry List, Workshop Queue, Project Queue List';
-    SourceTableView = sorting("In Progress", "Date of Enquiry", "Entry No.") order(ascending); // where("Done" = const(false));
+    SourceTableView = sorting("Sort Priority", "Date of Enquiry", "Entry No.") order(ascending);
 
     layout
     {
@@ -187,13 +187,15 @@ page 50123 "Project Queue"
     begin
 
         if Rec.Done then
-            exit('Strong')
+            exit('Subordinate')
         else if Rec.Cancelled then
             exit('Ambiguous')
         else if Rec."In Progress" then
             exit('Favorable')
         else if Rec."Incoming" then
             exit('Attention')
+        else if Rec."Postponed" then
+            exit('Ambiguous')
         else
             exit('Standard');
     end;

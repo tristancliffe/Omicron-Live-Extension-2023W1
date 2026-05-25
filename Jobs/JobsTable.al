@@ -349,7 +349,8 @@ tableextension 50105 JobNotes extends Job
             Caption = 'Committed Value';
             FieldClass = FlowField;
             CalcFormula = sum("Job Ledger Entry"."Total Cost" where("Job No." = field("No."),
-                                                                "Entry Type" = filter('Usage')));
+                                                                "Entry Type" = filter('Usage'),
+                                                                "Line Type" = filter('Billable'|'Both Budget and Billable')));
             AutoFormatExpression = '£<precision, 2:2><standard format, 0>';
             AutoFormatType = 1;
             ToolTip = 'The value committed to the project so far.';

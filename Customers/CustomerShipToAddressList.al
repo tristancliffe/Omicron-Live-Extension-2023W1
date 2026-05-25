@@ -5,6 +5,6 @@ pageextension 50192 ShipToListExt extends "Ship-to Address List"
         modify(Address) { Visible = true; }
         modify("Post Code") { Visible = true; }
         modify("Phone No.") { Visible = true; }
-        moveafter(County; "Post Code")
+        movebefore("Country/Region Code"; "Post Code")
     }
 }

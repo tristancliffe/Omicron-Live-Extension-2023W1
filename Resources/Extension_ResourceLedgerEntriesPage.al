@@ -19,4 +19,22 @@ pageextension 50203 "Resource Ledger Entries Ext" extends "Resource Ledger Entri
             }
         }
     }
+
+    analysisviews
+    {
+        addfirst
+        {
+            analysisview("Resource Ledger Entries with Work Done")
+            {
+                DefinitionFile = 'Analysis/Total Hours - Jules.analysis.json';
+                Caption = 'Total Hours - Jules';
+            }
+            analysisview("Resource Ledger Entries Productivity")
+            {
+                DefinitionFile = 'Analysis/Productivity.analysis.json';
+                Caption = 'Productivity';
+            }
+
+        }
+    }
 }

@@ -39,6 +39,8 @@ report 50101 "Job Billing Excel"
                 column(Budget_Qty; BudgetQty) { }
                 column(Transferred_Qty; "Qty. Transferred to Invoice") { }
                 column(Unit_Cost; "Unit Cost") { }
+                column(Line_DiscountPercent; "Line Discount %") { }
+                column(Line_DiscountAmount; "Line Discount Amount (LCY)") { }
                 column(Unit_Price; "Unit Price") { }
                 column(InvoiceCost; InvoiceCost) { }
                 column(InvoicePrice; InvoicePrice) { }
@@ -90,7 +92,8 @@ report 50101 "Job Billing Excel"
                             "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice"
                         else
                             "Qty. to Transfer to Invoice" := "Qty. to Transfer to Invoice";
-                        InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
+                        DiscountAmount := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") * ("Line Discount %" / 100), 0.01);
+                        InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - DiscountAmount, 0.01);
                         VAT := round(InvoicePrice * 0.2, 0.01);
                         InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                     end
@@ -98,20 +101,23 @@ report 50101 "Job Billing Excel"
                         if InvoicedSelector then begin
                             if ("Qty. Invoiced" = 0) and ("Qty. Transferred to Invoice" = 0) then CurrReport.Skip();
                             "Qty. to Transfer to Invoice" := "Qty. Invoiced";
-                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. Invoiced") - "Line Discount Amount (LCY)", 0.01);
+                            DiscountAmount := round(("Unit Price (LCY)" * "Qty. Invoiced") * ("Line Discount %" / 100), 0.01);
+                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. Invoiced") - DiscountAmount, 0.01);
                             VAT := round(InvoicePrice * 0.2, 0.01);
                             InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                         end
                         else if AddedToInvoiceSelector then begin
                             if "Qty. Invoiced" > 0 then CurrReport.Skip();
                             "Qty. to Transfer to Invoice" := "Qty. Transferred to Invoice";
-                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
+                            DiscountAmount := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") * ("Line Discount %" / 100), 0.01);
+                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - DiscountAmount, 0.01);
                             VAT := round(InvoicePrice * 0.2, 0.01);
                             InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                         end
                         else if BudgetLinesOnly then begin
                             "Qty. to Transfer to Invoice" := Quantity;
-                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01);
+                            DiscountAmount := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") * ("Line Discount %" / 100), 0.01);
+                            InvoicePrice := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") - DiscountAmount, 0.01);
                             VAT := round(InvoicePrice * 0.2, 0.01);
                             InvoicePriceInclVAT := round(InvoicePrice + VAT, 0.01);
                         end
@@ -119,6 +125,7 @@ report 50101 "Job Billing Excel"
                             if ("Qty. Invoiced" <> 0) then CurrReport.Skip();
                             if ("Qty. to Transfer to Invoice" = 0) then CurrReport.Skip();
                         end;
+                        //Logic for normal usage is in the JobPlanningLinesTable.al 
                     end;
 
                     if LastDate <> "Planning Date" then begin
@@ -252,6 +259,7 @@ report 50101 "Job Billing Excel"
         AddedToInvoiceSelector: Boolean;
         AllLinesSelector: Boolean;
         BudgetLinesOnly: Boolean;
+        DiscountAmount: Decimal;
         DateRank: Integer;
         LastDate: Date;
         RankCounter: Integer;

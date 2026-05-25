@@ -18,6 +18,7 @@ table 50101 "Project Enquiry"
         field(12; "Done"; Boolean) { }
         field(13; "Cancelled"; Boolean) { }
         field(14; "Postponed"; Boolean) { }
+        field(15; "Sort Priority"; Integer) { }
     }
 
     keys
@@ -26,12 +27,32 @@ table 50101 "Project Enquiry"
         {
             Clustered = true;
         }
-        key(InProgress; "In Progress", "Date of Enquiry", "Entry No.") { }
+        key(SortPriority; "Sort Priority", "Date of Enquiry", "Entry No.") { }
     }
 
     trigger OnInsert()
     begin
         if "Date of Enquiry" = 0D then
             "Date of Enquiry" := Today();
+        UpdateSortPriority();
+    end;
+
+    trigger OnModify()
+    begin
+        UpdateSortPriority();
+    end;
+
+    local procedure UpdateSortPriority()
+    begin
+        if Done then
+            "Sort Priority" := 4
+        else if Cancelled then
+            "Sort Priority" := 5
+        else if Incoming then
+            "Sort Priority" := 2
+        else if "In Progress" then
+            "Sort Priority" := 3
+        else
+            "Sort Priority" := 1;
     end;
 }

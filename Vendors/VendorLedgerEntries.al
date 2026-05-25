@@ -85,6 +85,17 @@ pageextension 50162 VendorLedgerEntriesExt extends "Vendor Ledger Entries"
             view(ANDREW) { Caption = 'Andrew'; Filters = where("Document Type" = filter(Invoice | "Credit Memo"), Open = const(true), "Payment Method Code" = filter('ANDREW')); ; }
         }
     }
+    analysisviews
+    {
+        addfirst
+        {
+            analysisview("BACS Payments Due")
+            {
+                DefinitionFile = 'Analysis/BACS Payments Due.analysis.json';
+                Caption = 'BACS Payments Due';
+            }
+        }
+    }
 
     var
         Priority: Integer;

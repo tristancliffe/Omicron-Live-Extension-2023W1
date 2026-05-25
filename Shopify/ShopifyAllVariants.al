@@ -91,8 +91,8 @@ page 50102 ShopifyAllVariants
                 { ApplicationArea = All; ToolTip = 'Specifies whether customers are allowed to place an order for the product variant when it is out of stock. Valid values are: deny, continue.'; }
                 field(Taxable; Rec.Taxable)
                 { ApplicationArea = All; ToolTip = 'Specifies whether a tax is charged when the product variant is sold.'; }
-                field(TaxCode; Rec."Tax Code")
-                { ApplicationArea = All; ToolTip = 'Specifies the Avalara tax code for the product variant. This parameter applies only to the stores that have the Avalara AvaTax app installed.'; }
+                // field(TaxCode; Rec."Tax Code")
+                // { ApplicationArea = All; ToolTip = 'Specifies the Avalara tax code for the product variant. This parameter applies only to the stores that have the Avalara AvaTax app installed.'; }
             }
         }
     }

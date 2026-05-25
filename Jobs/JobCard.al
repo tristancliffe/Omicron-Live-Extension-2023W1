@@ -43,8 +43,8 @@ pageextension 50111 JobCardExt extends "Job Card"
 
                 trigger OnValidate()
                 begin
-                    RecCustomer."Customer Notes" := CustomerNotes;
-                    RecCustomer.Modify()
+                    RecCustomer.Validate("Customer Notes", CustomerNotes);
+                    // RecCustomer.Modify()
                 end;
             }
         }
@@ -326,8 +326,9 @@ pageextension 50111 JobCardExt extends "Job Card"
 
         CalculatedDate := Rec.CalculateNextInvoiceDueDate();
         if CalculatedDate <> Rec."Next Invoice Due Date" then begin
-            Rec."Next Invoice Due Date" := CalculatedDate;
-            Rec.Modify(false);
+            Rec.Validate("Next Invoice Due Date", CalculatedDate);
+            //Rec."Next Invoice Due Date" := CalculatedDate;
+            //Rec.Modify(false);
         end;
     end;
 }

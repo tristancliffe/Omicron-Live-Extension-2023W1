@@ -12,9 +12,21 @@ page 50108 "Job Journal Factbox"
     {
         area(content)
         {
+            group(Image)
+            {
+                Visible = ImageExists;
+                Caption = 'Item Image';
+
+                field(Picture; Rec.Picture)
+                {
+                    ApplicationArea = All;
+                    Caption = '';
+                }
+            }
             group(Type)
             {
-                ShowCaption = false;
+                ShowCaption = true;
+                Caption = 'Info';
                 Visible = TypeExists;
                 field(UnitofMeasureCode; Rec."Sales Unit of Measure")
                 {
@@ -71,6 +83,7 @@ page 50108 "Job Journal Factbox"
     }
 
     var
+        ImageExists: Boolean;
         TypeExists: Boolean;
         NotesExist: Boolean;
         OrderFixed: Boolean;
@@ -79,10 +92,13 @@ page 50108 "Job Journal Factbox"
 
     trigger OnAfterGetCurrRecord()
     begin
+        ImageExists := true;
         NotesExist := true;
         TypeExists := false;
         OrderFixed := true;
         OrderMax := true;
+        if Rec.Picture.Count = 0 then
+            ImageExists := false;
         if (Rec.Type = Rec.Type::Inventory) or (Rec.Type = Rec.Type::"Non-Inventory") then TypeExists := true;
         // if Rec.Type <> Rec.type::Inventory then IsInventory := false;
         // if Rec.Type <> Rec.type::"Non-Inventory" then IsNotInventory := false;

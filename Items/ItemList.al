@@ -113,16 +113,16 @@ pageextension 50101 ItemListExtension extends "Item List"
                 end;
             }
         }
-        addfirst(factboxes)
-        {
-            part(ItemPicture; "Item Picture")
-            {
-                ApplicationArea = All;
-                Caption = 'Picture';
-                SubPageLink = "No." = field("No.");
-                Visible = true;
-            }
-        }
+        //addfirst(factboxes)
+        //{
+        // part(ItemPicture; "Item Picture") //! removed in 28.1
+        // {
+        //     ApplicationArea = All;
+        //     Caption = 'Picture';
+        //     SubPageLink = "No." = field("No.");
+        //     Visible = true;
+        // }
+        //}
         addbefore(ItemAttributesFactBox)
         {
             part(VendorListFactbox; "Item Vendor List Factbox")

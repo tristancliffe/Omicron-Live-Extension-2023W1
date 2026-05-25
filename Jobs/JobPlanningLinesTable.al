@@ -22,34 +22,17 @@ tableextension 50107 JobPlanningLinesExt extends "Job Planning Line"
     }
 
     trigger OnModify()
+    var
+        DiscountAmount: Decimal;
     begin
         if ((rec."Line Type" = Rec."Line Type"::Billable) or (rec."Line Type" = Rec."Line Type"::"Both Budget and Billable")) then begin
-            Rec.Validate(InvoicePrice, round((Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice") - "Line Discount Amount (LCY)", 0.01));
+            DiscountAmount := round(("Unit Price (LCY)" * "Qty. to Transfer to Invoice") * ("Line Discount %" / 100), 0.01);
+            Rec.Validate(InvoicePrice, round((Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice") - DiscountAmount, 0.01));
             Rec.Validate(InvoiceCost, round(Rec."Total Cost", 0.01));
             Rec.Validate(VAT, round(Rec.InvoicePrice * 0.2, 0.01));
             Rec.Validate(InvoicePriceInclVAT, round(Rec.InvoicePrice + Rec.VAT, 0.01));
         end;
     end;
-
-    // trigger OnBeforeModify()
-    // begin
-    //     UpdateInvoicableQty();
-    // end;
-
-    // trigger OnAfterInsert()
-    // begin
-    //     UpdateInvoicableQty();
-    // end;
-
-    // local procedure UpdateInvoicableQty()
-    // begin
-    //     if "Qty. Invoiced" <> 0 then
-    //         "Invoicable Qty" := "Qty. Invoiced"
-    //     else if "Qty. to Invoice" <> 0 then
-    //         "Invoicable Qty" := "Qty. to Invoice"
-    //     else
-    //         "Invoicable Qty" := "Qty. to Transfer to Invoice";
-    // end;
 }
 
 codeunit 50108 "Job Planning Line Events"
@@ -72,6 +55,19 @@ codeunit 50108 "Job Planning Line Events"
     local procedure OnQtyToTransferValidate(var Rec: Record "Job Planning Line")
     begin
         RecalculateInvoicableQty(Rec);
+        RecalculateLineDiscountAmount(Rec);
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Job Planning Line", 'OnAfterValidateEvent', 'Line Discount %', false, false)]
+    local procedure OnLineDiscountPercentValidate(var Rec: Record "Job Planning Line")
+    begin
+        RecalculateLineDiscountAmount(Rec);
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Job Planning Line", 'OnAfterValidateEvent', 'Unit Price (LCY)', false, false)]
+    local procedure OnUnitPriceValidate(var Rec: Record "Job Planning Line")
+    begin
+        RecalculateLineDiscountAmount(Rec);
     end;
 
     local procedure RecalculateInvoicableQty(var Rec: Record "Job Planning Line")
@@ -92,6 +88,22 @@ codeunit 50108 "Job Planning Line Events"
         // Only validate if value has changed to minimize writes
         if Rec."Invoicable Qty" <> NewValue then
             Rec.Validate("Invoicable Qty", NewValue);
+    end;
+
+    local procedure RecalculateLineDiscountAmount(var Rec: Record "Job Planning Line")
+    var
+        DiscountAmount: Decimal;
+    begin
+        // Calculate Line Discount Amount (LCY) based on discount percentage
+        // Formula: Unit Price (LCY) × Qty. to Transfer to Invoice × Line Discount % / 100
+        if Rec."Line Discount %" <> 0 then
+            DiscountAmount := round(Rec."Unit Price (LCY)" * Rec."Qty. to Transfer to Invoice" * Rec."Line Discount %" / 100, 0.01)
+        else
+            DiscountAmount := 0;
+
+        // Only update if value has changed
+        if Rec."Line Discount Amount (LCY)" <> DiscountAmount then
+            Rec."Line Discount Amount (LCY)" := DiscountAmount;
     end;
 }
 

@@ -81,11 +81,10 @@ table 50100 "Stock Used"
         {
             Caption = 'Last';
             ToolTip = 'Last one in stock - message for parts department to order more';
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'No longer used - staff recommended to tell management in person.';
         }
     }
-
 
     keys
     {
